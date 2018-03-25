@@ -1,0 +1,142 @@
+html,body{
+    background: #fff;
+}
+/*header*/
+.header{
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    -text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:999;
+    font-size: 0.3rem;
+    color: #333;
+    border-bottom: 0.01rem solid #E8E8E8;
+}
+.header .return{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/return.png") no-repeat;
+    background-size: 0.16rem 0.29rem;
+    background-position: 0.22rem 2px;
+    position: absolute;
+    left: 0;
+    top: 0.28rem;
+}
+.search{
+    width: 5.61rem;
+    height: 0.6rem;
+    border: 1px solid #d2d2d2;
+    -webkit-border-radius: 0.05rem;
+    -moz-border-radius: 0.05rem;
+    border-radius: 0.05rem;
+    background: #fff;
+    position: absolute;
+    left: 0.59rem;
+    top: 0.14rem;
+}
+.search .text{
+    top: 0;
+    left: 0.11rem;
+    position: absolute;
+    background: none;
+    font-size: 0.28rem;
+    color: #333;
+    width: 4.97rem;
+    height: 0.6rem;
+}
+.text::-webkit-input-placeholder{color:#999;font-size: 0.22rem;}
+.search .btn{
+    background: url("../../img/sousuo@3x.png") no-repeat;
+    background-size: 0.32rem 0.32rem;
+    background-position: 0 0;
+    top: 0.14rem;
+    right: 0.09rem;
+    width: 0.44rem;
+    height: 0.44rem;
+    position: absolute;
+}
+.zhanwei{
+    width: 100%;
+    height: 0.88rem;
+}
+.list{
+    width: 100%;
+    height: 1rem;
+    background: #fff;
+}
+.list div{
+    width: 6rem;
+    height: 1rem;
+    border-bottom: 1px solid #e8e8e8;
+    margin: 0 auto;
+    position: relative;
+}
+.list div a{
+    width: 6rem;
+    color: #333;
+    font-size: 0.26rem;
+    position: absolute;
+    left: 0;
+    top: 0.2rem;
+    overflow:hidden;
+}
+.list div p{
+    color: #666;
+    font-size: 0.2rem;
+    position: absolute;
+    left: 0;
+    bottom: 0.1rem;
+}
+.header2{
+    text-align: center;
+}
+.list2{
+    height: auto;
+    width: 100%;
+    background: #fff;
+}
+.list2 div{
+    width: 6rem;
+    border-bottom: 0;
+    height: 0.85rem;
+    margin: 0 auto;
+    position: relative;
+}
+.list2 div a{
+    font-size: 0.28rem;
+    color: #333;
+    position: absolute;
+    left: 0;
+    top: 0.2rem;
+    overflow:hidden;
+}
+.list2 div p{
+    font-size: 0.22rem;
+    bottom: 0;
+    color: #666;
+    position: absolute;
+    left: 0;
+}
+.list2 img{
+    width: 6rem;
+    height: 2.7rem;
+    margin:0.2rem auto;
+}
+.list2 .article{
+    width: 6rem;
+    margin: 0 auto;
+    color: #666;
+    font-size: 0.26rem;
+}
+.home{
+    font-size: 0.22rem;
+    color: #999;
+    width: 100%;
+    height: 0.63rem;
+    line-height: 0.63rem;
+    text-align: center;
+}

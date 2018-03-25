@@ -1,0 +1,217 @@
+.header {
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:9;
+    font-size: 0.3rem;
+    color: #333;
+    border-bottom: 0.01rem solid #E8E8E8;
+}
+.header a.return{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/return.png") no-repeat;
+    background-size: 0.2rem 0.3rem;
+    position: absolute;
+    left: 0.2rem;
+    top: 0.3rem;
+}
+.header span{
+    display: inline-block;
+    width: 2.3rem;
+}
+.header .xiala{
+    background: url("../../img/xiala.png") right center no-repeat;
+    background-size: 0.18rem 0.08rem;
+}
+.header .xiangshang{
+    background: url("../../img/xiangshang.png") right center no-repeat;
+    background-size: 0.18rem 0.08rem;
+}
+.header .list{
+    width: 2.32rem;
+    height: 2.7rem;
+    background: url("../../img/maiJiaXinXiBg.png") no-repeat;
+    background-size: 2.32rem 2.7rem;
+    position: fixed;
+    left: 2rem;
+    top: 0.63rem;
+    padding:0 0.2rem;
+    display: none;
+    z-index: 10;
+}
+.header .list li{
+    text-align: center;
+    color: #666;
+    font-size: 0.26rem;
+    height: 0.66rem;
+    line-height: 0.66rem;
+    border-bottom: 1px solid #e8e8e8;
+}
+.header .list li:last-child{
+    border: none;
+}
+.lianxiren{
+    background: #fff;
+    margin-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    position: relative;
+}
+.lianxiren .title{
+    font-weight: normal;
+    font-size: 0.26rem;
+    color: #333333;
+    margin-bottom: 0.2rem;
+    padding: 0.2rem 0 0 0.2rem;
+}
+.lianxiren p{
+    margin-top: 0.15rem;
+}
+.lianxiren p span{
+    float: left;
+}
+.lianxiren p span.left{
+    font-size: 0.22rem;
+    color: #666;
+    text-align: right;
+    width: 1.68rem;
+}
+.lianxiren p span.right{
+    font-size: 0.26rem;
+    color: #333;
+    width: 4.52rem;
+}
+.lianxiren p label{
+    color: #e32529;
+}
+.lianxiren p span.fl{
+    font-size: 0.26rem;
+    color: #333;
+    float: left;
+}
+.lianxiren p span.fr{
+    font-size: 0.22rem;
+    color: #666;
+    float: right;
+}
+.lianxiren p .fr a{
+    color: #e60012;
+    margin-left: 0.2rem;
+}
+.footer .xiuGaiYongHu{
+    width: 6rem;
+    height: 0.68rem;
+    line-height:0.68rem;
+    border-radius:0.05rem;
+    text-align: center;
+    color: #fff;
+    font-size:0.26rem;
+    background: #e60012;
+}
+.yishenhe{
+    width: 0.6rem;
+    height: 0.7rem;
+    background:url("../../img/yishenhe.png") no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    top: -5px;
+    right: 0.15rem;
+}
+.boHui{
+    width: 1.27rem;
+    height: 0.7rem;
+    position: absolute;
+    top: -5px;
+    right: 0.15rem;
+}
+.yibohui{
+    width: 0.6rem;
+    height: 0.7rem;
+    background:url("../../img/yibohui.png") no-repeat;
+    background-size: 100% 100%;
+    margin-right: 0.07rem;
+    float: left;
+}
+.chakanyuanyin{
+    width: 0.6rem;
+    height: 0.7rem;
+    background:url("../../img/chakanyuanyin.png") no-repeat;
+    background-size: 100% 100%;
+    float: left;
+}
+.daishenhe{
+    width: 0.6rem;
+    height: 0.7rem;
+    position: absolute;
+    top: -5px;
+    right: 0.15rem;
+    background:url("../../img/daishenhe.png") no-repeat;
+    background-size: 100% 100%;
+}
+/*联系人信息修改*/
+.lianxiren p span.right input{
+    width: 3.3rem;
+    height: 0.58rem;
+    border-radius: 0.05rem;
+    padding-left: 0.1rem;
+}
+.lianxiren p span.right select{
+    width: 3.3rem;
+    height: 0.58rem;
+    border-radius: 0.05rem;
+    padding-left: 0.1rem;
+}
+.footer{
+    border-top: 1px solid #e8e8e8;
+    width: 100%;
+    height: 0.84rem;
+    padding-top: 0.1rem;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    font-size:0;
+    text-align: center;
+    z-index: 9;
+    background-color: #fff;
+}
+.footer a{
+    font-size: 0.3rem;
+    width: 2rem;
+    height: 0.64rem;
+    line-height: 0.64rem;
+    background-color: #e60012;
+    color: #fff;
+    display: inline-block;
+    text-align: center;
+    border-radius: 0.05rem;
+}
+.footer a.quxiao{
+    background-color: #f39700;
+    margin-right: 0.8rem;
+}
+/*校验*/
+.warm{
+    color: #e60012;
+    font-size: 0.2rem;
+    padding-left: 1.68rem;
+}
+.gray_word{
+    color: #666;
+}
+.ccc_border{
+    border: 1px solid #ccc;
+}
+.red_word{
+    color: #e60012;
+}
+.red_border{
+    border: 1px solid #e60012;
+}
+.xinXi p span.right{
+    margin-top: -2px;
+}

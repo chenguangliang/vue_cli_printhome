@@ -1,0 +1,228 @@
+/*header*/
+.header{
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:99;
+    font-size: 0.3rem;
+    color: #333;
+    border-bottom: 1px solid #E8E8E8;
+}
+.header .fanHui{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/return.png") no-repeat;
+    background-size: 0.2rem 0.3rem;
+    position: absolute;
+    left: 0.2rem;
+    top: 0.3rem;
+}
+.yingYeZhiZhao{
+    background-color: #fff;
+    overflow: hidden;
+    margin-bottom: 0.2rem;
+}
+.yingYeZhiZhao h2{
+    font-weight: normal;
+    font-size: 0.26rem;
+    color: #333;
+    height: 0.65rem;
+    line-height: 0.65rem;
+    padding-left: 0.2rem;
+}
+.yingYeZhiZhao p{
+    margin-bottom: 0.2rem;
+    overflow: hidden;
+    padding: 0 0.2rem;
+}
+.yingYeZhiZhao p .left{
+    float: left;
+    width: 1.92rem;
+    font-size: 0.22rem;
+    color: #666;
+    text-align: right;
+}
+.yingYeZhiZhao p .right{
+    float: left;
+    width: 4rem;
+    font-size: 0.26rem;
+    color: #333;
+}
+.yingYeZhiZhao p .right i{
+    font-size: 0.26rem;
+    color: #666;
+}
+.yingYeZhiZhao p .fr{
+    float: right;
+    width: 4rem;
+}
+.yingYeZhiZhao p .fr span{
+    display: block;
+    width: 4rem;
+    font-size: 0.24rem;
+    color: #333;
+    background-color: #f8f8f8;
+    padding: 0.2rem;
+    margin-bottom: 0.2rem;
+}
+.yingYeZhiZhao p .fr img{
+    float: left;
+    width: 1.34rem;
+    height: 0.5rem;
+    margin-right: 0.16rem;
+}
+.yingYeZhiZhao p img.big{
+    width: 1rem;
+    height: 1.4rem;
+}
+.yingYeZhiZhao div{
+    padding: 0 0.2rem;
+    overflow: hidden;
+    margin-bottom: 0.2rem;
+}
+.yingYeZhiZhao div .left{
+    width: 2.6rem;
+    text-align: right;
+    float: left;
+    font-size: 0.22rem;
+    color: #666;
+}
+.yingYeZhiZhao div .right{
+    float: left;
+    font-size: 0.26rem;
+    color: #333;
+}
+.yingYeZhiZhao div img.big{
+    width: 1rem;
+    height: 1.4rem;
+}
+.yingYeZhiZhao div img.big{
+    width: 1rem;
+    height: 1.4rem;
+}
+.yingYeZhiZhao div img.small{
+    width: 1rem;
+    height: 0.7rem;
+}
+.zuZhiJiGou{
+    background-color: #fff;
+    overflow: hidden;
+    margin-bottom: 0.2rem;
+}
+.zuZhiJiGou h2{
+    font-weight: normal;
+    font-size: 0.26rem;
+    color: #333;
+    height: 0.65rem;
+    line-height: 0.65rem;
+    padding-left: 0.2rem;
+}
+.zuZhiJiGou p{
+    margin-bottom: 0.2rem;
+    padding: 0 0.2rem;
+    font-size: 0.22rem;
+    color: #666;
+}
+.zuZhiJiGou p span{
+    font-size: 0.26rem;
+    color: #333;
+}
+.zuZhiJiGou p img{
+    width: 1rem;
+    height: 1.4rem;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.dianpuziliao{
+    background-color: #fff;
+    overflow: hidden;
+    margin-bottom: 0.2rem;
+}
+.dianpuziliao h2{
+    font-weight: normal;
+    font-size: 0.26rem;
+    color: #333;
+    height: 0.65rem;
+    line-height: 0.65rem;
+    padding-left: 0.2rem;
+}
+.dianpuziliao p{
+    margin-bottom: 0.2rem;
+    overflow: hidden;
+    padding: 0 0.2rem;
+}
+.dianpuziliao p .left{
+    float: left;
+    width: 1.55rem;
+    font-size: 0.22rem;
+    color: #666;
+    text-align: right;
+}
+.dianpuziliao p .right{
+    float: left;
+    width: 4rem;
+    font-size: 0.26rem;
+    color: #333;
+}
+.dianpuziliao p .right i{
+    font-size: 0.26rem;
+    color: #666;
+}
+.dianpuziliao p .fr{
+    float: right;
+    width: 4.45rem;
+}
+.dianpuziliao p .fr span{
+    display: block;
+    width: 4.3rem;
+    font-size: 0.24rem;
+    color: #333;
+    background-color: #f8f8f8;
+    padding: 0.2rem;
+    margin-bottom: 0.2rem;
+}
+.dianpuziliao p .fr img{
+    float: left;
+    width: 1.34rem;
+    height: 0.5rem;
+    margin-right: 0.1rem;
+}
+.dianpuziliao p img.big{
+    width: 1rem;
+    height: 1.4rem;
+}
+.dianpuziliao div{
+    padding: 0 0.2rem;
+    overflow: hidden;
+    margin-bottom: 0.2rem;
+}
+.dianpuziliao div .left{
+    width: 2.6rem;
+    text-align: right;
+    float: left;
+    font-size: 0.22rem;
+    color: #666;
+}
+.dianpuziliao div .right{
+    float: left;
+    font-size: 0.26rem;
+    color: #333;
+}
+.dianpuziliao div img.big{
+    width: 1rem;
+    height: 1.4rem;
+}
+.dianpuziliao div img.big{
+    width: 1rem;
+    height: 1.4rem;
+}
+.dianpuziliao div img.small{
+    width: 1rem;
+    height: 0.7rem;
+}

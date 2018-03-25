@@ -1,0 +1,128 @@
+/*header*/
+.header{
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:999;
+    font-size: 0.3rem;
+    color: #333;
+    border-bottom: 0.01rem solid #E8E8E8;
+}
+.header .return{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/return.png") no-repeat;
+    background-size: 0.2rem 0.3rem;
+    position: absolute;
+    left: 0.2rem;
+    top: 0.3rem;
+}
+.zhanwei{
+    width: 100%;
+    height: 0.88rem;
+}
+/*shouCangShangPin*/
+.shouCangShangPin{
+    width: 100%;
+    background: #fff;
+    margin-top: 0.1rem;
+    padding-top: 0.2rem;
+}
+.shouCangShangPin .title{
+    width: 6rem;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.2rem;
+    margin:0 auto 0.2rem;
+    color: #333;
+    font-size: 0.26rem;
+    font-weight: normal;
+}
+.shouCangShangPin .more{
+    color: #666;
+    font-size: 0.24rem;
+    float: right;
+}
+.shouCangShangPin .shangPinLieBiao{
+    overflow: hidden;
+    padding-left: 0.2rem;
+}
+.shouCangShangPin .shangPinLieBiao li{
+    width: 1.9rem;
+    height: 1.9rem;
+    margin-right: 0.15rem;
+    margin-bottom: 0.2rem;
+    position: relative;
+    float: left;
+}
+.shouCangShangPin .shangPinLieBiao li a{
+    display: block;
+    width: 1.9rem;
+    height: 1.9rem;
+}
+.shouCangShangPin .shangPinLieBiao li img{
+    width: 1.9rem;
+    height: 1.9rem;
+    border: 1px solid #e4e4e4;
+}
+.shouCangShangPin .shangPinLieBiao li p{
+    width: 1.9rem;
+    height: 0.48rem;
+    line-height: 0.48rem;
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    font-size: 0.22rem;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    text-align: center;
+}
+.shouCangDianPu{
+    width: 100%;
+    background: #fff;
+    margin-top: 0.2rem;
+    padding-top: 0.2rem;
+}
+.shouCangDianPu .title{
+    width: 6rem;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.2rem;
+    margin:0 auto 0.2rem;
+    color: #333;
+    font-size: 0.26rem;
+    font-weight: normal;
+}
+.shouCangDianPu .more{
+    color: #666;
+    font-size: 0.24rem;
+    float: right;
+}
+.shouCangDianPu .dianPuLieBiao{
+    overflow: hidden;
+    padding-left: 0.2rem;
+}
+.shouCangDianPu .dianPuLieBiao li{
+    width: 1.9rem;
+    height: 1.9rem;
+    margin-right: 0.15rem;
+    margin-bottom: 0.2rem;
+    position: relative;
+    float: left;
+}
+.shouCangDianPu .dianPuLieBiao li a{
+    display: block;
+    width: 1.9rem;
+    height: 1.9rem;
+}
+.shouCangDianPu .dianPuLieBiao li img{
+    width: 1.9rem;
+    height: 1.9rem;
+    border: 1px solid #e4e4e4;
+}
+.zhanwei2{
+    height: 1.15rem;
+}

@@ -1,0 +1,191 @@
+body{
+    background-color: #fff;
+}
+.header {
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:9;
+    font-size: 0.3rem;
+    color: #333;
+    border-bottom: 0.01rem solid #E8E8E8;
+}
+.header a{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/return.png") no-repeat;
+    background-size: 0.2rem 0.3rem;
+    position: absolute;
+    left: 0.2rem;
+    top: 0.3rem;
+}
+.zhanwei{
+    width: 100%;
+    height: 0.88rem;
+}
+.content{
+
+}
+.content .shenQing{
+    display: block;
+    text-align: center;
+    border-radius: 0.05rem;
+    width: 6rem;
+    height: 0.78rem;
+    line-height: 0.78rem;
+    background-color: #e60012;
+    color: #fff;
+    font-size: 0.3rem;
+    margin: 0.3rem auto 0.3rem;
+}
+.xuZhi{
+    padding-left: 0.2rem;
+    line-height: 0.45rem;
+}
+.xuZhi h2{
+    color: #333;
+    font-size: 0.28rem;
+    font-weight: normal;
+}
+.xuZhi p{
+    color: #666;
+    font-size: 0.26rem;
+}
+.zhezhao{
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 99;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+}
+.con{
+    width: 5.3rem;
+    height: 5.7rem;
+    top: 50%;
+    left: 50%;
+    margin-top: -2.85rem;
+    margin-left: -2.65rem;
+    background-image: url("../../img/570bg@3x.png");
+    background-size: 100% 100%;
+    position: relative;
+}
+.con h3{
+    height: 0.67rem;
+    line-height: 0.67rem;
+    color: #fff;
+    font-size: 0.3rem;
+    text-align: center;
+    font-weight: normal;
+}
+.con h4{
+    height: 0.89rem;
+    line-height: 0.89rem;
+    color: #666;
+    font-size: 0.28rem;
+    padding-left: 0.2rem;
+    font-weight: normal;
+}
+.con textarea{
+    width: 4.9rem;
+    height: 2.8rem;
+    margin: 0 auto;
+    display: block;
+    resize: none;
+    border: 1px solid #ccc;
+    border-radius: 0.05rem;
+    color: #333;
+    font-size: 0.28rem;
+    padding-top: 0.2rem;
+    text-indent: 0.28rem;
+}
+.con p{
+    position: absolute;
+    bottom: 0.2rem;
+}
+.con p button{
+    width: 1.4rem;
+    height: 0.64rem;
+    color: #fff;
+    font-size: 0.3rem;
+    background-color: #e60012;
+    border-radius: 0.05rem;
+}
+.con p button.cancel{
+    background-color: #f39700;
+    margin: 0 0.54rem 0 0.98rem;
+}
+.con i{
+    width: 0.4rem;
+    height: 0.4rem;
+    background:url("../../img/cha.png") no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    top: -0.2rem;
+    right: -0.2rem;
+}
+.con .textNone{
+    display: none;
+    width: 5rem;
+    height: 0.78rem;
+    line-height: 0.78rem;
+    background: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    position: absolute;
+    top: 2.47rem;
+    left: 0.15rem;
+    border-radius: 0.05rem;
+    color: #fff;
+    font-size: 0.28rem;
+}
+.tiShi{
+    display: none;
+    width: 4rem;
+    height: 2.4rem;
+    background-color: #fff;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -1.2rem;
+    margin-left: -2rem;
+    border-radius: 0.05rem;
+}
+.tiShi h5{
+    height: 0.64rem;
+    line-height: 0.64rem;
+    color: #666;
+    font-size: 0.24rem;
+    text-align: center;
+    font-weight: normal;
+}
+.tiShi p{
+    height: 0.9rem;
+    color: #333;
+    font-size: 0.28rem;
+    text-align: center;
+}
+.tiShi div{
+    width: 3.35rem;
+    height: 1px;
+    border: 1px dashed #ccc;
+    margin:0 auto 0.2rem;
+}
+.tiShi button{
+    width: 1.2rem;
+    height: 0.48rem;
+    color: #fff;
+    font-size: 0.3rem;
+    background-color: #e60012;
+    border-radius: 0.05rem;
+    position: absolute;
+    bottom: 0.2rem;
+    left: 1.4rem;
+}

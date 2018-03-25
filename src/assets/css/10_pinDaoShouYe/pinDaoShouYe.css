@@ -1,0 +1,495 @@
+.main{
+    width: 6.3rem;
+    margin: 0 auto;
+}
+.nav ul li{
+    margin: 0.1rem 0.04rem;
+}
+.jingPinTuiJian .title{
+    background: url("../../img/jingPinTuiJianBg.png") no-repeat;
+    background-size:  100% 100%;
+}
+.jingPinNeiRong{
+    width: 100%;
+    height: 3rem;
+}
+.jingPinNeiRong a{
+    display:block;
+    float: left;
+    background: #fff;
+    width: 2.1rem;
+    min-height: 3.03rem;
+    border-right: 1px solid #e8e8e8;
+    font-size: 0.22rem;
+    padding:  0.15rem 0.15rem 0;
+}
+.jingPinNeiRong a img{
+    width: 1.8rem;
+    height: 1.8rem;
+}
+.jingPinNeiRong a h3{
+    color: #666;
+    font-weight: normal;
+    min-height:0.68rem;
+}
+.jingPinNeiRong a p{
+    color: #e60012;
+    min-height:0.4rem;
+}
+.teSeChanPin{
+    width: 100%;
+}
+.teSeChanPin .title{
+    background: url("../../img/jingPinTuiJianBg.png") no-repeat;
+    background-size:  100% 100%;
+}
+.teSeNeiRong{
+    width: 100%;
+}
+.teSeNeiRong a{
+    display:block;
+    float: left;
+    background: #fff;
+    width: 3.1rem;
+    min-height: 4.07rem;
+    font-size: 0.22rem;
+    margin-bottom: 0.1rem;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    padding: 0.15rem 0.15rem 0;
+}
+.teSeNeiRong a:nth-child(odd){
+    margin-right: 0.1rem;
+}
+.teSeNeiRong a:last-child{
+    margin-bottom: 0;
+}
+.teSeNeiRong a:nth-last-child(2){
+    margin-bottom: 0;
+}
+.teSeNeiRong a img{
+    width: 2.8rem;
+    height: 2.8rem;
+}
+.teSeNeiRong a h3{
+    color: #666;
+    font-weight: normal;
+    min-height: 0.68rem;
+}
+.teSeNeiRong a p{
+    color: #e60012;
+    font-size: 0.28rem;
+    min-height: 0.4rem;
+}
+.qiJianDian{
+    width: 100%;
+}
+.qiJianDian .title{
+    background: url("../../img/jingPinTuiJianBg.png") no-repeat;
+    background-size:  100% 100%;
+}
+.qiJianNeiRong{
+    width: 6.2rem;
+    margin: 0 auto;
+}
+.qiJianNeiRong a{
+    display: block;
+    float: left;
+    width: 3rem;
+    height: 1.2rem;
+    border-radius: 0.06rem;
+    font-size: 0.2rem;
+    color: #fff;
+    position: relative;
+    margin-bottom: 0.15rem;
+}
+.qiJianNeiRong a:nth-child(odd){
+    margin-right: 0.2rem;
+}
+.qiJianNeiRong a:last-child{
+    margin-bottom: 0;
+}
+.qiJianNeiRong a:nth-last-child(2){
+    margin-bottom: 0;
+}
+.qiJianNeiRong a img{
+    width: 3rem;
+    height: 1.2rem;
+    border-radius: 0.06rem;
+}
+.qiJianNeiRong a button{
+    width: 1.08rem;
+    height: 0.38rem;
+    text-align: center;
+    border: 0.004rem solid #fff;
+    border-radius: 0.06rem;
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
+    background: none;
+    color: #fff;
+}
+.qiJianNeiRong a p{
+    width: 100%;
+    text-align: center;
+}
+.qiJianNeiRong a div.bg{
+    width: 3rem;
+    height: 1.2rem;
+    border-radius: 0.06rem;
+    background: rgba(0,0,0,0.5);
+    position: absolute;
+    left: 0;
+    top: 0;
+    text-align: center;
+}
+.lunTan{
+    width: 100%;
+}
+.lunTan .title{
+    background: url("../../img/jingPinTuiJianBg.png") no-repeat;
+    background-size:  100% 100%;
+}
+.lunTanNeiRong{
+    width: 100%;
+    background: #fff;
+}
+.lunTanNeiRong .jingYan{
+    width: 100%;
+    border-bottom: 1px solid #dcdcdc;
+}
+.jingYan h1{
+    font-size: 0.26rem;
+    color: #333;
+    font-weight: normal;
+    height: 0.65rem;
+    line-height: 0.65rem;
+    padding-left: 0.15rem;
+}
+.jingYan dl{
+    overflow: hidden;
+    padding-left: 0.15rem;
+}
+.jingYan dl dt,.jingYan dl dd{
+    float: left;
+}
+.jingYan dt img{
+    width: 1rem;
+    height: 1rem;
+    float: left;
+    margin-right: 0.15rem;
+}
+.jingYan dl dd{
+    width: 5rem;
+}
+.jingYan dl dd b{
+    display: block;
+    font-size: 0.24rem;
+    color: #333;
+    font-weight: normal;
+    margin-bottom: 0.1rem;
+}
+.jingYan dl dd p{
+    font-size: 0.22rem;
+    color: #666;
+}
+.jingYan ol{
+    margin-top: 0.2rem;
+}
+.jingYan ol li{
+    list-style:none;
+    margin-bottom: 0.2rem;
+    overflow: hidden;
+}
+.jingYan ol li a{
+    color: #333;
+    font-size: 0.22rem;
+    display: block;
+    float:left;
+}
+.jingYan ol li a i{
+    font-size: 0;
+    width: 0.1rem;
+    height: 0.1rem;
+    border-radius: 50%;
+    background: #666;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 0.1rem 0 0.15rem;
+}
+.jingYan ol li a.wid_220{
+    width: 4.2rem;
+}
+.jingYan ol li a.wid_80{
+    width: 1.2rem;
+}
+.jingYan ol li a:last-child{
+    width: 0.9rem;
+}
+.lunTanNeiRong .tuJi{
+    width: 100%;
+    border-bottom: 1px solid #dcdcdc;
+    overflow: hidden;
+}
+.tuJi h1{
+    font-size: 0.26rem;
+    color: #333;
+    font-weight: normal;
+    height: 0.65rem;
+    line-height: 0.65rem;
+    padding-left: 0.15rem;
+}
+.tuJi .tuJiNeiRong{
+    overflow: hidden;
+}
+.tuJi .fl{
+    float: left;
+    width: 2.2rem!important;
+    height: 2.1rem!important;
+    margin: 0 0.1rem 0.2rem 0.15rem !important;
+}
+.tuJi .fl a img{
+    width: 2.2rem;
+    height: 1.6rem;
+}
+.tuJi .fl p{
+    width: 2.2rem;
+    height: 0.5rem;
+    line-height: 0.5rem;
+    text-align: center;
+    font-size: 0.22rem;
+    color: #333;
+    background: #f0f0f0;
+}
+.tuJi .wid_270{
+    width: 3.78rem!important;
+    height: 2.12rem!important;
+    margin: 0!important;
+}
+.tuJi .wid_270 #textbook{
+    float: left;
+    width: 1.79rem!important;
+    height:0.96rem!important;
+    margin: 0 0.1rem 0.2rem 0 !important;
+}
+.tuJi .wid_270 #textbook img{
+    width: 1.79rem!important;
+    height:0.96rem!important;
+}
+.tuJi .wid_270 #textbook p{
+    width: 0;
+    height: 0;
+    line-height:0;
+    text-align: center;
+    font-size: 0;
+    color: #fff;
+    background: none;
+}
+.lunTanNeiRong .zhiDing{
+    width: 100%;
+    border-bottom: 1px solid #dcdcdc;
+    overflow: hidden;
+    padding-left: 0.15rem;
+}
+.zhiDing h1{
+    font-size: 0.26rem;
+    color: #333;
+    font-weight: normal;
+    height: 0.65rem;
+    line-height: 0.65rem;
+}
+.zhiDing h1 span{
+    width: 0.08rem;
+    height: 0.08rem;
+    border-radius: 50%;
+    background-color: #333;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 0.1rem;
+}
+.zhiDing b{
+    display: block;
+    font-size: 0.24rem;
+    color: #333;
+    font-weight: normal;
+    margin-bottom: 0.2rem;
+}
+.zhiDing .new_div{
+    width: 6rem!important;
+}
+.zhiDing .new_div p{
+    font-size: 0.22rem;
+    color: #666;
+    background: #f4f4f4;
+    padding: 0.2rem;
+    margin-bottom: 0.2rem;
+    min-height: 1.52rem;
+}
+.lunTanNeiRong .gongSiLiuYan{
+    width: 100%;
+    padding-left: 0.15rem;
+    padding-bottom: 0.2rem;
+}
+.gongSiLiuYan h3{
+    font-size: 0.26rem;
+    color: #333;
+    font-weight: normal;
+    height: 0.65rem;
+    line-height: 0.65rem;
+}
+.gongSiLiuYan dl{
+    overflow: hidden;
+}
+.gongSiLiuYan dl dt{
+    width: 0.4rem!important;
+    height: 0.4rem!important;
+    line-height: 0!important;
+    margin: 0 0.15rem 0 0!important;
+    float: left;
+}
+.gongSiLiuYan dl dt img{
+    width: 0.4rem!important;
+    height: 0.4rem!important;
+    float: left;
+}
+.gongSiLiuYan dl dd{
+    float: left;
+    width: 5.6rem!important;
+    height: auto!important;
+    overflow: auto!important;
+}
+.gongSiLiuYan dl dd p{
+    height: 0.4rem;
+    line-height: 0.4rem;
+}
+.gongSiLiuYan dl dd p:first-child a{
+    color: #666;
+}
+.gongSiLiuYan dl dd p a{
+    font-size: 0.22rem;
+    color: #333;
+    display: block;
+}
+.gongSiLiuYan  .but_min{
+    display: block;
+    width: 1.5rem;
+    height: 0.4rem;
+    border: 1px solid #ccc;
+    border-radius: 0.06rem;
+    line-height: 0.4rem;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 0.22rem;
+    color: #e60012;
+}
+.zhuanJiaNeiRong .fr .biaoTi{
+    font-size: 0.22rem;
+    color: #333;
+    display: block;
+}
+.zhuanJiaNeiRong .fr .more{
+    font-size: 0.22rem;
+    color: #333;
+    display: block;
+    text-align: right;
+}
+.logo2{
+    margin-top: 0.1rem;
+}
+.lunTanNeiRong .faTie{
+    width: 6.3rem;
+    border-bottom: 1px solid #e8e8e8;
+    padding-left: 0.15rem;
+    padding-right: 0.15rem;
+    overflow: hidden;
+    list-style:none;
+}
+.faTie h1{
+    font-size: 0.26rem;
+    color: #333;
+    font-weight: normal;
+    margin: 0.2rem auto 0.2rem;
+}
+.faTie h3{
+    border-bottom: 1px dashed #dcdcdc;
+    overflow: hidden;
+    font-size: 0.24rem;
+    color: #333;
+    height: 0.5rem;
+}
+.faTie h3 b{
+    float: left;
+}
+.faTie h3 a{
+    float: right;
+}
+.faTie #forum_ol li{
+    overflow: hidden;
+    font-size: 0.24rem;
+    color: #333;
+    height: 0.5rem;
+    line-height: 0.5rem;
+    display: block;
+}
+
+.lunTanNeiRong .zhuanJia{
+    width: 6.3rem;
+    border-bottom: 1px solid #e8e8e8;
+    padding-left: 0.15rem;
+    padding-right: 0.15rem;
+    overflow: hidden;
+    list-style:none;
+}
+.zhuanJia h1{
+    font-size: 0.26rem;
+    color: #333;
+    font-weight: normal;
+    margin: 0.2rem auto 0.2rem;
+}
+.zhuanJia dl dt a img{
+    width: 0.9rem;
+    height: 0.9rem;
+}
+.zhuanJia dl dd b a{
+    font-size: 0.24rem;
+    color: #333;
+}
+.zhuanJia dl dd p a{
+    font-size: 0.22rem;
+    color: #333;
+}
+.zhuanJia dl dd p i{
+    font-size: 0.24rem;
+    color: #333;
+}
+
+.zhuanJiaNeiRong .fl .fl-top .liuyan{
+    width: 0.25rem;
+    height: 0.25rem;
+    margin-right: 0.1rem;
+    display: inline-block;
+    vertical-align: top;
+}
+.zhuanJiaNeiRong .fl .fl-top .liuYan{
+    font-size: 0.22rem;
+    color: #333;
+}
+.zhuanJia h3{
+    font-size: 0.24rem;
+    color: #333;
+    font-weight: normal;
+    margin: 0.1rem 0 0.1rem;
+}
+.zhuanJia #forum_ol li{
+    list-style:none;
+}
+.zhuanJia #forum_ol li  a{
+    font-size: 0.22rem;
+    color: #666;
+    display: block;
+    float:left;
+}
+/*底部广告*/
+.footerAdv{
+    width:6.3rem;
+    height:100%;
+    margin:0.1rem auto;
+}

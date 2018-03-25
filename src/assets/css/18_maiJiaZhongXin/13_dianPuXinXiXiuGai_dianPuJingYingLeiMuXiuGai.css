@@ -1,0 +1,324 @@
+/*����*/
+.header {
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:9;
+    font-size: 0.3rem;
+    color: #333;
+    border-bottom: 0.01rem solid #E8E8E8;
+}
+.header a.fanHui{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/return.png") no-repeat;
+    background-size: 0.2rem 0.3rem;
+    position: absolute;
+    left: 0.2rem;
+    top: 0.3rem;
+}
+.zhanwei{
+    width: 100%;
+    height: 0.88rem;
+}
+/*��Ӫ��Ŀ*/
+.dianPuLeiMu{
+    color: #333;
+    font-size: 0.26rem;
+    font-weight: normal;
+    background-color: #fff;
+    padding: 0.2rem 0 0 0.2rem;
+}
+.leiMu{
+    background-color: #fff;
+    padding: 0.2rem 0.2rem 0 0.2rem;
+    overflow: hidden;
+    font-size: 0;
+}
+.leiMu p{
+    margin-bottom: 0.2rem;
+    color: #333;
+    font-size: 0.26rem;
+    background-color: #f4f4f4;
+    padding: 0.2rem;
+    border-radius: 0.05rem;
+    position: relative;
+    display: inline-block;
+    max-width: 5.4rem;
+}
+.leiMu p .shanChu{
+    position: absolute;
+    top: 50%;
+    margin-top: -0.14rem;
+    right: -0.5rem;
+    background: url("../../img/shanchuhong@3x.png") no-repeat;
+    background-size: 0.28rem 0.28rem;
+    width: 0.28rem;
+    height: 0.28rem;
+}
+.leiMu p img{
+    width: 0.38rem;
+    height: 0.53rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.leiMu p .beiBoHui,.leiMu p .shenHeZhong{
+    width: 0.6rem;
+    height: 0.56rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.leiMu p span{
+    color: #333;
+    font-size: 0.22rem;
+    position: absolute;
+    right: -0.7rem;
+    top: 0.1rem;
+    background: url("../../img/eyes.png") no-repeat;
+    background-size: 0.42rem 0.24rem;
+    padding-top: 0.3rem;
+}
+.xinZengLeiMu{
+    display: block;
+    width: 6rem;
+    height: 0.78rem;
+    background-color: #fff;
+    border-radius:0.05rem;
+    box-shadow: 0 3px 3px #ccc;
+    color: #e60012;
+    font-size: 0.3rem;
+    margin: 0.2rem  auto;
+}
+/*�ײ�*/
+.footer_zhanWei{
+    height: 0.95rem;
+    width: 100%;
+}
+.tiJiao{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width:100%;
+    height: 0.84rem;
+    text-align: center;
+    background: #fff;
+    border-top: 1px solid #E8E8E8;
+    font-size: 0;
+}
+.tiJiao input{
+    width:6rem;
+    height: 0.6rem;
+    background: #e60012;
+    border-radius: 0.05rem;
+    color: #fff;
+    font-size: 0.3rem;
+    margin-top: 0.08rem;
+}
+/*���̹رյ���*/
+.bg{
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.shanChuTanChuang{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    display: none;
+}
+.faBuTanChuang{
+    width: 4rem;
+    height: 2rem;
+    background-color: #fff;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -1rem;
+    margin-left: -2rem;
+    border-radius: 0.05rem;
+}
+.faBuTanChuang h5{
+    height: 0.64rem;
+    line-height: 0.64rem;
+    color: #666;
+    font-size: 0.24rem;
+    text-align: center;
+    font-weight: normal;
+}
+.faBuTanChuang p{
+    color: #333;
+    font-size: 0.28rem;
+    text-align: center;
+}
+.faBuTanChuang div{
+    width: 3.35rem;
+    border: 1px dashed #e8e8e8;
+    margin:0.15rem auto;
+}
+.faBuTanChuang p a{
+    width: 1.2rem;
+    height: 0.48rem;
+    line-height: 0.48rem;
+    text-align: center;
+    color: #fff;
+    font-size: 0.3rem;
+    background-color: #e60012;
+    border-radius: 0.05rem;
+    display: inline-block;
+}
+.faBuTanChuang p a:first-child{
+    margin-right: 0.5rem;
+    background-color: #f39700;
+}
+/*��Ӫ��Ŀ�鿴����ԭ��*/
+.xinZengLeiMuTanChuang{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    display: none;
+}
+.boHuiYuanYin{
+    width: 5.3rem;
+    height: 5.26rem;
+    top: 50%;
+    left: 50%;
+    margin-left: -2.65rem;
+    margin-top: -2.63rem;
+    background-image: url("../../img/526bg@3x.png");
+    background-size: 100% 100%;
+    position: relative;
+}
+.boHuiYuanYin h3{
+    height: 0.67rem;
+    line-height: 0.67rem;
+    color: #fff;
+    font-size: 0.3rem;
+    text-align: center;
+    font-weight: normal;
+}
+.boHuiYuanYin p{
+    color: #333;
+    font-size: 0.26rem;
+    padding: 0.2rem;
+}
+.boHuiYuanYin select{
+    width: 4.9rem;
+    height: 0.58rem;
+    border: 1px solid #ccc;
+    border-radius: 0.05rem;
+    padding-right: 0.2rem;
+    font-size: 0.22rem;
+    display: block;
+    margin: 0 auto 0.2rem;
+}
+.boHuiYuanYin .btn{
+    position: absolute;
+    bottom: 0.2rem;
+    font-size: 0;
+    text-align: center;
+}
+.boHuiYuanYin .btn button{
+    width: 1.8rem;
+    height: 0.64rem;
+    color: #fff;
+    font-size: 0.3rem;
+    background-color: #e60012;
+    border-radius: 0.05rem;
+}
+.boHuiYuanYin .btn button.cancel{
+    background-color: #f39700;
+    margin-right: 0.5rem;
+    margin-left: 0.6rem;
+}
+.close{
+    width: 0.4rem;
+    height: 0.4rem;
+    position: absolute;
+    top: -0.2rem;
+    right: -0.2rem;
+}
+/*经营类目查看驳回原因*/
+.category_reject_prop{
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+}
+.category_reject{
+    width: 5.3rem;
+    height: 5.26rem;
+    top: 50%;
+    left: 50%;
+    margin-left: -2.65rem;
+    margin-top: -2.63rem;
+    background-image: url("../../img/526bg@3x.png");
+    background-size: 100% 100%;
+    position: relative;
+}
+.category_reject h3{
+    height: 0.67rem;
+    line-height: 0.67rem;
+    color: #fff;
+    font-size: 0.3rem;
+    text-align: center;
+    font-weight: normal;
+}
+.category_reject div{
+    overflow: hidden;
+    margin: 0.2rem 0;
+}
+.category_reject div .left{
+    width: 1.65rem;
+    text-align: right;
+    float: left;
+    color: #666;
+    font-size: 0.24rem;
+}
+.category_reject div .right{
+    width: 3.5rem;
+    overflow: scroll;
+    max-height: 1.5rem;
+    float: left;
+    color: #333;
+    font-size: 0.26rem;
+}
+.category_reject .btn{
+    position: absolute;
+    bottom: 0.2rem;
+    text-align: center;
+}
+.category_reject .btn button{
+    display: block;
+    float: left;
+    width: 1.8rem;
+    height: 0.64rem;
+    color: #fff;
+    font-size: 0.3rem;
+    background-color: #e60012;
+    border-radius: 0.05rem;
+}
+.category_reject .btn button.cancel{
+    background-color: #f39700;
+    margin-right: 0.5rem;
+    margin-left: 0.6rem;
+}

@@ -1,0 +1,240 @@
+/*header*/
+.header{
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:999;
+    font-size: 0.3rem;
+    color: #333;
+    border-bottom: 0.01rem solid #d2d2d2;
+}
+.header .return{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/return.png") no-repeat;
+    background-size: 0.2rem 0.3rem;
+    position: absolute;
+    left: 0.2rem;
+    top: 0.3rem;
+}
+.zhanwei{
+    width: 100%;
+    height: 0.88rem;
+}
+/*焦点图*/
+.slideBox{
+    position:relative;
+    overflow:hidden;
+}
+.slideBox .hd{
+    position:absolute;
+    height:0.18rem;
+    line-height:0.18rem;
+    bottom:0.2rem;
+    right:0.07rem;
+    z-index:1;
+}
+.slideBox .hd li{
+    display:inline-block;
+    width:0.18rem;
+    height:0.18rem;
+    -webkit-border-radius:50%;
+    -moz-border-radius:50%;
+    border-radius:50%;
+    background:#666;
+    text-indent:-9999px;
+    margin-left:0.13rem;
+}
+.slideBox .hd li.on{
+    background:#00b4ff;
+}
+.slideBox .bd{
+    position:relative;
+    z-index:0;
+}
+.slideBox .bd li{
+    position:relative;
+    text-align:center;
+}
+.slideBox .bd li img{
+    vertical-align:top;
+    width:100%;/* 图片宽度100%，达到自适应效果 */
+    height: 3.02rem;
+}
+.slideBox .bd li a{
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+/*积分商城广告*/
+.adv{
+    width: 6.3rem;
+    margin: 0.2rem auto 0;
+    background-color: #fff;
+    overflow: hidden;
+}
+.adv  a{
+    width: 1.26rem;
+    height: 1.26rem;
+    display: block;
+    position: relative;
+    border-right: 1px solid #E8E8E8;
+    border-bottom: 1px solid #E8E8E8;
+    float: left;
+    box-sizing: border-box;
+}
+.adv img{
+    width: 1.05rem;
+    height: 1.05rem;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -0.525rem;
+    margin-top: -0.525rem;
+}
+/*兑你喜欢*/
+.duiNiXiHuan{
+    width: 6.3rem;
+    margin: 0 auto;
+}
+.duiNiXiHuan .biaoTi{
+    width: 100%;
+    height: 0.55rem;
+    position: relative;
+    padding-top: 0.32rem;
+}
+.duiNiXiHuan .biaoTi .line{
+    width: 100%;
+    height: 1px;
+    background-color: #c9c9c9;
+}
+.duiNiXiHuan .biaoTi span{
+    width: 1.44rem;
+    background-color: #F4F4F4;
+    font-size: 0.26rem;
+    color: #333;
+    position: absolute;
+    left: 50%;
+    margin-left: -0.72rem;
+    top: 50%;
+    margin-top: -0.13rem;
+    text-align: center;
+}
+.duiNiXiHuan .content{
+    width: 100%;
+}
+.shangPinLieBiao{
+    display: block;
+    width: 100%;
+    height: 1.7rem;
+    background: #fff;
+    box-shadow: 0 3px 3px #e4e4e4;
+    margin-top: 0.1rem;
+    padding: 0.1rem 0 0.1rem 0.1rem;
+}
+.shangPinLieBiao .shangPinTuPian{
+    width: 1.5rem;
+    height: 1.5rem;
+    float: left;
+    margin-right: 0.15rem;
+}
+.shangPinLieBiao .shangPinXiangQing{
+    float: left;
+}
+.shangPinLieBiao .shangPinXiangQing .mingZi{
+    font-size: 0.24rem;
+    color: #666;
+    word-wrap: break-word;
+    width: 4.5rem;
+    margin-bottom: 0.1rem;
+}
+.shangPinLieBiao .shangPinXiangQing .jiaGe{
+    font-size: 0.22rem;
+    color: #999;
+    margin-bottom: 0.1rem;
+}
+.shangPinLieBiao .shangPinXiangQing .jiFen{
+    font-size: 0.24rem;
+    color: #666;
+}
+.shangPinLieBiao .shangPinXiangQing .jiFen span{
+    font-size: 0.26rem;
+    color: #e60012;
+}
+.taoXinPin{
+    width: 6.3rem;
+    margin: 0 auto;
+}
+.taoXinPin .biaoTi{
+    width: 100%;
+    height: 0.55rem;
+    position: relative;
+    padding-top: 0.32rem;
+}
+.taoXinPin .biaoTi .line{
+    width: 100%;
+    height: 1px;
+    background-color: #c9c9c9;
+}
+.taoXinPin .biaoTi span{
+    width: 1.44rem;
+    background-color: #F4F4F4;
+    font-size: 0.26rem;
+    color: #333;
+    position: absolute;
+    left: 50%;
+    margin-left: -0.72rem;
+    top: 50%;
+    margin-top: -0.13rem;
+    text-align: center;
+}
+.taoXinPin .content{
+    width: 100%;
+}
+.xinPinLieBiao{
+    display:block;
+    float: left;
+    background: #fff;
+    width: 3.1rem;
+    font-size: 0.22rem;
+    margin-bottom: 0.1rem;
+    box-shadow: 0 3px 3px #e4e4e4;
+}
+.xinPinLieBiao:nth-child(odd){
+    margin-right: 0.1rem;
+}
+.xinPinLieBiao .shangPinTuPian{
+    width: 2.8rem;
+    height: 2.8rem;
+    margin: 0.15rem auto 0;
+}
+.xinPinLieBiao .mingZi{
+    color: #666;
+    font-weight: normal;
+    padding-left: 0.15rem;
+    margin-bottom: 0.1rem;
+}
+.xinPinLieBiao .jiaGe{
+    color: #999;
+    padding-left: 0.15rem;
+    font-size: 0.2rem;
+    margin-bottom: 0.1rem;
+}
+.xinPinLieBiao .jiFen{
+    color: #666;
+    padding-left: 0.15rem;
+    font-size: 0.2rem;
+    margin-bottom: 0.1rem;
+}
+.xinPinLieBiao .jiFen span{
+    font-size: 0.26rem;
+    color: #e60012;
+}
+.printHome{
+    text-align: center;
+    font-size: 0.2rem;
+    color: #999;
+}

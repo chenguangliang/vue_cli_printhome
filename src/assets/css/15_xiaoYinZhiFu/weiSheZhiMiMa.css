@@ -1,0 +1,545 @@
+body{
+    background-color: #F4F4F4;
+}
+/*header*/
+.header{
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:999;
+    font-size: 0.3rem;
+    color: #333;
+    border-bottom: 0.01rem solid #E8E8E8;
+}
+.header .return{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/return.png") no-repeat;
+    background-size: 0.2rem 0.3rem;
+    position: absolute;
+    left: 0.2rem;
+    top: 0.3rem;
+}
+.zhanwei{
+    width: 100%;
+    height: 0.88rem;
+}
+.logo{
+    width: 100%;
+    height: 1.1rem;
+    line-height: 1.1rem;
+    background-color: #fff;
+    border-bottom: 1px dashed #c9c9c9;
+}
+.logo .zhiFuLoGo{
+    width: 1.7rem;
+    height: 0.72rem;
+    float: left;
+    margin: 0.1rem 0 0 0.2rem;
+}
+.logo .line{
+    width: 1px;
+    height: 0.58rem;
+    background-color: #c9c9c9;
+    float: left;
+    margin: 0.26rem 0.2rem 0 0.2rem;
+}
+.logo .shouYinTai{
+    font-size: 0.26rem;
+    color: #666;
+    float: left;
+}
+.money{
+    padding: 0.1rem 0 0 0.2rem;
+    width: 100%;
+    height: 1.1rem;
+    background-color: #fff;
+    border-bottom: 1px dashed #c9c9c9;
+}
+.money .huaFei{
+    font-size: 0.4rem;
+    color: #e60012;
+}
+.money .keYong{
+    font-size: 0.26rem;
+    color: #999;
+}
+.tiShi{
+    width: 100%;
+    height:0.6rem;
+    line-height: 0.6rem;
+    background-color: #fff;
+    text-align: center;
+    font-size: 0.22rem;
+    color: #e60012;
+}
+.dingDan{
+    width: 100%;
+    height:0.66rem;
+    line-height: 0.66rem;
+    background-color: #fff;
+    border-bottom: 1px dashed #c9c9c9;
+    font-size: 0.26rem;
+    color: #333;
+    padding-left: 0.2rem;
+    margin-top: 0.2rem;
+    position: relative;
+}
+.xiangQing{
+    width: 100%;
+    padding: 0.2rem 0 0.2rem 0.2rem;
+    background-color: #fff;
+    border-bottom: 1px dashed #c9c9c9;
+}
+.xiangQing p .left{
+    -width: 1.3rem;
+    float: left;
+    font-size: 0.26rem;
+    color: #666;
+    text-align: right;
+}
+.xiangQing p .right{
+    width:4.17rem;
+    float: left;
+    font-size: 0.34rem;
+    color: #333;
+}
+/*δ����֧������*/
+.zhiFu{
+    width: 100%;
+    height: 1.2rem;
+    padding-top: 0.3rem;
+    background-color: #fff;
+    color: #f39700;
+    font-size: 0.22rem;
+    text-align: center;
+}
+.zhiFu .tipImg{
+    width: 0.3rem;
+    height: 0.26rem;
+    margin-right: 0.2rem;
+    margin-left: 0.2rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+.twoBtn{
+    width: 100%;
+    height: 0.64rem;
+    margin-top: 0.2rem;
+}
+.twoBtn .cancel,.twoBtn .sheZhi{
+    text-align: center;
+    width: 1.54rem;
+    height: 0.64rem;
+    line-height: 0.64rem;
+    display: inline-block;
+    background-color: #f39700;
+    border-radius: 0.05rem;
+    margin-right: 0.61rem;
+    margin-left: 1.35rem;
+    color: #fff;
+    font-size: 0.3rem;
+    vertical-align: top;
+}
+.twoBtn .sheZhi{
+    background-color: #e60012;
+    margin: 0;
+}
+/*������֧������*/
+.zhiFu2{
+    height: 1.9rem;
+    width: 100%;
+    background-color: #fff;
+}
+.zhiFu2 .top{
+    height: 0.72rem;
+    line-height: 0.72rem;
+    text-align: center;
+    color: #333;
+    font-size: 0.24rem;
+}
+.zhiFu2 .top span{
+    width: 0.3rem;
+    height: 0.3rem;
+    display: inline-block;
+    background-image: url(../../img/lv@3x.png);
+    background-size: 100% 100%;
+    margin-right: 0.2rem;
+    margin-left: 0;
+}
+.zhiFu2 .middle{
+    width: 5.66rem;
+    margin-left: 0.2rem;
+    color: #666;
+    font-size: 0.24rem;
+    position: relative;
+}
+.zhiFu2 .middle input{
+    width: 3.7rem;
+    height: 0.58rem;
+    border: 1px solid #ccc;
+    border-radius: 0.05rem;
+    padding-left: 0.1rem;
+    font-size: 0.26rem;
+    color: #333;
+    -margin-left: 0.1rem;
+}
+.zhiFu2 .middle i{
+    width: 0.4rem;
+    height: 0.24rem;
+    position: absolute;
+    right: 0.3rem;
+}
+.zhiFu2 .middle .img01{
+    background:url("../../img/eyes1.png") no-repeat;
+    -webkit-background-size: 100% 50%;
+    background-size: 100% 50%;
+    top: 0.25rem;
+}
+.zhiFu2 .middle .img02{
+    background:url("../../img/eyes.png") no-repeat;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    top: 0.18rem;
+}
+.zhiFu2 .forget{
+    font-size: 0.2rem;
+    color: #e60012;
+    float: right;
+    margin-right: 0.5rem;
+    margin-top: 0.15rem;
+    text-decoration: underline;
+}
+.twoBtn .chongZhi,.twoBtn .shengCheng{
+    text-align: center;
+    width: 1.54rem;
+    height: 0.64rem;
+    line-height: 0.64rem;
+    display: inline-block;
+    background-color: #e60012;
+    border-radius: 0.05rem;
+    margin-right: 0.62rem;
+    margin-left:0.78rem;
+    color: #fff;
+    font-size: 0.3rem;
+    vertical-align: top;
+}
+.twoBtn .shengCheng {
+    width: 2.7rem;
+    margin: 0;
+}
+/*��ʶ���*/
+.dingDan .jianTou{
+    width: 0.3rem;
+    height: 0.3rem;
+    position: absolute;
+    top: 0.2rem;
+    right: 0.2rem;
+}
+.dingDan .zhiFuDown{
+    background: url(../../img/xiangxia@3x.png) no-repeat;
+    background-size: 0.3rem 0.3rem;
+}
+.dingDan .zhiFuUp{
+    background: url(../../img/xiangshang@3x.png) no-repeat;
+    background-size: 0.3rem 0.3rem;
+}
+.content{
+}
+.dingDanHao{
+    background-color: #fff;
+    margin-bottom: 0.2rem;
+    padding-bottom: 0.2rem;
+}
+.dingDanHao h2{
+    width: 100%;
+    height: 0.6rem;
+    line-height: 0.6rem;
+    background-color: #ebebeb;
+    font-size: 0.24rem;
+    color: #666;
+    font-weight: normal;
+    padding-left: 0.2rem;
+}
+.dingDanHao p{
+    padding-left: 0.2rem;
+    margin-top: 0.2rem;
+}
+.dingDanHao p .left{
+    float: left;
+    font-size: 0.22rem;
+    color: #666;
+    text-align: right;
+}
+.dingDanHao p .right{
+    width:4.7rem;
+    float: left;
+    font-size: 0.26rem;
+    color: #333;
+}
+.dingDanHao p .w180{
+    width: 2rem;
+}
+/*֧�������������*/
+.zhezhao{
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+}
+.con{
+    width: 4rem;
+    height: 2.4rem;
+    background-color: #fff;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    margin-top: -1.2rem;
+    margin-left: -2rem;
+    border-radius: 0.05rem;
+    position: relative;
+}
+.con h5{
+    height: 0.64rem;
+    line-height: 0.64rem;
+    color: #666;
+    font-size: 0.24rem;
+    text-align: center;
+    font-weight: normal;
+}
+.con p{
+    height: 0.9rem;
+    color: #333;
+    font-size: 0.28rem;
+    text-align: center;
+}
+.con div{
+    width: 3.35rem;
+    height: 1px;
+    border: 1px dashed #ccc;
+    margin:0 auto 0.2rem;
+}
+.con button{
+    width: 1.2rem;
+    height: 0.48rem;
+    color: #fff;
+    font-size: 0.3rem;
+    background-color: #e60012;
+    border-radius: 0.05rem;
+    position: absolute;
+    bottom: 0.2rem;
+    left: 1.4rem;
+}
+/*��������*/
+.sheZhiMiMa{
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.neiRong{
+    width: 5.3rem;
+    height: 6.25rem;
+    top: 50%;
+    left: 50%;
+    margin-top: -3.125rem;
+    margin-left: -2.65rem;
+    background-image: url("../../img/zhiFuBg.png");
+    background-size: 100% 100%;
+    position: relative;
+}
+.neiRong h3{
+    height: 0.67rem;
+    line-height: 0.67rem;
+    color: #fff;
+    font-size: 0.3rem;
+    text-align: center;
+    font-weight: normal;
+}
+.xiuGaiContent{
+    width:100%;
+    overflow: hidden;
+}
+.xiuGaiContent div{
+    height: 0.58rem;
+    line-height: 0.58rem;
+    margin-top: 0.15rem;
+    font-size: 0.22rem;
+    color: #666;
+    position: relative;
+    overflow: hidden;
+}
+.xiuGaiContent div span.left{
+    float: left;
+    text-align: right;
+    width: 1.65rem;
+}
+.xiuGaiContent div span.right{
+    float: left;
+}
+.xiuGaiContent div label{
+    color: #e32529;
+}
+.xiuGaiContent div input{
+    width: 3.26rem;
+    height: 0.58rem;
+    border: 1px solid #ccc;
+    border-radius: 0.05rem;
+    font-size: 0.26rem;
+    color: #333;
+    padding-left: 0.1rem;
+}
+
+.xiuGaiContent div span.right span{
+    color: #333;
+    font-size: 0.3rem;
+}
+.xiuGaiContent div input#yanZhengMa{
+    width: 1.46rem;
+}
+.xiuGaiContent div button{
+    width: 1.46rem;
+    height: 0.58rem;
+    line-height: 0.58rem;
+    font-size: 0.24rem;
+    color: #fff;
+    background-color: #e60012;
+    text-align: center;
+    border-radius: 0.05rem;
+    margin-left: 0.2rem;
+}
+.neiRong i{
+    width: 0.4rem;
+    height: 0.4rem;
+    background:url("../../img/cha.png") no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    top: -0.2rem;
+    right: -0.2rem;
+}
+.neiRong .sure{
+    width: 1.8rem;
+    height: 0.64rem;
+    color: #fff;
+    font-size: 0.3rem;
+    background-color: #e60012;
+    border-radius: 0.05rem;
+    position: absolute;
+    left: 1.75rem;
+    bottom: 0.2rem;
+}
+.warm{
+    font-size: 0.2rem;
+    color: #e60012;
+    margin-top: 0.1rem;
+    padding-left: 1.5rem;
+}
+/*��ֵҳ*/
+.borderNone{
+    border: none;
+}
+.keYongYuE{
+    width: 100%;
+    height: 0.76rem;
+    line-height: 0.76rem;
+    background-color: #e60012;
+    padding-left: 0.2rem;
+    font-size: 0.26rem;
+    color: #fff;
+}
+.keYongYuE span{
+    font-size: 0.38rem;
+    color: #fffc03;
+}
+.chongZhiTiShi{
+    width: 100%;
+    line-height: 0.45rem;
+    background-color: #fff;
+    padding:0.1rem 0.2rem;
+    font-size: 0.24rem;
+    color: #666;
+    margin: 0.2rem 0;
+}
+.zhangHu{
+    width: 100%;
+    background-color: #fff;
+    padding:0.2rem;
+    font-size: 0.3rem;
+    color: #666;
+}
+.zhangHu p{
+    /*height: 0.45rem;*/
+    /*line-height: 0.45rem;*/
+}
+.zhangHu .color3{
+    color: #333;
+}
+.shengCheng{
+    width: 100%;
+    height: 0.78rem;
+    margin-top: 0.2rem;
+    text-align: center;
+}
+.shengCheng a{
+    text-align: center;
+    width: 6.05rem;
+    height: 0.78rem;
+    line-height: 0.78rem;
+    display: inline-block;
+    background-color: #e60012;
+    border-radius: 0.05rem;
+    color: #fff;
+    font-size: 0.3rem;
+    vertical-align: top;
+}
+#send_msg_false, #send_msg{
+    z-index: 999999;
+}
+
+/*cgl seller Balance*/
+.blockedAccount{
+    width: 6rem;
+    height: 1.36rem;
+    margin: 0.2rem auto;
+    background: url("../../img/balance1.png");
+    background-size:100% 100%;
+    padding: 0.15rem 0.2rem 0;
+}
+.accountDetile{
+    width: 6rem;
+    margin: 0.2rem auto;
+    background: url("../../img/balance2.png");
+    background-size:100% 100%;
+    color: white;
+    padding: 0.2rem 0.2rem;
+}
+.font26{
+    font-size: 0.26rem;
+}
+/*提现*/
+.Withdrawals{
+    width:6.06rem;
+    height:0.8rem;
+    background: #e60012;
+    color: #fff;
+    font-size: 0.3rem;
+    border-radius: 0.06rem;
+    display:block;
+    margin:0.2rem auto;
+}
+.disabled{
+    background: #ccc;
+    color: #fff !important;
+}

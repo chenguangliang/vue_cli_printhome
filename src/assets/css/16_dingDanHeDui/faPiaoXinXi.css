@@ -1,0 +1,338 @@
+body{
+    background-color: #fff;
+}
+/*header*/
+.header{
+    width: 100%;
+    height: 0.87rem;
+    line-height: 0.87rem;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:9;
+    font-size: 0.3rem;
+    color: #333;
+}
+.header .return{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/return.png") no-repeat;
+    background-size: 0.2rem 0.3rem;
+    position: absolute;
+    left: 0.2rem;
+    top: 0.3rem;
+}
+.xuanXiangKa{
+    position: fixed;
+    top: 0.87rem;
+    left: 0;
+    z-index:9;
+    width: 100%;
+    height: 0.9rem;
+    border-bottom: 1px solid #E8E8E8;
+    background-color: #fff;
+}
+.xuanXiangKa ul{
+    width: 6rem;
+    height: 0.7rem;
+    margin: 0 auto 0.2rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    box-sizing: content-box;
+}
+.xuanXiangKa ul li{
+    float: left;
+    width: 2rem;
+    height: 0.7rem;
+    line-height: 0.7rem;
+    color: #666;
+    font-size: 0.26rem;
+    text-align: center;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+.xuanXiangKa ul li:first-child{
+    border-radius: 0.5rem 0 0 0.5rem;
+}
+.xuanXiangKa ul li:last-child{
+    border-radius:  0 0.5rem 0.5rem 0;
+}
+.xuanXiangKa ul li:nth-child(2){
+    border-right: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+}
+.xuanXiangKa ul li.on{
+    background-color: #e60012;
+    color: #fff;
+    border: none;
+}
+.xuanXiangKa2 ul li{
+    width: 3rem;
+}
+.xuanXiangKa2 ul li:nth-child(2){
+    border: none;
+}
+.zhanwei{
+    width: 100%;
+    height: 1.77rem;
+}
+/*.tab_box > div{
+    display: none;
+}*/
+.tab_box div:first-child{
+    display: block;
+}
+.tab_box .div1,.tab_box .div2{
+    padding: 0.2rem 0 0 0.2rem;
+    color: #333;
+    font-size: 0.28rem;
+}
+.tab_box .div2 h2{
+    font-weight: normal;
+    color: #333;
+    font-size: 0.28rem;
+    margin-bottom: 0.2rem;
+}
+.tab_box .div2 textarea{
+    width: 6rem;
+    height: 2rem;
+    border: 1px solid #ccc;
+    border-radius: 0.05rem;
+    resize: none;
+    padding-top: 0.2rem;
+    text-indent: 0.2rem;
+}
+.tab_box .div2 p{
+    padding-left: 0.8rem;
+    margin-bottom: 0.3rem;
+}
+.tab_box .div2 p input{
+    width: 0.4rem;
+    height: 0.4rem;
+    border: 1px solid #ccc;
+    vertical-align: middle;
+    margin-right: 0.25rem;
+}
+.tab_box .div2 p label{
+    color: #333;
+    font-size: 0.3rem;
+}
+.tab_box .div2 .tiXing{
+    width: 6rem;
+    height: 0.78rem;
+    line-height: 0.78rem;
+    text-align: center;
+    color: #fff;
+    font-size: 0.28rem;
+    background: rgba(0,0,0,0.5);
+    border-radius: 0.05rem;
+    display: none;
+}
+.tab_box .div3{
+    background-color: #f4f4f4;
+}
+.tab_box .div3 .kaiPiao{
+    background-color: #fff;
+    padding: 0.2rem 0 0.2rem 0.2rem;
+    overflow: hidden;
+    margin-bottom: 0.2rem;
+}
+.tab_box .div3  h2{
+    color: #333;
+    font-size: 0.28rem;
+    font-weight: normal;
+}
+.tab_box .div3 p{
+    color: #666;
+    font-size: 0.26rem;
+    margin-top: 0.2rem;
+    overflow: hidden;
+}
+.tab_box .div3  p label{
+    color: #e60012;
+}
+.tab_box .div3  input[type=text],.tab_box .div3  input[type=tel]{
+    width: 5.6rem;
+    height: 0.58rem;
+    border: 1px solid #ccc;
+    border-radius: 0.05rem;
+    display: block;
+    margin: 0.2rem auto 0;
+    font-size: 0.3rem;
+    padding-left: 0.1rem;
+}
+.tab_box .div3 .kaiPiao .xiangJi{
+    width: 1rem;
+    height: 1rem;
+    padding: 0.3rem 0.25rem;
+    border: 1px solid #ccc;
+    border-radius: 0.05rem;
+    position: relative;
+    float: left;
+}
+.xiangJi {
+    margin-left: 0.2rem;
+}
+.tab_box .div3 .kaiPiao .xiangJi img{
+    width: 0.5rem;
+    height: 0.41rem;
+}
+.fuJian{
+    opacity: 0;
+    width:1rem;
+    height: 1rem;
+    float: left;
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 0;
+}
+.tab_box .div3 .kaiPiao .zhaoPian{
+    width: 1rem;
+    height: 1.4rem;
+    margin-left: 0.2rem;
+    float: left;
+}
+.tab_box .div3 .kaiPiao .zhaoPian2{
+    width: 1rem;
+    height: 0.7rem;
+    margin-left: 0.2rem;
+    float: left;
+}
+.tab_box .div3 .shouPiao{
+    background-color: #fff;
+    padding: 0.2rem 0 0.2rem 0.2rem;
+    overflow: hidden;
+    font-size: 0;
+}
+.tab_box .div3 .shouPiao select,.tab_box .div2 select{
+    vertical-align: top;
+    color: #333;
+    font-size: 0.26rem;
+    height: 0.58rem;
+    width: 1.1rem;
+    margin: 0.2rem 0.2rem 0 0;
+}
+.tab_box .div3 .shouPiao #sel_Province,.tab_box .div2 #sel_Province1{
+    margin-left: 0.3rem;
+}
+.tab_box .div3 .shouPiao #sel_City,.tab_box .div2 #sel_City1{
+    width: 1.6rem;
+}
+.tab_box .div3 .shouPiao #sel_County,.tab_box .div2 #sel_County1{
+    width: 2.49rem;
+}
+.tab_box .div3 .shouPiao textarea{
+    width: 5.6rem;
+    height: 1.3rem;
+    font-size: 0.24rem;
+    text-indent: 0.2rem;
+    padding-top: 0.2rem;
+    resize: none;
+    margin: 0.15rem auto 0;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 0.05rem;
+}
+.btn{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 1.18rem;
+    background-color: #fff;
+    border-top: 1px solid #ccc;
+    font-size: 0;
+    text-align: center;
+    padding-top: 0.2rem;
+}
+.btn input{
+    width: 6.05rem;
+    height: 0.78rem;
+    color: #fff;
+    font-size: 0.3rem;
+    background-color: #e60012;
+    border-radius: 0.05rem;
+}
+/*����Ŵ�ͼƬ*/
+.zhezhao{
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 99;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+}
+.zhezhao .con{
+    width: 5rem;
+    height: 8.08rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -4.04rem;
+    margin-left: -2.5rem;
+}
+.zhezhao .con img{
+    width: 5rem;
+    height: 7.08rem;
+}
+.zhezhao .con input{
+    width: 100%;
+    height: 0.78rem;
+    color: #e60012;
+    font-size: 0.3rem;
+    position: absolute;
+    bottom: 0;
+    background-color: #fff;
+    border-radius: 0.05rem;
+}
+.zhezhao .con .close{
+    width: 0.4rem;
+    height: 0.4rem;
+    background:url("../../img/cha.png") no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    top: -0.2rem;
+    right: -0.2rem;
+}
+/*添加发票校验*/
+.wrong_tit{
+    color: #e60012;
+    font-size: 0.24rem;
+    padding-left:0.4rem;
+}
+
+/*纳税码*/
+#taxpayerCode_normal,#invoice_title {
+    width: 5.6rem;
+    height: 0.58rem;
+    border: 1px solid #ccc;
+    border-radius: 0.05rem;
+    display: block;
+    margin: 0.1rem 0 0.2rem 0;
+    font-size: 0.3rem;
+    padding-left: 0.1rem;
+}
+
+/*补开发票添加的--cgl*/
+.commonInvoice_add input,.commonInvoice_add input#taxpayerCode_normal,.commonInvoice_add input#invoice_title{
+    width: 5.6rem;
+    height: 0.58rem;
+    border: 1px solid #ccc;
+    border-radius: 0.05rem;
+    display: block;
+    margin: 0.1rem 0 0 0;
+    font-size: 0.3rem;
+    padding-left: 0.1rem;
+}
+.commonInvoice_add label{
+    color: #e60012;
+}
+.commonInvoice_add .wrong_tit{
+    padding-left:0;
+}
+
+

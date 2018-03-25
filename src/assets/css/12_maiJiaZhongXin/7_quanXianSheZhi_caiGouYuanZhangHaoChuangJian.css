@@ -1,0 +1,128 @@
+body{
+    background-color: #fff;
+}
+.header {
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:999;
+    font-size: 0.3rem;
+    color: #333;
+    border-bottom: 0.01rem solid #E8E8E8;
+}
+.header a{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/return.png") no-repeat;
+    background-size: 0.2rem 0.3rem;
+    position: absolute;
+    left: 0.2rem;
+    top: 0.3rem;
+}
+.zhanwei{
+    width: 100%;
+    height: 0.88rem;
+}
+.content{
+    margin-top: 0.2rem;
+}
+.content .margin0{
+    margin-top: 0;
+}
+.content p{
+    margin-top: 0.3rem;
+    overflow: hidden;
+    font-size: 0.22rem;
+    color: #666;
+}
+.content p label{
+    color: #e60012;
+}
+.content p input[type=text],.content p input[type=password]{
+    width: 4.4rem;
+    height: 0.58rem;
+    border: 1px solid #ccc;
+    border-radius: 0.05rem;
+    padding-left: 0.1rem;
+}
+.content p span{
+    display: inline-block;
+
+}
+.content p span.w181{
+    width: 1.81rem;
+}
+.content p span.w140{
+    width: 1.4rem;
+}
+.content p span.w121{
+    width: 1.22rem;
+}
+.content p span input[type=checkbox]{
+    vertical-align: middle;
+}
+.warm{
+    font-size: 0.22rem;
+    color: #e60012;
+    padding-left: 1.6rem;
+}
+.content .guiZe{
+    width: 4.4rem;
+    font-size: 0.22rem;
+    color: #999;
+    margin-left: 1.6rem;
+}
+.content .chongZhi{
+    display: block;
+    margin: 0.3rem auto 1rem;
+    width:5rem;
+    height: 0.68rem;
+    line-height: 0.68rem;
+    background-color: #e60012;
+    color: #fff;
+    font-size: 0.28rem;
+    text-align: center;
+    border-radius: 0.05rem;
+}
+.content p.p160{
+    margin-left: 1.5rem;
+}
+.btn{
+    position: absolute;
+    bottom: 0.2rem;
+}
+.btn a{
+    width:2.1rem;
+    height: 0.78rem;
+    line-height: 0.78rem;
+    background-color: #e60012;
+    color: #fff;
+    font-size: 0.3rem;
+    text-align: center;
+    border-radius: 0.05rem;
+    float: left;
+    margin-bottom: 0.2rem;
+}
+.btn a.quXiao{
+    background-color: #f39700;
+    margin-right: 0.9rem;
+    margin-left: 0.65rem;
+}
+/*采购员信息修改*/
+.content p span.left{
+    float: left;
+    width: 1.68rem;
+    text-align: right;
+}
+.content p span.right{
+    float: left;
+    width: 4.72rem;
+}
+.content p span.right span{
+    margin-bottom: 0.2rem;
+}

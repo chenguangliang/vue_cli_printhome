@@ -1,0 +1,342 @@
+/*顶部*/
+.header {
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:9;
+    font-size: 0.3rem;
+    color: #333;
+    border-bottom: 0.01rem solid #E8E8E8;
+}
+.header a.fanHui{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/return.png") no-repeat;
+    background-size: 0.2rem 0.3rem;
+    position: absolute;
+    left: 0.2rem;
+    top: 0.3rem;
+}
+/*选项卡*/
+.xuanXiangKa{
+    width: 100%;
+    height: 0.7rem;
+    background-color: #fff;
+    position: fixed;
+    top: 0.88rem;
+    left: 0;
+    border-bottom: 0.01rem solid #E8E8E8;
+    z-index:9;
+}
+.xuanXiangKa ul{
+    overflow: hidden;
+}
+.xuanXiangKa ul li{
+    height: 0.7rem;
+    line-height: 0.7rem;
+    font-size: 0.26rem;
+    color: #666;
+    border-right: 1px solid #e8e8e8;
+    float: left;
+    width: 3.21rem;
+    text-align: center;
+}
+.xuanXiangKa ul li:last-child{
+    border-right: none;
+    width: 3.19rem;
+}
+.xuanXiangKa ul li.on{
+    color: #e60012;
+}
+/*切换内容*/
+.tab_box{
+    margin-top: 0.1rem;
+}
+/*协议明细*/
+.xieYiMingXi{
+
+}
+.jiBenXinXi{
+    width: 100%;
+    background-color: #fff;
+    padding: 0.2rem 0;
+    font-size: 0;
+    margin-bottom: 0.2rem;
+}
+.jiBenXinXi h2{
+    color: #333;
+    font-size: 0.26rem;
+    font-weight: normal;
+    margin-bottom: 0.1rem;
+    padding-left: 0.2rem;
+}
+.jiBenXinXi p{
+    margin-bottom: 0.1rem;
+    padding: 0 0.2rem;
+    position: relative;
+}
+.jiBenXinXi p span.left{
+    color: #666;
+    font-size: 0.22rem;
+    width: 1.2rem;
+    display: inline-block;
+    text-align: right;
+}
+.jiBenXinXi p span.right{
+    color: #333;
+    font-size: 0.26rem;
+    display: inline-block;
+    width: 4.69rem;
+    vertical-align: top;
+}
+.jiBenXinXi p span.right i{
+    color: #666;
+    font-size: 0.22rem;
+    margin-left: 0.6rem;
+}
+.jiBenXinXi p span.right i span{
+    color: #333;
+    font-size: 0.26rem;
+}
+.jiBenXinXi p.line{
+    width: 6rem;
+    margin: 0 auto 0.1rem;
+    height: 1px;
+    border: 1px dashed #ccc;
+}
+.jiBenXinXi p span.youXiaoQi{
+    width: 1.44rem;
+    text-align: left;
+}
+.jiBenXinXi p span.riQi{
+    width: 4.5rem;
+}
+.jiBenXinXi p span.right img{
+    width: 1rem;
+    height: 1rem;
+}
+.jiBenXinXi p span.right textarea{
+    width: 4rem;
+    height: 1.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.05rem;
+    resize: none;
+    text-indent:0.26rem;
+    color: #333;
+    font-size: 0.26rem;
+}
+.jiBenXinXi p span.right input{
+    height: 0.58rem;
+    border: 1px solid #ccc;
+    border-radius: 0.05rem;
+    padding-left: 0.1rem;
+    color: #333;
+    font-size: 0.26rem;
+}
+.jiBenXinXi p span.right .shuLiang{
+    width: 1.7rem;
+}
+.jiBenXinXi p span.right .danJia{
+    width: 2.5rem;
+}
+.jiBenXinXi p span.dian{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+/*协议订单*/
+.xieYiDingDan{
+}
+.bianHao{
+    background-color: #fff;
+    width: 100%;
+    height: 1.56rem;
+    margin: 0 auto 0.2rem;
+    padding: 0.2rem 0.2rem 0 0.2rem;
+}
+.bianHao p .xiangQing{
+    width: 1.2rem;
+    height: 0.4rem;
+    float: right;
+    border: 1px solid #a0a0a0;
+    border-radius:0.5rem;
+    font-size:0.22rem;
+    color: #666;
+    text-align: center;
+    line-height: 0.4rem;
+}
+.bianHao p{
+    font-size:0.22rem;
+    color: #666;
+    margin-bottom: 0.1rem;
+}
+.bianHao p span{
+    font-size:0.26rem;
+    color: #333;
+}
+.bianHao p i{
+    font-size:0.26rem;
+    color: #e60012;
+    margin-right: 0.7rem;
+}
+.foot{
+    width: 100%;
+    height: 0.84rem;
+    background-color: #fff;
+    border-top: 1px solid #E8E8E8;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding-top: 0.1rem;
+    text-align: center;
+    font-size: 0;
+}
+.foot a{
+    width: 2rem;
+    height: 0.64rem;
+    color: #fff;
+    font-size: 0.3rem;
+    display: inline-block;
+    background-color: #f39700;
+    border-radius: 0.05rem;
+    text-align: center;
+    line-height: 0.64rem;
+}
+.foot .queding{
+    margin-left: 0.8rem;
+    background-color: #e60012;
+}
+
+/*底部*/
+.foot2{
+    border-top: 1px solid #E8E8E8;
+    width: 100%;
+    height: 0.84rem;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    font-size:0;
+}
+.foot2 a{
+    font-size: 0.28rem;
+    width: 3.2rem;
+    height: 0.84rem;
+    line-height: 0.84rem;
+    background-color: #fff;
+    color: #666;
+    display: inline-block;
+    text-align: center;
+}
+.foot2 a:first-child{
+    border-right: 1px solid #ccc;
+}
+.foot2 a.on{
+    color: #e60012;
+}
+
+/*询价明细*/
+.baoJia{
+    color: #333;
+    font-size: 0.22rem;
+    text-align: right;
+    padding-right: 0.15rem;
+    overflow: hidden;
+}
+.baoJia span{
+    font-size: 0.26rem;
+    color: #e60012;
+}
+.jianTou{
+    width: 0.21rem;
+    height: 0.11rem;
+    position: absolute;
+    top: 0.1rem;
+    right: 0.2rem;
+}
+.zhiFuDown{
+    background: url(../../img/xiala.png) no-repeat;
+    background-size: 0.21rem 0.11rem;
+}
+.zhiFuUp{
+    background: url(../../img/xiangshang.png) no-repeat;
+    background-size: 0.21rem 0.11rem;
+}
+.mingXi{
+    background-color: #f8f8f8;
+    padding: 0.1rem 0;
+    display: none;
+}
+.mingXi p{
+    margin: 0;
+}
+.jiBenXinXi p span.num{
+    width: 0.95rem;
+}
+.jiBenXinXi p span.zong{
+    width:4.76rem;
+}
+.jiBenXinXi p span.right .num{
+    width: 1.2rem;
+    margin-right: 0.2rem;
+}
+.jiBenXinXi p span.right .jinE{
+    width: 2.32rem;
+}
+/*求购明细添加样式*/
+.gouXuan{
+    width: 0.3rem;
+    height:0.3rem;
+    float: left;
+    margin: 0.4rem 0 0.2rem 0.2rem;
+}
+.gouXuan .no-select{
+    width: 0.3rem;
+    height: 0.3rem;
+}
+.select p{
+    float: left;
+    width: 5.9rem;
+    padding: 0;
+}
+.selBtnWrap{
+    width: 0.3rem;
+    height: 1.5rem;
+    float: left;
+    margin-right: 0.2rem;
+    padding-top: 0.8rem;
+    margin-left: 0.2rem;
+}
+.selBtnWrap .no-select{
+    width: 0.3rem;
+    height: 0.3rem;
+}
+.goodsWrap1{
+    display: inline-block;
+    vertical-align: top;
+}
+.selContractGood{
+    display: inline-block;
+    vertical-align: top;
+
+}
+.selContractGood p span.right{
+    color: #333;
+    font-size: 0.26rem;
+    display: inline-block;
+    width: 3.8rem;
+    vertical-align: top;
+}
+.selContractGood p {
+    margin-bottom: 0.1rem;
+    padding: 0;
+    position: relative;
+}
+.contractGoodMount{
+    height: 0.58rem;
+    line-height: 0.58rem;
+}

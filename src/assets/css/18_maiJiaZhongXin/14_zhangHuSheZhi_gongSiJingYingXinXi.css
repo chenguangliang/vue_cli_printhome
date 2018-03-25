@@ -1,0 +1,344 @@
+.header {
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:9;
+    font-size: 0.3rem;
+    color: #333;
+    border-bottom: 0.01rem solid #E8E8E8;
+}
+.header a.return{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/return.png") no-repeat;
+    background-size: 0.2rem 0.3rem;
+    position: absolute;
+    left: 0.2rem;
+    top: 0.3rem;
+}
+.header span{
+    display: inline-block;
+    width: 2.3rem;
+}
+.header .xiala{
+    background: url("../../img/xiala.png") right center no-repeat;
+    background-size: 0.18rem 0.08rem;
+}
+.header .xiangshang{
+    background: url("../../img/xiangshang.png") right center no-repeat;
+    background-size: 0.18rem 0.08rem;
+}
+.header .list{
+    width: 2.32rem;
+    height: 2.7rem;
+    background: url("../../img/maiJiaXinXiBg.png") no-repeat;
+    background-size: 2.32rem 2.7rem;
+    position: fixed;
+    left: 2rem;
+    top: 0.63rem;
+    padding:0 0.2rem;
+    display: none;
+    z-index: 10;
+}
+.header .list li{
+    text-align: center;
+    color: #666;
+    font-size: 0.26rem;
+    height: 0.66rem;
+    line-height: 0.66rem;
+    border-bottom: 1px solid #e8e8e8;
+}
+.header .list li:last-child{
+    border: none;
+}
+.lianxiren{
+    background: #fff;
+    padding:0.2rem;
+    margin-top: 0.2rem;
+    position: relative;
+}
+.lianxiren .title{
+    font-weight: normal;
+    font-size: 0.26rem;
+    color: #333333;
+    margin-bottom: 0.2rem;
+}
+.lianxiren p{
+    margin-top: 0.15rem;
+}
+.lianxiren p span{
+    float: left;
+}
+.lianxiren p span.left{
+    font-size: 0.22rem;
+    color: #666;
+    text-align: right;
+    width: 2.4rem;
+}
+.lianxiren p span.w264{
+    width: 2.64rem;
+}
+.lianxiren p span.right{
+    font-size: 0.26rem;
+    color: #333;
+    width: 3.6rem;
+}
+.lianxiren p label{
+    color: #e32529;
+}
+.lianxiren p span.fr{
+    font-size: 0.22rem;
+    color: #666;
+    float: right;
+}
+.lianxiren p .fr a{
+    color: #e60012;
+    margin-left: 0.2rem;
+}
+.footer .xiuGaiYongHu{
+    width: 6rem;
+    height: 0.68rem;
+    line-height:0.68rem;
+    border-radius:0.05rem;
+    text-align: center;
+    color: #fff;
+    font-size:0.26rem;
+    background: #e60012;
+}
+.yishenhe{
+    width: 0.6rem;
+    height: 0.7rem;
+    background:url("../../img/yishenhe.png") no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    top: -5px;
+    right: 0.15rem;
+}
+.boHui{
+    width: 1.27rem;
+    height: 0.7rem;
+    position: absolute;
+    top: -5px;
+    right: 0.15rem;
+}
+.yibohui{
+    width: 0.6rem;
+    height: 0.7rem;
+    background:url("../../img/yibohui.png") no-repeat;
+    background-size: 100% 100%;
+    margin-right: 0.07rem;
+    float: left;
+}
+.chakanyuanyin{
+    width: 0.6rem;
+    height: 0.7rem;
+    background:url("../../img/chakanyuanyin.png") no-repeat;
+    background-size: 100% 100%;
+    float: left;
+}
+.daishenhe{
+    width: 0.6rem;
+    height: 0.7rem;
+    position: absolute;
+    top: -5px;
+    right: 0.15rem;
+    background:url("../../img/daishenhe.png") no-repeat;
+    background-size: 100% 100%;
+}
+/*联系人信息修改*/
+.lianxiren p span.right input{
+    width: 3.6rem;
+    height: 0.58rem;
+    border-radius: 0.05rem;
+    padding-left: 0.1rem;
+}
+.lianxiren p span.right select{
+    width: 3.6rem;
+    height: 0.58rem;
+    border-radius: 0.05rem;
+    padding-left: 0.1rem;
+}
+.footer{
+    border-top: 1px solid #e8e8e8;
+    width: 100%;
+    height: 0.84rem;
+    padding-top: 0.1rem;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    font-size:0;
+    text-align: center;
+    z-index: 9;
+    background-color: #fff;
+}
+.footer a{
+    font-size: 0.3rem;
+    width: 2rem;
+    height: 0.64rem;
+    line-height: 0.64rem;
+    background-color: #e60012;
+    color: #fff;
+    display: inline-block;
+    text-align: center;
+    border-radius: 0.05rem;
+}
+.footer a.quxiao{
+    background-color: #f39700;
+    margin-right: 0.8rem;
+}
+/*校验*/
+.warm{
+    color: #e60012;
+    font-size: 0.2rem;
+    padding-left: 2.4rem;
+}
+.gray_word{
+    color: #666;
+}
+.ccc_border{
+    border: 1px solid #ccc;
+}
+.red_word{
+    color: #e60012;
+}
+.red_border{
+    border: 1px solid #e60012;
+}
+/*提现账户信息*/
+.yinhang{
+    background: #fff;
+    padding:0.2rem;
+    margin-top: 0.2rem;
+    position: relative;
+}
+.yinhang p{
+    overflow: hidden;
+    font-size: 0;
+}
+.yinhang p span{
+    font-size: 0.22rem;
+    color: #666;
+}
+.yinhang p span.right img{
+    display: inline-block;
+    vertical-align: middle;
+    width: 1rem;
+    height: 1.4rem;
+}
+/*查看驳回原因弹窗*/
+.zhezhao{
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 99;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+}
+.con{
+    width: 5.3rem;
+    height: 5.7rem;
+    top: 50%;
+    left: 50%;
+    margin-top: -2.85rem;
+    margin-left: -2.65rem;
+    background-image: url("../../img/570bg@3x.png");
+    background-size: 100% 100%;
+    position: relative;
+}
+.con h3{
+    height: 0.67rem;
+    line-height: 0.67rem;
+    color: #fff;
+    font-size: 0.3rem;
+    text-align: center;
+    font-weight: normal;
+}
+.con h4{
+    height: 0.89rem;
+    line-height: 0.89rem;
+    color: #666;
+    font-size: 0.28rem;
+    padding-left: 0.2rem;
+    font-weight: normal;
+}
+.con textarea{
+    width: 4.9rem;
+    height: 2.8rem;
+    margin: 0 auto;
+    display: block;
+    resize: none;
+    border: 1px solid #ccc;
+    border-radius: 0.05rem;
+    color: #333;
+    font-size: 0.28rem;
+    padding-top: 0.2rem;
+    text-indent: 0.28rem;
+}
+.con p{
+    position: absolute;
+    bottom: 0.2rem;
+}
+.con p button{
+    width: 1.4rem;
+    height: 0.64rem;
+    color: #fff;
+    font-size: 0.3rem;
+    background-color: #e60012;
+    border-radius: 0.05rem;
+}
+.con p button.cancel{
+    background-color: #f39700;
+    margin: 0 0.54rem 0 0.98rem;
+}
+.con i{
+    width: 0.4rem;
+    height: 0.4rem;
+    background:url("../../img/cha.png") no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    top: -0.2rem;
+    right: -0.2rem;
+}
+.rongZi img {
+    display: inline;
+    margin: 0 0.15rem;
+    width: 0.3rem;
+    height: 0.3rem;
+    vertical-align: middle;
+}
+#sel_Province{
+    width: 1.1rem;
+}
+#sel_City{
+    width: 1.6rem;
+}
+#sel_County{
+    width: 2.49rem;
+}
+.diZhi{
+    font-size: 0;
+}
+.diZhi select{
+    height: 0.58rem;
+    color: #333;
+    font-size: 0.26rem;
+    margin-left: 0.23rem;
+}
+.xinXi p span.right{
+    margin-top: -2px;
+}
+.xinXiXiuGai p span.left{
+    height: 0.58rem;
+    line-height: 0.58rem;
+}
+.xinXiXiuGai p span.rongZi{
+    height: 0.58rem;
+    line-height: 0.58rem;
+}

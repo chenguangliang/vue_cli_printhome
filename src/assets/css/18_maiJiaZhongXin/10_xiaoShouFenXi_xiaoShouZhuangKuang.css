@@ -1,0 +1,232 @@
+.header {
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:9;
+    font-size: 0.3rem;
+    color: #333;
+    border-bottom: 0.01rem solid #E8E8E8;
+}
+.header a.fanHui{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/return.png") no-repeat;
+    background-size: 0.2rem 0.3rem;
+    position: absolute;
+    left: 0.2rem;
+    top: 0.3rem;
+}
+.header a.riLi{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/rili@3x.png") no-repeat;
+    background-size: 0.38rem 0.34rem;
+    background-position: right top;
+    position: absolute;
+    right:0.2rem;
+    top: 0.3rem;
+}
+.shangPinLieBiao{
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 3px 3px #e4e4e4;
+    margin: 0.1rem 0;
+}
+.shangPinLieBiao .theTop{
+    overflow: hidden;
+    padding: 0.1rem 0 0.1rem 0.1rem;
+}
+.theTop .shangPinTuPian{
+    width: 1.5rem;
+    height: 1.5rem;
+    float: left;
+}
+.theTop .mingZi{
+    float: left;
+    font-size: 0.26rem;
+    color: #333;
+    width: 4.6rem;
+    padding: 0 0 0.1rem 0.15rem;
+}
+.theTop .shuXing{
+    float: left;
+    font-size: 0.24rem;
+    color: #666;
+    width: 4.6rem;
+    padding-left: 0.15rem;
+}
+.xuanXiangKa{
+    overflow: hidden;
+    background-color: #fff;
+    padding: 0.2rem 0.2rem 0.3rem;
+}
+.xuanXiangKa li{
+    float: left;
+    padding: 0 0.21rem;
+    height: 0.45rem;
+    font-size: 0.26rem;
+    color: #666;
+    text-align: center;
+    line-height: 0.45rem;
+    background-color: #eee;
+    border-radius: 0.2rem;
+    margin-right: 0.15rem;
+}
+.xuanXiangKa li.on{
+    background-color: #e60012;
+    color: #fff;
+    box-shadow: 0 0 15px #bfbebe;
+}
+.xuanXiangKa li.qieHuan{
+    float: right;
+    margin: 0;
+}
+.leiMu{
+    width: 6.2rem;
+    margin: 0.2rem auto 0;
+    background-color: #fff;
+    border-radius: 0.05rem;
+    position: relative;
+}
+.leiMu .xuLie{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0.38rem;
+    height: 0.38rem;
+    background: url("../../img/hong@3x.png");
+    background-size: 100% 100%;
+    color: #fff;
+    font-size: 0.24rem;
+    text-align: center;
+    line-height: 0.38rem;
+}
+.leiMu .left{
+    position: absolute;
+    top: -0.42rem;
+    width: 0.13rem;
+    height: 0.64rem;
+    background: url("../../img/sheng@3x.png") no-repeat;
+    background-size: 100% 100%;
+    left: 0.83rem;
+}
+.leiMu .right{
+    position: absolute;
+    top: -0.42rem;
+    width: 0.13rem;
+    height: 0.64rem;
+    background: url("../../img/sheng@3x.png") no-repeat;
+    background-size: 100% 100%;
+    right: 0.96rem;
+}
+.leiMu .time{
+    font-size: 0.22rem;
+    color: #666;
+    text-align: center;
+    padding: 0.1rem 0 0.3rem;
+}
+.leiMu .time span{
+    font-size: 0.26rem;
+    color: #333;
+}
+.leiMu .xiaoShouE{
+    float: left;
+    width: 3.09rem;
+}
+.leiMu .xiaoShouE p{
+    font-size: 0.26rem;
+    color: #666;
+    text-align: center;
+    padding-bottom: 0.2rem;
+}
+.leiMu .xiaoShouE span{
+    font-size: 0.3rem;
+    color: #e60012;
+    display: block;
+    text-align: center;
+    padding-bottom: 0.3rem;
+}
+.leiMu .lineY{
+    width: 1px;
+    height:1.27rem;
+    background-color: #cee7e3;
+    position: absolute;
+    top: 0.67rem;
+    left: 3.09rem;
+}
+.leiMu .xiaoShouLiang{
+    float: left;
+    width: 3.1rem;
+}
+.leiMu .xiaoShouLiang p{
+    font-size: 0.26rem;
+    color: #666;
+    text-align: center;
+    padding-bottom: 0.2rem;
+}
+.leiMu .xiaoShouLiang span{
+    font-size: 0.3rem;
+    color: #168ff5;
+    display: block;
+    text-align: center;
+    padding-bottom: 0.3rem;
+}
+.tongJiTu{
+    display: none;
+    background-color: #fff;
+}
+.tongJiTu ul{
+    overflow: hidden;
+    padding: 0.2rem 0 0.5rem;
+}
+.tongJiTu ul li{
+    float: left;
+    padding: 0 0.21rem;
+    height: 0.45rem;
+    font-size: 0.26rem;
+    color: #666;
+    text-align: center;
+    line-height: 0.45rem;
+    background-color: #eee;
+    border-radius: 0.2rem;
+    margin-left: 0.15rem;
+}
+.tongJiTu ul li.on{
+    background-color: #e60012;
+    color: #fff;
+    box-shadow: 0 0 15px #bfbebe;
+}
+.tongJiTu .qieHuan{
+    float: right;
+    padding: 0 0.21rem;
+    height: 0.45rem;
+    font-size: 0.26rem;
+    color: #666;
+    text-align: center;
+    line-height: 0.45rem;
+    background-color: #eee;
+    border-radius: 0.2rem;
+    margin-right: 0.2rem;
+}
+.tu{
+    /*background-color: #fff;*/
+    width: 6rem;
+    margin: 0 auto;
+    height: 4.95rem;
+    /*box-shadow: 0 1px 1px #ccc;*/
+}
+.tu div{
+    /*width: 100%;*/
+    /*height: 4.1rem;*/
+    /*background-color: #d2d2d2;*/
+    display: none;
+    font-size: 0.26rem;
+}
+.tu div:first-child{
+    display: block;
+}

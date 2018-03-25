@@ -1,0 +1,109 @@
+.header{
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:9;
+    font-size: 0.3rem;
+    color: #333;
+    border-bottom: 0.01rem solid #E8E8E8;
+}
+.header .return{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/return.png") no-repeat;
+    background-size: 0.2rem 0.3rem;
+    position: absolute;
+    left: 0.2rem;
+    top: 0.3rem;
+}
+.search{
+    width: 100%;
+    background-color: #fff;
+    position: fixed;
+    top: 0.88rem;
+    left: 0;
+    z-index: 9;
+    border-bottom: 0.01rem solid #E8E8E8;
+    padding: 0.1rem;
+}
+.search .input_text{
+    width: 4rem;
+    height: 0.6rem;
+    border-radius: 0.05rem;
+    border: 1px solid #ccc;
+    color: #333;
+    font-size: 0.24rem;
+    float: left;
+    padding-left: 0.1rem;
+}
+.search .searchBtn{
+    width: 2rem;
+    height: 0.6rem;
+    line-height: 0.6rem;
+    text-align: center;
+    border-radius: 0.05rem;
+    border: 1px solid #ccc;
+    color: #333;
+    font-size: 0.28rem;
+    float: right;
+    position: relative;
+}
+.search .searchBtn span{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/sousuo@3x.png") no-repeat;
+    background-size: 0.3rem 0.3rem;
+    background-position: right top;
+    position: absolute;
+    left:0.25rem;
+    top: 0.15rem;
+}
+/*顶部占位*/
+.zhanwei{
+    width: 100%;
+    height:0.88rem;
+}
+/*字母列表*/
+.lieBiao{
+    overflow: hidden;
+    padding-top: 0.88rem;
+    margin-top: -0.88rem;
+}
+.lieBiao .top{
+    width: 100%;
+    height: 0.6rem;
+    line-height: 0.6rem;
+    font-size: 0.28rem;
+    color: #666;
+    padding-left: 0.1rem;
+    background-color: #E8E8E8;
+}
+.lieBiao ul li{
+    width: 100%;
+    font-size: 0.3rem;
+    color: #333;
+    padding: 0.1rem;
+    background-color: #fff;
+}
+.lieBiao ul li span{
+    float: right;
+    margin-right: 0.8rem;
+}
+.ziMu{
+    width: 0.5rem;
+    background-color: #fff;
+    position: fixed;
+    top: 1rem;
+    right: 0.1rem;
+}
+.ziMu a{
+    display: block;
+    font-size: 0.28rem;
+    text-align: center;
+    color: #005fff;
+}

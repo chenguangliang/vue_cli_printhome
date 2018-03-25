@@ -1,0 +1,616 @@
+/*顶部*/
+.header {
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:9;
+    font-size: 0.3rem;
+    color: #333;
+    border-bottom: 0.01rem solid #E8E8E8;
+}
+.header a.fanHui{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/return.png") no-repeat;
+    background-size: 0.2rem 0.3rem;
+    position: absolute;
+    left: 0.2rem;
+    top: 0.3rem;
+}
+/*选项卡*/
+.xuanXiangKa{
+    width: 100%;
+    height: 0.7rem;
+    background-color: #fff;
+    position: fixed;
+    top: 0.88rem;
+    left: 0;
+    border-bottom: 0.01rem solid #E8E8E8;
+    z-index: 9;
+}
+.xuanXiangKa ul{
+    overflow: hidden;
+}
+.xuanXiangKa ul li{
+    height: 0.7rem;
+    line-height: 0.7rem;
+    font-size: 0.26rem;
+    color: #666;
+    border-right: 1px solid #e8e8e8;
+    float: left;
+    width: 2.13rem;
+    text-align: center;
+}
+.xuanXiangKa ul li:last-child{
+    border-right: none;
+    width: 2.14rem;
+}
+.xuanXiangKa ul li.on{
+    color: #e60012;
+}
+.zhanwei{
+    width: 100%;
+    height: 1.58rem;
+}
+/*切换内容*/
+.leiMu,.pinPai{
+    display: none;
+}
+.xinXi .dianPu{
+    background-color: #fff;
+    padding-top: 0.2rem;
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
+    overflow: hidden;
+}
+.xinXi .dianPu .maxLength_25{
+    color: #333;
+    font-size: 0.24rem;
+}
+.xinXi .dianPu .pingJia{
+    margin: 0.2rem auto;
+    overflow: hidden;
+}
+.xinXi .dianPu .pingJia img{
+    width: 2rem;
+    height: 0.9rem;
+    float: left;
+    margin-right: 0.2rem;
+}
+.xinXi .dianPu .pingJia .fl{
+    float: left;
+    width: 3.8rem;
+}
+.xinXi .dianPu .pingJia .fl span{
+    color: #666;
+    font-size: 0.24rem;
+    float: left;
+    margin-right: 0.44rem;
+}
+.xinXi .dianPu .pingJia .fl span:nth-child(even){
+    margin-right: 0;
+}
+.red{
+    color: #e60012;
+    font-size: 0.28rem;
+}
+.xinXi  .title{
+    border-bottom:1px solid #E8E8E8;
+    line-height:0.7rem;
+    color: #333;
+    font-size: 0.26rem;
+    padding-left:0.2rem;
+    background: #fff;
+    position: relative;
+}
+.pass{
+    width: 0.6rem;
+    height: 0.7rem;
+    background:url("../../img/shenhetongguo@3x.png") no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    top: -5px;
+    right: 0.2rem;
+    display: none;
+}
+.wait{
+    width: 0.6rem;
+    height: 0.7rem;
+    position: absolute;
+    top: -5px;
+    right: 0.2rem;
+    background:url("../../img/daishenhe.png") no-repeat;
+    background-size: 100% 100%;
+    display: none;
+}
+.two_states{
+    width: 1.27rem;
+    height: 0.7rem;
+    position: absolute;
+    top: -5px;
+    right: 0.2rem;
+}
+.reject-reason{
+    display: none;
+}
+.reject{
+    width: 0.6rem;
+    height: 0.7rem;
+    background:url("../../img/yibohui.png") no-repeat;
+    background-size: 100% 100%;
+    margin-right: 0.07rem;
+    float: left;
+}
+.reason{
+    width: 0.6rem;
+    height: 0.7rem;
+    background:url("../../img/chakanyuanyin.png") no-repeat;
+    background-size: 100% 100%;
+    float: left;
+}
+.under_review_detail{
+    -display: none;
+}
+.under_review{
+    width: 0.6rem;
+    height: 0.7rem;
+    background:url("../../img/shenhezhong@3x.png") no-repeat;
+    background-size: 100% 100%;
+    margin-right: 0.07rem;
+    float: left;
+}
+.detail{
+    width: 0.6rem;
+    height: 0.7rem;
+    background:url("../../img/xiugaimingxi@3x.png") no-repeat;
+    background-size: 100% 100%;
+    float: left;
+}
+.xinXi .dianPu p{
+    margin-bottom: 0.2rem;
+    overflow: hidden;
+}
+.xinXi .dianPu p .left{
+    color: #666;
+    font-size: 0.22rem;
+    width: 1.2rem;
+    text-align: right;
+    float: left;
+}
+.xinXi .dianPu p .right{
+    color: #333;
+    font-size: 0.26rem;
+    float: left;
+    width: 4.8rem;
+}
+.xinXi .dianPu p .right img{
+    width: 0.3rem;
+    height: 0.3rem;
+    display: inline-block;
+    margin-right: 0.15rem;
+    vertical-align: top;
+}
+.xinXi .dianPu p .right img:last-child{
+    margin-left: 0.5rem;
+}
+.xinXi .guiZe{
+    background-color: #fff;
+    padding-top: 0.2rem;
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
+    overflow: hidden;
+}
+.xinXi .guiZe p{
+    margin-bottom: 0.2rem;
+    color: #666;
+    font-size: 0.22rem;
+    overflow: hidden;
+}
+.xinXi .guiZe p i{
+    font-size: 0.24rem;
+    color: #333;
+}
+.xinXi .guiZe p span{
+    color: #333;
+    font-size: 0.26rem;
+}
+.xinXi .guiZe p .left{
+    color: #666;
+    font-size: 0.22rem;
+    width: 1.8rem;
+    text-align: right;
+    float: left;
+}
+.xinXi .guiZe p .right{
+    color: #333;
+    font-size: 0.26rem;
+    float: left;
+    width: 4.2rem;
+}
+.xinXi .xiaoShou{
+    background-color: #fff;
+    padding-top: 0.2rem;
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
+    overflow: hidden;
+}
+.xinXi .xiaoShou p{
+    margin-bottom: 0.2rem;
+    overflow: hidden;
+}
+.xinXi .xiaoShou p .left{
+    color: #666;
+    font-size: 0.22rem;
+    width: 1.92rem;
+    text-align: right;
+    float: left;
+}
+.xinXi .xiaoShou p .right{
+    color: #333;
+    font-size: 0.26rem;
+    float: left;
+    width: 4.08rem;
+}
+.xinXi .xiaoShou p span{
+    color: #666;
+    font-size: 0.22rem;
+    width:1.2rem;
+    text-align: left;
+    float: left;
+}
+.xinXi .xiaoShou p img{
+    width: 1rem;
+    height: 1.4rem;
+    float: left;
+    margin-left: 0.15rem;
+}
+.xinXi .xiaoShou p img.mar_85{
+    margin-right: 0.85rem;
+}
+/*底部*/
+.footer_zhanWei{
+    height: 0.95rem;
+    width: 100%;
+}
+.caoZuoAnNiu a{
+    display: none;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width:100%;
+    height: 0.84rem;
+    text-align: center;
+    line-height: 0.84rem;
+    color: #666;
+    background: #fff;
+    font-size: 0.28rem;
+    border-top: 1px solid #E8E8E8;
+}
+.caoZuoAnNiu a:first-child{
+    display: block;
+}
+.caoZuoAnNiu a img{
+    width: 0.31rem;
+    height: 0.27rem;
+    display: inline-block;
+    margin-right: 0.2rem;
+}
+/*经营类目*/
+.leiMu{
+    background-color: #fff;
+    padding: 0.2rem 0.2rem 0 0.2rem;
+    overflow: hidden;
+    font-size: 0;
+}
+.leiMu h3{
+    color: #333;
+    font-size: 0.26rem;
+    font-weight: normal;
+    margin-bottom: 0.2rem;
+}
+.leiMu p{
+    margin-bottom: 0.2rem;
+    color: #333;
+    font-size: 0.26rem;
+    background-color: #f4f4f4;
+    padding: 0.2rem;
+    border-radius: 0.05rem;
+    position: relative;
+    display: inline-block;
+}
+.leiMu p .beiBoHui,.leiMu p .shenHeZhong{
+    width: 0.6rem;
+    height: 0.56rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.leiMu p span{
+    color: #333;
+    font-size: 0.22rem;
+    position: absolute;
+    right: -0.7rem;
+    top: 0.1rem;
+    background: url("../../img/eyes.png") no-repeat;
+    background-size: 0.42rem 0.24rem;
+    padding-top: 0.3rem;
+}
+/*经营品牌*/
+.pinPai{
+    background-color: #fff;
+    padding: 0.2rem 0 0 0.2rem;
+    font-size: 0;
+}
+.pinPai h3{
+    color: #333;
+    font-size: 0.26rem;
+    font-weight: normal;
+    margin-bottom: 0.2rem;
+    padding-left: 0.2rem;
+}
+.pinPai .items{
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 0.2rem;
+    color: #333;
+    font-size: 0.26rem;
+    background-color: #f4f4f4;
+    padding: 0.2rem;
+    border-radius: 0.05rem;
+}
+/*.pinPai .brand{*/
+    /*display: none;*/
+/*}*/
+.pinPai .dianPu{
+    position: relative;
+    float: left;
+    margin-right: 0.2rem;
+    margin-bottom:0.2rem;
+}
+.pinPai .dianPu .logo{
+    width: 1.3rem;
+    height: 0.6rem;
+    border-radius: 0.05rem;
+    float: left;
+}
+.pinPai .beiBoHui,.pinPai .shenHeZhong{
+    width: 0.6rem;
+    height: 0.56rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.pinPai .chaKanYuanYin{
+    display: block;
+    float: left;
+    color: #333;
+    font-size: 0.22rem;
+    background: url("../../img/eyes.png") no-repeat;
+    background-size: 0.42rem 0.24rem;
+    padding-top: 0.3rem;
+    margin-right: 0.12rem;
+}
+/*公用半透明黑色遮罩层*/
+.bg{
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+/*公用关闭小叉号*/
+.close{
+    width: 0.4rem;
+    height: 0.4rem;
+    position: absolute;
+    top: -0.2rem;
+    right: -0.2rem;
+}
+
+
+/*图片放大弹窗*/
+.showBigImgProp{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    display: none;
+}
+.showBigImg{
+    width: 5rem;
+    height: 7.08rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -3.09rem;
+    margin-left: -2.5rem;
+}
+.showBigImg #imgDiv{
+    width: 5rem;
+    height: 7.08rem;
+}
+.zhezhao{
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+}
+.zhezhao .con{
+    width: 5rem;
+    height: 7.08rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -3.09rem;
+    margin-left: -2.5rem;
+}
+.zhezhao .con img{
+    width: 5rem;
+    height: 7.08rem;
+}
+.zhezhao .con .close{
+    width: 0.4rem;
+    height: 0.4rem;
+    background:url("../../img/cha.png") no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    top: -0.2rem;
+    right: -0.2rem;
+}
+
+/*查看驳回原因*/
+.reject_reason_prop{
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+}
+.reject_reason{
+    position: relative;
+    top: 50%;
+    margin: -1.75rem auto 0;
+    width: 4rem;
+    padding: 0.22rem;
+    background: #fff;
+    border-radius:0.05rem;
+}
+.reject_reason h3{
+    font-weight: normal;
+    color: #666;
+    font-size:0.24rem;
+}
+.reject_reason p{
+    color: #333;
+    font-size:0.3rem;
+    min-height: 1.5rem;
+    max-height: 2.5rem;
+    overflow: scroll;
+    text-align: left;
+}
+/*经营类目查看驳回原因*/
+.category_reject_prop{
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+}
+.category_reject{
+    width: 5.3rem;
+    height: 5.26rem;
+    top: 50%;
+    left: 50%;
+    margin-left: -2.65rem;
+    margin-top: -2.63rem;
+    background-image: url("../../img/526bg@3x.png");
+    background-size: 100% 100%;
+    position: relative;
+}
+.category_reject h3{
+    height: 0.67rem;
+    line-height: 0.67rem;
+    color: #fff;
+    font-size: 0.3rem;
+    text-align: center;
+    font-weight: normal;
+}
+.category_reject div{
+    overflow: hidden;
+    margin: 0.2rem 0;
+}
+.category_reject div .left{
+    width: 1.65rem;
+    text-align: right;
+    float: left;
+    color: #666;
+    font-size: 0.24rem;
+}
+.category_reject div .right{
+    width: 3.5rem;
+    overflow: scroll;
+    max-height: 1.5rem;
+    float: left;
+    color: #333;
+    font-size: 0.26rem;
+}
+.category_reject .btn{
+    position: absolute;
+    bottom: 0.2rem;
+    text-align: center;
+}
+.category_reject .btn button{
+    display: block;
+    float: left;
+    width: 1.8rem;
+    height: 0.64rem;
+    color: #fff;
+    font-size: 0.3rem;
+    background-color: #e60012;
+    border-radius: 0.05rem;
+}
+.category_reject .btn button.cancel{
+    background-color: #f39700;
+    margin-right: 0.5rem;
+    margin-left: 0.6rem;
+}
+/*经营品牌点击放大图片*/
+.pinPai_bg{
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+}
+.pinPai_logo{
+    width: 5.2rem;
+    height: 3.28rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -2.14rem;
+    margin-left: -2.6rem;
+}
+.pinPai_logo #pinPaiImg{
+    width: 5.2rem;
+    height: 2.3rem;
+}
+.pinPai_logo p{
+    width: 100%;
+    height: 0.78rem;
+    text-align: center;
+    line-height: 0.78rem;
+    color: #333;
+    font-size: 0.3rem;
+    position: absolute;
+    bottom: 0;
+    background-color: #fff;
+    border-radius: 0.05rem;
+}
+/*修改明细*/
+.revise_detail{
+    display: none;
+}
+/*分割线*/
+.cut-off-rule{
+    height: 1px;
+    background: #e8e8e8;
+}

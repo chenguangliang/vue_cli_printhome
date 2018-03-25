@@ -1,0 +1,520 @@
+/*header*/
+.header{
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:99;
+    font-size: 0.3rem;
+    color: #333;
+    border-bottom: 1px solid #d2d2d2;
+}
+.header .return{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/return.png") no-repeat;
+    background-size: 0.2rem 0.3rem;
+    position: absolute;
+    left: 0.2rem;
+    top: 0.3rem;
+}
+.zhanwei{
+    width: 100%;
+    height: 0.88rem;
+}
+.xinxi{
+    background: #fff;
+    padding: 0.2rem 0 0.2rem 0;
+    position: relative;
+}
+.xinxi .shouJianRen{
+    font-size: 0.26rem;
+    color: #333;
+    width: 5.1rem;
+    line-height: 0.45rem;
+    padding-left: 0.55rem;
+}
+.xinxi .shouJianRen p{
+    display: inline-block;
+}
+.xinxi .diZhi{
+    position: relative;
+}
+.xinxi .diZhi .dingWei{
+    width: 0.2rem;
+    height: 0.25rem;
+    background:url(../../img/dingWei.png) no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    left: 0.2rem;
+    top: 0;
+}
+.xinxi .diZhi p{
+    font-size: 0.22rem;
+    color: #666;
+    width: 5.5rem;
+    padding-left: 0.55rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+.xinxi  .moRen{
+    width: 0.55rem;
+    height: 0.3rem;
+    background: #e60012;
+    color: #fff;
+    font-size: 0.22rem;
+    line-height: 0.3rem;
+    text-align: center;
+    position: absolute;
+    right: 0.67rem;
+    top:0.23rem;
+}
+.xinxi .jianTou{
+    width: 0.12rem;
+    height: 0.24rem;
+    background:url(../../img/right_arrow.png) no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    right: 0.2rem;
+    top: 0.6rem;
+}
+.tiaoWen{
+    height: 0.05rem;
+    background: url(../../img/tiaoWen.png) repeat-x;
+    background-size: 25% 100%;
+}
+.shangPin{
+    background: #fff;
+    margin-top: 0.2rem;
+    padding: 0.2rem;
+    position: relative;
+    height: 1.42rem;
+}
+.shangPin img{
+    display: block;
+    float: left;
+    margin-right: 0.15rem;
+    width: 1.02rem;
+    height: 1.02rem;
+    border:1px solid #e4e4e4;
+    border-radius: 0.05rem;
+}
+.shangPin img:nth-child(3){
+    margin-right: 0;
+}
+.shangPin span{
+    color: #333;
+    font-size: 0.24rem;
+    float: right;
+    display: block;
+    margin: 0.4rem 0.05rem 0;
+}
+.shangPin .down{
+    width: 0.3rem;
+    height: 0.3rem;
+    float: right;
+    margin-top: 0.4rem;
+    background: url(../../img/down.png) no-repeat;
+    background-size: 100% 100%;
+}
+.faPiao,.youHuiQuan,.zhiFu,.shenHe,.sheZhiDiZhi,.lockPrice{
+    height: 0.7rem;
+    background: #fff;
+    position: relative;
+    padding: 0.2rem 0.2rem;
+    margin-top: 0.2rem;
+}
+.sheZhiDiZhi{
+    margin-top: 0;
+}
+.faPiao .xinXi,.youHuiQuan .xinXi,.zhiFu .xinXi,.shenHe .xinXi,.sheZhiDiZhi .xinXi,.lockPrice .xinXi{
+    color: #333;
+    font-size: 0.26rem;
+    float: left;
+}
+.faPiao .zhuangTai,.youHuiQuan .zhuangTai,.zhiFu .zhuangTai,.shenHe .zhuangTai{
+    color: #666;
+    font-size: 0.24rem;
+    float: right;
+}
+.faPiao .faPiaoYe,.youHuiQuan .youHuiQuanYe,.shenHe .shenHeYe,.sheZhiDiZhi .sheZhiDiZhiYe{
+    width: 0.12rem;
+    height: 0.24rem;
+    background: url(../../img/right_arrow.png) no-repeat;
+    background-size: 100% 100%;
+    float: right;
+    margin: 0.06rem 0 0 0.15rem;
+}
+.youHuiQuan .xianShi{
+    background-color:#e60012;
+    float: left;
+    margin-left: 0.2rem;
+    display: inline-block;
+    padding: 1px;
+    color: #fff;
+    font-size: 0.22rem;
+}
+.liuYan{
+    background: #fff;
+    position: relative;
+    padding: 0.2rem 0.2rem;
+    margin-top: 0.2rem;
+    font-size: 0;
+}
+.liuYan .biaoTi{
+    color: #333;
+    font-size: 0.26rem;
+    margin-bottom: 0.2rem;
+}
+.liuYan textarea{
+    width:6rem;
+    height: 2rem;
+    border: 1px solid #ccc;
+    border-radius:0.05rem;
+    resize: none;
+    font-size: 0.22rem;
+    color: #999;
+    padding: 0.1rem;
+}
+.footer{
+    width:100%;
+    height:0.84rem;
+    /*line-height: 0.84rem;*/
+    background: #fff;
+    position: fixed;
+    bottom: 0;
+    border-top: 1px solid #ccc;
+}
+.heJi{
+    font-size: 0.26rem;
+    color: #666;
+    float: right;
+}
+.jiaGe{
+    font-size: 0.3rem;
+    color: #e60012;
+}
+.button{
+    width: 2rem;
+    height: 0.84rem;
+    float: right;
+    font-size: 0.3rem;
+    color: #fff;
+    background: #ccc;
+    margin-left: 0.2rem;
+    border-radius: 0;
+}
+.zheZhao{
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+}
+.lingQuan{
+    position: fixed;
+    bottom: 0.15rem;
+    left: 0.1rem;
+    z-index: 101;
+    width: 6.2rem;
+    height: 5.73rem;
+    border-radius: 0.05rem;
+    background-color: #fff;
+}
+.lingQuan .biaoTi{
+    text-align: center;
+    font-size: 0.24rem;
+    color: #666;
+    height: 0.63rem;
+    line-height: 0.63rem;
+}
+.lingQuan .biaoTi span{
+    height: 0.2rem;
+    width: 0.2rem;
+    position: absolute;
+    right: 0.1rem;
+    top: 0.2rem;
+    background: url("../../img/win_chahao.png") no-repeat;
+    background-size: 100% 100%;
+}
+.lingQuan .quan{
+    height: 4.9rem;
+    overflow: auto;
+}
+.manjian ,.yiguoqi{
+    width: 6rem;
+    height: 1.35rem;
+    position: relative;
+    margin: 0 auto 0.2rem;
+}
+.xianjin{
+    width: 6rem;
+    height: 1.35rem;
+    position: relative;
+    margin: 0 auto 0.2rem;
+}
+.dazhe{
+    width: 6rem;
+    height: 1.35rem;
+    position: relative;
+    margin: 0 auto 0.2rem;
+}
+.dazhe .content{
+    background: url("../../img/dazhe@3x.png") no-repeat;
+    background-size: 100% 100%;
+}
+.dazhe .leibie{
+    color: #d18b05;
+}
+.manjian .content{
+    background: url("../../img/manjian@3x.png") no-repeat;
+    background-size: 100% 100%;
+}
+.manjian .leibie{
+    color: #03b3a2;
+}
+.content{
+    width: 6rem;
+    height: 1.35rem;
+    background: url("../../img/xianjin@3x.png") no-repeat;
+    background-size: 100% 100%;
+    color: #fff;
+    position: relative;
+}
+.content .zhuangtai{
+    width: 0.96rem;
+    height: 0.3rem;
+    background:url("../../img/jijiangguoqi@3x.png") no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.content  .jine{
+    font-size: 0.24rem;
+    width: 2.8rem;
+    text-align: center;
+    position: absolute;
+    top: 0.3rem;
+    left: 0;
+}
+.content  .jine span{
+    font-size: 0.4rem;
+}
+.content .mingcheng{
+    font-size: 0.2rem;
+    width: 2.8rem;
+    padding-left: 0.1rem;
+    position: absolute;
+    left: 0;
+    top: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.content .riqi {
+    font-size: 0.2rem;
+    position: absolute;
+    top: 0.16rem;
+    left: 2.94rem;
+    width: 2.25rem;
+    height: 0.34rem;
+    line-height: 0.34rem;
+    text-align: center;
+}
+.content .shuliang {
+    font-size: 0.2rem;
+    position: absolute;
+    top: 0.55rem;
+    left: 2.96rem;
+}
+.content .qian {
+    font-size: 0.2rem;
+    position: absolute;
+    top: 0.9rem;
+    left: 2.96rem;
+}
+.content .yilingqu{
+    width: 1.18rem;
+    height: 1.18rem;
+    position: absolute;
+    top: 0.12rem;
+    right: 0.87rem;
+    display: none;
+}
+.leibie{
+    width: 0.7rem;
+    height: 1.35rem;
+    background: url("../../img/yuanshi@3x.png") no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    -webkit-transform-style: preserve-3d;
+}
+.leibie div{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.22rem;
+    color: #f1041a;
+    width: 0.4rem;
+    margin: 0 auto;
+    text-align: center;
+}
+.win_wancheng {
+    width: 100%;
+    text-align: center;
+    color: #ffffff;
+    font-size: 0.3rem;
+    margin-top: 0.1rem;
+    height: 0.78rem;
+    line-height: 0.78rem;
+    background-color: #e60012;
+    border-radius: 0.1rem;
+}
+
+.pro_tit1 {
+    font-size: 0.24rem;
+    color: #666666
+}
+
+.promotion_option {
+    font-size: 0.28rem;
+    color: #333333;
+}
+
+.promotion_main {
+    margin-top: 0.1rem;
+    border-top: 1px dotted #999999;
+}
+
+.lingqu_tit {
+    font-size: 0.24rem;
+    color: #666666;
+    line-height: 0.5rem;
+}
+.quan_wrap {
+    height: 4rem;
+    overflow: auto;
+}
+.qingSheZhi{
+    color: #333;
+    font-size: 0.26rem;
+    display: block;
+    background: #fff;
+    padding: 0.2rem;
+    position: relative;
+}
+.qingSheZhi .jianTou{
+    width: 0.12rem;
+    height: 0.24rem;
+    background: url(../../img/right_arrow.png) no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    right: 0.2rem;
+    top: 0.3rem;
+}
+
+.dingDanXinXi{
+    display: block;
+    background: #fff;
+    position: relative;
+    padding: 0.2rem 0.2rem;
+    margin-top: 0.2rem;
+    overflow: hidden;
+}
+/*如果是个人用户*/
+.dingDanXinXi .personal_user{
+}
+/*如果是企业用户*/
+.dingDanXinXi .corporate_user{
+    width: 0.21rem;
+    height: 0.11rem;
+    margin: 0.1rem 0 0 0.05rem;
+    float: right;
+}
+.dingDanXinXi .xiala{
+    background:url("../../img/xiala.png") no-repeat;
+    background-size: 100% 100%;
+}
+.dingDanXinXi .xiangshang{
+    background:url("../../img/xiangshang.png") no-repeat;
+    background-size: 100% 100%;
+}
+
+.dingDanXinXi .xinXi{
+    color: #333;
+    font-size: 0.26rem;
+    float: left;
+}
+
+.dingDanXinXi .zhuangTai{
+    color: #666;
+    font-size: 0.24rem;
+    float: right;
+}
+/*企业用户选择支付方式*/
+.payment{
+    background: #fff;
+    padding: 0 0.2rem 0;
+}
+.payment .select{
+    border-top: 1px dashed #e8e8e8;
+    padding: 0.2rem 0 0.3rem;
+    color: #333;
+    font-size: 0.26rem;
+    overflow: hidden;
+}
+
+.payment .select img{
+    width: 0.3rem;
+    height: 0.3rem;
+    margin-right: 0.2rem;
+    float: left;
+}
+.payment .select_list{
+    overflow: hidden;
+}
+
+.payment .select_list select{
+    width: 2.5rem;
+    height: 0.58rem;
+    color: #333;
+    font-size: 0.26rem;
+    float: left;
+    margin-right: 0.2rem;
+}
+
+
+
+/*优惠卷点击使用*/
+.coupon_click_use{
+    background : url("../../img/yuanshi@3x.png") no-repeat;
+    background-size: 100% 100%;
+}
+/*优惠卷已经选择*/
+.coupon_already_checked{
+    background: url("../../img/dianji@3x.png") no-repeat;
+    background-size: 100% 100%;
+}
+.delay_pay{
+	width: 2rem;
+    height: 0.58rem;
+    color: #333;
+    font-size: 0.26rem;
+    margin-left: 0.2rem;
+}
+.payment .select div{
+	line-height: 0.58rem;
+}
+.payment .select div img{
+	margin-top:0.14rem;
+}

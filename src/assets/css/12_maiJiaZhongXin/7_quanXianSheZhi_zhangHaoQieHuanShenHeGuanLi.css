@@ -1,0 +1,174 @@
+body{
+    background-color: #fff;
+}
+.header {
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:9;
+    font-size: 0.3rem;
+    color: #333;
+    border-bottom: 0.01rem solid #E8E8E8;
+}
+.header a{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/return.png") no-repeat;
+    background-size: 0.2rem 0.3rem;
+    position: absolute;
+    left: 0.2rem;
+    top: 0.3rem;
+}
+.zhanwei{
+    width: 100%;
+    height: 0.88rem;
+}
+.biaoGe{
+    width: 6.2rem;
+    margin: 0.2rem auto 0.2rem;
+    cellSpacing:0;
+    cellPadding:0;
+    border:0;
+    border-collapse:collapse;
+}
+.biaoGe tr{
+    height: 0.55rem;
+}
+.biaoGe th{
+    border: 1px solid #ccc;
+    color: #666;
+    font-size: 0.26rem;
+    font-weight: normal;
+}
+.biaoGe td{
+    border: 1px solid #ccc;
+    text-align: center;
+    color: #333;
+    font-size: 0.24rem;
+}
+.biaoGe .look{
+    color: #e60012;
+    font-size: 0.24rem;
+}
+.daiShenHe{
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 99;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+}
+.con{
+    width: 5.3rem;
+    height: 6.32rem;
+    top: 50%;
+    left: 50%;
+    margin-top: -3.16rem;
+    margin-left: -2.65rem;
+    background-image: url("../../img/632bg@3x.png");
+    background-size: 100% 100%;
+    position: relative;
+}
+.con h3,.con2 h3{
+    height: 0.67rem;
+    line-height: 0.67rem;
+    color: #fff;
+    font-size: 0.3rem;
+    text-align: center;
+    font-weight: normal;
+}
+.con div,.con2 div{
+    overflow: hidden;
+    margin: 0.2rem 0;
+}
+.con div .left,.con2 div .left{
+    width: 1.4rem;
+    text-align: right;
+    float: left;
+    color: #666;
+    font-size: 0.22rem;
+}
+.con div .right,.con2 div .right{
+    width: 3.9rem;
+    text-align: left;
+    float: left;
+    color: #333;
+    font-size: 0.28rem;
+}
+.con .btn button{
+    width: 1.8rem;
+    height: 0.64rem;
+    color: #fff;
+    font-size: 0.3rem;
+    background-color: #e60012;
+    border-radius: 0.05rem;
+    vertical-align: middle;
+}
+.con .btn button.cancel{
+    background-color: #f39700;
+    margin: 0 0.5rem 0 0.6rem;
+}
+.con .tiShi{
+    padding-left: 0.2rem;
+    color: #666;
+    font-size: 0.2rem;
+}
+.con .tiShi span{
+    color: #e60012;
+}
+.con i,.con2 i{
+    width: 0.4rem;
+    height: 0.4rem;
+    background:url("../../img/cha.png") no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    top: -0.2rem;
+    right: -0.2rem;
+}
+.qieHuanChengGong{
+    width:5rem;
+    height: 0.78rem;
+    line-height: 0.78rem;
+    text-align: center;
+    color: #fff;
+    font-size: 0.28rem;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 0.05rem;
+    z-index: 99;
+    position: fixed;
+    top: 50%;
+    margin-top: -0.39rem;
+    left: 50%;
+    margin-left: -2.5rem;
+    display: none;
+}
+.con2{
+    width: 5.3rem;
+    height: 5.26rem;
+    top: 50%;
+    left: 50%;
+    margin-top: -2.63rem;
+    margin-left: -2.65rem;
+    background-image: url("../../img/526bg@3x.png");
+    background-size: 100% 100%;
+    position: relative;
+    display: none;
+}
+.con2 .sure{
+    width: 1.8rem;
+    height: 0.64rem;
+    color: #fff;
+    font-size: 0.3rem;
+    background-color: #e60012;
+    border-radius: 0.05rem;
+    position: absolute;
+    left: 1.75rem;
+    bottom: 0.2rem;
+}

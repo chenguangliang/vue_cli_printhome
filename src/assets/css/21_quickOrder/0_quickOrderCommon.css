@@ -1,0 +1,394 @@
+body{
+    font-size: 0.24rem;
+}
+/*快速下单抽取的公用样式*/
+.grayInput{
+    width: 4rem;
+    height: 0.58rem;
+    border: 1px solid #ccc;
+    padding-left: 0.1rem;
+    border-radius: 0.05rem;
+    font-size: 0.24rem;
+}
+.graySelect{
+    width: 4rem;
+    height: 0.58rem;
+    border: 1px solid #ccc;
+    padding-left: 0.1rem;
+    border-radius: 0.05rem;
+    font-size: 0.24rem;
+    /*在选择框的最右侧中间显示小箭头图片*/
+    background: url("../../img/selectBg.png") no-repeat scroll right center transparent;
+    background-size: 12px 0.58rem;
+    /*为下拉小箭头留出一点位置，避免被文字覆盖*/
+    padding-right: 14px;
+}
+.grayArea{
+    border: 1px solid #ccc;
+    padding-left: 0.1rem;
+    border-radius: 0.05rem;
+    font-size: 0.24rem;
+}
+/*左边对其的标题*/
+.infoKey {
+    display: inline-block;
+    width: 1.4rem;
+    text-align: right;
+    color: #8b8b8b;
+}
+.infoValue{
+    display: inline-block;
+    width: 4.6rem;
+    vertical-align: top;
+    word-break: break-all;
+}
+/*返回箭头头部*/
+.headerquickOrder {
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:99;
+    font-size: 0.3rem;
+    color: #333;
+    border-bottom: 0.01rem solid #E8E8E8;
+}
+.headerquickOrder a.fanHui{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/return.png") no-repeat;
+    background-size: 0.2rem 0.3rem;
+    position: absolute;
+    left: 0.2rem;
+    top: 0.3rem;
+}
+.font20{
+    font-size: 0.2rem;
+}
+.font24{
+    font-size: 0.24rem;
+}
+.font26{
+    font-size: 0.26rem;
+}
+.font28{
+    font-size: 0.28rem;
+}
+.font30{
+    font-size: 0.3rem;
+}
+.mart10{
+    margin-top:0.1rem;
+}
+.padB10{
+    padding-bottom:0.1rem;
+}
+.marb10{
+    margin-bottom:0.1rem;
+}
+.mart20{
+    margin-top:0.2rem;
+}
+.marL20{
+    margin-left:0.2rem;
+}
+.marL30{
+    margin-left:0.3rem;
+}
+.marL40{
+    margin-left:0.4rem;
+}
+.marLR10{
+    margin: 0 0.1rem;
+}
+.marR10{
+    margin-right: 0.1rem;
+}
+.redWord{
+    color: #e60012;
+}
+.redBg{
+    background-color: #e60012;
+    color: white;
+}
+.fl{
+    float: left;
+}
+.cor999{
+    color: #999;
+}
+.grayWord{
+    color: #333333;
+}
+.redRoundBtn{
+    width: 0.3rem;
+    height: 0.3rem;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 0.1rem;
+}
+.w100{
+    width: 1.0rem;
+}
+.w140{
+    width: 1.4rem;
+}
+.w150{
+    width: 1.5rem;
+}
+.w160{
+    width: 1.6rem;
+}
+.w200{
+    width:2rem;
+}
+.w250{
+    width: 2.5rem;
+}
+.bt{
+    border-top: 1px solid #F4F4F4;
+}
+.bl{
+    border-left:1px solid #F4F4F4;
+}
+.br{
+    border-right:1px solid #F4F4F4;
+}
+.bb{
+    border-bottom:1px solid #F4F4F4;
+}
+/*通用遮罩层*/
+.zhezhao {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+}
+.zhezhao .con {
+    width: 5rem;
+    height: 8.08rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -4.04rem;
+    margin-left: -2.5rem;
+}
+.zhezhao .con img {
+    width: 5rem;
+    height: 7.08rem;
+}
+.zhezhao .con .close {
+    width: 0.4rem;
+    height: 0.4rem;
+    background: url("../../img/cha.png") no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    top: -0.2rem;
+    right: -0.2rem;
+}
+
+/*带背景图片的弹窗*/
+/*普通发票弹窗*/
+.zhezhao2 {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+}
+.winCon {
+    width: 5.3rem;
+    height: 5.7rem;
+    top: 50%;
+    left: 50%;
+    margin-top: -2.85rem;
+    margin-left: -2.65rem;
+    background-image: url("../../img/570bg@3x.png");
+    background-size: 100% 100%;
+    position: relative;
+}
+.winCon h3 {
+    height: 0.67rem;
+    line-height: 0.67rem;
+    color: #fff;
+    font-size: 0.3rem;
+    text-align: center;
+    font-weight: normal;
+}
+.winCon h4 {
+    height: 0.89rem;
+    line-height: 0.89rem;
+    color: #666;
+    font-size: 0.28rem;
+    padding-left: 0.2rem;
+    font-weight: normal;
+}
+.winCon textarea {
+    width: 4.9rem;
+    height: 2.8rem;
+    margin: 0 auto;
+    display: block;
+    resize: none;
+    border: 1px solid #ccc;
+    border-radius: 0.05rem;
+    color: #333;
+    font-size: 0.28rem;
+    padding-top: 0.2rem;
+    text-indent: 0.2rem;
+}
+.winCon button {
+    width: 1.4rem;
+    height: 0.64rem;
+    color: #fff;
+    font-size: 0.3rem;
+    background-color: #e60012;
+    border-radius: 0.05rem;
+}
+.boottomBtn{
+    position: absolute;
+    bottom: 0.2rem;
+}
+.winCon button.cancel {
+    background-color: #f39700;
+    margin: 0 0.54rem 0 0.98rem;
+}
+.winCon i {
+    width: 0.4rem;
+    height: 0.4rem;
+    background: url("../../img/cha.png") no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    top: -0.2rem;
+    right: -0.2rem;
+}
+
+/*镂空按钮*/
+.grayBtn,.redBtn{
+    display: inline-block;
+    text-align: center;
+    width: 1.2rem;
+    height: 0.56rem;
+    line-height: 0.52rem;
+    font-size: 0.24rem;
+    color: #666;
+    border: 1px solid #ccc;
+    border-radius: 0.05rem;
+    background-color: #fff;
+}
+.redBtn{
+    border: 1px solid #e60012;
+    color: #e60012;
+}
+.unable{
+    pointer-events: none;
+}
+/*无订单的样式*/
+.tab_box .wuDingDan{
+    display: block;
+}
+.zhiFuChengGong img{
+    width: 3.05rem;
+    height: 2.5rem;
+    margin: 1rem auto 0.6rem;
+}
+.wuDingDan h2{
+    color: #333;
+    font-size: 0.3rem;
+    text-align: center;
+    font-weight: normal;
+    margin-bottom: 0.6rem;
+}
+.tiaoZhuan{
+    width: 4rem;
+    height: 0.68rem;
+    line-height: 0.68rem;
+    color: #fff;
+    font-size: 0.3rem;
+    display: block;
+    background-color: #e60012;
+    text-align: center;
+    border-radius: 0.05rem;
+    margin: 0 auto;
+}
+.wuDingDan .printHome{
+    text-align: center;
+    margin-top: 3rem;
+    /*position: absolute;
+    left: 2.4rem;
+    bottom: 0.2rem;*/
+    color: #999;
+    font-size: 0.22rem;
+}
+#delSelGoods .con {
+    width: 4.5rem;
+    height: 2.5rem;
+    background-color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -1.51rem;
+    margin-left: -2.25rem;
+    border-radius: 0.05rem;
+    text-align: center;
+}
+#delSelGoods h5 {
+    height: 0.6rem;
+    line-height: 0.6rem;
+    color: #666;
+    font-size: 0.22rem;
+    text-align: center;
+    font-weight: normal;
+}
+#delSelGoods .mainTip {
+    margin-top:0.2rem;
+    height: 0.5rem;
+    color: #333;
+    font-size: 0.28rem;
+    text-align: center;
+}
+
+#delSelGoods span.queDing {
+    margin-right: 0.5rem;
+    background-color: #f39700;
+}
+
+#delSelGoods span {
+    margin-top: 0.4rem;
+    display: inline-block;
+    width: 1.7rem;
+    height: 0.48rem;
+    line-height:0.5rem;
+    border-radius: 0.05rem;
+    color: #fff;
+    font-size: 0.3rem;
+    background-color: #e60012;
+    text-align: center;
+}
+/*新增订单按钮*/
+.newOrder {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background-color: #fff;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    font-size: 0.28rem;
+    text-align: center;
+    z-index: 5;
+    border-top: 1px solid #F4F4F4;
+}
+
+
+
+

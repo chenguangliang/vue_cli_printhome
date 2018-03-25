@@ -1,0 +1,182 @@
+/*common style*/
+/*header*/
+.header{
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:999;
+    font-size: 0.3rem;
+    color: #333;
+    border-bottom: 0.01rem solid #E8E8E8;
+}
+.header .return{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/return.png") no-repeat;
+    background-size: 0.2rem 0.3rem;
+    position: absolute;
+    left: 0.2rem;
+    top: 0.3rem;
+}
+.zhanwei{
+    width: 100%;
+    height: 0.88rem;
+}
+.red_bg{
+    background-color: #e60012;
+}
+.ccc_bg{
+    background-color: #cccccc;
+}
+.red_border{
+    border: 1px solid #e60012;
+}
+.ccc_border{
+    border: 1px solid #cccccc;
+}
+.red_word{
+    color: #e60012;
+}
+.gray_word{
+    color: #333;
+}
+/*common style*/
+.title img{
+    width: 1.96rem;
+    height: 0.6rem;
+}
+.title div{
+    margin-top: -0.5rem;
+    font-size: 0.3rem;
+    color: white;
+    text-indent: 0.1rem;
+}
+.user_name{
+    width: 100%;
+    height: 0.75rem;
+    padding-left: 0.1rem;
+    margin-top: 0.2rem;
+    border-radius: 0.1rem;
+    font-size: 0.24rem;
+}
+.code{
+    margin-top: 0.2rem;
+    clear: both;
+}
+.code img{
+    float: left;
+    width: 1.72rem;
+    margin-right: 0.2rem;
+}
+.code input{
+    width: 65%;
+    height: 0.75rem;
+    padding-left: 0.1rem;
+    border-radius: 0.1rem;
+}
+
+.btn{
+    position: absolute;
+    bottom: 0.2rem;
+    clear: both;
+}
+.btn a{
+    display: inline-block;
+    float: left;
+}
+.btn input{
+    font-size: 0.3rem;
+    color: white;
+    width: 6.05rem;
+    height: 0.78rem;
+    border-radius: 0.1rem;
+}
+.user_error,.code_error,.code_expire{
+    font-size: 0.22rem;
+    color: #e60012;
+    margin-top: 0.1rem;
+}
+/*验证身份页面*/
+.btn_second,.btn_third{
+    position: absolute;
+    bottom: 0.2rem;
+    clear: both;
+}
+.btn_second input,.btn_third input{
+    font-size: 0.3rem;
+    color: white;
+    width:6.05rem;
+    height: 0.78rem;
+    border-radius: 0.1rem;
+}
+.tel_msg{
+    float: left;
+    width: 3.67rem;
+    height: 0.75rem;
+    padding-left: 0.1rem;
+    margin-top: 0.2rem;
+    border-radius: 0.1rem;
+    font-size: 0.24rem;
+    margin-right: 0.2rem;
+}
+.get_msg{
+    font-size: 0.24rem;
+    text-align: center;
+    margin-top: 0.2rem;
+    float: left;
+    border-radius: 0.1rem;
+    color: white;
+    width: 1.72rem;
+    height: 0.75rem;
+    line-height: 0.75rem;
+}
+.msg_error{
+    font-size: 0.22rem;
+    color: #e60012;
+    margin-top: 0.1rem;
+}
+/*第三页样式*/
+.password,.check_password{
+    width: 100%;
+    height: 0.75rem;
+    padding-left: 0.1rem;
+    margin-top: 0.2rem;
+    border-radius: 0.1rem;
+    font-size: 0.24rem;
+    margin-right: 0.2rem;
+}
+.msg_diff{
+    font-size: 0.22rem;
+}
+.keyWord_input{
+    position: relative;
+}
+.showKeyWord{
+    width: 0.4rem;
+    height: 0.26rem;
+    position: absolute;
+    top: 0.45rem;
+    right: 0.1rem;
+}
+.closedEyes{
+    background:url("../../img/eyes1.png") no-repeat;
+    -webkit-background-size: 100% 50%;
+    background-size: 100% 50%;
+    top: 0.5rem;
+}
+.opendEyes{
+    background:url("../../img/eyes.png") no-repeat;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+}
+
+
+
+
+
+

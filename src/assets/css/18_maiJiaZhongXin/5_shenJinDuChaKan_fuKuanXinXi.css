@@ -1,0 +1,205 @@
+/*顶部*/
+.header {
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:9;
+    font-size: 0.3rem;
+    color: #333;
+    border-bottom: 0.01rem solid #E8E8E8;
+}
+.header a.fanHui{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/return.png") no-repeat;
+    background-size: 0.2rem 0.3rem;
+    position: absolute;
+    left: 0.2rem;
+    top: 0.3rem;
+}
+/*选项卡*/
+.xuanXiangKa{
+    width: 100%;
+    height: 0.7rem;
+    background-color: #fff;
+    position: fixed;
+    top: 0.88rem;
+    left: 0;
+    border-bottom: 0.01rem solid #E8E8E8;
+    z-index:9;
+}
+.xuanXiangKa ul{
+    overflow: hidden;
+}
+.xuanXiangKa ul li{
+    height: 0.7rem;
+    line-height: 0.7rem;
+    font-size: 0.26rem;
+    color: #666;
+    border-right: 1px solid #e8e8e8;
+    float: left;
+    width: 3.21rem;
+    text-align: center;
+}
+.xuanXiangKa ul li:last-child{
+    border-right: none;
+    width: 3.19rem;
+}
+.xuanXiangKa ul li.on{
+    color: #e60012;
+}
+/*切换内容*/
+.tab_box{
+
+}
+.biaoTi{
+    width: 100%;
+    background-color:#fff;
+}
+.biaoTi .bg{
+    width: 100%;
+    height: 1.42rem;
+    background-color: #e60012;
+    position: relative;
+}
+.bg div{
+    width: 100%;
+    height: 0.8rem;
+    position: absolute;
+    left: 0;
+    bottom: -0.15rem;
+    background: url("../../img/yun.png") no-repeat;
+    background-size: 100% 100%;
+}
+.bg p{
+    color: #fff;
+    font-size: 0.28rem;
+    text-align: center;
+    padding-top: 0.2rem;
+}
+.bg span.left{
+    width: 1rem;
+    height: 0.33rem;
+    position: absolute;
+    top: 0.36rem;
+    left: 0;
+    background: url("../../img/yunzuo@3x.png") no-repeat;
+    background-size: 100% 100%;
+}
+.bg span.right{
+    width: 0.97rem;
+    height: 0.55rem;
+    position: absolute;
+    top: 0.37rem;
+    right: 0.1rem;
+    background: url("../../img/yunyou@3x.png") no-repeat;
+    background-size: 100% 100%;
+}
+.biaoTi p.zongJie{
+    color: #333;
+    font-size: 0.26rem;
+    padding: 0.3rem 0.2rem;
+}
+.biaoTi p.zongJie .red{
+    color: #e60012;
+    font-size: 0.3rem;
+}
+.shiYongFei{
+    display: none;
+}
+.leiMu{
+    width: 6.2rem;
+    margin: 0.2rem auto 0;
+    background-color: #fff;
+    border-radius: 0.05rem;
+    position: relative;
+}
+.leiMu .xuLie{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0.38rem;
+    height: 0.38rem;
+    background: url("../../img/hong@3x.png");
+    background-size: 100% 100%;
+    color: #fff;
+    font-size: 0.24rem;
+    text-align: center;
+    line-height: 0.38rem;
+}
+.leiMu .left{
+    position: absolute;
+    top: -0.42rem;
+    width: 0.13rem;
+    height: 0.64rem;
+    background: url("../../img/sheng@3x.png") no-repeat;
+    background-size: 100% 100%;
+    left: 0.83rem;
+}
+.leiMu .right{
+    position: absolute;
+    top: -0.42rem;
+    width: 0.13rem;
+    height: 0.64rem;
+    background: url("../../img/sheng@3x.png") no-repeat;
+    background-size: 100% 100%;
+    right: 0.96rem;
+}
+.leiMu ul{
+    overflow: hidden;
+    padding: 0.3rem 0.2rem;
+}
+.leiMu ul li{
+    float: left;
+    width: 2.9rem;
+}
+.leiMu ul li h2{
+    font-weight: normal;
+    font-size: 0.22rem;
+    color: #666;
+    text-align: center;
+}
+.leiMu ul li p{
+    font-size: 0.26rem;
+    color: #333;
+    text-align: center;
+}
+.leiMu ul li:first-child p,.leiMu ul li:nth-child(2) p{
+    margin: 0.1rem 0;
+}
+.leiMu ul li:nth-child(3) h2,.leiMu ul li:last-child h2{
+    margin: 0.1rem 0;
+}
+.leiMu ul li:last-child p{
+    font-size: 0.3rem;
+    color: #e60012;
+}
+.leiMu .lineX{
+    width: 5.8rem;
+    height: 1px;
+    background-color: #cee7e3;
+    position: absolute;
+    top: 1.16rem;
+    left: 0.2rem;
+}
+.leiMu .lineY{
+    width: 1px;
+    height:1.73rem;
+    background-color: #cee7e3;
+    position: absolute;
+    top: 0.3rem;
+    left: 3.09rem;
+}
+.leiMu .shuoMing{
+    color: #333;
+    font-size: 0.26rem;
+    padding: 0.3rem 0.2rem;
+}
+.leiMu .shuoMing a{
+    color: #e60012;
+}

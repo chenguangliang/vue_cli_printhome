@@ -1,0 +1,359 @@
+body{
+    background: url("../../img/loginBg.png") no-repeat;
+    background-size: 100% 200%;
+}
+.dingBu{
+    width: 100%;
+    height: 1rem;
+}
+.backToIndex{
+    width: 0.44rem;
+    height: 0.4rem;
+    float: right;
+    margin-right: 0.15rem;
+    margin-top: 0.1rem;
+}
+.backToIndex img{
+    width:0.3rem;
+    height: 0.3rem;
+    margin: 0.07rem auto 0;
+}
+.errorTip{
+    width: 100%;
+    text-align: center;
+    height: 0.5rem;
+    line-height: 0.5rem;
+    background: #e60012;
+    font-size: 0.24rem;
+    color: #fff;
+    display: none;
+}
+/*logo*/
+.logo{
+    width: 100%;
+    height: 1.08rem;
+    margin-bottom: 1rem;
+}
+.logo a img{
+    width: 3.2rem;
+    height: 1.08rem;
+    margin: 0 auto;
+}
+/*phoneNumber*/
+.phoneNumber{
+    width: 5.12rem;
+    height: 0.75rem;
+    margin: 0 auto 0.2rem;
+    border: 1px solid #a0a0a0;
+    -webkit-border-radius: 0.05rem;
+    -moz-border-radius: 0.05rem;
+    border-radius: 0.05rem;
+    overflow: hidden;
+}
+.phoneNumber .pic{
+    width: 0.25rem;
+    height: 0.4rem;
+    float: left;
+    margin-top: 0.15rem;
+    margin-left: 0.1rem;
+    background: url("../../img/phone1.png") no-repeat;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+}
+.phoneNumber input{
+    background: none;
+    width: 70%;
+    height: 0.75rem;
+    float: left;
+    margin-left: 0.15rem;
+    top: 0;
+    font-size: 0.24rem;
+    color: #333;
+}
+.phoneNumber input::-webkit-input-placeholder{
+    font-size: 0.24rem;
+    color: #999;
+}
+.phoneNumber .warm{
+    width: 0.34rem;
+    height: 0.34rem;;
+    background: url("../../img/warm.png") no-repeat;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    float: right;
+    margin-right: 0.1rem;
+    margin-top: 0.18rem;
+    display: none;
+}
+/*tpYan*/
+.tpYan{
+    width: 5.12rem;
+    height: 0.75rem;
+    margin: 0 auto 0.2rem;
+}
+.tpYan .tpInput{
+    width: 3.2rem;
+    height: 0.75rem;
+    border: 1px solid #a0a0a0;
+    -webkit-border-radius: 0.05rem;
+    -moz-border-radius: 0.05rem;
+    border-radius: 0.05rem;
+    float: left;
+    overflow: hidden;
+}
+.tpInput input{
+    width:80%;
+    height: 0.75rem;
+    background: none;
+    float: left;
+    margin-left: 0.1rem;
+    font-size: 0.24rem;
+    color: #333;
+}
+.tpInput input::-webkit-input-placeholder{
+    font-size: 0.24rem;
+    color: #999;
+}
+.tpInput .warm{
+    width: 0.34rem;
+    height: 0.34rem;;
+    background: url("../../img/warm.png") no-repeat;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    float: right;
+    margin-right: 0.1rem;
+    margin-top: 0.18rem;
+    display: none;
+}
+.tpYan img{
+    float: right;
+    width: 1.72rem;
+    height: 0.75rem;
+}
+/*dxYan*/
+.dxYan{
+    width: 5.12rem;
+    height: 0.75rem;
+    margin: 0 auto 0.3rem;
+}
+.dxYan .dxInput{
+    width: 3.2rem;
+    height: 0.75rem;
+    border: 1px solid #a0a0a0;
+    -webkit-border-radius: 0.05rem;
+    -moz-border-radius: 0.05rem;
+    border-radius: 0.05rem;
+    overflow: hidden;
+    float: left;
+}
+.dxInput input{
+    background: none;
+    width: 85%;
+    height: 0.75rem;
+    float: left;
+    margin-left: 0.1rem;
+    font-size: 0.24rem;
+    color: #333;
+}
+.dxInput input::-webkit-input-placeholder{
+    font-size: 0.24rem;
+    color: #999;
+}
+.dxInput .warm{
+    width: 0.34rem;
+    height: 0.34rem;;
+    background: url("../../img/warm.png") no-repeat;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    float: right;
+    margin-right: 0.03rem;
+    margin-top: 0.15rem;
+    display: none;
+}
+.dxYan button{
+    float: right;
+    width: 1.72rem;
+    height: 0.75rem;
+    border: 1px solid #a0a0a0;
+    border-radius: 0.05rem;
+    background:none;
+    font-size: 0.28rem;
+    color: #333;
+}
+/*btn*/
+.btn{
+    width: 5.12rem;
+    height: 0.78rem;
+    line-height: 0.78rem;
+    text-align: center;
+    display: block;
+    margin: 0 auto 0.15rem;
+    background: #e60012;
+    -webkit-border-radius: 0.05rem;
+    -moz-border-radius: 0.05rem;
+    border-radius: 0.05rem;
+    font-size: 0.3rem;
+    color: #fff;
+}
+.btnSuccess{
+    background: #c30d23;
+}
+/*协议*/
+.ts{
+    width:5.12rem;
+    margin: 0 auto 0.6rem;
+    font-size: 0.2rem;
+    color: #666;
+}
+.ts a{
+    color: #e60012;
+}
+/*other*/
+.other{
+    width: 5.12rem;
+    height: 0.4rem;
+    margin: 0 auto;
+    position: relative;
+}
+.other div{
+    position: absolute;
+}
+.other .left{
+    width: 1.7rem;
+    height:1px;
+    background: #999;
+    left: 0;
+    top: 0;
+}
+.other .middle{
+    width: 1.72rem;
+    font-size: 0.22rem;
+    color: #333;
+    left: 1.7rem;
+    top: -0.15rem;
+    text-align: center;
+}
+.other .right{
+    width: 1.7rem;
+    height: 1px;
+    background: #999;
+    top: 0;
+    right: 0;
+}
+/*twoLogin*/
+.twoLogin{
+    width: 5.12rem;
+    height: 1.52rem;
+    margin: 0 auto;
+}
+.twoLogin a{
+    font-size: 0.22rem;
+    color: #666;
+    text-align: center;
+    display: inline-block;
+}
+.twoLogin .weChat{
+    padding-left: 0.5rem;
+}
+.twoLogin .phone{
+    padding-left: 2rem;
+}
+.twoLogin a img{
+    width: 0.8rem;
+    height: 0.8rem;
+    margin: 0 auto 0.15rem;
+}
+/*zheZhao*/
+.zheZhao{
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding-top: 0.4rem;
+}
+.zheZhao .content{
+    width: 5.3rem;
+    height: 7.85rem;
+    top: 50%;
+    left: 50%;
+    margin-top: -3.925rem;
+    margin-left: -2.65rem;
+    background: url("../../img/agreement.png") no-repeat;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    position: relative;
+}
+.zheZhao .guan{
+    width: 0.4rem;
+    height: 0.4rem;
+    background: url("../../img/cha.png") no-repeat;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    position: absolute;
+    top: -0.2rem;
+    right: -0.2rem;
+}
+.zheZhao h3{
+    text-align: center;
+    height: 0.67rem;
+    line-height: 0.67rem;
+    font-size: 0.26rem;
+    color: #fff;
+    font-weight: normal;
+}
+.zheZhao p{
+    width:100%;
+    height: 5.7rem;
+    overflow: auto;
+    padding: 0.2rem 0.2rem 0.3rem 0.2rem;
+    word-break: break-all;
+    font-size: 0.24rem;
+    color: #333;
+}
+.zheZhao .sure{
+    display: block;
+    text-align: center;
+    margin: 0.65rem auto 0;
+    width: 1.4rem;
+    height: 0.64rem;
+    line-height: 0.64rem;
+    -webkit-border-radius: 0.05rem;
+    -moz-border-radius: 0.05rem;
+    border-radius: 0.05rem;
+    background: #e60012;
+    font-size: 0.26rem;
+    color: #fff;
+}
+
+/*加国际区号*/
+.phoneWrap {
+    /* padding-left: 0.6rem; */
+    width: 5.12rem;
+    overflow: hidden;
+    margin: 0 auto 0.2rem;
+}
+.phoneHead {
+    width: 1.4rem;
+    height: 0.75rem;
+    line-height: 0.75rem;
+    border: 1px solid #a0a0a0;
+    -webkit-border-radius: 0.05rem;
+    -moz-border-radius: 0.05rem;
+    border-radius: 0.05rem;
+    font-size: 0.28rem;
+    text-align: center;
+    float: left;
+}
+.phoneNumber {
+    width: 3.6rem;
+    height: 0.75rem;
+    border: 1px solid #a0a0a0;
+    -webkit-border-radius: 0.05rem;
+    -moz-border-radius: 0.05rem;
+    border-radius: 0.05rem;
+    position: relative;
+    float: right;
+}

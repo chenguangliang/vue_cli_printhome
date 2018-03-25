@@ -1,0 +1,142 @@
+/*header*/
+.header{
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:999;
+    font-size: 0.3rem;
+    color: #333;
+    border-bottom: 0.01rem solid #E8E8E8;
+}
+.header .return{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/return.png") no-repeat;
+    background-size: 0.2rem 0.3rem;
+    position: absolute;
+    left: 0.2rem;
+    top: 0.3rem;
+}
+.header .quanBuYiDu{
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 0.28rem;
+    color: #666;
+    margin-right: 0.2rem;
+}
+.zhanwei{
+    width: 100%;
+    height: 0.88rem;
+}
+.xiaoXiZhongXin{
+    display: block;
+    width: 6rem;
+    margin: 0.2rem auto 0;
+    background: #fff;
+    border-right: 5px solid #e60012;
+    border-radius: 0.1rem;
+    padding-left: 0.2rem;
+    padding-right: 0.3rem;
+    padding-bottom: 0.15rem;
+}
+.xiaoXiZhongXin .top{
+    width: 5.5rem;
+    height: 0.58rem;
+    border-bottom: 1px dashed #ccc;
+}
+.xiaoXiZhongXin .top .hongDian{
+    width: 0.1rem;
+    height: 0.1rem;
+    display: inline-block;
+    background: #e60012;
+    border-radius: 50%;
+    vertical-align: top;
+    margin-top: 0.25rem;
+    margin-right: 0.15rem;
+}
+.xiaoXiZhongXin .top .shiJian{
+    font-size: 0.22rem;
+    color: #666;
+    vertical-align: top;
+    display: inline-block;
+    margin-top: 0.15rem;
+}
+.xiaoXiZhongXin .bottom{
+    font-size: 0.26rem;
+    color: #333;
+    line-height: 0.45rem;
+}
+.zhezhao{
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 9999;
+    display: none;
+}
+.zhezhao .xiangXi{
+    width: 5rem;
+    min-height: 2.67rem;
+    max-height: 4rem;
+    background: #fff;
+    border-radius:0.05rem;
+    position: absolute;
+    top: 50%;
+    margin-top: -3rem;
+    left: 50%;
+    margin-left: -2.5rem;
+    text-align: center;
+    line-height: 0.38rem;
+    padding: 0 0.15rem;
+}
+.zhezhao .xiangXi span{
+    font-size: 0.24rem;
+    color: #666;
+}
+.zhezhao .xiangXi p{
+    max-height: 3rem;
+    overflow: scroll;
+    font-size: 0.26rem;
+    color: #333;
+    text-align: left;
+    margin-bottom: 0.2rem;
+}
+.zhezhao .xiangXi .close{
+    width: 0.6rem;
+    height: 0.6rem;
+    background:url("../../img/cha.png") no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    right: -0.3rem;
+    top: -0.3rem;
+}
+/*无结果*/
+.tiShi{
+    width: 100%;
+    padding-top: 1.5rem;
+}
+.tiShi img{
+    margin: 0 auto 0.96rem;
+    width: 3.05rem;
+    height: 2.5rem;
+}
+.tiShi  h2{
+    text-align: center;
+    font-size: 0.28rem;
+    color:#333333;
+    font-weight: normal;
+}
+.tiShi  p{
+    text-align: center;
+    font-size: 0.26rem;
+    color:#666666;
+    margin-top: 0.4rem;
+}

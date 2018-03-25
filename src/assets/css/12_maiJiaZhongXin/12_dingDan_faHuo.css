@@ -1,0 +1,143 @@
+/*¶¥²¿*/
+.header {
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:9;
+    font-size: 0.3rem;
+    color: #333;
+    border-bottom: 0.01rem solid #E8E8E8;
+}
+.header a.fanHui{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/return.png") no-repeat;
+    background-size: 0.2rem 0.3rem;
+    position: absolute;
+    left: 0.2rem;
+    top: 0.3rem;
+}
+.tuiKuanzhong{
+    background-color: #fff;
+    overflow: hidden;
+    margin-bottom: 0.2rem;
+}
+.tuiKuanzhong img{
+    width: 3.05rem;
+    height: 2.5rem;
+    margin: 0.2rem auto;
+}
+.tuiKuanzhong h2{
+    color: #333;
+    font-size: 0.3rem;
+    text-align: center;
+    font-weight: normal;
+    margin-bottom: 0.3rem;
+}
+.tuiKuanzhong p{
+    color: #666;
+    font-size: 0.26rem;
+    text-align: center;
+    margin-bottom: 0.2rem;
+}
+.tuiKuanzhong span{
+    position: absolute;
+    left: 2.4rem;
+    bottom: 0.2rem;
+    color: #999;
+    font-size: 0.22rem;
+    text-align: center;
+    height: 0.5rem;
+    line-height: 0.5rem;
+}
+.shouHuoXinXi{
+    background-color: #fff;
+    padding: 0.2rem 0 0 0.2rem;
+    overflow: hidden;
+    margin-bottom: 0.2rem;
+}
+.shouHuoXinXi h3{
+    color: #333;
+    font-size: 0.26rem;
+    margin-bottom: 0.2rem;
+    font-weight: normal;
+}
+.shouHuoXinXi .box{
+    overflow: hidden;
+    margin-bottom: 0.2rem;
+}
+.shouHuoXinXi .box .left{
+    float: left;
+    width: 1.2rem;
+    color: #666;
+    font-size: 0.22rem;
+}
+.shouHuoXinXi .box .right{
+    float: left;
+    width: 4.8rem;
+    color: #333;
+    font-size: 0.26rem;
+}
+.shouHuoXinXi p{
+    color: #333;
+    font-size: 0.26rem;
+    margin-bottom: 1rem;
+}
+.faHuoXinXi{
+    background-color: #fff;
+    padding: 0.2rem 0 0 0.2rem;
+    overflow: hidden;
+}
+.faHuoXinXi h3{
+    color: #333;
+    font-size: 0.26rem;
+    margin-bottom: 0.2rem;
+    font-weight: normal;
+}
+.faHuoXinXi p{
+    color: #666;
+    font-size: 0.26rem;
+    margin-bottom: 0.2rem;
+}
+.faHuoXinXi input{
+    width: 6rem;
+    height: 0.58rem;
+    border: 1px solid #ccc;
+    border-radius: 0.05rem;
+    display: block;
+    margin-bottom: 0.2rem;
+    padding-left: 0.1rem;
+    color: #333;
+    font-size: 0.26rem;
+}
+.diBu{
+    width: 100%;
+    height: 0.84rem;
+    line-height: 0.84rem;
+    background: #fff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index:9;
+    font-size: 0.3rem;
+    color: #333;
+    border-top: 0.01rem solid #E8E8E8;
+}
+.diBu input{
+    width: 2rem;
+    height: 0.64rem;
+    background-color: #e60012;
+    color: #fff;
+    border-radius: 0.05rem;
+}
+.diBu input:first-child{
+    margin: 0 0.8rem;
+    background: none;
+    border: 1px solid #e60012;
+    color: #e60012;
+}

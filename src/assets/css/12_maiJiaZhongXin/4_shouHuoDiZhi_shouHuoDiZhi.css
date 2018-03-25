@@ -1,0 +1,112 @@
+body{
+    background: #fff;
+}
+/*header*/
+.header{
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:999;
+    font-size: 0.3rem;
+    color: #333;
+    border-bottom: 0.01rem solid #E8E8E8;
+}
+.header .return{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/return.png") no-repeat;
+    background-size: 0.2rem 0.3rem;
+    position: absolute;
+    left: 0.2rem;
+    top: 0.3rem;
+}
+.zhanwei{
+    width: 100%;
+    height: 0.88rem;
+}
+.tianXie div{
+    overflow: hidden;
+    margin-top: 0.2rem;
+}
+.tianXie div span{
+    float: left;
+    height: 0.58rem;
+    line-height: 0.58rem;
+}
+.tianXie div span.left{
+    font-size: 0.22rem;
+    color: #666;
+    text-align: right;
+    width: 1.5rem;
+}
+.tianXie div span.right{
+    font-size: 0.26rem;
+    color: #333;
+}
+ label{
+    color: #e32529;
+}
+.tianXie div input{
+    width: 3.26rem;
+    height: 0.58rem;
+    border: 1px solid #ccc;
+    border-radius: 0.05rem;
+    padding-left: 0.1rem;
+    float: left;
+    color: #333;
+    font-size: 0.2rem;
+}
+.tianXie div input::-webkit-input-placeholder{
+    color: #999;
+    font-size: 0.2rem;
+}
+.tianXie div  select{
+    width: 3.26rem;
+    height: 0.58rem;
+    line-height: 0.58rem;
+    font-size: 0.2rem;
+    color: #999;
+    padding-left: 0.1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.05rem;
+    overflow: hidden;
+    float: left;
+}
+.tianXie div input#address{
+    width: 4.68rem;
+}
+.tianXie div input[type=checkbox]{
+    width: 0.25rem;
+    height: 0.25rem;
+    font-size: 0.24rem;
+    color: #666;
+    vertical-align: middle;
+    border: 1px solid #ccc;
+    border-radius: 0.05rem;
+    margin-top: 0.15rem;
+}
+.saveAddress{
+    width: 6.05rem;
+    height: 0.78rem;
+    line-height: 0.78rem;
+    background: #e60012;
+    position: fixed;
+    bottom: 0.2rem;
+    left: 0.2rem;
+    font-size: 0.3rem;
+    color: #fff;
+    text-align: center;
+    border-radius: 0.05rem;
+}
+.warm{
+    font-size: 0.2rem;
+    color: #e60012;
+    margin-top: 0.1rem;
+    padding-left: 1.5rem;
+}
+

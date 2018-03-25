@@ -1,0 +1,485 @@
+.main{
+    width: 6.3rem;
+    margin: 0 auto;
+}
+.nav ul li{
+    margin: 0.1rem 0.04rem;
+}
+.jingPinTuiJian .title{
+    background: url("../../img/jingPinTuiJianBg.png") no-repeat;
+    background-size:  100% 100%;
+}
+.jingPinNeiRong{
+    width: 100%;
+    height: 3rem;
+    border-bottom: 1px solid #e8e8e8;
+}
+.jingPinNeiRong a{
+    display:block;
+    float: left;
+    background: #fff;
+    width: 2.1rem;
+    height: 2.98rem;
+    border-right: 1px solid #e8e8e8;
+    font-size: 0.22rem;
+}
+.jingPinNeiRong a img{
+    width: 1.8rem;
+    height: 1.8rem;
+    margin: 0.15rem auto 0;
+}
+.jingPinNeiRong a h3{
+    color: #666;
+    font-weight: normal;
+    padding-left: 0.1rem;
+}
+.jingPinNeiRong a p{
+    color: #e60012;
+    padding-left: 0.05rem;
+}
+.teSeChanPin{
+    width: 100%;
+}
+.teSeChanPin .title{
+    background: url("../../img/jingPinTuiJianBg.png") no-repeat;
+    background-size:  100% 100%;
+}
+.teSeNeiRong{
+    width: 100%;
+}
+.teSeNeiRong a{
+    display:block;
+    float: left;
+    background: #fff;
+    width: 3.1rem;
+    height: 4.07rem;
+    font-size: 0.22rem;
+    margin-bottom: 0.1rem;
+    box-shadow: 0 0 5px #e8e8e8;
+}
+.teSeNeiRong a:nth-child(odd){
+    margin-right: 0.1rem;
+}
+.teSeNeiRong a:last-child{
+    margin-bottom: 0;
+}
+.teSeNeiRong a:nth-last-child(2){
+    margin-bottom: 0;
+}
+.teSeNeiRong a img{
+    width: 2.8rem;
+    height: 2.8rem;
+    margin: 0.15rem auto 0;
+}
+.teSeNeiRong a h3{
+    color: #666;
+    font-weight: normal;
+    padding-left: 0.1rem;
+}
+.teSeNeiRong a p{
+    color: #e60012;
+    padding-left: 0.06rem;
+    font-size: 0.28rem;
+}
+.qiJianDian{
+    width: 100%;
+}
+.qiJianDian .title{
+    background: url("../../img/jingPinTuiJianBg.png") no-repeat;
+    background-size:  100% 100%;
+    margin-top: 0.6rem;
+}
+.qiJianNeiRong{
+    width: 6.19rem;
+    height: 2.55rem;
+    margin: 0 auto;
+}
+.qiJianNeiRong a{
+    display: block;
+    float: left;
+    width: 3rem;
+    height: 1.2rem;
+    border-radius: 0.1rem;
+    font-size: 0.2rem;
+    color: #fff;
+    position: relative;
+    margin-bottom: 0.15rem;
+}
+.qiJianNeiRong a:nth-child(odd){
+    margin-right: 0.19rem;
+}
+.qiJianNeiRong a:last-child{
+    margin-bottom: 0;
+}
+.qiJianNeiRong a:nth-last-child(2){
+    margin-bottom: 0;
+}
+.qiJianNeiRong a img{
+    width: 3rem;
+    height: 1.2rem;
+    border-radius: 0.1rem;
+}
+.qiJianNeiRong a button{
+    width: 1.08rem;
+    height: 0.38rem;
+    line-height: 0.38rem;
+    text-align: center;
+    border: 1px solid #fff;
+    border-radius: 0.2rem;
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
+    background: none;
+    color: #fff;
+}
+.qiJianNeiRong a div.bg{
+    width: 3rem;
+    height: 1.2rem;
+    border-radius: 0.1rem;
+    background: rgba(0,0,0,0.6);
+    position: absolute;
+    left: 0;
+    top: 0;
+    text-align: center;
+}
+.lunTan{
+    width: 100%;
+}
+.lunTan .title{
+    background: url("../../img/jingPinTuiJianBg.png") no-repeat;
+    background-size:  100% 100%;
+    margin-top: 0.6rem;
+}
+.lunTanNeiRong{
+    width: 100%;
+    background: #fff;
+}
+.lunTanNeiRong .jingYan{
+    width: 6.3rem;
+    border-bottom: 1px solid #e8e8e8;
+    padding-left: 0.15rem;
+    padding-right: 0.15rem;
+    overflow: hidden;
+}
+.jingYan h3{
+    font-size: 0.26rem;
+    color: #333;
+    font-weight: normal;
+    margin: 0.2rem auto 0.2rem;
+}
+.jingYan .middle{
+    overflow: hidden;
+
+}
+.jingYan .middle img{
+    width: 1rem;
+    height: 1rem;
+    float: left;
+    margin-right: 0.15rem;
+}
+.jingYan .middle div{
+    float: left;
+    width: 4.85rem;
+    position: relative;
+}
+.jingYan .middle div h4{
+    font-size: 0.24rem;
+    color: #333;
+    font-weight: normal;
+    margin-bottom: 0.2rem;
+}
+.jingYan .middle div p{
+    font-size: 0.22rem;
+    color: #666;
+}
+.jingYan .middle div .more{
+    color: #e60012;
+    font-size: 0.22rem;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+.jingYan .bottom{
+    margin-top: 0.2rem;
+}
+.jingYan .bottom a{
+    color: #333;
+    font-size: 0.22rem;
+    display: block;
+    margin-bottom: 0.2rem;
+    position: relative;
+}
+.jingYan .bottom a i{
+    width: 0.1rem;
+    height: 0.1rem;
+    border-radius: 50%;
+    background: #666;
+    display: inline-block;
+    margin-right: 0.1rem;
+}
+.jingYan .bottom a span{
+    color: #999;
+    font-size: 0.2rem;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.jingYan .bottom a span.guankan{
+    right: 0.9rem;
+}
+.lunTanNeiRong .tuJi{
+    width: 6.3rem;
+    border-bottom: 1px solid #e8e8e8;
+    padding-left: 0.15rem;
+    overflow: hidden;
+}
+.tuJi h3{
+    font-size: 0.26rem;
+    color: #333;
+    font-weight: normal;
+    margin: 0.2rem auto 0.2rem;
+}
+.tuJi .tuJiNeiRong{
+    overflow: hidden;
+}
+.tuJi .tuJiNeiRong .fl{
+    float: left;
+}
+.tuJi .tuJiNeiRong .left{
+    margin-right: 0.1rem;
+    margin-bottom: 0.2rem;
+}
+.tuJi .tuJiNeiRong .left a{
+    display: block;
+    width: 2.2rem;
+    height: 1.6rem;
+}
+.tuJi .tuJiNeiRong .left a img{
+    width: 2.2rem;
+    height: 1.6rem;
+}
+.tuJi .tuJiNeiRong .left p{
+    width: 2.2rem;
+    height: 0.5rem;
+    line-height: 0.5rem;
+    text-align: center;
+    font-size: 0.22rem;
+    color: #333;
+    background: #f0f0f0;
+}
+.tuJi .tuJiNeiRong .right{
+    width: 3.78rem;
+}
+.tuJi .tuJiNeiRong .right a{
+    margin-bottom: 0.2rem;
+    margin-right: 0.1rem;
+}
+.tuJi .tuJiNeiRong .right a img{
+    width: 1.79rem;
+    height: 0.96rem;
+}
+.lunTanNeiRong .zhiDing{
+    width: 6.3rem;
+    border-bottom: 1px solid #e8e8e8;
+    padding-left: 0.15rem;
+    padding-right: 0.15rem;
+    overflow: hidden;
+}
+.zhiDing h3{
+    font-size: 0.26rem;
+    color: #333;
+    font-weight: normal;
+    margin: 0.2rem auto 0.2rem;
+}
+.zhiDing .zhiDingNeiRong h3{
+    font-size: 0.24rem;
+    color: #333;
+    font-weight: normal;
+    margin-bottom: 0.2rem;
+}
+.zhiDing .zhiDingNeiRong p{
+    font-size: 0.22rem;
+    color: #666;
+    background: #f4f4f4;
+    padding: 0.2rem;
+    font-weight: normal;
+    margin-bottom: 0.2rem;
+}
+.lunTanNeiRong .faTie{
+    width: 6.3rem;
+    border-bottom: 1px solid #e8e8e8;
+    padding-left: 0.15rem;
+    padding-right: 0.15rem;
+    overflow: hidden;
+}
+.faTie h3{
+    font-size: 0.26rem;
+    color: #333;
+    font-weight: normal;
+    margin: 0.2rem auto 0.2rem;
+}
+.faTie .faTieNeiRong .zuiJin{
+    border-bottom: 1px dashed #dcdcdc;
+    overflow: hidden;
+    font-size: 0.24rem;
+    color: #333;
+    height: 0.5rem;
+}
+.faTie .faTieNeiRong p span{
+    float: left;
+}
+.faTie .faTieNeiRong p a{
+    float: right;
+}
+.faTie .faTieNeiRong .liebiao{
+    overflow: hidden;
+    font-size: 0.24rem;
+    color: #333;
+    height: 0.5rem;
+    line-height: 0.5rem;
+    display: block;
+}
+.faTie .faTieNeiRong .liebiao .xinxi{
+    float: left;
+}
+.faTie .faTieNeiRong .liebiao .huiFu{
+    float: right;
+    font-size: 0.2rem;
+    color: #999;
+}
+.lunTanNeiRong .zhuanJia{
+    width: 6.3rem;
+    border-bottom: 1px solid #e8e8e8;
+    padding-left: 0.15rem;
+    padding-right: 0.15rem;
+    overflow: hidden;
+}
+.zhuanJia h3{
+    font-size: 0.26rem;
+    color: #333;
+    font-weight: normal;
+    margin: 0.2rem auto 0.2rem;
+}
+.zhuanJia .zhuanJiaNeiRong{
+    overflow: hidden;
+}
+.zhuanJiaNeiRong .fl{
+    float: left;
+    width: 3.28rem;
+    height: 3.6rem;
+}
+.zhuanJiaNeiRong .fl .fl-top{
+    font-size: 0.22rem;
+    color: #666;
+}
+.zhuanJiaNeiRong .fl .fl-top .person{
+    float: left;
+    margin-right: 0.1rem;
+}
+.zhuanJiaNeiRong .fl .fl-top .person img{
+    width: 0.9rem;
+    height: 0.9rem;
+}
+.zhuanJiaNeiRong .fl .fl-top .mingZi{
+    font-size: 0.24rem;
+    color: #333;
+}
+.zhuanJiaNeiRong .fl .fl-top .shuLiang{
+    font-size: 0.22rem;
+    color: #333;
+}
+.zhuanJiaNeiRong .fl .fl-top .liuyan{
+    width: 0.25rem;
+    height: 0.25rem;
+    margin-right: 0.1rem;
+    display: inline-block;
+    vertical-align: top;
+}
+.zhuanJiaNeiRong .fl .fl-top .liuYan{
+    font-size: 0.22rem;
+    color: #333;
+}
+.zhuanJiaNeiRong .fl .fl-bottom .wenZhang{
+    margin-bottom: 0.1rem;
+}
+.zhuanJiaNeiRong .fl .fl-bottom h4{
+    font-size: 0.24rem;
+    color: #333;
+    font-weight: normal;
+    margin: 0.1rem 0 0.1rem;
+}
+.zhuanJiaNeiRong .fl .fl-bottom  a{
+    font-size: 0.22rem;
+    color: #666;
+    display: block;
+}
+.zhuanJiaNeiRong .fl .fl-bottom span{
+    font-size: 0.2rem;
+    color: #999;
+    display: block;
+}
+.zhuanJiaNeiRong .line{
+    border: 1px dashed #d2d2d2;
+    height: 3.2rem;
+    float: left;
+}
+.zhuanJiaNeiRong .fr{
+    float: left;
+    width: 2.68rem;
+    padding-left: 0.15rem;
+}
+.zhuanJiaNeiRong .fr h4{
+    font-size: 0.24rem;
+    color: #333;
+}
+.zhuanJiaNeiRong .fr .gongSiLiuYan{
+    margin: 0.2rem 0 0.2rem 0;
+}
+.zhuanJiaNeiRong .fr .company{
+    font-size: 0.22rem;
+    color: #666;
+    display: block;
+    margin-bottom: 0.15rem;
+}
+.zhuanJiaNeiRong .fr .company img{
+    width: 0.4rem;
+    height: 0.4rem;
+    margin-right: 0.15rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+.zhuanJiaNeiRong .fr .biaoTi{
+    font-size: 0.22rem;
+    color: #333;
+    display: block;
+}
+.zhuanJiaNeiRong .fr .more{
+    font-size: 0.22rem;
+    color: #333;
+    display: block;
+    text-align: right;
+}
+.logo2{
+    margin-top: 0.1rem;
+}
+.img_list1{
+    width: 100000rem;
+    position: relative;
+}
+.img_list1 ul{
+    position: absolute;
+    left: 0;
+}
+.img_list1 ul li{
+    width: 1.56rem;
+    height: 0.5rem;
+    border-right: 1px solid #ccc;
+    float: left;
+}
+.img_list1 ul li a{
+    display: block;
+    margin: 0.05rem 0 0 0.25rem;
+}
+.img_list1 ul li img{
+    width: 1.05rem;
+    height: 0.45rem;
+}

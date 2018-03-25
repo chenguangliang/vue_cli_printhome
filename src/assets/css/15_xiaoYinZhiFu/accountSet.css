@@ -1,0 +1,237 @@
+body{
+    background-color: #F4F4F4;
+}
+.font-24{
+    font-size:0.24rem;
+}
+.font-26{
+    font-size:0.26rem;
+}
+.font-28{
+    font-size:0.28rem;
+}
+.font-32{
+    font-size:0.32rem;
+}
+.color-666{
+    color: #666;
+}
+.color-999{
+    color: #999;
+}
+.color-333{
+    color: #333;
+}
+.color-red{
+    color: #e60012;
+}
+.mar_t20{
+    margin-top:0.2rem;
+}
+.mar_b20{
+    margin-bottom:0.2rem;
+}
+.pad_l20{
+    padding-left:0.2rem;
+}
+.font-cen{
+    text-align: center;
+}
+.fl{
+    float: left;
+}
+.ccc_border {
+    border: 1px solid #ccc;
+}
+/*header*/
+.header{
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:9;
+    font-size: 0.3rem;
+    color: #333;
+    border-bottom: 0.01rem solid #E8E8E8;
+}
+.header .return{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/return.png") no-repeat;
+    background-size: 0.2rem 0.3rem;
+    position: absolute;
+    left: 0.2rem;
+    top: 0.3rem;
+}
+.zhanwei{
+    width: 100%;
+    height: 0.88rem;
+}
+/*提现账户*/
+.cash_account{
+    background: #fff;
+    padding:0 0 0.2rem 0.2rem;
+    overflow: hidden;
+}
+.cash_money{
+    background: #fff;
+    padding:0 0.2rem 0.2rem 0.2rem;
+    overflow: hidden;
+}
+.border-bottom{
+    border-bottom: 0.01rem solid #E8E8E8;
+}
+.money_input{
+    width:90%;
+    background: 0 none;
+}
+/*绑定提现账户*/
+.captcha_input{
+    width:3.66rem;
+    height:0.76rem;
+    border-radius: 0.06rem;
+    border:1px solid #ccc;
+    padding-left:0.2rem;
+    margin:0 0.2rem 0 0.2rem;
+}
+.send_captcha{
+    width: 2.12rem;
+    height:0.76rem;
+    font-size: 0.26rem;
+    color: #fff;
+    background-color: #e60012;
+    text-align: center;
+    border-radius: 0.06rem;
+}
+.xinXin p{
+    margin-top: 0.2rem;
+    font-size: 0.22rem;
+    color: #666;
+}
+.xinXin .left{
+    width: 2.16rem;
+    text-align: right;
+    float: left;
+    height: 0.58rem;
+    line-height: 0.58rem;
+}
+.xinXin .right{
+    width: 3.8rem;
+    float: left;
+    font-size: 0.26rem;
+    color: #333333;
+}
+.xinXin p label{
+    color: #e60012;
+}
+.xinXin p input{
+    width: 3.6rem;
+    border-radius: 0.05rem;
+    height: 0.58rem;
+    padding-left: 0.1rem;
+    font-size: 0.2rem;
+    color:#333;
+}
+.xinXin input::-webkit-input-placeholder{
+    color: #999;
+}
+.xinXin p select{
+    border-radius: 0.05rem;
+    height: 0.58rem;
+    padding-left: 0.1rem;
+}
+.lianxiren p span.right img{
+    display: inline-block;
+    vertical-align: middle;
+    width: 1rem;
+    height: 1.4rem;
+}
+#bank_province{
+    width: 1.1rem;
+}
+#bank_city{
+    width: 1.2rem;
+}
+#bank_area{
+    width: 1.2rem;
+}
+.lianxiren p span.rongZi{
+    line-height:0.58rem;
+}
+.lianxiren p span.rongZi img {
+    display: inline;
+    margin: 0 0.15rem;
+    width: 0.3rem;
+    height: 0.3rem;
+    vertical-align: middle;
+}
+
+.Withdrawals{
+    position: absolute;
+    bottom:0.2rem;
+    left:50%;
+    margin-left:-3.03rem;
+    width:6.06rem;
+    height:0.8rem;
+    background: #e60012;
+    color: #fff;
+    font-size: 0.3rem;
+    border-radius: 0.06rem;
+}
+.disabled{
+    background: #ccc;
+    color: #fff !important;
+}
+.zhezhao2{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    display: none;
+}
+.zhezhao2 div{
+    width: 4rem;
+    height: 1.82rem;
+    background: #fff;
+    border-radius:0.1rem;
+    margin-top:-0.91rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -2rem;
+    font-size: 0.34rem;
+    color: #333;
+    text-align: center;
+}
+.zhezhao2 div p{
+    width: 3.35rem;
+    height: 0.95rem;
+    line-height: 0.95rem;
+    text-align: center;
+    margin: 0 auto;
+    border-bottom: 1px dashed #e4e4e4;
+    margin-bottom: 0.2rem;
+}
+.zhezhao2 div span{
+    width: 1.2rem;
+    height: 0.48rem;
+    line-height: 0.48rem;
+    border-radius:0.05rem;
+    display: inline-block;
+    color: #fff;
+    font-size: 0.3rem;
+}
+.zhezhao2 div span.quXiao{
+    background: #f39700;
+    margin-right: 0.5rem;
+}
+.zhezhao2 div span.queDing{
+    background: #e60012;
+}

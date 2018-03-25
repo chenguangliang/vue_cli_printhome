@@ -1,0 +1,150 @@
+/*¶¥²¿*/
+.header {
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:9;
+    font-size: 0.3rem;
+    color: #333;
+    border-bottom: 0.01rem solid #E8E8E8;
+}
+.header a.fanHui{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/return.png") no-repeat;
+    background-size: 0.2rem 0.3rem;
+    position: absolute;
+    left: 0.2rem;
+    top: 0.3rem;
+}
+.header a.suoSou{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/rili@3x.png") no-repeat;
+    background-size: 0.38rem 0.34rem;
+    background-position: right top;
+    position: absolute;
+    right:0.2rem;
+    top: 0.3rem;
+}
+/*Ñ¡Ïî¿¨*/
+.xuanXiangKa{
+    width: 100%;
+    height: 0.7rem;
+    background-color: #fff;
+    position: fixed;
+    top: 0.88rem;
+    left: 0;
+    border-bottom: 0.01rem solid #E8E8E8;
+    z-index: 9;
+}
+.xuanXiangKa ul{
+    overflow: hidden;
+}
+.xuanXiangKa ul li{
+    height: 0.7rem;
+    line-height: 0.7rem;
+    font-size: 0.26rem;
+    color: #666;
+    border-right: 1px solid #e8e8e8;
+    float: left;
+    width: 3.21rem;
+    text-align: center;
+}
+.xuanXiangKa ul li:last-child{
+    border-right: none;
+    width: 3.19rem;
+}
+.xuanXiangKa ul li.on{
+    color: #e60012;
+}
+.tab_box{
+    padding-top: 0.1rem;
+}
+.shuJu div{
+    width: 6rem;
+    margin: 0 auto 0.2rem;
+    height: 1.47rem;
+    background-color: #fff;
+    border-radius: 0.1rem;
+    box-shadow: 1px 2px 3px #ccc;
+    position: relative;
+}
+.shuJu div img{
+    width: 0.35rem;
+    height: 1.47rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.shuJu div h2{
+    font-weight: normal;
+    font-size: 0.28rem;
+    color: #333;
+    text-align: center;
+    padding: 0.2rem 0;
+}
+.shuJu div p{
+    font-size: 0.36rem;
+    color: #e60012;
+    text-align: center;
+}
+.shuJu div p.maiJia{
+    color: #f39700;
+}
+.shuJu div p.shangPin{
+    color: #00b3e6;
+}
+.shuJu div p.dingDan{
+    color: #09c5b5;
+}
+.shuJu div p.zhanBi{
+    color: #dc31ba;
+}
+.tongJiTu{
+    display: none;
+    background-color: #fff;
+}
+.tongJiTu ul{
+    overflow: hidden;
+    padding: 0.2rem 0 0.5rem;
+}
+.tongJiTu ul li{
+    float: left;
+    padding: 0 0.21rem;
+    height: 0.45rem;
+    font-size: 0.26rem;
+    color: #666;
+    text-align: center;
+    line-height: 0.45rem;
+    background-color: #eee;
+    border-radius: 0.2rem;
+    margin-left: 0.15rem;
+}
+.tongJiTu ul li.on{
+    background-color: #e60012;
+    color: #fff;
+    box-shadow: 0 0 15px #bfbebe;
+}
+.tu{
+    /*background-color: #fff;*/
+    width: 6rem;
+    margin: 0 auto;
+    height: 4.95rem;
+    /*box-shadow: 0 1px 1px #ccc;*/
+}
+.tu div{
+    /*width: 100%;*/
+    /*height: 4.1rem;*/
+    /*background-color: #d2d2d2;*/
+    display: none;
+    font-size: 0.26rem;
+}
+.tu div:first-child{
+    display: block;
+}

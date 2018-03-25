@@ -1,0 +1,170 @@
+/*header*/
+.header{
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:999;
+    font-size: 0.3rem;
+    color: #333;
+    border-bottom: 0.01rem solid #E8E8E8;
+}
+.header .return{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/return.png") no-repeat;
+    background-size: 0.2rem 0.3rem;
+    position: absolute;
+    left: 0.2rem;
+    top: 0.3rem;
+}
+/*顶部占位*/
+.zhanwei{
+    width: 100%;
+    height: 0.88rem;
+}
+/*字母列表*/
+.ziMu .kezi{
+    border-left: 0.1rem solid #fff;
+    background: #fff;
+}
+.ziMu .dianjihou{
+    border-left: 0.1rem solid #e60012;
+}
+.ziMu .kezi .yiji{
+    width: 6rem;
+    margin: 0 auto;
+    font-size: 0.28rem;
+    color: #666;
+    height: 0.62rem;
+    line-height: 0.62rem;
+    text-align: left;
+    border-bottom: 1px solid #e8e8e8;
+}
+.ziMu .kezi .yijibg{
+    background:url("../../img/xiala.png") no-repeat;
+    background-size:0.18rem 0.08rem;
+    background-position: right center;
+}
+.ziMu .kezi .yijibg2{
+    background:url("../../img/xiangshang.png") no-repeat;
+    background-size:0.18rem 0.08rem;
+    background-position: right center;
+    color: #e60012;
+}
+.ziMu .erji,.ziMu .sanji{
+    display: none;
+}
+.ziMu .erji ol{
+    overflow: hidden;
+}
+.ziMu .erji ol li{
+    width: 1.38rem;
+    height: 1rem;
+    font-size: 0.2rem;
+    color: #333;
+    text-align: center;
+    margin-left: 0.16rem;
+    margin-bottom: 0.1rem;
+    margin-top: 0.1rem;
+    float: left;
+    list-style: none;
+}
+.erjiColor{
+    border: 1px solid #ccc;
+}
+.erjiColor2{
+    border: 1px solid #e60012;
+}
+.ziMu .erji ol li img{
+    width: 1.34rem;
+    height: 0.5rem;
+    display: block;
+    margin: 0.03rem auto 0.05rem;
+}
+.ziMu .erji ol li .line{
+    width: 1.27rem;
+    display: block;
+    margin: 0 auto;
+    border: 1px dashed #ccc;
+}
+.ziMu .erji ol li .brandName{
+    width: 1.38rem;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+.sanji1{
+    display: none;
+    /*width:6rem;*/
+    /*margin: 0 auto;*/
+    position: fixed;
+    z-index: 1002;
+    top:0;
+    height: 100%;
+    width: 100%;
+    overflow: scroll;
+    background-color: #f4f4f4;
+}
+.sanji1 a{
+    display: block;
+    width: 6rem;
+    height: 1.2rem;
+    background: #fff;
+    margin: 0.2rem;
+}
+.sanji1 a img{
+    width: 2rem;
+    height: 0.9rem;
+    margin: 0.15rem 0.15rem 0 0.15rem;
+    float: left;
+}
+.sanji1 a p{
+    color: #666;
+    font-size: 0.24rem;
+    width: 3.6rem;
+    float: left;
+    padding: 0.3rem 0;
+}
+.zhanwei2{
+    height: 1.15rem;
+}
+.home{
+    text-align: center;
+    width: 100%;
+    height: 0.6rem;
+    line-height: 0.6rem;
+    margin: 0 auto;
+    font-size: 0.22rem;
+    color: #999;
+}
+.sanji1{
+    font-size: 0.2rem;
+    padding-top: 0.88rem;
+}
+.winBrandNameWrap{
+    background-color: #fff;
+    width: 100%;
+    height: 0.88rem;
+    position: fixed;
+    top:0;
+
+}
+.winBrandName{
+    text-align: center;
+    height: 0.88rem;
+    width: 90%;
+    font-size: 0.3rem;
+    line-height: 0.88rem;
+    float: left;
+    padding-left: 5%;
+}
+.close{
+    height: 0.3rem;
+    float: right;
+    margin: 0.3rem 0.2rem 0 0;
+}

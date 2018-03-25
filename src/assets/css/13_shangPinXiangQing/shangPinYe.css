@@ -1,0 +1,1041 @@
+body {
+    font-size: 0.24rem;
+}
+
+.top {
+    display: none;
+}
+
+img {
+    display: inline-block;
+}
+
+.upCar {
+    height: 0.3rem;
+}
+
+.upCar_wrap {
+    position: absolute;
+    right: 0.2rem;
+}
+
+.upCar_wrap img {
+    vertical-align: middle;
+}
+
+/*����ͼ*/
+.slideBox {
+    position: relative;
+    overflow: hidden;
+}
+
+.slideBox .hd {
+    position: absolute;
+    height: 0.18rem;
+    line-height: 0.18rem;
+    bottom: 0.2rem;
+    z-index: 1;
+    width: 100%;
+    text-align: center;
+}
+
+.slideBox .hd li {
+    display: inline-block;
+    width: 0.18rem;
+    height: 0.18rem;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    background: #666;
+    text-indent: -9999px;
+    margin-left: 0.13rem;
+}
+
+.slideBox .hd li.on {
+    background: #00b4ff;
+}
+
+.slideBox .bd {
+    position: relative;
+    z-index: 0;
+}
+
+.slideBox .bd li {
+    position: relative;
+    text-align: center;
+}
+
+.slideBox .bd li img {
+    vertical-align: top;
+    width: 100%; /* ͼƬ���100%���ﵽ����ӦЧ�� */
+    height: 6.4rem;
+}
+
+.slideBox .bd li a {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.banner {
+    position: relative;
+    height: 6.4rem;
+    overflow: hidden
+}
+
+.bannerImg_wrap {
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    overflow: hidden;
+    padding: 0.2rem;
+    width: 100%;
+}
+
+.bannerImg_wrap img {
+    height: 0.5rem;
+    width: 0.5rem;
+}
+
+.bannerImg_wrap img:nth-child(1) {
+    float: left;
+}
+
+.bannerImg_wrap img:nth-child(2) {
+    float: right;
+}
+.bannerImg_wrap .goods_num{
+    background: #e60012;
+    width: 0.2rem;
+    height: 0.2rem;
+    line-height: 0.2rem;
+    text-align: center;
+    border-radius: 50%;
+    color: #fff;
+    /*font-size: 0.2rem;*/
+    float: right;
+    margin-right: -0.55rem;
+    margin-top: -0.05rem;
+}
+/*.bannerImg_wrap .goods_num_two{
+    width: 0.3rem;
+}
+.bannerImg_wrap .goods_num_three{
+    width: 0.4rem;
+    border-radius: 40%;
+    margin-right: -0.6rem;
+}*/
+/*��Ʒѡ��*/
+.goods_wrap {
+    padding: 0.2rem;
+    margin-top: 0.2rem;
+    background-color: #fff;
+}
+
+.goods_name{
+    font-size: 0.24rem;
+    color: #666666;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+ .ad_title{
+    font-size: 0.24rem;
+    color: #666666;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+
+.market {
+    font-size: 0.2rem;
+    color: #999999;
+    text-decoration: line-through;
+    margin-right: 0.2rem;
+}
+
+.goods_price {
+    margin: 0.2rem 0;
+    font-size: 0.24rem;
+    color: #333333;
+    display:block ;
+}
+
+.noSale {
+    margin: 0.2rem 0;
+    font-size: 0.26rem;
+    color: #e60012;
+}
+
+.xunJia ,.xunjiaNoLogin{
+    margin: 0.2rem 0;
+    font-size: 0.26rem;
+    color: #fff;
+    background-color: #e60012;
+    width: 1.5rem;
+    height: 0.45rem;
+    line-height: 0.45rem;
+    text-align: center;
+    border-radius: 0.1rem;
+}
+.xunjiaNoLogin{
+    width: 1.8rem;
+}
+.promotion_price,.locked_price {
+    font-size: 0.28rem;
+    color: #e60012;
+}
+
+.goods_prop{
+    font-size: 0.2rem;
+    color: #666666;
+    position: relative;
+}
+.ad_prop{
+    font-size: 0.2rem;
+    color: #666666;
+    position: relative;
+}
+
+.goods_key {
+    color: #999999;
+}
+
+.goods_select {
+    height: 0.24rem;
+    position: absolute;
+    right: 0;
+    top: 0.05rem;
+}
+
+.promotion_wrap,.adWrap {
+    margin: 0.2rem auto 0;
+    padding: 0.2rem;
+    background-color: #fff;
+}
+
+.promotion {
+    position: relative;
+}
+
+.tip {
+    padding: 0.2rem;
+    font-size: 0.22rem;
+    color: #666666;
+    background-color: #f8f8f8;
+}
+.instruction{
+    display: inline-block;
+    margin-right: 0.3rem;
+    line-height: 0.35rem;
+}
+.check_mark {
+    width: 0.22rem;
+    height: 0.22rem;
+    vertical-align: middle;
+    margin-right: 0.15rem;
+}
+
+.ml_20 {
+    margin-left: 0.25rem;
+}
+
+.distribution {
+    background-color: #fff;
+    padding: 0.2rem;
+}
+
+.select_add {
+    height: 0.58rem;
+    line-height: 0.58rem;
+}
+
+.select_add select {
+    width: 1.1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+}
+
+.limit {
+    background-color: #fff;
+    padding: 0.2rem;
+    margin-top: 0.2rem;
+}
+
+.yellow_bg {
+    display: inline-block;
+    height: 0.32rem;
+    text-align: center;
+    line-height: 0.32rem;
+    width: 0.5rem;
+    background-color: #f88705;
+    font-size: 0.22rem;
+    color: #fff;
+    float: left;
+}
+
+.yellow_con {
+    display: inline-block;
+    width: 5.2rem;
+    float: right;
+}
+
+.red_bg {
+    display: inline-block;
+    height: 0.32rem;
+    text-align: center;
+    line-height: 0.32rem;
+    width: 0.5rem;
+    background-color: #e60012;
+    font-size: 0.22rem;
+    color: #fff;
+    float: left;
+}
+
+.red_con {
+    display: inline-block;
+    width: 5.2rem;
+    float: right;
+}
+
+.yellow_wrap, .red_wrap {
+    overflow: hidden;
+}
+
+.yellow_wrap {
+    margin: 0.2rem 0;
+}
+
+.promise {
+    padding: 0.2rem;
+    background-color: #f8f8f8;
+    font-size: 0.2rem;
+    color: #666666;
+}
+
+/*ͼ������*/
+.tuijian {
+    height: 0.6rem;
+    padding: 0 0.1rem;
+    position: relative;
+    text-align: center;
+}
+
+.tuijian span {
+    position: absolute;
+    height: 0.3rem;
+    line-height: 0.3rem;
+    width: 3rem;
+    margin-left: -1.6rem;
+    top: 0.16rem;
+    background-color: #f4f4f4;
+
+}
+
+.line_mid {
+    border-bottom: 1px solid rgba(153, 153, 153, 0.59);
+    height: 0.3rem
+}
+
+/*��Ʒ����*/
+
+.nav_wrap {
+    padding: 0.2rem;
+    width: 100%;
+    background-color: #fff;
+    border-bottom: 1px solid #f4f4f4;
+}
+
+.nav_con {
+    width: 100%;
+    height: 0.5rem;
+    line-height: 0.5rem;
+}
+
+.nav_con .nav {
+    width: 24%;
+    border-right: 1px solid #999999;
+    display: inline-block;
+    text-align: center;
+}
+
+.nav.last {
+    border: none;
+}
+
+.printhome {
+    color: #999999;
+    padding-bottom: 1rem;
+    text-align: center;
+    margin-bottom: 0.3rem;
+    margin-top: 0.2rem;
+}
+
+/*β��������ʽ��ʼ*/
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 99;
+    font-size: 0.2rem;
+    background: white;
+    height: 0.84rem;
+    width: 100%;
+    border-top: 1px solid #d2d2d2;
+}
+
+.footer .lianxi {
+    padding-top: 0.1rem;
+    display: inline-block;
+    width: 17%;
+    text-align: center;
+    height: 0.84rem;
+}
+
+.footer .lianxi:nth-child(2) {
+    border-right: 1px solid #d2d2d2;
+    border-left: 1px solid #d2d2d2;
+}
+
+.lianxi img {
+    height: 0.32rem;
+    width: 0.32rem;
+}
+
+.jiaru-wrap {
+    width: 48%;
+    top: 0;
+    position: absolute;
+    display: inline-block;
+    height: 0.84rem
+}
+
+.jiaru {
+    width: 100%;
+    color: white;
+    text-align: center;
+    font-size: 0.26rem;
+    display: inline-block;
+    height: 0.84rem;
+    line-height: 0.84rem;
+    background-color: #f78805;
+}
+
+.jiaru_gray {
+    background-color: #cccccc;
+}
+
+.qingdan-wrap, .pinglun-wrap, .jieshao-wrap, .pingce-wrap {
+    margin-top: 0.2rem;
+    padding: 0.2rem;
+}
+.goodsDetileInfo,.goodsDetileInfoLeft{
+    display: inline-block;
+    width: 40%;
+    font-size: 0.24rem;
+    margin-bottom: 0.1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.goodsDetileInfoLeft{
+    width: 55%;
+}
+
+.jieshao-wrap .goodsDetileTit{
+
+}
+
+.qingdan-wrap {
+    display: none;
+    background-color: #fff;
+}
+
+.qingdan {
+    line-height: 150%;
+    font-size: 0.22rem;
+}
+
+.qingdan_con li {
+    line-height: 0.5rem;
+    font-size: 0.26rem;
+    color: #333333;
+    border-bottom: 1px solid #f4f4f4;
+}
+
+.qingdan_con li:last-child {
+    border: none;
+}
+
+/*����*/
+.pinglun-wrap {
+    display: none;
+    padding: 0;
+}
+
+.pinglun {
+    margin-bottom: 0.2rem;
+    padding: 0.2rem;
+    line-height: 150%;
+    font-size: 0.22rem;
+    background-color: #fff;
+}
+
+.star_wrap {
+    overflow: hidden;
+}
+
+.star_tit {
+    float: left;
+    font-size: 0.24rem;
+    color: #666666;
+}
+
+.star_rtit {
+    float: right;
+    font-size: 0.24rem;
+    color: #999999;
+}
+
+.star {
+    height: 0.28rem;
+    width: 0.28rem!important;
+    float: left;
+    vertical-align: bottom;
+    display: block;
+    margin: 0.05rem 0 0 0.1rem;
+}
+
+.pinglun_con {
+    padding: 0.1rem 0;
+    border-top: 1px solid #f4f4f4;
+    border-bottom: 1px solid #f4f4f4;
+    margin: 0.1rem 0;
+}
+
+.pinglun_tit {
+    font-size: 0.24rem;
+    color: #999999;
+}
+
+.pinglun_list {
+    line-height: 0.4rem;
+}
+
+.pinglun_img{
+    width: 1.2rem !important;
+    height: 0.9rem;
+    vertical-align: middle;
+}
+/*买家评论图片弹窗*/
+.pinglun_img_tanChuang {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+.pinglun_wrap {
+    margin-top: 0.2rem;
+    background-color: white;
+
+}
+
+/*�̼�����*/
+.pingce-wrap {
+    display: none;
+    background-color: #fff;
+
+}
+
+.pingce {
+    margin-bottom: 0.2rem;
+    background-color: white;
+    height: 0.8rem;
+    padding: 0.2rem;
+    line-height: 150%;
+    font-size: 0.22rem;
+}
+
+.jieshao-wrap {
+    background-color: #fff;
+}
+
+.pingce_con {
+}
+
+/*����ѡ�񵯴�����*/
+.win_prop, .win_prop_xunJia, .xunJia_dio_wrap, .win_ad {
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    display: none;
+}
+
+.prop_bg {
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.prop_wrap {
+    position: fixed;
+    bottom: 0;
+    z-index: 100;
+    width: 100%;
+    padding: 0.1rem;
+}
+
+.prop_con {
+
+    width: 100%;
+    border-radius: 0.1rem;
+    background-color: #fff;
+    padding: 0.1rem;
+}
+
+.prop_img {
+    width: 1.4rem;
+    height: 1.4rem;
+    border-radius: 0.2rem;
+    /*vertical-align: top;*/
+    /*margin-top: -0.2rem;*/
+}
+
+.prop_chahaoWrap {
+    height: 0.4rem;
+    width: 0.4rem;
+    float: right;
+}
+
+.prop_chahao {
+    margin-top: 0.1rem;
+    margin-left: 0.1rem;
+    height: 0.2rem;
+    width: 0.2rem;
+
+}
+
+.win_priceWrap {
+    display: inline-block;
+    margin-top: 0.1rem;
+    width: 4rem;
+    vertical-align: top;
+}
+
+.win_price {
+    font-size: 0.3rem;
+    color: #e60012;
+}
+
+.win_count {
+    font-size: 0.26rem;
+    color: #666666;
+}
+
+.wrap_wrapper, .color_wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.win_select {
+    margin: 0.2rem 0;
+    height: 3rem;
+    overflow: auto;
+}
+
+.wrap_con, .color_con {
+    width: 4.5rem;
+    float: left;
+}
+
+.wrap_tit, .color_tit {
+    font-size: 0.24rem;
+    color: #666666;
+    float: left;
+    width: 1.5rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+.wrap_tit{
+    text-align: right;
+}
+
+.beginSpan {
+    display: inline-block;
+    background-color: #eeeeee;
+    padding: 0 0.2rem;
+    border-radius: 0.2rem;
+    font-size: 0.26rem;
+    color: #666666;
+    line-height: 0.4rem;
+    margin-bottom: 0.1rem;
+}
+
+.red {
+    background-color: #e60012;
+    color: #ffffff;
+}
+
+.win_jiaRu {
+    width: 100%;
+    text-align: center;
+    color: #ffffff;
+    font-size: 0.3rem;
+    margin-top: 0.1rem;
+    height: 0.78rem;
+    line-height: 0.78rem;
+    background-color: #f39700;
+    border-radius: 0.1rem;
+}
+
+.win_xunJia {
+    background-color: #e60012;
+}
+
+.win_nosale{
+    background-color: #A5A5A5;
+}
+
+/*������������*/
+.win_Promotion {
+    display: none;
+}
+
+.promotion_con {
+    width: 100%;
+    border-radius: 0.1rem;
+    background-color: #fff;
+    padding: 0.1rem;
+    position: relative;
+}
+
+.promotionCon_wrap {
+    position: fixed;
+    bottom: 0;
+    z-index: 100;
+    width: 100%;
+    padding: 0.1rem;
+}
+
+.pro_tit {
+    text-align: center;
+    font-size: 0.24rem;
+    color: #666666
+}
+
+.pro_chahaoWrap {
+    height: 0.4rem;
+    width: 0.4rem;
+    position: absolute;
+    right: 0.1rem;
+    top: 0.1rem;
+}
+
+.pro_chahao {
+    margin-top: 0.1rem;
+    margin-left: 0.1rem;
+    height: 0.2rem;
+    width: 0.2rem;
+}
+
+.win_wancheng {
+    width: 100%;
+    text-align: center;
+    color: #ffffff;
+    font-size: 0.3rem;
+    margin-top: 0.1rem;
+    height: 0.78rem;
+    line-height: 0.78rem;
+    background-color: #e60012;
+    border-radius: 0.1rem;
+}
+
+.pro_tit1 {
+    font-size: 0.24rem;
+    color: #666666
+}
+
+.promotion_option {
+    font-size: 0.28rem;
+    color: #333333;
+}
+
+.promotion_main {
+    margin-top: 0.1rem;
+    border-top: 1px dotted #999999;
+}
+
+.lingqu_tit {
+    font-size: 0.24rem;
+    color: #666666;
+    line-height: 0.5rem;
+}
+
+.quan_wrap {
+    height: 4rem;
+    overflow: auto;
+}
+
+/*ѯ�۶Ի���*/
+.xunJia_dio_wrap {
+    position: relative;
+}
+
+.xunJia_cha {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 0.5rem;
+    width: 0.5rem;
+    z-index: 102;
+    margin-right: -0.2rem;
+    margin-top: -0.2rem;
+}
+
+.redWord {
+    color: #e60012;
+}
+
+.xunJia_dio_wrapper {
+    width: 5.6rem;
+    position: fixed;
+    z-index: 101;
+    top: 50%;
+    left: 50%;
+    margin-left: -2.8rem;
+    margin-top: -3.7rem;
+    border-radius: 0.2rem;
+    background-color: #fff;
+}
+
+.con_wrap {
+    padding: 0.2rem;
+}
+
+.zixun_tit {
+    line-height: 0.6rem;
+    text-align: center;
+    background-color: #e60012;
+    font-size: 0.26rem;
+    color: white;
+    border-radius: 0.2rem;
+}
+
+.buhong {
+    height: 0.2rem;
+    margin-top: -0.2rem;
+    background-color: #e60012;
+}
+
+.zixun_msg {
+    text-align: center;
+    color: #e60012;
+    line-height: 0.6rem;
+    margin-bottom: 0.1rem;
+}
+
+.con_wrap input {
+    border: 1px solid #999999;
+    height: 0.58rem;
+    width: 3.56rem;
+    margin-bottom: 0.3rem;
+    border-radius: 0.1rem;
+    padding-left: 0.1rem;
+}
+
+.xunJia_quxiao, .xunJia_queding {
+    display: inline-block;
+    width: 1.4rem;
+    height: 0.64rem;
+    line-height: 0.64rem;
+    text-align: center;
+    color: white;
+    border-radius: 0.1rem;
+    font-size: 0.3rem;
+}
+
+.xunJia_quxiao {
+    background-color: #f39700;
+}
+
+.xunJia_queding {
+    background-color: #e60012;
+    margin-left: 0.4rem;
+}
+
+.btn_wrap {
+    text-align: center;
+    padding-top: 0.2rem;
+    border-top: 1px dotted #000000;
+}
+
+#caigou {
+    display: inline-block;
+    height: 2rem;
+    width: 3.56rem;
+    outline: none;
+    resize: none;
+    border: 1px solid #999999;
+    border-radius: 0.1rem;
+    margin-bottom: 0.2rem;
+    vertical-align: top;
+    padding: 0.1rem;
+}
+
+
+
+.normal{
+
+}
+
+
+.disabled{
+    color: #ccc;
+}
+
+
+.checked{
+    background-color: #e60012;
+    color: #ffffff;
+}
+#xiangqing img{
+  width: 100%;
+}
+/*sku轮播*/
+.sku-popup{
+    /*display: none;*/
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -10;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 1);
+}
+.swiper-container{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+}
+.swiper-slide a.pic{
+    width:100%;
+    display: block;
+    position:relative;
+    padding-bottom:100%;
+    height:0;
+    left: 50%;
+    top: 50%;
+    margin-top: -50%;
+    margin-left: -50%;
+}
+.swiper-slide img{
+    width:100%;
+    height:100%;
+    position:absolute;
+
+}
+.swiper-slide p{
+    width: 100%;
+    height: 0.5rem;
+    line-height: 0.5rem;
+    text-align: center;
+    font-size: 18px;
+    color: #fff;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    margin-top: 10%;
+    margin-left: -50%;
+}
+.swiper-pagination{
+    z-index: 0;
+}
+.swiper-pagination-bullet{
+    background-color: #ccc;
+}
+
+/*cgl 分期改造加的*/
+.stageDet{
+    margin-top:0.1rem;
+    color: #999;
+}
+
+/*cgl促销广告添加*/
+.adWrap img{
+    width: 6rem;
+    height: 1.714rem;
+}
+.prop_imgWrap{
+    position: relative;
+    display: inline-block;
+}
+.adLittleImg,.adBigImg{
+    width: 100%;
+    height: 0.25rem;
+    position: absolute;
+    bottom:0;
+}
+img.adBigImg{
+    height: 1.13rem;
+}
+/*陈广良-定金支付添加*/
+.normalBtn{
+    display: inline-block;
+    border:1px solid #e0e0e0;
+    line-height:0.42rem;
+    word-break: keep-all;
+    padding: 0 0.1rem;
+    border-radius: 0.1rem;
+    margin-bottom:0.1rem;
+}
+.selPayBtn{
+    background-color: #e60012;
+    color: #fff;
+    border:1px solid #e60012;
+}
+/*陈广良 锁价新增*/
+
+.locked_price_wrap{
+    position: relative;
+}
+.locked_price_tip{
+    width: 3.2rem;
+    height: 2.86rem;
+    top:-2.86rem;
+    position: absolute;
+    left:0;
+    background: url("../../img/suojia_bg.png") no-repeat center 100% ;
+    background-size: cover;
+    z-index: 100;
+    text-align: center;
+    font-size: 0.22rem;
+    color: #666;
+    line-height:0.38rem;
+    padding: 0.2rem 0.16rem;
+}
+
+/*套餐商品新增*/
+.goods_package_btn{
+    display: inline-block;
+    padding: 0 0.2rem;
+    border-right:1px solid #b8b8b8;
+}
+
+
+
+

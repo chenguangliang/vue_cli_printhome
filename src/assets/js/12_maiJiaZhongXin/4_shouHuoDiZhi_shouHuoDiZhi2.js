@@ -1,0 +1,2 @@
+testAuto('.adderess',37);
+

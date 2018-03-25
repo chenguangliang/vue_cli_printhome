@@ -1,0 +1,684 @@
+/*顶部*/
+.header {
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:9;
+    font-size: 0.3rem;
+    color: #333;
+    border-bottom: 0.01rem solid #E8E8E8;
+}
+.header a.fanHui{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/return.png") no-repeat;
+    background-size: 0.2rem 0.3rem;
+    position: absolute;
+    left: 0.2rem;
+    top: 0.3rem;
+}
+.header a.suoSou{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/sousuo@3x.png") no-repeat;
+    background-size: 0.3rem 0.3rem;
+    background-position: right top;
+    position: absolute;
+    right:0.2rem;
+    top: 0.3rem;
+}
+/*选项卡*/
+.xuanXiangKa{
+    width: 100%;
+    height: 0.7rem;
+    background-color: #fff;
+    position: fixed;
+    top: 0.88rem;
+    left: 0;
+    border-bottom: 0.01rem solid #E8E8E8;
+    z-index: 9;
+}
+.xuanXiangKa ul{
+    overflow: hidden;
+}
+.xuanXiangKa ul li{
+    height: 0.7rem;
+    line-height: 0.7rem;
+    font-size: 0.26rem;
+    color: #666;
+    border-right: 1px solid #e8e8e8;
+    float: left;
+    width: 2.13rem;
+    text-align: center;
+}
+.xuanXiangKa ul li:last-child{
+    border-right: none;
+    width: 2.14rem;
+}
+.xuanXiangKa ul li.on{
+    color: #e60012;
+}
+.zhanwei{
+    width: 100%;
+    height: 1.58rem;
+}
+/*切换内容*/
+.tab_box{
+    margin-top: 0.1rem;
+}
+.queRen,.shenPi{
+    display: none;
+}
+.biaoGe{
+    background-color: #fff;
+    width: 6.2rem;
+    margin: 0 auto 0.2rem;
+    padding-bottom: 0.2rem;
+}
+.biaoGe .top,.biaoGe .middle,.biaoGe .bottom{
+    font-size: 0;
+}
+.biaoGe .top span{
+    font-size: 0.24rem;
+    color: #666;
+    display: inline-block;
+    width: 2.44rem;
+    text-align: center;
+    padding: 0.2rem 0;
+}
+.biaoGe .top span:nth-child(2){
+    width: 1.36rem;
+}
+.biaoGe .top span:last-child{
+    width: 2.4rem;
+}
+.biaoGe .middle .shangPinShuXing{
+    display: inline-block;
+}
+.biaoGe .middle span{
+    font-size: 0.26rem;
+    color: #333;
+    display: inline-block;
+    vertical-align: top;
+}
+.biaoGe .middle a{
+    width: 2.44rem;
+    padding-left: 0.1rem;
+    font-size: 0.26rem;
+    color: #333;
+    display: inline-block;
+}
+.biaoGe .shangPinShuXing a{
+    display: block;
+}
+.biaoGe .middle span:nth-child(2){
+    color: #e60012;
+    width: 1.36rem;
+    text-align: center;
+}
+.biaoGe .middle span:last-child{
+    width: 2.4rem;
+    text-align: center;
+}
+.biaoGe .bottom a{
+    font-size: 0.22rem;
+    color: #666;
+    width: 1.2rem;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    border: 1px solid #ccc;
+    border-radius:0.5rem;
+    display: block;
+    float: right;
+    text-align: center;
+    margin:0.15rem 0.15rem 0 0;
+}
+.biaoGe .bottom a.on{
+    color: #e60012;
+    border-color: #e60012;
+}
+/*printHome*/
+.printHome{
+    font-size: 0.22rem;
+    color: #999;
+    text-align: center;
+}
+/*底部*/
+.chuangJian{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width:100%;
+    height: 0.84rem;
+    text-align: center;
+    line-height: 0.84rem;
+    color: #666;
+    background: #fff;
+    font-size: 0.28rem;
+    border-top: 1px solid #E8E8E8;
+    z-index: 1000;
+}
+/*弹窗*/
+.zhezhao{
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+}
+.con{
+    width: 4rem;
+    height: 2.01rem;
+    background-color: #fff;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -1.005rem;
+    margin-left: -2rem;
+    border-radius: 0.05rem;
+}
+.con h5{
+    height: 0.6rem;
+    line-height: 0.6rem;
+    color: #666;
+    font-size: 0.22rem;
+    text-align: center;
+    font-weight: normal;
+}
+.con p{
+    height: 0.5rem;
+    color: #333;
+    font-size: 0.28rem;
+    text-align: center;
+}
+.con div{
+    width: 3.35rem;
+    height: 1px;
+    border: 1px dashed #E8E8E8;
+    margin:0 auto 0.2rem;
+}
+.zhezhao  span{
+    width: 1.2rem;
+    height: 0.48rem;
+    line-height: 0.48rem;
+    border-radius:0.05rem;
+    display: inline-block;
+    color: #fff;
+    font-size: 0.3rem;
+    vertical-align: top;
+}
+.zhezhao  span.quXiao{
+    background: #f39700;
+    margin-right: 0.5rem;
+}
+.zhezhao  span.queDing{
+    background: #e60012;
+}
+.zhezhao2{
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.content{
+    width: 5.3rem;
+    height: 5.7rem;
+    top: 50%;
+    left: 50%;
+    margin-top: -2.85rem;
+    margin-left: -2.65rem;
+    background-image: url("../../img/570bg@3x.png");
+    background-size: 100% 100%;
+    position: relative;
+}
+.content h3{
+    height: 0.67rem;
+    line-height: 0.67rem;
+    color: #fff;
+    font-size: 0.3rem;
+    text-align: center;
+    font-weight: normal;
+}
+.content h4{
+    height: 0.89rem;
+    line-height: 0.89rem;
+    color: #666;
+    font-size: 0.28rem;
+    padding-left: 0.2rem;
+    font-weight: normal;
+}
+.content textarea{
+    width: 4.9rem;
+    height: 2.8rem;
+    margin: 0 auto;
+    display: block;
+    resize: none;
+    border: 1px solid #ccc;
+    border-radius: 0.05rem;
+    color: #333;
+    font-size: 0.28rem;
+    padding-top: 0.2rem;
+    text-indent: 0.28rem;
+}
+.content p{
+    position: absolute;
+    bottom: 0.2rem;
+}
+.content p button{
+    width: 1.4rem;
+    height: 0.64rem;
+    color: #fff;
+    font-size: 0.3rem;
+    background-color: #e60012;
+    border-radius: 0.05rem;
+}
+.content p button.cancel{
+    background-color: #f39700;
+    margin: 0 0.54rem 0 0.98rem;
+}
+.content i{
+    width: 0.4rem;
+    height: 0.4rem;
+    background:url("../../img/cha.png") no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    top: -0.2rem;
+    right: -0.2rem;
+}
+.content .textNone{
+    display: none;
+    width: 5rem;
+    height: 0.78rem;
+    line-height: 0.78rem;
+    background: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    position: absolute;
+    top: 2.47rem;
+    left: 0.15rem;
+    border-radius: 0.05rem;
+    color: #fff;
+    font-size: 0.28rem;
+}
+/*询价管理*/
+.xunJia ul li{
+    width: 3.21rem;
+}
+.xunJia ul li:last-child {
+    width: 3.19rem;
+}
+.line{
+    height: 1px;
+    border: 1px dashed #E8E8E8;
+    width: 5.87rem;
+    margin: 0.2rem auto;
+}
+.biaoGe .middle a.shuXing{
+    color: #666;
+    font-size: 0.22rem;
+}
+.biaoGe .baoJia{
+    color: #333;
+    font-size: 0.22rem;
+    text-align: right;
+    padding-right: 0.15rem;
+    overflow: hidden;
+}
+.biaoGe .baoJia span{
+    font-size: 0.26rem;
+}
+.yincang{
+    display: none;
+}
+/*报价管理*/
+.baoJia i{
+    background: url("../../img/xiugaiicon@3x.png") no-repeat;
+    background-size: 0.24rem 0.27rem;
+    background-position: left top;
+    color: #666;
+    font-size: 0.22rem;
+    width: 0.79rem;
+    height: 0.27rem;
+    float: right;
+    margin-left: 0.4rem;
+}
+.biaoGe .baoJia a{
+   margin: 0 0 0 0.2rem;
+}
+.daiShenHe{
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+}
+.con2{
+    width: 5.3rem;
+    left: 50%;
+    top: 50%;
+    margin-left: -2.65rem;
+    margin-top: -2.935rem;
+    /*background-image: url("../../img/526bg@3x.png");*/
+    /*background-size: 100% 100%;*/
+    position: relative;
+    border-radius:0.06rem;
+    background-color: #fff;
+}
+.con2 h3{
+    height: 0.67rem;
+    line-height: 0.67rem;
+    color: #fff;
+    font-size: 0.3rem;
+    text-align: center;
+    font-weight: normal;
+    background-color: #e60012;
+    border-top-left-radius:0.06rem;
+    border-top-right-radius:0.06rem;
+}
+.con2 div{
+    margin: 0.2rem 0;
+}
+.con2 div span{
+    float: left;
+    display: block;
+}
+.con2 div .left{
+    width: 1.2rem;
+    text-align: right;
+    color: #666;
+    font-size: 0.26rem;
+}
+.con2 div .lh{
+    line-height: 0.58rem;
+    height: 0.58rem;
+}
+.con2 div .right{
+    color: #333;
+    font-size: 0.24rem;
+}
+.con2 div .right input{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    display: block;
+    float: left;
+    height: 0.58rem;
+    line-height: 0.58rem;
+    border: 1px solid #ccc;
+    border-radius: 0.05rem;
+    padding-left: 0.1rem;
+}
+.con2 div .right input[type=text]{
+    width: 1.7rem;
+}
+.con2 div .right input[type=date]{
+    width: 2.3rem;
+}
+.con2 div .right textarea{
+    display: block;
+    width: 3.76rem;
+    height: 1.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.05rem;
+    resize: none;
+    padding: 0.1rem;
+}
+.con2 .btn{
+    padding-bottom: 0.2rem;
+}
+.con2 .btn button{
+    display: block;
+    float: left;
+    width: 1.8rem;
+    height: 0.64rem;
+    color: #fff;
+    font-size: 0.3rem;
+    background-color: #e60012;
+    border-radius: 0.05rem;
+    margin-left: 0.5rem;
+}
+.con2 .btn button.cancel{
+    background-color: #f39700;
+    margin-left: 0.6rem;
+}
+.con2 i{
+    width: 0.4rem;
+    height: 0.4rem;
+    background:url("../../img/cha.png") no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    top: -0.2rem;
+    right: -0.2rem;
+}
+/*批量保价修改报价*/
+.wuPin{
+    background-color: #fff;
+    overflow: hidden;
+    margin-bottom: 0.2rem;
+    padding-top: 0.2rem;
+}
+.wuPin p{
+    font-size: 0.22rem;
+    color: #666;
+    margin-bottom: 0.2rem;
+}
+.wuPin p span{
+    display: inline-block;
+    width: 1.35rem;
+    text-align: right;
+}
+.wuPin p i{
+    font-size: 0.26rem;
+    color: #333;
+    width: 4.85rem;
+    display: inline-block;
+    vertical-align: top;
+}
+.wuPin p input{
+    width: 1.7rem;
+    height: 0.58rem;
+    border: 1px solid #ccc;
+    border-radius: 0.05rem;
+    font-size: 0.24rem;
+    padding-left: 0.1rem;
+}
+.foot{
+    border-top: 1px solid #e8e8e8;
+    width: 100%;
+    height: 0.84rem;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    font-size:0;
+}
+.foot a{
+    font-size: 0.28rem;
+    width: 3.2rem;
+    height: 0.84rem;
+    line-height: 0.84rem;
+    background-color: #fff;
+    color: #666;
+    display: inline-block;
+    text-align: center;
+}
+.foot a:first-child{
+    border-right: 1px solid #ccc;
+}
+.foot a.on{
+    color: #e60012;
+}
+/*求购无结果*/
+.tiShi{
+    width: 100%;
+    padding-top: 1.5rem;
+}
+.tiShi img{
+    margin: 0 auto 0.96rem;
+    width: 3.05rem;
+    height: 2.5rem;
+}
+.tiShi  h2{
+    text-align: center;
+    font-size: 0.28rem;
+    color:#333333;
+    font-weight: normal;
+}
+.tiShi  p{
+    text-align: center;
+    font-size: 0.26rem;
+    color:#666666;
+    margin-top: 0.4rem;
+}
+/*询价详情*/
+.goods_information_title{
+    padding-left: 0.2rem;
+    background-color: #f4f4f4;
+    color: #333;
+    font-size: 0.24rem;
+    height: 0.6rem;
+    line-height: 0.6rem;
+    font-weight: normal;
+}
+.goods_information{
+    width: 100%;
+    padding: 0.2rem;
+    overflow: hidden;
+    background-color: #fff;
+}
+.goods_information .float-left{
+    float: left;
+    width: 1.3rem;
+    height: 1rem;
+    margin-right: 0.2rem;
+}
+.goods_information .float-right{
+    float: right;
+    width: 4.5rem;
+}
+.goods_information p{
+    color: #666;
+    font-size: 0.24rem;
+    overflow: hidden;
+    line-height: 0.4rem;
+}
+.goods_information span{
+    float: left;
+    width:1.3rem;
+    text-align: right;
+}
+.goods_information i{
+    float: left;
+    text-overflow : ellipsis;
+    white-space : nowrap;
+    overflow : hidden;
+    color: #333;
+    width: 3.2rem;
+}
+.user_information{
+    width: 100%;
+    padding: 0.2rem;
+    overflow: hidden;
+    background-color: #fff;
+}
+.user_information p{
+    color: #666;
+    font-size: 0.24rem;
+    overflow: hidden;
+    line-height: 0.4rem;
+}
+.user_information span{
+    float: left;
+    width:1.3rem;
+    text-align: right;
+}
+.user_information i{
+    float: left;
+    text-overflow : ellipsis;
+    white-space : nowrap;
+    overflow : hidden;
+    color: #333;
+    width: 4.7rem;
+}
+/*求购搜索*/
+.suoSou{
+    padding: 0.2rem 0 0 0;
+    overflow: hidden;
+    margin-bottom: 0.2rem;
+}
+.suoSou p{
+    font-size: 0.22rem;
+    color: #666;
+    margin-bottom: 0.2rem;
+    overflow: hidden;
+}
+.suoSou p span{
+    display: inline-block;
+    width: 1.54rem;
+    text-align: right;
+    padding-left: 0.1rem;
+}
+.suoSou p input{
+    width: 4.5rem;
+    height: 0.58rem;
+    border: 1px solid #ccc;
+    padding-left: 0.1rem;
+    border-radius: 0.05rem;
+    font-size: 0.24rem;
+}
+.suoSou p .reset{
+    width: 1.8rem;
+    height: 0.68rem;
+    border: 1px solid #e60012;
+    text-align: center;
+    line-height: 0.68rem;
+    display: inline-block;
+    border-radius: 0.05rem;
+    font-size: 0.3rem;
+    color: #e60012;
+}
+.suoSou p .search{
+    width: 1.8rem;
+    height: 0.68rem;
+    background-color: #e60012;
+    text-align: center;
+    line-height: 0.68rem;
+    display: inline-block;
+    border-radius: 0.05rem;
+    font-size: 0.3rem;
+    color: #fff;
+    margin-left: 0.93rem;
+}
+.suoSou select{
+    width: 1.45rem;
+    height: 0.58rem;
+    border: 1px solid #ccc;
+    padding-left: 0.1rem;
+    border-radius: 0.05rem;
+    font-size: 0.24rem;
+}
+.suoSou .gaoJiSouSuo{
+    display: block;
+    margin: 0.4rem auto 0;
+    width: 6rem;
+    height: 0.78rem;
+    background-color: #e60012;
+    color: #fff;
+    font-size: 0.3rem;
+    text-align: center;
+    line-height: 0.78rem;
+    border-radius: 0.05rem;
+}

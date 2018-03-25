@@ -1,0 +1,100 @@
+.shop_detile {
+    padding: 0.2rem 0.2rem 0.1rem 0.2rem;
+    font-size: 0.28rem;
+    color: #333333;
+}
+
+.shop_detile p {
+    margin-bottom: 0.1rem;
+}
+
+.shop_detile span {
+    font-size: 0.26rem;
+    color: #666666;
+}
+
+.img_con {
+    background-color: #fff;
+    padding: 0.2rem;
+    margin-top: 0.2rem;
+}
+
+.img_con img {
+    vertical-align: middle;
+}
+
+.btn {
+    display: block;
+    color: white;
+    border-radius: 0.1rem;
+    width: 6.05rem;
+    margin: 0.2rem auto;
+    height: 0.78rem;
+    line-height: 0.78rem;
+    background-color: #e60012;
+}
+
+.renzheng {
+    display: inline-block;
+    height: 0.5rem;
+    width: 0.5rem;
+    margin-right: 0.2rem;
+}
+
+.zhizhao {
+    display: inline-block;
+    height: 0.7rem;
+    width: 0.5rem
+}
+
+/*µ¯´°*/
+.renzheng_tanChuang, .zhizhao_tanChuang {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+    z-index: 5;
+}
+
+.informDetile{
+    display: inline-block;
+    width: 4.7rem;
+
+}
+.informTitle{
+    vertical-align: top;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

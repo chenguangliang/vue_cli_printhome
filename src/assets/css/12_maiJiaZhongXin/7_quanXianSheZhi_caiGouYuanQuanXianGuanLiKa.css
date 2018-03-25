@@ -1,0 +1,141 @@
+.header {
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:9;
+    font-size: 0.3rem;
+    color: #333;
+    border-bottom: 0.01rem solid #E8E8E8;
+}
+.header a{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/return.png") no-repeat;
+    background-size: 0.2rem 0.3rem;
+    position: absolute;
+    left: 0.2rem;
+    top: 0.3rem;
+}
+.zhanwei{
+    width: 100%;
+    height: 0.88rem;
+}
+.content{
+    width: 6rem;
+    padding:0.2rem 0.2rem 0;
+    margin: 0.2rem auto 0;
+    background: #fff;
+    position: relative;
+    overflow: hidden;
+}
+.content p{
+    overflow: hidden;
+    margin-bottom: 0.2rem;
+}
+.content p span{
+    float: left;
+}
+.content p span.left{
+    font-size: 0.24rem;
+    color: #666;
+    width: 1.2rem;
+    text-align: right;
+}
+.content p span.right{
+    font-size: 0.28rem;
+    color: #333;
+}
+.content p .xiuGai,.content p .delete{
+    width: 1.2rem;
+    height: 0.48rem;
+    line-height: 0.48rem;
+    font-size: 0.28rem;
+    color: #fff;
+    display: inline-block;
+    background: #e60012;
+    border-radius: 0.05rem;
+    text-align: center;
+}
+.content p .delete{
+    background: #f39700;
+    margin-left: 0.5rem;
+}
+.content .chaKan{
+    position: absolute;
+    right: 0;
+    top: 0.2rem;
+    width: 1.32rem;
+    height: 0.4rem;
+    text-align: center;
+    line-height: 0.4rem;
+    color: #fff;
+    background: #00a2e6;
+    font-size: 0.24rem;
+    border-radius: 0.5rem 0 0 0.5rem;
+}
+.chuangJian{
+    display: block;
+    width:6rem;
+    height: 0.78rem;
+    text-align: center;
+    line-height: 0.78rem;
+    color: #fff;
+    background: #e60012;
+    font-size: 0.3rem;
+    border-radius: 0.05rem;
+    margin: 0 auto 0.2rem;
+}
+.zhezhao{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 99;
+    display: none;
+}
+.zhezhao div{
+    width: 4rem;
+    height: 1.82rem;
+    background: #fff;
+    border-radius:0.1rem;
+    margin-top:-0.91rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -2rem;
+    font-size: 0.34rem;
+    color: #333;
+    text-align: center;
+}
+.zhezhao div p{
+    width: 3.35rem;
+    height: 0.95rem;
+    line-height: 0.95rem;
+    text-align: center;
+    margin: 0 auto;
+    border-bottom: 1px dashed #e4e4e4;
+    margin-bottom: 0.2rem;
+}
+.zhezhao div span{
+    width: 1.2rem;
+    height: 0.48rem;
+    line-height: 0.48rem;
+    border-radius:0.05rem;
+    display: inline-block;
+    color: #fff;
+    font-size: 0.3rem;
+}
+.zhezhao div span.quXiao{
+    background: #f39700;
+    margin-right: 0.5rem;
+}
+.zhezhao div span.queDing{
+    background: #e60012;
+}

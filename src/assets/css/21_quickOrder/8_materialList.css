@@ -1,0 +1,93 @@
+.materialWrap{
+    width: 100%;
+}
+.oneMaterial{
+    width: 96%;
+    background-color: #fff;
+    margin: 0.2rem auto;
+}
+.btnWrap span{
+    border-radius: 1rem;
+}
+.materialTit,.materialCon{
+    overflow: hidden;
+}
+.materialTit p{
+    width: 33.3%;
+    text-align: center;
+    color: #666666;
+    font-size: 0.24rem;
+    float: left;
+    padding: 0.2rem 0.2rem 0 0.2rem;
+}
+.materialCon p{
+    width: 33.3%;
+    text-align: center;
+    color: #333;
+    font-size: 0.26rem;
+    float: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+    padding: 0.2rem;
+}
+.materialCon p.redWord{
+   color: #e60012;
+ }
+
+.btnWrap{
+    text-align: right;
+    padding: 0 0.2rem 0.2rem 0;
+}
+
+.grayBtn, .redBtn{
+    height: 0.4rem;
+    line-height:0.36rem;
+    font-size: 0.22rem;
+}
+.suoSou p span{
+    width: 1.4rem;
+}
+.suoSou select{
+    width: 1.5rem;
+}
+.listSelWin {
+    position: fixed;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #f4f4f4;
+    z-index: 99;
+    display: none;
+    overflow: auto;
+}
+.listOneGoods {
+    background-color: #fff;
+    overflow: hidden;
+    padding: 0.2rem 0.1rem;
+    margin-top: 0.2rem;
+}
+#materialWin input{
+    pointer-events: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

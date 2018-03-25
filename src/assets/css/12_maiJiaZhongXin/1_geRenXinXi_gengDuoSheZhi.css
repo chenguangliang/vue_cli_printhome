@@ -1,0 +1,90 @@
+/*header*/
+.header{
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:999;
+    font-size: 0.3rem;
+    color: #333;
+    border-bottom: 0.01rem solid #E8E8E8;
+}
+.header .return{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/return.png") no-repeat;
+    background-size: 0.2rem 0.3rem;
+    position: absolute;
+    left: 0.2rem;
+    top: 0.3rem;
+}
+.zhanwei{
+    width: 100%;
+    height: 0.88rem;
+}
+.shezhi-con{
+    margin: 0.2rem 0;
+    background: #ffffff;
+}
+.shezhi-con li{
+    height: 0.88rem;
+    line-height: 0.88rem;
+    background: #ffffff;
+}
+.shezhi-con a{
+    font-size:0.26rem;
+    display: block;
+    width: 6rem;
+    margin: 0 auto;
+    height: 100%;
+    position: relative;
+    border-bottom: 1px solid #ccc;
+}
+.shezhi-con .border-none{
+    border-bottom: none;
+}
+.shezhi-con a img{
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -0.09rem;
+    width: 0.12rem;
+    height: 0.24rem;
+}
+.zhuxiao{
+    display: block;
+    width: 6.05rem;
+    height: 0.78rem;
+    line-height: 0.78rem;
+    border-radius: 0.05rem;
+    background-color: #e32529;
+    color: #ffffff;
+    font-size: 0.3rem;
+    text-align: center;
+    margin: 0 auto;
+}
+.shezhi-con a .tiShi{
+    color: #e60012;
+    font-size: 0.24rem;
+    position: absolute;
+    left: 2.2rem;
+}
+.shezhi-con a .tiShi img{
+    width: 0.38rem;
+    height: 0.34rem;
+    position: absolute;
+    left: -0.4rem;
+    top:40%;
+}
+
+
+
+
+
+
+
+

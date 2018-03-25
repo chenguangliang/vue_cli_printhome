@@ -1,0 +1,601 @@
+/*顶部*/
+.header {
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:999;
+    font-size: 0.3rem;
+    color: #333;
+    border-bottom: 0.01rem solid #E8E8E8;
+}
+.header a.fanHui{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/return.png") no-repeat;
+    background-size: 0.2rem 0.3rem;
+    position: absolute;
+    left: 0.2rem;
+    top: 0.3rem;
+}
+/*协议编号*/
+.bianHao{
+    background-color: #fff;
+    padding: 0.2rem 0 0 0;
+    overflow: hidden;
+    margin-bottom: 0.2rem;
+}
+.bianHao p{
+    font-size: 0.22rem;
+    color: #666;
+    margin-bottom: 0.2rem;
+}
+.bianHao p span{
+    display: inline-block;
+    width: 1.54rem;
+    text-align: right;
+    padding-left: 0.1rem;
+}
+.bianHao p label{
+    color: #e60012;
+}
+.bianHao p input{
+    width: 4rem;
+    height: 0.58rem;
+    padding-left: 0.1rem;
+    border-radius: 0.05rem;
+    font-size: 0.24rem;
+}
+.bianHao p i{
+    font-size: 0.26rem;
+    color: #333;
+}
+.gray_word{
+    color: #666;
+}
+.ccc_border{
+    border: 1px solid #ccc;
+}
+.red_word{
+    color: #e60012;
+}
+.red_border{
+    border: 1px solid #e60012;
+}
+
+/*联系方式*/
+.lianXi{
+    background-color: #fff;
+    overflow: hidden;
+    margin-bottom: 0.2rem;
+}
+.lianXi h2{
+    font-size: 0.26rem;
+    color: #333;
+    font-weight: normal;
+    height: 0.65rem;
+    line-height: 0.65rem;
+    padding-left: 0.2rem;
+}
+.lianXi p{
+    font-size: 0.22rem;
+    color: #666;
+    margin-bottom: 0.2rem;
+}
+.lianXi p span{
+    display: inline-block;
+    width: 1.54rem;
+    text-align: right;
+    padding-left: 0.1rem;
+}
+.lianXi p label{
+    color: #e60012;
+}
+.lianXi p i{
+    display: inline-block;
+    color: #333;
+    font-size: 0.26rem;
+    width: 4.4rem;
+    vertical-align: top;
+}
+.lianXi p input{
+    width: 4rem;
+    height: 0.58rem;
+    padding-left: 0.1rem;
+    border-radius: 0.05rem;
+    font-size: 0.24rem;
+}
+.lianXi textarea{
+    width: 4rem;
+    height: 2rem;
+    border-radius: 0.05rem;
+    resize: none;
+    text-indent: 0.2rem;
+}
+/*底部*/
+.foot{
+    border-top: 1px solid #ccc;
+    width: 100%;
+    height: 0.84rem;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    font-size:0;
+}
+.foot a{
+    font-size: 0.28rem;
+    width: 3.2rem;
+    height: 0.84rem;
+    line-height: 0.84rem;
+    background-color: #fff;
+    color: #666;
+    display: inline-block;
+    text-align: center;
+}
+.foot a:first-child{
+    border-right: 1px solid #e8e8e8;
+}
+.foot a.on{
+    color: #e60012;
+}
+/*弹窗*/
+.zhezhao{
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+}
+.con{
+    width: 4rem;
+    height: 2.01rem;
+    background-color: #fff;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -1.005rem;
+    margin-left: -2rem;
+    border-radius: 0.05rem;
+}
+.con h5{
+    height: 0.6rem;
+    line-height: 0.6rem;
+    color: #666;
+    font-size: 0.22rem;
+    text-align: center;
+    font-weight: normal;
+}
+.con p{
+    height: 0.5rem;
+    color: #333;
+    font-size: 0.28rem;
+    text-align: center;
+}
+.con div{
+    width: 3.35rem;
+    height: 1px;
+    border: 1px dashed #ccc;
+    margin:0 auto 0.2rem;
+}
+.zhezhao  a{
+    width: 1.2rem;
+    height: 0.48rem;
+    line-height: 0.48rem;
+    border-radius:0.05rem;
+    display: inline-block;
+    color: #fff;
+    font-size: 0.3rem;
+    vertical-align: top;
+}
+.zhezhao  a.quXiao{
+    background: #f39700;
+    margin-right: 0.5rem;
+}
+.zhezhao  a.queDing{
+    background: #e60012;
+}
+/*协议条件*/
+.xieYi{
+    background-color: #fff;
+    overflow: hidden;
+}
+.xieYi h2{
+    font-size: 0.26rem;
+    color: #333;
+    font-weight: normal;
+    height: 0.65rem;
+    line-height: 0.65rem;
+    padding-left: 0.2rem;
+}
+.xieYi p{
+    font-size: 0.22rem;
+    color: #666;
+    margin-bottom: 0.2rem;
+}
+.xieYi p span{
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 0.05rem;
+    width: 1.78rem;
+    text-align: right;
+    padding-left: 0.1rem;
+}
+.xieYi p label{
+    color: #e60012;
+}
+.xieYi p input[type=date],.xieYi p input[type=month]{
+    width: 1.7rem;
+    height: 0.58rem;
+    border-radius: 0.05rem;
+    font-size: 0.24rem;
+}
+.xieYi p input[type=tel]{
+    width: 2.4rem;
+    height: 0.58rem;
+    border-radius: 0.05rem;
+    font-size: 0.24rem;
+    padding-left: 0.1rem;
+}
+.xieYi p .month{
+    width: 2.4rem;
+    height: 0.58rem;
+    border-radius: 0.05rem;
+    font-size: 0.24rem;
+}
+.xieYi p input[type=radio]{
+    width: 0.3rem;
+    height: 0.3rem;
+    border-radius: 50%;
+}
+.xieYi #need{
+    margin-left: 0.3rem;
+}
+.xieYi .shenHeRen{
+    display: none;
+}
+.xieYi p .shenHe,.xieYi p .xieyi{
+    width: 1.7rem;
+    height: 0.58rem;
+    border-radius: 0.05rem;
+    font-size: 0.24rem;
+}
+.xieYi .shangChuan{
+    width: 0.8rem;
+    height: 0.8rem;
+    padding: 0.22rem 0.19rem;
+    border-radius: 0.05rem;
+    display: inline-block;
+}
+.xieYi .shangChuan img{
+    width: 0.43rem;
+    height: 0.35rem;
+    display: inline-block;
+}
+.xieYi textarea{
+    width: 4rem;
+    height: 2rem;
+    border-radius: 0.05rem;
+    resize: none;
+    text-indent: 0.2rem;
+}
+.foot2{
+    border-top: 1px solid #ccc;
+    width: 100%;
+    height: 0.84rem;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    font-size:0;
+}
+.foot2 a{
+    font-size: 0.28rem;
+    width: 2.14rem;
+    height: 0.84rem;
+    line-height: 0.84rem;
+    background-color: #fff;
+    color: #666;
+    display: inline-block;
+    text-align: center;
+    border-right: 1px solid #e8e8e8;
+}
+.foot2 a:nth-child(2){
+    width: 2.12rem;
+}
+.foot2 a:last-child{
+    border-right: 0;
+}
+.foot2 a.on{
+    color: #e60012;
+}
+/*协议物品*/
+.wuPin{
+    background-color: #fff;
+    overflow: hidden;
+    margin-bottom: 0.2rem;
+    padding-top: 0.2rem;
+}
+.wuPin h2{
+    font-size: 0.26rem;
+    color: #333;
+    font-weight: normal;
+    height: 0.45rem;
+    padding-left: 0.2rem;
+}
+.wuPin p{
+    font-size: 0.22rem;
+    color: #666;
+    margin-bottom: 0.2rem;
+}
+.wuPin p span{
+    display: inline-block;
+    vertical-align: top;
+    width: 1.35rem;
+    text-align: right;
+}
+.wuPin p span label{
+    color: #e60012;
+}
+.wuPin p i{
+    font-size: 0.26rem;
+    color: #333;
+}
+.wuPin p input[type=number],.wuPin p input[type=date]{
+    width: 1.7rem;
+    height: 0.58rem;
+    border-radius: 0.05rem;
+    font-size: 0.24rem;
+    padding-left: 0.1rem;
+}
+/*新增商品*/
+.xinZeng{
+    width: 6rem;
+    height: 0.78rem;
+    display: block;
+    margin:  0.2rem auto 0.5rem;
+    background-color: #fff;
+    box-shadow: 0 2px 2px #ccc;
+    border-radius: 0.05rem;
+    font-size: 0.3rem;
+    color: #e60012;
+    text-align: center;
+    line-height: 0.78rem;
+}
+.foot3{
+    border-top: 1px solid #ccc;
+    width: 100%;
+    height: 0.84rem;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    font-size:0;
+}
+.foot3 a{
+    font-size: 0.28rem;
+    width: 1.6rem;
+    height: 0.84rem;
+    line-height: 0.84rem;
+    background-color: #fff;
+    color: #666;
+    display: inline-block;
+    text-align: center;
+    border-right: 1px solid #e8e8e8;
+}
+.foot3 a:last-child{
+    border-right: 0;
+}
+.foot3 a.on{
+    color: #e60012;
+}
+/*创建询价*/
+.xunJia p span {
+    width: 1.92rem;
+    text-align: right;
+    padding-left: 0;
+    vertical-align: top;
+}
+.xunJia p span.right img {
+    width: 0.8rem;
+    height: 0.8rem;
+}
+.shangChuan{
+    width: 0.8rem;
+    height: 0.8rem;
+    padding: 0.22rem 0.19rem;
+    border: 1px solid #ccc;
+    border-radius: 0.05rem;
+    display: inline-block;
+}
+.shangChuan img{
+    width: 0.43rem;
+    height: 0.35rem;
+    display: inline-block;
+}
+.shangPinShuXing i label{
+    font-size: 0.24rem;
+}
+.shanChu{
+    float: right;
+    margin-right: 0.2rem;
+    width: 0.44rem;
+    height: 0.44rem;
+    background: url("../../img/shanchu-@3x.png") no-repeat;
+    background-size:0.28rem 0.25rem;
+    background-position: right bottom;
+}
+.zhezhao2{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    display: none;
+}
+.zhezhao2 div{
+    width: 4rem;
+    height: 1.82rem;
+    background: #fff;
+    border-radius:0.1rem;
+    margin-top:-0.91rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -2rem;
+    font-size: 0.34rem;
+    color: #333;
+    text-align: center;
+}
+.zhezhao2 div p{
+    width: 3.35rem;
+    height: 0.95rem;
+    line-height: 0.95rem;
+    text-align: center;
+    margin: 0 auto;
+    border-bottom: 1px dashed #e4e4e4;
+    margin-bottom: 0.2rem;
+}
+.zhezhao2 div span{
+    width: 1.2rem;
+    height: 0.48rem;
+    line-height: 0.48rem;
+    border-radius:0.05rem;
+    display: inline-block;
+    color: #fff;
+    font-size: 0.3rem;
+}
+.zhezhao2 div span.quXiao{
+    background: #f39700;
+    margin-right: 0.5rem;
+}
+.zhezhao2 div span.queDing{
+    background: #e60012;
+}
+/*求购搜索*/
+.suoSou{
+    padding: 0.2rem 0 0 0;
+    overflow: hidden;
+    margin-bottom: 0.2rem;
+}
+.suoSou p{
+    font-size: 0.22rem;
+    color: #666;
+    margin-bottom: 0.2rem;
+    overflow: hidden;
+}
+.suoSou p span{
+    display: inline-block;
+    width: 1.54rem;
+    text-align: right;
+    padding-left: 0.1rem;
+}
+.suoSou p input{
+    width: 4.5rem;
+    height: 0.58rem;
+    border: 1px solid #ccc;
+    padding-left: 0.1rem;
+    border-radius: 0.05rem;
+    font-size: 0.24rem;
+}
+.suoSou p .reset{
+    width: 1.8rem;
+    height: 0.68rem;
+    border: 1px solid #e60012;
+    text-align: center;
+    line-height: 0.68rem;
+    display: inline-block;
+    border-radius: 0.05rem;
+    font-size: 0.3rem;
+    color: #e60012;
+}
+.suoSou p .search{
+    width: 1.8rem;
+    height: 0.68rem;
+    background-color: #e60012;
+    text-align: center;
+    line-height: 0.68rem;
+    display: inline-block;
+    border-radius: 0.05rem;
+    font-size: 0.3rem;
+    color: #fff;
+    margin-left: 0.93rem;
+}
+/*求购*/
+.qiuGou{
+    padding-top: 0.2rem;
+}
+.mingXi{
+    padding: 0.2rem;
+    background-color: #fff;
+}
+.mingXi p {
+    font-size: 0.22rem;
+    color: #666;
+    line-height: 0.4rem;
+}
+.mingXi p span{
+    font-size: 0.26rem;
+    color: #333;
+}
+.mingXi .line{
+    width: 6rem;
+    margin:  0.2rem auto;
+    height: 1px;
+    border: 1px dashed #ccc;
+}
+/*求购报价*/
+/*底部*/
+.footer{
+    border-top: 1px solid #ccc;
+    width: 100%;
+    height: 0.84rem;
+    padding-top: 0.1rem;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    font-size:0;
+    text-align: center;
+}
+.footer a{
+    font-size: 0.28rem;
+    width: 2rem;
+    height: 0.64rem;
+    line-height: 0.64rem;
+    background-color: #e60012;
+    color: #fff;
+    display: inline-block;
+    text-align: center;
+    border-radius: 0.05rem;
+}
+.footer a:first-child{
+    background-color: #f39700;
+    margin-right: 0.8rem;
+}
+.suoSou select{
+    width: 1.45rem;
+    height: 0.58rem;
+    border: 1px solid #ccc;
+    padding-left: 0.1rem;
+    border-radius: 0.05rem;
+    font-size: 0.24rem;
+}
+.suoSou .gaoJiSouSuo{
+    display: block;
+    margin: 0.4rem auto 0;
+    width: 6rem;
+    height: 0.78rem;
+    background-color: #e60012;
+    color: #fff;
+    font-size: 0.3rem;
+    text-align: center;
+    line-height: 0.78rem;
+    border-radius: 0.05rem;
+}

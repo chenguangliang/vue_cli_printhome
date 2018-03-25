@@ -1,0 +1,45 @@
+body{
+    background-color: #fff;
+}
+.zhiFuChengGong img{
+    width: 3.05rem;
+    height: 2.5rem;
+    margin: 1.2rem auto 0.8rem;
+}
+h2{
+    color: #333;
+    font-size: 0.3rem;
+    text-align: center;
+    font-weight: normal;
+    margin-bottom: 0.2rem;
+}
+p{
+    text-align: center;
+    color: #666;
+    font-size: 0.26rem;
+    margin-bottom: 0.2rem;
+}
+.tiShi{
+    color: #e60012;
+    font-size: 0.24rem;
+}
+.tiaoZhuan{
+    width: 4rem;
+    height: 0.68rem;
+    line-height: 0.68rem;
+    color: #fff;
+    font-size: 0.3rem;
+    display: block;
+    margin: 0.6rem auto 0;
+    background-color: #e60012;
+    text-align: center;
+    border-radius: 0.05rem;
+
+}
+.printHome{
+    position: absolute;
+    left: 2.4rem;
+    bottom: 0.2rem;
+    color: #999;
+    font-size: 0.22rem;
+}

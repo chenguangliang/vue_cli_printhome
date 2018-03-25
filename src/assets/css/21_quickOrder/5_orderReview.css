@@ -1,0 +1,17 @@
+.checkStateWrap{
+    position: fixed;
+    top:1.68rem;
+    height: 0.6rem;
+    width: 100%;
+    line-height:0.6rem;
+    background-color: #f9f9f9;
+    font-size:0.24rem;
+    color:#666666;
+    z-index: 99;
+    display: none;
+}
+.checkStateWrap p{
+    float: left;
+    width: 33.3%;
+    text-align: center;
+}

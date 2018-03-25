@@ -1,0 +1,233 @@
+.header {
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:99;
+    font-size: 0.3rem;
+    color: #333;
+    border-bottom: 0.01rem solid #E8E8E8;
+}
+.header a.fanHui{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/return.png") no-repeat;
+    background-size: 0.2rem 0.3rem;
+    position: absolute;
+    left: 0.2rem;
+    top: 0.3rem;
+}
+.header a.suoSou{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/sousuo@3x.png") no-repeat;
+    background-size: 0.3rem 0.3rem;
+    background-position: right top;
+    position: absolute;
+    right:0.2rem;
+    top: 0.3rem;
+}
+
+.lieBiao{
+    margin-top: 0.1rem;
+}
+.lieBiao .title{
+    background-color: #fff;
+    font-size: 0.26rem;
+    color: #333;
+    height: 0.65rem;
+    line-height: 0.65rem;
+    padding-left:0.2rem;
+}
+.duiZhangDan{
+    background-color: #fff;
+    margin-bottom: 0.2rem;
+}
+.duiZhangDan .danHao{
+    height: 0.58rem;
+    line-height: 0.58rem;
+    font-size: 0.26rem;
+    color: #333;
+    background-color: #f8f8f8;
+    padding: 0 0.2rem;
+}
+.duiZhangDan .danHao .riQi{
+    float: right;
+    font-size: 0.22rem;
+    color: #666;
+}
+.duiZhangDan .dingDan{
+    width: 6rem;
+    margin: 0 auto;
+    padding-top: 0.2rem;
+    border-bottom: 1px dashed #e8e8e8;
+}
+.duiZhangDan .dingDan p{
+    overflow: hidden;
+    margin-bottom: 0.05rem;
+}
+.duiZhangDan .dingDan .left{
+    float: left;
+    width: 1.2rem;
+    text-align: right;
+    font-size: 0.22rem;
+    color: #666;
+    margin-right: 0.15rem;
+}
+.duiZhangDan .dingDan .right{
+    float: left;
+    font-size: 0.26rem;
+    color: #333;
+}
+.duiZhangDan .zongJi{
+    padding: 0.2rem 0.2rem 0 0;
+    overflow: hidden;
+}
+.duiZhangDan .zongJi p{
+    font-size: 0.24rem;
+    color: #666;
+    padding-left: 1.8rem;
+    margin-bottom: 0.05rem;
+}
+.duiZhangDan .zongJi p span{
+    font-size: 0.26rem;
+    color: #333;
+}
+.printHome{
+    font-size: 0.22rem;
+    color: #999;
+    text-align: center;
+}
+.footer{
+    width: 100%;
+    height: 0.84rem;
+    border-top: 1px solid #e8e8e8;
+    background-color: #fff;
+    position: fixed;
+    bottom: 0;
+    font-size: 0.28rem;
+    color: #666;
+    text-align: center;
+    line-height: 0.84rem;
+    z-index:99;
+}
+.red{
+    color: #e60012 !important;
+}
+/*���˵��޽��*/
+.tiShi{
+    width: 100%;
+    padding-top: 1.5rem;
+}
+.tiShi img{
+    margin: 0 auto 0.96rem;
+    width: 3.05rem;
+    height: 2.5rem;
+}
+.tiShi  h2{
+    text-align: center;
+    font-size: 0.28rem;
+    color:#333333;
+    font-weight: normal;
+}
+.tiShi  p{
+    text-align: center;
+    font-size: 0.26rem;
+    color:#666666;
+    margin-top: 0.4rem;
+}
+/*发票管理新增样式*/
+.caoZuo{
+    font-size: 0.24rem;
+    padding-right: 0.2rem;
+    padding-left: 0.2rem;
+    border-top: 1px dashed #e8e8e8;
+}
+.common_button{
+    display: inline-block;
+    text-align: center;
+    padding:0.1rem 0.2rem;
+    font-size: 0.24rem;
+    float: right;
+    border-radius: 0.05rem;
+    background-color: #fff;
+    margin: 0.2rem 0 0.2rem 0.2rem;
+}
+.orderGrayBtn{
+    color: #666;
+    border: 1px solid #ccc;
+}
+.orderRedBtn{
+    color:  #e60012;
+    border: 1px solid #e60012;
+}
+.dingDan p span.new_order{
+    width:1.54rem !important;
+}
+.mar_l100{
+    margin-left:1rem !important;
+}
+.mar_t-1{
+    margin-top:-1px !important;
+}
+.mar_b10{
+    margin-bottom:0.1rem !important;
+}
+.border_none{
+    border:0 none !important;
+}
+/*发票搜索*/
+.invoice_search{
+    padding: 0.2rem 0 0 0;
+    overflow: hidden;
+}
+.invoice_search p{
+    font-size: 0.22rem;
+    color: #666;
+    margin-bottom: 0.2rem;
+    overflow: hidden;
+}
+.invoice_search p span{
+    display: inline-block;
+    float: left;
+    width: 1.7rem;
+    line-height:0.58rem;
+    text-align: right;
+}
+.invoice_search p input{
+    float: left;
+    width: 4.5rem;
+    height: 0.58rem;
+    border: 1px solid #ccc;
+    padding-left: 0.1rem;
+    border-radius: 0.05rem;
+    font-size: 0.24rem;
+}
+.invoice_search p .operation_btn{
+    width: 1.8rem;
+    height: 0.68rem;
+    border: 1px solid #e60012;
+    text-align: center;
+    border-radius: 0.05rem;
+    font-size: 0.3rem;
+    background: 0 none;
+    color: #e60012;
+}
+.invoice_search p .active{
+    background-color: #e60012;
+    color: #fff;
+    margin-left: 0.93rem;
+}
+.invoice_search select{
+    width: 1.45rem;
+    white-space: nowrap;
+    height: 0.6rem;
+    border: 1px solid #ccc;
+    padding-left: 0.1rem;
+    border-radius: 0.05rem;
+    font-size: 0.24rem;
+}

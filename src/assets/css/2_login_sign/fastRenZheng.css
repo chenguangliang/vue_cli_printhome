@@ -1,0 +1,189 @@
+body{
+    background: #fff;
+}
+/*header*/
+.header{
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:999;
+    font-size: 0.3rem;
+    color: #333;
+    border-bottom: 0.01rem solid #E8E8E8;
+}
+.header .return{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/return.png") no-repeat;
+    background-size: 0.2rem 0.3rem;
+    position: absolute;
+    left: 0.2rem;
+    top: 0.3rem;
+}
+.zhanwei{
+    width: 100%;
+    height: 0.88rem;
+}
+.register_box ul li{
+    margin-top: 0.2rem;
+    position: relative;
+    width: 100%;
+    height: 0.5rem;
+}
+.register_box ul li span{
+    color: #666;
+    font-size: 0.22rem;
+    text-align: right;
+    width: 1.73rem;
+    height: 0.32rem;
+    position: absolute;
+    left: 0;
+    top: 0.1rem;
+}
+.register_box ul li span i{
+    color: #e60012;
+}
+.register_box ul li input{
+    background: none;
+    color: #333;
+    font-size: 0.22rem;
+    width: 4.03rem;
+    height: 0.5rem;
+    border-radius: 0.05rem;
+    position: absolute;
+    left: 1.73rem;
+    top: 0;
+    padding-left: 0.1rem;
+}
+.register_box ul li input::-webkit-input-placeholder{
+    color: #999;
+    font-size: 0.22rem;
+}
+.gray_word{
+    color: #666;
+}
+.ccc_border{
+    border: 1px solid #ccc;
+}
+.red_word{
+    color: #e60012;
+}
+.red_border{
+    border: 1px solid #e60012;
+}
+.warm{
+    color: #e60012;
+    font-size: 0.22rem;
+    padding: 0.1rem 0 0 1.73rem;
+}
+.register_box .regist_item{
+    height: 2.8rem;
+    margin-top: 0;
+}
+.regist_item_ifo{
+    position: absolute;
+    top: 0;
+    left: 1.73rem;
+}
+.regist_item_ifo div{
+    width: 1.2rem;
+    height: 0.5rem;
+    line-height: 0.5rem;
+    text-align: center;
+    color: #333;
+    font-size: 0.22rem;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 0.2rem;
+    border-radius: 0.2rem;
+    margin-top: 0.2rem;
+    margin-right: 0.2rem;
+    float: left;
+}
+.regist_item .regist_item_ifo input[type=checkbox]{
+    display: none;
+}
+.regist_item .regist_item_ifo label{
+    width: 1.2rem;
+    height: 0.5rem;
+    line-height: 0.5rem;
+    text-align: center;
+    font-size: 0.22rem;
+    -webkit-border-radius: 0.2rem;
+    border-radius: 0.2rem;
+    margin-top: 0.2rem;
+    margin-right: 0.2rem;
+    float: left;
+}
+.regist_item .regist_item_ifo label::after {
+    content: attr(data-name);
+}
+.regist_item .regist_item_ifo .chushi{
+    color: #333;
+    border: 1px solid #ccc;
+}
+.regist_item .regist_item_ifo .dianji{
+    border: none;
+    background: #e60012;
+    color: #fff;
+}
+.tijiao{
+    width: 5.12rem;
+    height: 0.78rem;
+    line-height: 0.78rem;
+    text-align: center;
+    font-size: 0.3rem;
+    color: #fff;
+    background: #e60012;
+    margin: 0.5rem auto 0.15rem;
+    display: block;
+    -webkit-border-radius: 0.05rem;
+    -moz-border-radius: 0.05rem;
+    border-radius: 0.05rem;
+}
+.back{
+    display: block;
+    width: 5.12rem;
+    height: 0.32rem;
+    margin: 0 auto;
+    font-size: 0.22rem;
+    color: #e60012;
+}
+/*home*/
+.home{
+    width: 100%;
+    position: absolute;
+    bottom: 0.2rem;
+    font-size: 0.22rem;
+    color: #999;
+    text-align: center;
+}
+.diZhi select{
+	height: 0.58rem;
+    line-height: 0.58rem;
+    width: 1.7rem;
+    color: #333;
+    font-size: 0.26rem;
+    margin-left: 0.23rem;
+    vertical-align: top;
+}
+
+.diZhi{
+	font-size: 0;
+}
+.lianxiren p span.right{
+	    font-size: 0.26rem;
+    color: #333;
+}
+
+.rongZi img{
+	display: inline;
+    margin: 0 0.15rem;
+    width: 0.3rem;
+    height: 0.3rem;
+    vertical-align: middle;
+}

@@ -1,0 +1,432 @@
+@charset "utf-8";
+.header {
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:9;
+    font-size: 0.3rem;
+    color: #333;
+    border-bottom: 0.01rem solid #E8E8E8;
+}
+.header a{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/return.png") no-repeat;
+    background-size: 0.2rem 0.3rem;
+    position: absolute;
+    left: 0.2rem;
+    top: 0.3rem;
+}
+.zhanwei{
+    width: 100%;
+    height: 0.88rem;
+}
+.xinXin{
+    background: #fff;
+    margin-bottom: 0.2rem;
+    padding-bottom: 0.2rem;
+    position: relative;
+}
+.xinXin .title{
+    font-weight: normal;
+    font-size: 0.24rem;
+    color: #333333;
+    padding: 0.2rem 0 0 0.2rem;
+}
+.xinXin p{
+    margin-top: 0.2rem;
+    font-size: 0.22rem;
+    color: #666;
+    overflow: hidden;
+}
+.xinXin p label{
+    color: #e60012;
+}
+.xinXin p input{
+    width: 3.25rem;
+    border-radius: 0.05rem;
+    height: 0.58rem;
+    padding-left: 0.1rem;
+    font-size: 0.2rem;
+    color:#333;
+}
+.xinXin input::-webkit-input-placeholder{
+    color: #999;
+}
+.xinXin p select{
+    width: 2.2rem;
+    border-radius: 0.05rem;
+    height: 0.58rem;
+    font-size: 0.2rem;
+    padding-left: 0.1rem;
+}
+.xinXin p .w444{
+    width: 4.44rem;
+}
+.xinXin p .w150{
+    width: 1.5rem;
+}
+.xinXin p .w102{
+    width: 1.02rem;
+}
+.xinXin p .w130{
+    width: 1.3rem;
+}
+.xinXin p .w183{
+    width: 1.83rem;
+}
+.xinXin p .w140{
+    width: 1.4rem;
+}
+.xinXin .left{
+    width: 1.8rem;
+    text-align: right;
+    float: left;
+}
+.xinXin .right{
+    width: 4.6rem;
+    float: left;
+    font-size: 0.26rem;
+    color: #333333;
+}
+.warm{
+    color: #e60012;
+    font-size: 0.2rem;
+    padding-left: 1.8rem;
+    padding-top: 0.1rem;
+}
+.xinXin p input[type=checkbox]{
+    width: 0.22rem;
+    height: 0.22rem;
+    padding: 0;
+}
+.xinXin .right .jingYingXuanXiang{
+    width: 1.53rem;
+    float: left;
+    font-size: 0.24rem;
+    margin-bottom: 0.1rem;
+}
+.rongzi{
+    padding-left: 0.1rem;
+}
+.rongzi img{
+    display: inline-block;
+    margin-right: 0.15rem;
+    width: 0.3rem;
+    height: 0.3rem;
+    vertical-align: top;
+}
+.rongzi i{
+    font-size: 0.26rem;
+    color: #333333;
+}
+.xinXin p .fon-22{
+    font-size: 0.22rem;
+    color: #666;
+}
+.picYZ img{
+    width: 1.1rem;
+    height: 0.5rem;
+    display: inline-block;
+    margin-left: 0.15rem;
+    vertical-align: top;
+    border: 1px solid #ccc;
+    border-radius: 0.05rem;
+}
+.tijiao{
+    display: block;
+    width: 5.8rem;
+    height: 0.78rem;
+    line-height: 0.78rem;
+    border-radius: 0.05rem;
+    background: #e60012;
+    color: #ffffff;
+    text-align: center;
+    font-size: 0.3rem;
+    margin: 0.2rem auto;
+}
+.xinXin .right .yongHuMing{
+    font-size: 0.22rem;
+    color: #666;
+    padding-left: 0.5rem;
+}
+.xinXin .right .weiBangDing{
+    color: #999;
+    font-size: 0.22rem;
+    float: right;
+    padding-right: 0.2rem;
+    margin-top: 2px;
+}
+.xinXin .right .bangDing{
+    color: #e60012;
+    font-size: 0.22rem;
+    float: right;
+    margin-left: 0.2rem;
+}
+.btn{
+    text-align: center;
+}
+.btn a{
+    width: 1.2rem;
+    height: 0.48rem;
+    line-height:0.48rem;
+    border-radius:0.05rem;
+    display: inline-block;
+    text-align: center;
+    color: #fff;
+    font-size:0.26rem;
+}
+.btn .baoCunYongHu{
+    background: #e60012;
+    margin-right: 0.9rem;
+}
+.btn .baoCunGongSi{
+    background: #e60012;
+    margin-right: 0.9rem;
+}
+.btn .save{
+    background: #c30d23;
+}
+.btn .cancle{
+    background: #f39700;
+}
+.btn .xiuGaiGongSi,.btn .xiuGaiYongHu,.btn .xiuGaiTiXian{
+    width: 1.5rem;
+    height: 0.5rem;
+    line-height:0.5rem;
+    border-radius:0.05rem;
+    display: inline-block;
+    text-align: center;
+    color: #fff;
+    font-size:0.26rem;
+    background: #e60012;
+    margin-right: 0;
+}
+.yishenhe{
+    width: 0.6rem;
+    height: 0.7rem;
+    background:url("../../img/yishenhe.png") no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    top: -5px;
+    right: 0.15rem;
+}
+.boHui{
+    width: 1.27rem;
+    height: 0.7rem;
+    position: absolute;
+    top: -5px;
+    right: 0.15rem;
+}
+.yibohui{
+    width: 0.6rem;
+    height: 0.7rem;
+    background:url("../../img/yibohui.png") no-repeat;
+    background-size: 100% 100%;
+    margin-right: 0.07rem;
+    float: left;
+}
+.chakanyuanyin{
+    width: 0.6rem;
+    height: 0.7rem;
+    background:url("../../img/chakanyuanyin.png") no-repeat;
+    background-size: 100% 100%;
+    float: left;
+}
+.daishenhe{
+    width: 0.6rem;
+    height: 0.7rem;
+    position: absolute;
+    top: -5px;
+    right: 0.15rem;
+    background:url("../../img/daishenhe.png") no-repeat;
+    background-size: 100% 100%;
+}
+/*驳回原因*/
+.shade{
+    width:100%;
+    height:100%;
+    position: fixed;
+    z-index: 99;
+    top:0;
+    left:0;
+    background: rgba(0, 0, 0, 0.7);
+}
+#reject-reason-popup{
+    display: none;
+    z-index: 99;
+}
+#reject-reason{
+    width: 4rem;
+    position: fixed;
+    z-index: 99;
+    top: 50%;
+    left:50%;
+    margin: -1.75rem -2rem 0;
+    padding: 0.22rem;
+    border-radius:0.05rem;
+    background: #fff;
+}
+#reject-reason div{
+    color: #666;
+    font-size:0.24rem;
+}
+#reject-reason p{
+    min-height: 1.5rem;
+    max-height: 2.5rem;
+    overflow: auto;
+    color: #333;
+    font-size:0.3rem;
+    text-align: left;
+    text-indent: 2em;
+}
+#reject-reason img{
+    width: 0.4rem;
+    height: 0.4rem;
+    position: absolute;
+    top: -0.2rem;
+    right: -0.2rem;
+}
+.lianXiRenXinXi{
+    margin-top: 0.1rem;
+}
+.YongHuxiuGai{
+    display: none;
+    margin-top: 0.1rem;
+}
+.GongSiXiuGai{
+    display: none;
+}
+.lianXiRenXinXi span.right,.gongSiXinXi span.right{
+    margin-top: -2px;
+}
+/*提现账户信息*/
+.lianxiren{
+    margin-top: 0.2rem;
+}
+.lianxiren p span.left{
+    width: 2.16rem;
+}
+.lianxiren p span.w260{
+    width: 2.6rem;
+}
+.lianxiren p span.right{
+    width: 3.8rem;
+}
+.lianxiren p span.right img{
+    display: inline-block;
+    vertical-align: middle;
+    width: 1rem;
+    height: 1.4rem;
+}
+.lianxiren p span.lh{
+    height: 0.58rem;
+    line-height: 0.58rem;
+}
+.diZhi select{
+    height: 0.58rem;
+    line-height: 0.58rem;
+    color: #333;
+    font-size: 0.26rem;
+    margin-left: 0.23rem;
+    float: left;
+}
+#bank_province{
+    width: 1.1rem;
+}
+#bank_city{
+    width: 1.6rem;
+}
+#bank_area{
+    width: 2.49rem;
+}
+.lianxiren p span.rongZi img {
+    display: inline;
+    margin: 0 0.15rem;
+    width: 0.3rem;
+    height: 0.3rem;
+    vertical-align: middle;
+}
+.tiXianXiuGai{
+    display: none;
+}
+/*显示图像*/
+.showBigImg {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+    z-index: 10000;
+}
+.ccc_border {
+    border: 1px solid #ccc;
+}
+/*手机验证码*/
+#code_btn{
+    width: 1.3rem;
+    height: 0.58rem;
+    line-height: 0.58rem;
+    border-radius: 0.05rem;
+    display: inline-block;
+    text-align: center;
+    color: #fff;
+    font-size: 0.20rem;
+    background: rgba(228, 53, 67, 0.91);
+}
+.zhezhao2{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    display: none;
+}
+.zhezhao2 div{
+    width: 4rem;
+    height: 1.82rem;
+    background: #fff;
+    border-radius:0.1rem;
+    margin-top:-0.91rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -2rem;
+    font-size: 0.34rem;
+    color: #333;
+    text-align: center;
+}
+.zhezhao2 div p{
+    width: 3.35rem;
+    height: 0.95rem;
+    line-height: 0.95rem;
+    text-align: center;
+    margin: 0 auto;
+    border-bottom: 1px dashed #e4e4e4;
+    margin-bottom: 0.2rem;
+}
+.zhezhao2 div span{
+    width: 1.2rem;
+    height: 0.48rem;
+    line-height: 0.48rem;
+    border-radius:0.05rem;
+    display: inline-block;
+    color: #fff;
+    font-size: 0.3rem;
+}
+.zhezhao2 div span.quXiao{
+    background: #f39700;
+    margin-right: 0.5rem;
+}
+.zhezhao2 div span.queDing{
+    background: #e60012;
+}

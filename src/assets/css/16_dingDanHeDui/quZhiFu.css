@@ -1,0 +1,467 @@
+/*header*/
+.header{
+    width: 100%;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:9;
+    font-size: 0.3rem;
+    color: #333;
+    border-bottom: 1px solid #d2d2d2;
+}
+.header .return{
+    width: 0.44rem;
+    height: 0.44rem;
+    background:url("../../img/return.png") no-repeat;
+    background-size: 0.2rem 0.3rem;
+    position: absolute;
+    left: 0.2rem;
+    top: 0.3rem;
+}
+.zhanwei{
+    width: 100%;
+    height: 0.88rem;
+}
+.shouyin{
+    height: 1.1rem;
+    background: #fff;
+    position: relative;
+}
+.zhiFuLoGo{
+    width: 1.98rem;
+    height: 0.86rem;
+    float: left;
+    margin: 0.1rem 0.3rem 0 0.2rem;
+}
+.shouYinTai{
+    width: 0.4rem;
+    float: left;
+    margin-top:0.4rem;
+}
+.xuanze{
+    padding:0 0.2rem 0;
+    background: #fff;
+    border-top:1px dashed #ccc;;
+}
+.xuanze-b{
+    height: 0.68rem;
+    line-height: 0.68rem;
+    font-size: 0.26rem;
+    color: #666;
+}
+.xuanze-c{
+    height: 0.68rem;
+    line-height: 0.68rem;
+    font-size: 0.26rem;
+    color: #333;
+}
+.xuanze-b i{
+    font-size: 0.3rem;
+    color:#e60012;
+}
+.pay_no_checked{
+    background: url(../../img/no-select.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.pay_checked{
+    background: url(../../img/yes-select.png) no-repeat;
+    background-size: 100% 100%;
+}
+.bg_redArrow{
+    height: 0.48rem;
+    background: url("../../img/bg_red@3x.png") no-repeat -1.8rem ;
+}
+.otherPay{
+    padding:0 0 0.3rem;
+}
+.otherPay img{
+    width: 1.6rem;
+    display: inline-block;
+}
+.rightValue{
+    display: inline-block;
+    width: 4.7rem;
+    vertical-align: top;
+}
+.inputPassword{
+    color: #666;
+    font-size: 0.24rem;
+    position: relative;
+}
+#paypassword{
+    width: 3.5rem;
+    height: 0.58rem;
+    border: 1px solid #ccc;
+    border-radius: 0.05rem;
+    padding-left: 0.1rem;
+    font-size: 0.26rem;
+    color: #333;
+    background-color: #fff;
+}
+.img01 {
+    background: url("../../img/eyes1.png") no-repeat;
+    -webkit-background-size: 100% 50%;
+    background-size: 100% 50%;
+    width: 0.4rem;
+    height: 0.24rem;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left:0.2rem;
+    /*position: absolute;
+    right: 0.3rem;
+    top: 0.25rem;*/
+}
+.img02{
+    background:url("../../img/eyes.png") no-repeat;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    width: 0.4rem;
+    height: 0.24rem;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left:0.2rem;
+    /*position: absolute;
+    right: 0.3rem;
+    top: 0.18rem;*/
+
+}
+ .forget {
+    font-size: 0.2rem;
+    color: #e60012;
+    margin-right: 0.2rem;
+    margin-top: 0.15rem;
+    text-decoration: underline;
+     padding-right: 0.6rem;
+}
+.zhezhao {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+}
+.zhezhao .con {
+    width: 5rem;
+    height: 8.08rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -4.04rem;
+    margin-left: -2.5rem;
+}
+.zhezhao .con img {
+    width: 5rem;
+    height: 7.08rem;
+}
+.zhezhao .con .close {
+    width: 0.4rem;
+    height: 0.4rem;
+    background: url("../../img/cha.png") no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    top: -0.2rem;
+    right: -0.2rem;
+}
+/*新增样式*/
+#paymentType{
+    text-align: right;
+    font-size:0;
+}
+#paymentType span{
+    display: inline-block;
+    padding: 0 0.2rem;
+    height: 0.46rem;
+    line-height: 0.46rem;
+    border-radius: 0.05rem;
+    background-color: #fff;
+    font-size: 0.26rem;
+    color: #e60012;
+    border:1px solid #e60012;
+}
+#paymentType .currentBtn{
+    background-color: #e60012;
+    color: white;
+}
+.inputFile{
+    font-size:0;
+    position: relative;
+}
+.inputFile span{
+    padding:0 0.2rem;
+}
+.inputFile input{
+    width: 3.5rem;
+    height: 0.58rem;
+    border: 1px solid #ccc;
+    border-radius: 0.05rem;
+    padding-left: 0.1rem;
+    font-size: 0.26rem;
+    color: #333;
+    background: none;
+    margin-top:0.3rem;
+}
+.inputFile .img01 {
+    top: 0.55rem;
+}
+.inputFile .img02{
+    top: 0.5rem;
+}
+.popUp{
+    width: 100%;
+    height: 100%;
+}
+.popup{
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+}
+.unboundMailbox{
+    display: none;
+}
+.unboundMailboxContent{
+    width:6rem;
+    height:3.15rem;
+    background: #fff;
+    border-radius: 0.05rem;
+    position: absolute;
+    z-index: 10;
+    top:50%;
+    left:50%;
+    margin-top:-1.575rem;
+    margin-left:-3rem;
+}
+.inputEmail{
+    display: block;
+    margin: 0 auto;
+    width:5.6rem;
+    height: 0.58rem;
+    border: 1px solid #ccc;
+    border-radius: 0.05rem;
+    padding-left: 0.1rem;
+    font-size: 0.26rem;
+    color: #333;
+    background: none;
+}
+.line{
+    margin:0.2rem auto;
+    width:5.6rem;
+    border-bottom:1px dashed #ccc;
+}
+.confirmEmail{
+    display: none;
+}
+.confirmEmailContent{
+    width:6rem;
+    height:2.5rem;
+    background: #fff;
+    border-radius: 0.05rem;
+    position: absolute;
+    z-index: 10;
+    top:50%;
+    left:50%;
+    margin-top:-1.25rem;
+    margin-left:-3rem;
+}
+.modifyMailbox{
+    display: none;
+}
+.cmodifyMailboxContent{
+    width:6rem;
+    height:2.77rem;
+    background: #fff;
+    border-radius: 0.05rem;
+    position: absolute;
+    z-index: 10;
+    top:50%;
+    left:50%;
+    margin-top:-1.385rem;
+    margin-left:-3rem;
+}
+.disclaimer{
+    display: none;
+}
+.disclaimerContent{
+    width: 5.3rem;
+    height: 7.85rem;
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    left: 50%;
+    margin-top: -3.925rem;
+    margin-left: -2.65rem;
+    background: url("../../img/agreement.png") no-repeat;
+    background-size: 100% 100%;
+}
+ .closed{
+    width: 0.4rem;
+    height: 0.4rem;
+    background: url("../../img/cha.png") no-repeat;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    position: absolute;
+    top: -0.2rem;
+    right: -0.2rem;
+}
+.disclaimerContent h3{
+    text-align: center;
+    height: 0.67rem;
+    line-height: 0.67rem;
+    font-size: 0.26rem;
+    color: #fff;
+    font-weight: normal;
+}
+.disclaimerContent p{
+    width:100%;
+    max-height: 5.9rem;
+    overflow: auto;
+    padding: 0.2rem 0.2rem 0 0.2rem;
+    word-break: break-all;
+    font-size: 0.24rem;
+    color: #333;
+}
+.disclaimerContent .sure{
+    position: absolute;
+    bottom:0.2rem;
+    width: 100%;
+    text-align: center;
+}
+.paymentExample{
+    display: none;
+}
+.paymentExampleContent{
+    width:5.8rem;
+    height:8rem;
+    position: absolute;
+    z-index: 10;
+    top:50%;
+    left:50%;
+    margin-top:-4rem;
+    margin-left:-2.9rem;
+    background: #f8f8f8;
+    border-radius: 0.05rem;
+    padding:0 0.2rem;
+}
+.explain{
+    width:3.4rem;
+    height:0.4rem;
+    background: url("../../img/changbg@3x.png") no-repeat;
+    background-size: 100% 100%;
+}
+.explain2{
+    width:2.87rem;
+    height:0.4rem;
+    background: url("../../img/duanbg@3x.png") no-repeat;
+    background-size: 100% 100%;
+}
+.indexNumWrap{
+    overflow: hidden;
+    margin: 0.2rem 0 0.3rem;
+    position: relative;
+}
+.jianHang{
+    width:3.1rem;
+    height:5.3rem;
+    float: left;
+}
+.indexNum{
+    display: inline-block;
+    font-size: 0.24rem;
+    width: 2.2rem;
+    float: left;
+    vertical-align: bottom;
+    position: absolute;
+    bottom: 0rem;
+}
+
+.footer{
+    position: fixed;
+    bottom:0;
+    z-index: 9;
+    width:100%;
+    height:0.84rem;
+    line-height:0.84rem;
+    border-top:1px solid #e8e8e8;
+    font-size:0;
+}
+/*操作引导*/
+.mar_cen{
+    margin:0.2rem auto 0;
+}
+.lead{
+    display: none;
+}
+.lead_step{
+    position: absolute;
+    left:50%;
+    z-index: 10;
+    zoom: 1;
+}
+.first_step{
+    top:52%;
+    margin-left:-3rem;
+}
+.second_step{
+    top:71.5%;
+    margin-left:-1.85rem;
+    display: none;
+}
+.third_step{
+    top: 39%;
+    margin-left: -3.1rem;
+}
+.dialog_box{
+    font-size:0.24rem;
+    text-align: center;
+    -webkit-border-radius: 0.06rem;
+    -moz-border-radius: 0.06rem;
+    border-radius: 0.06rem;
+    line-height: 0.6rem;
+    width:4.2rem;
+    background: #eeeeee;
+}
+.dialog_box span{
+    font-size:0.26rem;
+}
+.fourth_step{
+    top: 20%;
+    margin-left:-3rem;
+    display: none;
+}
+.message_box{
+    width: 6rem;
+    border-radius: 0.06rem;
+    padding:0.1rem 0.2rem;
+    background-color: #f8f8f8;
+    font-size:0;
+}
+.message_box p{
+    display: inline-block;
+    padding:0.05rem 0.2rem;
+}
+.fifth_step{
+    top: 29%;
+    margin-left:-3.1rem;
+    display: none;
+}
+.sixth_step{
+    bottom: 0.1rem;
+    left: 10%;
+    display: none;
+}
+.seventh_step{
+    top: 20%;
+    margin-left:-2.9rem;
+    display: none;
+}

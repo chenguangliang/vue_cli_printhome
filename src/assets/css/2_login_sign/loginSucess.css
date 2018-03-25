@@ -1,0 +1,48 @@
+img{
+    width: 1.8rem;
+    height: 1.8rem;
+    margin: 1.88rem auto 0.3rem;
+}
+h3{
+    font-weight: normal;
+    color: #333;
+    font-size: 0.34rem;
+    text-align: center;
+    margin: 0 auto 0.3rem;
+}
+p{
+    color: #666;
+    font-size: 0.22rem;
+    text-align: center;
+    margin: 0 auto 1rem;
+}
+a {
+    width: 4rem;
+    height: 0.68rem;
+    -webkit-border-radius: 0.05rem;
+    -moz-border-radius: 0.05rem;
+    border-radius: 0.05rem;
+    display: block;
+    margin: 0 auto;
+    line-height: 0.68rem;
+    text-align: center;
+    background: #fff;
+    color: #e60012;
+    font-size: 0.28rem;
+    -webkit-box-shadow:  0 3px 3px #ccc;
+    -moz-box-shadow:  0 3px 3px #ccc ;
+    box-shadow:  0 3px 3px #ccc ;
+}
+.wanCheng{
+    width: 1.4rem;
+    height: 0.6rem;
+    line-height: 0.6rem;
+    text-align: center;
+    font-size: 0.3rem;
+    color: #fff;
+    background: url('../../img/yz-bg.png') no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    left: 0.2rem;
+    top: 0.2rem;
+}

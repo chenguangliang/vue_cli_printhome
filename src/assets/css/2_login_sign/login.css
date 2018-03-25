@@ -1,0 +1,427 @@
+html,body{
+    overflow: hidden;
+}
+body{
+    background: url("../../img/loginBg.png") no-repeat;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+}
+/*close*/
+.close{
+    display: block;
+    width: 0.44rem;
+    height: 0.44rem;
+    margin-top: 0.2rem;
+    float: right;
+    z-index: 99;
+}
+.close img{
+    width: 0.3rem;
+    height: 0.3rem;
+}
+/*commonLogin*/
+.commonLogin{
+    display: block;
+}
+/*loginLogo*/
+.commonLogin .loginLogo{
+    display: block;
+    margin: 1.3rem auto 1.17rem;
+}
+.commonLogin .loginLogo img{
+    width: 3.2rem;
+    height: 1.08rem;
+    margin: 0 auto;
+}
+/*user*/
+.user{
+    width: 5.12rem;
+    height: 0.75rem;
+    margin: 0 auto 0.5rem;
+    border: 0.01rem solid #a0a0a0;
+    -webkit-border-radius: 0.05rem;
+    -moz-border-radius: 0.05rem;
+    border-radius: 0.05rem;
+    position: relative;
+}
+.user .pic{
+    width: 0.4rem;
+    height: 0.4rem;
+    position: absolute;
+    top: 0.15rem;
+    left: 0.1rem;
+    background: url("../../img/user.png") no-repeat;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+}
+.user #usertips{
+    font-size: 0.22rem;
+    color: #e60012;
+    position: absolute;
+    left: 0;
+    top: 0.85rem;
+}
+.user input{
+    background: none;
+    position: absolute;
+    left: 0.65rem;
+    top: 0.15rem;
+}
+.user input::-webkit-input-placeholder{
+    font-size: 0.24rem;
+    color: #999;
+}
+.user .warm{
+    width: 0.34rem;
+    height: 0.34rem;;
+    background: url("../../img/warm.png") no-repeat;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    position: absolute;
+    right: 0.1rem;
+    top: 0.15rem;
+    display: none;
+}
+ .tip{
+    width: 100%;
+    height: 0.6rem;
+    background: #e60012;
+    font-size: 0.24rem;
+    color: #fff;
+    text-align: center;
+    line-height: 0.6rem;
+     display: none;
+}
+/*key*/
+.key{
+    width: 5.12rem;
+    height: 0.75rem;
+    margin: 0 auto 0.2rem;
+    border: 0.01rem solid #a0a0a0;
+    -webkit-border-radius: 0.05rem;
+    -moz-border-radius: 0.05rem;
+    border-radius: 0.05rem;
+    position: relative;
+}
+.key span{
+    width: 0.4rem;
+    height: 0.4rem;
+    position: absolute;
+    top: 0.15rem;
+    left: 0.1rem;
+    background:url("../../img/key.png") no-repeat;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+}
+.key input{
+    background: none;
+    position: absolute;
+    left: 0.65rem;
+    top: 0.15rem;
+}
+.key input::-webkit-input-placeholder{
+    font-size: 0.24rem;
+    color: #999;
+}
+.key i{
+    width: 0.4rem;
+    height: 0.26rem;
+    position: absolute;
+    top: 0.25rem;
+    right: 0.1rem;
+    /*background:url("../img/eyes.png") no-repeat;*/
+    /*-webkit-background-size: 100% 100%;*/
+    /*background-size: 100% 100%;*/
+}
+.key .img01{
+    background:url("../../img/eyes.png") no-repeat;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+}
+.key .img02{
+    background:url("../../img/eyes1.png") no-repeat;
+    -webkit-background-size: 100% 50%;
+    background-size: 100% 50%;
+    top: 0.3rem;
+}
+/*twoBtn*/
+.twoBtn{
+    margin:0 auto;
+    width: 5.12rem;
+    height: auto;
+}
+.twoBtn .forget{
+    float: left;
+}
+.twoBtn .newUser{
+    float: right;
+}
+.twoBtn a{
+    font-size: 0.22rem;
+    color: #666;
+}
+/*btn*/
+.commonLogin .btn{
+    width: 5.12rem;
+    height: 0.78rem;
+    display: block;
+    margin: 0.4rem auto 1.82rem;
+    background: #e60012;
+    -webkit-border-radius: 0.05rem;
+    -moz-border-radius: 0.05rem;
+    border-radius: 0.05rem;
+    font-size: 0.3rem;
+    color: #fff;
+}
+/*other*/
+.other{
+    width: 5.12rem;
+    height: auto;
+    margin: 0 auto 0.2rem;
+    position: relative;
+}
+.other span{
+    float: left;
+}
+.other .left{
+    width: 1.7rem;
+    height: 0.02rem;
+    background: #999;
+}
+.other .middle{
+    font-size: 0.22rem;
+    color: #333;
+    padding: 0 0.14rem;
+    margin-top: -0.15rem;
+}
+.other .right{
+    width: 1.7rem;
+    height: 0.02rem;
+    background: #999;
+}
+/*twoLogin*/
+.twoLogin{
+    width: 5.12rem;
+    margin: 0 auto;
+    padding-left: 0.5rem;
+    padding-right: 0.478rem;
+    overflow: hidden;
+}
+.twoLogin a{
+    font-size: 0.22rem;
+    color: #666;
+    text-align: center;
+}
+.twoLogin .weChat{
+    float: left;
+}
+.twoLogin .phone,.twoLogin .phone1{
+    float: right;
+}
+.twoLogin .phone{
+    display: block;
+}
+.twoLogin .phone1{
+    display: none;
+}
+.twoLogin a img{
+    width: 0.8rem;
+    height: 0.8rem;
+    margin: 0 auto 0.2rem;
+}
+/*phoneLogin*/
+.phoneLogin{
+    display: none;
+}
+/*loginLogo2*/
+.phoneLogin .loginLogo2{
+    display: block;
+    margin: 1rem auto 1.17rem;
+}
+.phoneLogin .loginLogo2 img{
+    width: 3.2rem;
+    height: 1.08rem;
+    margin: 0 auto;
+}
+/*phoneNumber*/
+.phoneNumber{
+    width: 5.12rem;
+    height: 0.75rem;
+    margin: 0 auto 0.2rem;
+    border: 0.01rem solid #a0a0a0;
+    -webkit-border-radius: 0.05rem;
+    -moz-border-radius: 0.05rem;
+    border-radius: 0.05rem;
+    position: relative;
+}
+.phoneNumber span{
+    width: 0.25rem;
+    height: 0.4rem;
+    position: absolute;
+    top: 0.15rem;
+    left: 0.1rem;
+    background: url("../../img/phone1.png") no-repeat;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+}
+.phoneNumber input{
+    background: none;
+    position: absolute;
+    left: 0.65rem;
+    top: 0.15rem;
+}
+.phoneNumber input::-webkit-input-placeholder{
+    font-size: 0.24rem;
+    color: #999;
+}
+/*tpYan*/
+.tpYan{
+    width: 5.12rem;
+    height: 0.75rem;
+    margin: 0 auto 0.2rem;
+}
+.tpYan .tpInput{
+    width: 3.2rem;
+    height: 0.75rem;
+    border: 0.01rem solid #a0a0a0;
+    -webkit-border-radius: 0.05rem;
+    -moz-border-radius: 0.05rem;
+    border-radius: 0.05rem;
+    position: relative;
+    float: left;
+}
+.tpInput input{
+    background: none;
+    position: absolute;
+    left: 0.1rem;
+    top: 0.15rem;
+}
+.tpInput input::-webkit-input-placeholder{
+    font-size: 0.24rem;
+    color: #999;
+}
+.tpYan img{
+    float: right;
+    width: 1.72rem;
+    height: 0.75rem;
+}
+/*dxYan*/
+.dxYan{
+    width: 5.12rem;
+    height: 0.75rem;
+    margin: 0 auto 0.3rem;
+}
+.dxYan .dxInput{
+    width: 3.2rem;
+    height: 0.75rem;
+    border: 0.01rem solid #a0a0a0;
+    -webkit-border-radius: 0.05rem;
+    -moz-border-radius: 0.05rem;
+    border-radius: 0.05rem;
+    position: relative;
+    float: left;
+}
+.dxInput input{
+    background: none;
+    position: absolute;
+    left: 0.1rem;
+    top: 0.15rem;
+}
+.dxInput input::-webkit-input-placeholder{
+    font-size: 0.24rem;
+    color: #999;
+}
+.dxYan button{
+    float: right;
+    width: 1.72rem;
+    height: 0.75rem;
+    border: 0.01rem solid #a0a0a0;
+    -webkit-border-radius: 0.05rem;
+    -moz-border-radius: 0.05rem;
+    border-radius: 0.05rem;
+    background:none;
+    color: #999;
+}
+/*btn*/
+.phoneLogin .btn{
+    width: 5.12rem;
+    height: 0.78rem;
+    display: block;
+    margin: 0 auto 0.2rem;
+    background: #e60012;
+    -webkit-border-radius: 0.05rem;
+    -moz-border-radius: 0.05rem;
+    border-radius: 0.05rem;
+    font-size: 0.3rem;
+    color: #fff;
+}
+/*协议*/
+.phoneLogin p{
+    width:5.12rem;
+    margin: 0 auto 0.9rem;
+    font-size: 0.2rem;
+    color: #666;
+}
+.phoneLogin p a{
+    color: #e60012;
+}
+/*zheZhao*/
+.zheZhao{
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+.zheZhao .content{
+    width: 5.3rem;
+    height: 7.85rem;
+    margin: 1.4rem auto 0;
+    background: url("../../img/agreement.png") no-repeat;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    position: relative;
+}
+.zheZhao .guan{
+    width: 0.4rem;
+    height: 0.4rem;
+    background: url("../../img/cha.png") no-repeat;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    position: absolute;
+    top: -0.2rem;
+    right: -0.2rem;
+}
+.zheZhao h3{
+    text-align: center;
+    height: 0.67rem;
+    line-height: 0.67rem;
+    font-size: 0.26rem;
+    color: #fff;
+    font-weight: normal;
+}
+.zheZhao p{
+    width:100%;
+    max-height: 5.7rem;
+    overflow: auto;
+    padding: 0.2rem 0.2rem 0.3rem 0.2rem;
+    word-break: break-all;
+    font-size: 0.24rem;
+    color: #333;
+}
+.zheZhao .sure{
+    display: block;
+    text-align: center;
+    margin: 0.65rem auto 0;
+    width: 1.4rem;
+    height: 0.64rem;
+    line-height: 0.64rem;
+    -webkit-border-radius: 0.05rem;
+    -moz-border-radius: 0.05rem;
+    border-radius: 0.05rem;
+    background: #e60012;
+    font-size: 0.26rem;
+    color: #fff;
+}
