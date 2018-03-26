@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>销售分析</title>
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+    <link rel="stylesheet" href="../../css/common.css"/>
+    <link rel="stylesheet" href="../../css/animate.css"/>
+    <link rel="stylesheet" href="../../css/18_maiJiaZhongXin/10_xiaoShouFenXi_xiaoShouFenXi.css"/>
+</head>
+<div>
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="../../html/18_maiJiaZhongXin/8_maiJiaZhongXin_maiJiaZhongXin.html" class="return"></a>
+        销售分析
+    </div>
+    <div style="height: 0.88rem;"></div>
+</header>
+<!--头部结束-->
+<div id="salesAnalysis">
+<!--商品列表开始-->
+<section>
+    <template v-for="item in salesAnalysisItemList">
+        <div class="shangPinLieBiao">
+            <div class="theTop" @click="getItemInfo(item.itemId)">
+                <img :src="imgUrl + item.pictureUrl" alt="" class="shangPinTuPian"/>
+                <p class="mingZi">{{item.itemName}}</p>
+            </div>
+            <div class="shuXing">
+                <!--<p>销售属性</p>-->
+                <ul>
+                    <template v-for="attrSale in saleAttrList">
+                          <li @click="clickAttr($event,attrSale.skuId,item.itemId,attrSale.attrSaleName)"><a href="javascript:;">{{attrSale.attrSaleName}}</a></li>
+                    </template>
+                </ul>
+
+            </div>
+        </div>
+    </template>
+</section>
+<!--商品列表结束-->
+<!--回到顶部-->
+<section>
+    <div id="top"></div>
+</section>
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/jsonUtil.js"></script>
+<!--<script charset="utf-8" type="text/javascript" src="../../js/18_maiJiaZhongXin/10_xiaoShouFenXi_xiaoShouFenXi.js"></script>-->
+<script charset="utf-8" type="text/javascript" src="script/10_xiaoShouFenXi.js"></script>
+
+</body>
+</html>

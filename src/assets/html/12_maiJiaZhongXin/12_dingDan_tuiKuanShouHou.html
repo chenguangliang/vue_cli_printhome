@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>退款/售后</title>
+    <link type="text/css" rel="stylesheet" href="../../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/pullToRefresh.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/12_maiJiaZhongXin/12_dingDan_woDedingDan.css"/>
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+</head>
+<body>
+<div id="sale_after_list" v-cloak>
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="../../html/12_maiJiaZhongXin/2_maiJiaZhongXin_maiJiaZhongXin.html" class="fanHui"></a>
+        退款/售后
+    </div>
+    <div style="height: 0.88rem;"></div>
+</header>
+<section id="wrapper">
+
+    <div class="wrapScrool">
+        <div style="height: 1rem"></div>
+        <template v-for="saleAfter in saleAfterList">
+            <div class="dingDan tui ">
+                <div class="dianPu">
+                    <span class="pingTai"></span>
+                    <template v-for="refundInfo in refundInfoList">
+                        <template v-if="saleAfter.id == refundInfo.refundId">
+                            <a href="javascript:;" class="name" v-on:click="toShop(refundInfo.shopId)">{{refundInfo.shopName}}</a>
+                        </template>
+                    </template>
+                    <a href="javascript:;" class="zhuangTai">
+                        <template v-if="saleAfter.state == 1">卖家待确认</template>
+                        <template v-else-if="saleAfter.state == 2">卖家拒绝</template>
+                        <template v-else-if="saleAfter.state == 3">待发货</template>
+                        <template v-else-if="saleAfter.state == 4">卖家待收货</template>
+                        <template v-else-if="saleAfter.state == 5">已关闭</template>
+                        <template v-else-if="saleAfter.state == 6">退款成功</template>
+                        <template v-else-if="saleAfter.state == 7">待收款</template>
+                        <template v-else-if="saleAfter.state == 8">待平台处理退款</template>
+                        <template v-else-if="saleAfter.state == 9">平台处理退款中</template>
+                        <template v-else-if="saleAfter.state == 10">退款失败</template>
+                        <template v-else-if="saleAfter.state == 11">支付宝处理中</template>
+                    </a>
+                </div>
+                <a class="xiangQing" href="javascript:;">
+                    <template v-for="refundInfo in refundInfoList">
+                        <template v-if="saleAfter.id == refundInfo.refundId">
+                            <template v-for="goodsDetail in refundInfo.tradeReturnGoodsDetailList">
+                                <div class="top clearfix" v-on:click="querySaleAfterDetail(refundInfo.tradeReturnDto.id,refundInfo.tradeReturnDto.passKey)">
+                                    <img v-bind:src="img_url + goodsDetail.goodsPicUrl" alt="" class="dianPuLogo"/>
+                                    <p class="shangPin">{{goodsDetail.goodsName}}</p>
+                                    <p class="money">
+                                        <template v-if="refundInfo.tradeReturnDto.orderPayBank == 7">{{goodsDetail.payPrice}}积分</template>
+                                        <template v-else>¥{{goodsDetail.payPrice}}</template>
+                                    </p>
+                                    <p class="num">X {{refundInfo.num}}</p>
+                                </div>
+                            </template>
+                            <div class="tuiKuan">
+                                <template v-if="refundInfo.tradeReturnDto.orderPayBank == 7">
+                                    <p>退还积分：<span>{{refundInfo.tradeReturnDto.refundGoods}}积分</span></p>
+                                </template>
+                                <template v-else>
+                                    <p>退款金额：<span>¥{{refundInfo.tradeReturnDto.refundGoods}}元</span></p>
+                                </template>
+
+                                <template v-for="goodsDetail in refundInfo.tradeReturnGoodsDetailList">
+                                    <p>退款数量：<span>{{goodsDetail.rerurnCount}}</span></p>
+                                </template>
+                            </div>
+                        </template>
+                    </template>
+                </a>
+                <template v-for="refundInfo in refundInfoList">
+                    <template v-if="saleAfter.id == refundInfo.refundId">
+                        <template v-if="saleAfter.state == 2 || saleAfter.state == 3 || saleAfter.state == 7">
+                            <div class="caoZuo">
+                                <template v-if="saleAfter.state == 2">
+                                    <span class="orderGrayBtn" v-on:click="modifySaleAfterApply(refundInfo.tradeReturnDto.id,refundInfo.tradeReturnDto.passKey)">修改申请</span>
+                                </template>
+                                <template v-else-if="saleAfter.state == 3">
+                                    <span class="orderGrayBtn" v-on:click="confirmDeliverGoods(refundInfo.tradeReturnDto.id)">确认发货</span>
+                                </template>
+                                <template v-else-if="saleAfter.state == 7">
+                                    <span class="orderGrayBtn" v-on:click="receivables(refundInfo.tradeReturnDto.id, refundInfo.tradeReturnDto.orderId, refundInfo.tradeReturnDto.state)">确认收款</span>
+                                </template>
+                            </div>
+                        </template>
+                    </template>
+                </template>
+            </div>
+        </template>
+        <p class="printHome">printhome.com</p>
+    </div>
+</section>
+<!--回到顶部-->
+<section>
+    <div id="top">
+    </div>
+</section>
+<section>
+    <div class="zhezhao" id="deliver_goods_notice">
+        <div class="content">
+            <h5>发货信息</h5>
+            <p>退货快递单号</p>
+            <input type="text" class="miMa" v-model="expressNo"/>
+            <p>快递公司名称</p>
+            <input type="text" class="miMa" v-model="expressName"/>
+            <div>
+                <input type="button" class="cancel" value="取消" />
+                <input type="button" class="sure" value="确认" v-on:click="deliverGoods()"/>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/iscroll.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/pullToRefresh_fixHead.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/12_maiJiaZhongXin/12_dingDan_woDedingDan.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/jsonUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/vueFilter.js"></script>
+<script charset="utf-8" type="text/javascript" src="script/sale-after-list.js"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+	<meta name="format-detection" content="telephone=no"/>
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<title>订单评价</title>
+	<script type="text/javascript" src="../../js/adjust.js"></script>
+	<link type="text/css" rel="stylesheet" href="../../css/common.css"/>
+	<link type="text/css" rel="stylesheet" href="../../css/12_maiJiaZhongXin/12_dingDan_woDedingDan.css"/>
+	<link rel="stylesheet" href="../../css/12_maiJiaZhongXin/12_dingDan_dingDanPingJia.css">
+</head>
+<body>
+<div id="order_evaluate">
+<!--头部开始-->
+<header>
+	<div class="header">
+		<a href="javascript:;" class="fanHui" v-on:click="goBackOrderList()"></a>
+		订单评价
+	</div>
+	<div style="height: 0.88rem;"></div>
+</header>
+<section>
+	<div class="dingDan tui">
+		<div class="dianPu">
+			<span class="pingTai"></span>
+			<a href="javascript:;" class="name">{{resultData.userDTO.uname}}</a>
+		</div>
+		<template v-for="tradeOrderItemsDTO in resultData.tradeOrdersDTO.items">
+		<a class="xiangQing" href="javascript:;">
+			<div class="top clearfix">
+				<template v-for="itemShopCartDTO in resultData.itemShopCartDTOList">
+					<template v-if="itemShopCartDTO.skuId == tradeOrderItemsDTO.skuId">
+						<img v-bind:src="img_url + itemShopCartDTO.skuPicUrl" alt="" class="dianPuLogo">
+					</template>
+				</template>
+				<template v-for="itemDTO in resultData.itemDTOList">
+					<template v-if="itemDTO.itemId == tradeOrderItemsDTO.itemId">
+						<p class="shangPin">{{itemDTO.itemName}}</p>
+					</template>
+				</template>
+				<p class="leiXing">{{tradeOrderItemsDTO.skuName}}</p>
+			</div>
+		</a>
+		<div style="border: 1px dashed #ccc;width: 6rem;margin: 0 auto"></div>
+		</template>
+		<div class="m">
+			<h3>添加评论</h3>
+			<textarea v-model="evaluateContent" placeholder="请写下您对买家的评价"></textarea>
+		</div>
+		<div id="scope_div" class="pingfen_group" style="margin:0.2rem 0 0.2rem 0.2rem;">
+			对买家评分：
+			<img src="../../img/shoucang.png" alt="" name="scope_img"/>
+			<img src="../../img/shoucang.png" alt="" name="scope_img"/>
+			<img src="../../img/shoucang.png" alt="" name="scope_img"/>
+			<img src="../../img/shoucang.png" alt="" name="scope_img"/>
+			<img src="../../img/shoucang.png" alt="" name="scope_img"/>
+		</div>
+	</div>
+</section>
+<div style="height: 0.84rem;"></div>
+<footer>
+	<div class="footer">
+		<a href="javascript:;"><img src="../../img/no-select.png" alt="" id="is_anonymity"/>匿名评价</a>
+		<input type="button"value="发表评价" class="faBiao" v-on:click="publishEvaluate()"/>
+		<input type="button"value="取消" class="quXiao" v-on:click="goBackOrderList()"/>
+	</div>
+</footer>
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/12_maiJiaZhongXin/12_dingDan_woDedingDan.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/jsonUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/vueFilter.js"></script>
+<script charset="utf-8" type="text/javascript" src="script/seller-order-evaluate.js"></script>
+</body>
+</html>

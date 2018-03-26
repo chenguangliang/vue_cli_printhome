@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>营业执照信息查看</title>
+    <link type="text/css" rel="stylesheet" href="../../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/18_maiJiaZhongXin/14_zhangHuSheZhi_yingYeZhiZhaoXinXi.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/18_maiJiaZhongXin/14_zhangHuSheZhi_yingYeZhiZhaoXiangGuanZhaoPian.css"/>
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+</head>
+<body>
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="../../html/18_maiJiaZhongXin/14_zhangHuSheZhi_jiBenXinXiSheZhi.html" class="return"></a>
+        <span class="xiala">营业执照信息</span>
+        <ul class="list">
+            <li><a href="14_zhangHuSheZhi_lianXiRenXinXi.html">联系人信息</a></li>
+            <li><a href="14_zhangHuSheZhi_yingYeZhiZhaoXinXi.html">营业执照信息</a></li>
+            <li><a href="14_zhangHuSheZhi_tiXianZhangHuXinXi.html">提现账户信息</a></li>
+            <li><a href="14_zhangHuSheZhi_gongSiJingYingXinXi.html">公司经营信息</a></li>
+        </ul>
+    </div>
+    <div style="height: 0.88rem;"></div>
+</header>
+<!--联系人开始-->
+<div id="seller">
+<section>
+    <div class="lianxiren xinXi">
+        <h2 class="title">营业执照信息</h2>
+        <p class="clearfix">
+            <span class="left"><label>＊</label>公司名称：</span><span class="right" style="width: 4.5rem;" v-text="userInfoDTO.userBusinessDTO.companyName"></span>
+        </p>
+        <p  class="clearfix">
+            <span class="left"><label>＊</label>法定代表人姓名：</span><span class="right" style="width: 3.8rem;" v-text="userInfoDTO.userBusinessDTO.artificialPersonName"></span>
+        </p>
+        <p  class="clearfix">
+            <span class="left"><label>＊</label>注册资本：</span><span class="right" v-text="userInfoDTO.userBusinessDTO.registeredCapital+'万元'"></span>
+        </p>
+        <p  class="clearfix">
+            <span class="left"><label>＊</label>证件类型：</span><span class="right" v-text="userInfoDTO.userBusinessDTO.idCardType"></span>
+        </p>
+        <p  class="clearfix">
+            <span class="left"><label>＊</label>证件号码：</span><span class="right" v-text="userInfoDTO.userBusinessDTO.idCardNum"></span>
+        </p>
+        <p  class="clearfix">
+            <span class="left"><label>＊</label>经营范围：</span><span class="right" style="width: 4.5rem;" v-text="userInfoDTO.userBusinessDTO.businessScope"></span>
+        </p>
+        <template v-if="userInfoDTO.userBusinessDTO.businessStatus=='1'">
+            <div class="daishenhe"></div>
+        </template>
+        <template v-if="userInfoDTO.userBusinessDTO.businessStatus=='0'">
+            <div class="boHui" @click="showRemark(userInfoDTO.userBusinessDTO.auditRemark)">
+                <div class="yibohui"></div>
+                <div class="chakanyuanyin"></div>
+            </div>
+        </template>
+        <template v-if="userInfoDTO.userBusinessDTO.businessStatus=='2'">
+            <div class="yishenhe" ></div>
+        </template>
+        <template v-else>
+            <div class=""></div>
+        </template>
+    </div>
+</section>
+<section>
+    <div class="lianxiren xinXi">
+        <p style="margin-top: 0;"  class="clearfix">
+            <span class="left"><label>＊</label>营业执照所在地：</span><span class="right" style="width:3.8rem;" v-text="busLicAddr"></span>
+        </p>
+        <p  class="clearfix">
+            <span class="left"><label>＊</label>营业执照详细地址：</span><span class="right" style="width: 3.6rem;" v-text="userInfoDTO.userBusinessDTO.businessLicencAddressDetail"></span>
+        </p>
+        <p  class="clearfix">
+            <span class="left"><label>＊</label>成立日期：</span><span class="right" v-text="time(userInfoDTO.userBusinessDTO.businessLicenceDate)"></span>
+        </p>
+        <p  class="clearfix">
+            <span class="left"><label>＊</label>公用电话：</span><span class="right" v-text="userInfoDTO.userBusinessDTO.companyPhone"></span>
+        </p>
+        <p  class="clearfix">
+            <span class="left"><label>＊</label>联系人：</span><span class="right" v-text="userInfoDTO.userBusinessDTO.linkman" style="width:4.8rem;"></span>
+        </p>
+        <p  class="clearfix">
+            <span class="left"><label>＊</label>联系人手机：</span><span class="right" v-text="userInfoDTO.userBusinessDTO.linkmanPhone"></span>
+        </p>
+        <p  class="clearfix">
+            <span class="left"><label>＊</label>公司所在地：</span><span class="right" style="width: 4.3rem;" v-text="companyAddress"></span>
+        </p>
+        <p  class="clearfix">
+            <span class="left"><label>＊</label>公司详细地址：</span><span class="right" style="width: 4rem;" v-text="userInfoDTO.userBusinessDTO.companyDeclinedAddress"></span>
+        </p>
+        <p  class="clearfix">
+            <span class="left"><label>＊</label>公司是否有融资计划：</span><span class="right" v-text="userInfoDTO.userBusinessDTO.isFinancing=='1'?'（有）':'（无）'"></span>
+        </p>
+        <template v-if="userInfoDTO.userBusinessDTO.isFinancing==1">
+            <p  class="clearfix">
+                <span class="left"><label>＊</label>期望融资额度：</span><span class="right"  v-text="userInfoDTO.userBusinessDTO.financingNum+'万元'"></span>
+            </p>
+        </template>
+    </div>
+</section>
+<section>
+    <div class="lianxiren xinXi">
+        <p  style="margin-top: 0;"  class="clearfix">
+            <template v-if="userInfoDTO.userBusinessDTO.isSanzheng==1">
+                <span class="left"><label>＊</label>统一社会信用代码：</span><span class="right" v-text="userInfoDTO.userBusinessDTO.unifiedCreditCode" style="width: 3.6rem;"></span>
+            </template>
+            <template v-else-if="userInfoDTO.userBusinessDTO.isSanzheng==0">
+                <span class="left"><label>＊</label>注册号（营业执照）：</span><span class="right" v-text="userInfoDTO.userBusinessDTO.businessLicenceId"></span>
+            </template>
+        </p>
+        <p  class="clearfix">
+            <span class="left">营业执照有效期至：</span>
+            <template v-if="businessLicenceIndate==''">
+                <span class="right">长期有效</span>
+            </template>
+            <template v-else>
+                <span class="right" v-text="businessLicenceIndate"></span>
+            </template>
+        </p>
+    </div>
+</section>
+    <section>
+        <div class="lianxiren">
+            <p class=" clearfix">
+                <span class="left">营业执照副本电子版：</span><span class="right"><img :src="getImgUrl(userInfoDTO.userBusinessDTO.businessLicencePicSrc)" @click="showImg($event)"  alt="" class="bigImg"/></span>
+            </p>
+            <p  class="clearfix">
+                <span class="left">法人身份证（正面）：</span><span class="right"><img :src="getImgUrl(userInfoDTO.userBusinessDTO.artificialPersonPicSrc)" @click="showImg($event)" alt=""/></span>
+            </p>
+            <p class=" clearfix">
+                <span class="left">法人身份证（背面）：</span><span class="right"><img :src="getImgUrl(userInfoDTO.userBusinessDTO.artificialPersonPicBackSrc)" @click="showImg($event)" alt=""/></span>
+            </p>
+            <template v-if="userInfoDTO.userDTO.auditStatus=='2' && userInfoDTO.userBusinessDTO.businessStatus!='1'">
+                <p><a href="14_zhangHuSheZhi_yingYeZhiZhaoXinXiXiuGai.html" class="xiuGai">修改</a></p>
+            </template>
+        </div>
+    </section>
+    <section v-if="userInfoDTO.userBusinessDTO.isSanzheng==0">
+        <div class="lianxiren xinXi">
+            <h2 class="title">组织机构代码信息</h2>
+            <p class=" clearfix">
+                <span class="left"><label>＊</label>组织机构代码：</span><span class="right" v-text="userInfoDTO.userOrganizationDTO.organizationId"></span>
+            </p>
+            <p  class="clearfix">
+                <span class="left"><label>＊</label>组织机构代码有效期：</span><span class="right" v-text="userInfoDTO.userOrganizationDTO.userfulTime"></span>
+            </p>
+            <template v-if="userInfoDTO.userDTO.auditStatus=='2' && userInfoDTO.userOrganizationDTO.organizationStatus!='1'">
+                <p><a href="14_zhangHuSheZhi_zuZhiJiGouDaiMaXinXiXiuGai.html" class="xiuGai">修改</a></p>
+            </template>
+            <template v-if="userInfoDTO.userOrganizationDTO.organizationStatus=='1'">
+                <div class="daishenhe"></div>
+            </template>
+            <template v-if="userInfoDTO.userOrganizationDTO.organizationStatus=='0'">
+                <div class="boHui" @click="showRemark(userInfoDTO.userOrganizationDTO.auditRemark)">
+                    <div class="yibohui"></div>
+                    <div class="chakanyuanyin"></div>
+                </div>
+            </template>
+            <template v-if="userInfoDTO.userOrganizationDTO.organizationStatus=='2'">
+                <div class="yishenhe" ></div>
+            </template>
+            <template v-else>
+                <div class=""></div>
+            </template>
+        </div>
+        <div class="lianxiren xinXi">
+            <div style="width: 6rem;margin: 0.2rem 0;border: 1px dashed #E8E8E8;"></div>
+            <h2 class="title">税务登记证信息</h2>
+            <p class=" clearfix">
+                <span class="left"><label>＊</label>税务人识别号：</span><span class="right" v-text="userInfoDTO.userTaxDTO.taxManId" style="width: 4rem;"></span>
+            </p>
+            <p  class="clearfix">
+                <span class="left"><label>＊</label>纳税人类型：</span><span class="right" v-text="userInfoDTO.userTaxDTO.taxpayerType"></span>
+            </p>
+            <p  class="clearfix">
+                <span class="left"><label>＊</label>纳税人类型税码：</span><span class="right" v-text="userInfoDTO.userTaxDTO.taxpayerCode"></span>
+            </p>
+            <template v-if="userInfoDTO.userDTO.auditStatus=='2' && userInfoDTO.userTaxDTO.taxStatus!='1'">
+                <p><a href="14_zhangHuSheZhi_shuiWuDengJiZhengXinXiXiuGai.html" class="xiuGai">修改</a></p>
+            </template>
+            <template v-if="userInfoDTO.userTaxDTO.taxStatus=='1'">
+                <div class="daishenhe"></div>
+            </template>
+            <template v-if="userInfoDTO.userTaxDTO.taxStatus=='0'">
+                <div class="boHui" @click="showRemark(userInfoDTO.userTaxDTO.auditRemark)">
+                    <div class="yibohui"></div>
+                    <div class="chakanyuanyin"></div>
+                </div>
+            </template>
+            <template v-if="userInfoDTO.userTaxDTO.taxStatus=='2'">
+                <div class="yishenhe" ></div>
+            </template>
+            <template v-else>
+                <div class=""></div>
+            </template>
+        </div>
+    </section>
+    <div class="showBigImg" @click="hideImg()">
+        <div style="height: 7rem;width: 5rem;margin: 2rem auto;position: relative">
+            <img style="width: 100%" id="imgDiv" alt=""/>
+            <img style="height: 0.4rem;width: 0.4rem;position: absolute;right: -0.2rem;top:  -0.2rem" src="../../img/cha.png" alt=""/>
+        </div>
+    </div>
+    <section>
+        <div class="zhezhao">
+            <div class="con">
+                <h3>查看驳回原因</h3>
+                <h4>驳回原因：</h4>
+                <textarea class="text" readonly="readonly" v-text="remark"></textarea>
+                <p><button class="cancel">取消</button><button class="sure">确定</button></p>
+                <i class="close"></i>
+            </div>
+        </div>
+    </section>
+</div>
+<div id="top" @click="goToTop"></div>
+<script type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="script/14_sellerInfo.js"></script>
+<script type="text/javascript" src="../../js/18_maiJiaZhongXin/14_zhangHuSheZhi_lianXiRenXinXi.js"></script>
+</body>
+</html>

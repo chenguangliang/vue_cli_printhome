@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>询价明细</title>
+    <link type="text/css" rel="stylesheet" href="../../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/12_maiJiaZhongXin/10_xieYiGuanLi_xieYiMingXi.css"/>
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+</head>
+<body>
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="#" onclick="goback()"  class="fanHui" ></a>
+        询价明细
+        <a href="javascript:;" class="suoSou"></a>
+    </div>
+</header>
+<!--选项卡-->
+<div id="priceInfo">
+<section>
+    <div class="xuanXiangKa">
+        <ul>
+            <li class="on">询价明细</li>
+            <li>询价订单（<span v-text="orders.length"></span>）</li>
+        </ul>
+    </div>
+</section>
+<div style="height: 1.58rem;"></div>
+<section>
+    <div class="tab_box">
+        <div class="xieYiMingXi">
+            <div class="jiBenXinXi">
+                <h2>询价信息</h2>
+                <p>
+                    <span class="left">询价编码：</span><span class="right" v-text="inquiryInfoMap.inquiryNo"></span>
+                </p>
+                <p>
+                    <span class="left">询价名称：</span><span class="right" v-text="inquiryInfoMap.inquiryName"></span>
+                </p>
+                <p>
+                    <span class="left">询价方：</span><span class="right" v-text="inquiryInfoMap.printerName"></span>
+                </p>
+                <p>
+                    <span class="left">附件：</span><span class="right"><a :href="getImgUrl(inquiryInfoMap.annex)"  target='_blank' v-text="inquiryInfoMap.oldFileName"></a></span>
+                </p>
+                <p>
+                    <span class="left">备注：</span><span class="right" v-text="inquiryInfoMap.remarks"></span>
+                </p>
+            </div>
+            <template v-for="detail in details">
+            <div class="jiBenXinXi">
+                <h2>商品信息</h2>
+                <p>
+                    <span class="left">供应商：</span><span class="right" v-text="detail.shopName"></span>
+                </p>
+                <p>
+                    <span class="left">物品名称：</span><span class="right" v-text="detail.itemName"></span>
+                </p>
+                <p class="zhanKai">
+                    <span class="left">数量：</span><span class="right">{{detail.quantity}}<i>单价：<span v-text="detail.matPrice"></span></i></span>
+                    <span class="jianTou zhiFuDown"></span>
+                </p>
+                <!--<div class="">-->
+                <div class="mingXi">
+                    <p>
+                        <span class="left">物品属性：</span>
+                        <span class="right" style="width: 4.73rem;">
+                            <span class="xianZhi" v-text="detail.salerAttr+'  '"></span>
+                            <i style="margin:0;">交货日期：
+                                <span v-text="time(detail.deliveryDate2)">2016-12-25</span>
+                            </i>
+                        </span>
+                    </p>
+                    <p>
+                        <span class="left">有效期：</span>
+                        <span class="right" v-text="time(detail.beginDate)+' 至 '+time(detail.endDate)">2016-11-25至2016-12-11</span>
+                    </p>
+                </div>
+                <p class="line"></p>
+                <p class="bottom baoJia">
+
+                    状态：<span v-text="detail.JS">已接受</span>
+                </p>
+            </div>
+            </template>
+        </div>
+        <div class="xieYiDingDan" hidden>
+            <template v-for="order in orders">
+            <div class="bianHao">
+                <p>
+                    协议编号：
+                    <span v-text="order.inquiryNo"></span>
+                    <template v-if="order.flag=='request'">
+                        <a :href="'../../html/12_maiJiaZhongXin/12_dingDan_dingDanXiangQing2.html?orderId='+order.orderId+'&passKey='+order.passKey" class="xiangQing">订单详情</a>
+                    </template>
+                    <template v-else>
+                        <a :href="'../../html/18_maiJiaZhongXin/3_dingDan_dingDanXiangQing2.html?orderId='+order.orderId+'&passKey='+order.passKey" class="xiangQing">订单详情</a>
+                    </template>
+                </p>
+                <p>
+                    订单编号：
+                    <span v-text="order.orderId"></span>
+                </p>
+                <p>
+                    订单状态：
+                    <i v-text="order.stateText"></i>
+                    总金额：<span v-text="order.totalPrice"></span>
+                </p>
+            </div>
+            </template>
+        </div>
+    </div>
+</section>
+</div>
+<!--回到顶部-->
+<section>
+    <div id="top" @click="goToTop">
+    </div>
+</section>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/12_maiJiaZhongXin/10_xieYiGuanLi_xieYiGuanLi.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script type="text/javascript" src="script/2_baojiamingxi.js"></script>
+</body>
+</html>

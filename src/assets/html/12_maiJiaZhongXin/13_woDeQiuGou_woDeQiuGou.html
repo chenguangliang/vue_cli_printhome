@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>我的求购</title>
+    <link type="text/css" rel="stylesheet" href="../../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/pullToRefresh.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/12_maiJiaZhongXin/13_qiuGouGuanLi_qiuGouGuanLi.css"/>
+    <!--<link type="text/css" rel="stylesheet" href="../../css/12_maiJiaZhongXin/13_qiugouguanli_qiugouChuangJian.css"/>-->
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+</head>
+<body>
+<!--搜索-->
+<div id="qiugou_sousuo" hidden="hidden">
+    <header>
+        <div class="header">
+            <a href="#" class="fanHui" onclick="showList();"></a>
+            搜索
+        </div>
+        <div style="height:0.88rem;"></div>
+    </header>
+    <!--协议编号-->
+    <section>
+        <div class="suoSou">
+            <p>
+                <span>求购编号：</span>
+                <input id="translationNo" name="translationNo" type="text" maxlength="20"/>
+            </p>
+            <p>
+                <span>求购名称：</span>
+                <input type="text" id="translationName" name="translationName" maxlength="20"/>
+            </p>
+            <p>
+                <span>供应商：</span>
+                <input type="text" id="supplierName" name="supplierName" maxlength="20"/>
+            </p>
+            <p>
+                <span>物品：</span>
+                <input type="text" id="matCd"  name = "matCd" maxlength="20"/>
+            </p>
+            <p>
+                <span>类目：</span>
+                <select id="itemCategoryLevelOne" name="itemCategoryLevelOne" @change="doCatLevelchange('itemCategoryLevelOne')" title="一级分类">
+                    <option value="" selected="selected"> 一级分类 </option>
+                    <option v-for="(val,key) in itemCategoryLevelOneMap" :value="key" v-text="val" ></option>
+                </select>
+                <select id="itemCategoryLevelTwo" name="itemCategoryLevelTwo" @change="doCatLevelchange('itemCategoryLevelTwo')" title="二级分类">
+                    <option value="" selected="selected"> 二级分类 </option>
+                    <option v-for="(val,key) in itemCategoryLevelTwoMap" :value="key" v-text="val" ></option>
+                </select>
+                <select id="itemCategoryLevelThree" name="itemCategoryLevelThree"  title="三级分类">
+                    <option value="" selected="selected"> 三级分类 </option>
+                    <option v-for="(val,key) in itemCategoryLevelThreeMap" :value="key" v-text="val" ></option>
+                </select>
+            </p>
+            <p style="text-align: center; padding-top: 0.4rem;"><a href="#" @click="reset()" class="reset">重置</a><a href="#" @click="search()" class="search">搜索</a></p>
+        </div>
+    </section>
+</div>
+<!--搜索无结果-->
+<div id="wujieguo" hidden="hidden">
+    <header>
+        <div class="header">
+            <a href="javascript:;" onclick="showList();" class="fanHui"></a>
+            我的求购
+            <a href="javascript:;" onclick="showSouSuo();" class="suoSou"></a>
+        </div>
+        <div style="height: 0.88rem;"></div>
+    </header>
+    <section>
+        <div class="tiShi">
+            <img src="../../img/search_bg.png" alt=""/>
+            <h2>十分抱歉，没有找到您想要的相关内容</h2>
+            <p>亲，我们换个词试试吧~</p>
+        </div>
+    </section>
+    <section>
+        <p class="printHome" style="position: absolute;bottom: 0.2rem; left: 50%;margin-left: -0.88rem;">printhome.com</p>
+    </section>
+</div>
+<!--我的求购列表-->
+<div id="qiugouList" v-cloak>
+<header>
+    <div class="header">
+        <a href="../../html/12_maiJiaZhongXin/2_maiJiaZhongXin_maiJiaZhongXin.html" class="fanHui"></a>
+        我的求购
+        <a href="javascript:;" class="suoSou" onclick="showSouSuo();"></a>
+    </div>
+    <div style="height: 0.88rem;"></div>
+</header>
+<section>
+    <div class="tab_box" id="wrapper">
+        <div class="quanBU wrapScrool" id="f">
+            <div style="height: 0.8rem"></div>
+            <template v-for="page in qiugoulist">
+                <div class="biaoGe">
+                    <p class="top">
+                        <span>求购名称</span>
+                        <span>状态</span>
+                        <span>有效期</span>
+                    </p>
+                    <p class="middle">
+                        <a style="text-align: center;" href="#" v-text="getSubText(page.translationName,8)"></a>
+                        <span v-text="statusText(page.status)"></span>
+                        <span v-text="validity(page.beginDate,page.endDate)"></span>
+                    </p>
+                    <p class="bottom clearfix">
+                        <template v-if="page.status == '0' || page.status == '4'">
+                            <!--status == 0/4-->
+                            <a href="#" class="on" @click="submit(page.translationNo)">提交</a>
+                            <!--<a href="#" @click="translationNo = page.translationNo;func = 'submit';showDiv1 = !showDiv1;">提交</a>-->
+                            <a :href="'13_woDeQiuGou_updateQiuGou.html?translationNo='+page.translationNo" class="xiuGai">修改</a>
+                            <a :href="'13_woDeQiuGou_qiuGouMingXi.html?translationNo='+page.translationNo+'&flag=request'" class="chaKan">查看</a>
+                            <a href="#" @click="del(page.translationNo)">删除</a>
+                            <!--<a href="#" @click="translationNo = page.translationNo;func = 'delete';showDiv1 = !showDiv1;">删除</a>-->
+                        </template>
+                        <template v-else-if="page.status == '2'">
+                            <!--status == 2/3-->
+                            <!--<a href="#" @click="translationNo = page.translationNo;func = 'reCommit';showDiv1 = !showDiv1;">重新求购</a>-->
+                            <!--status == 2-->
+                            <a class="on" :href="'13_woDeQiuGou_qiuGouMingXi_jieShouJiaGe.html?translationNo='+page.translationNo+'&flag=request'">接受价格</a>
+                            <a href="#" @click="reCommit(page.translationNo)">重新求购</a>
+                            <a :href="'13_woDeQiuGou_qiuGouMingXi.html?translationNo='+page.translationNo+'&flag=request'" class="chaKan">查看</a>
+                        </template>
+                        <template v-else-if="page.status == '3'">
+                            <!--status == 2/3-->
+                            <a href="#" class="on" @click="reCommit(page.translationNo)">重新求购</a>
+                            <a :href="'13_woDeQiuGou_qiuGouMingXi.html?translationNo='+page.translationNo+'&flag=request'" class="chaKan">查看</a>
+                        </template>
+                        <template v-else>
+                            <a class="on" :href="'13_woDeQiuGou_qiuGouMingXi.html?translationNo='+page.translationNo+'&flag=request'" class="chaKan">查看</a>
+                        </template>
+
+                    </p>
+                </div>
+            </template>
+            <p class="printHome">printhome.com</p>
+        </div>
+    </div>
+</section>
+<!--占位-->
+<section>
+    <div style="height: 0.95rem;width: 100%;"></div>
+</section>
+<!--回到顶部-->
+<section>
+    <div id="top">
+    </div>
+</section>
+<footer>
+    <a  style="z-index:999" href="13_woDeQiuGou_chuangJianQiuGou.html" class="chuangJian">+创建求购</a>
+</footer>
+<!--弹窗-->
+<!--<section>-->
+    <!--<div class="zhezhao" v-if="showDiv1" >-->
+        <!--<div class="con">-->
+            <!--<h5 v-text="getDivText()"></h5>-->
+            <!--<p>确定执行此请求吗？</p>-->
+            <!--<div></div>-->
+            <!--<span class="quXiao" @click="showDiv1 = !showDiv1; func = ''; translationNo = '';">取消</span>-->
+            <!--<span class="queDing" @click="showDiv1 = !showDiv1; queding();">确定</span>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</section>-->
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/iscroll.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/pullToRefresh_fixHead.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<!--<script charset="utf-8" type="text/javascript" src="../../js/12_maiJiaZhongXin/10_xieYiGuanLi_xieYiGuanLi.js"></script>-->
+
+<script type="text/javascript" src="script/13_qiugouguanli.js"></script>
+
+</body>
+</html>

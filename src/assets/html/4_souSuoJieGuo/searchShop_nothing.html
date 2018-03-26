@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>搜索结果</title>
+    <link rel="stylesheet" href="../../css/common.css"/>
+    <link rel="stylesheet" href="../../css/4_souSuoJieGuo/search.css"/>
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+</head>
+<body style="background: white;font-size: 0.3rem;">
+<div id="searchNothing">
+<div class="top_wrapper">
+    <a href="../1_index/index.html" class="back_wrapper"><img class="back" src="../../img/back.png" alt=""/></a>
+
+    <div class="search_wrapper">
+        <select name="search" id="search">
+            <option value="shop">店铺</option>
+            <option value="goods">商品</option>
+        </select>
+        <input type="text" class="search_box" @click="goToSearch"/>
+
+        <div style="display: inline-block; float: right; margin: 3px 10px 0 0;">
+            <img class="chahao" src="../../img/chahao.png" alt=""/>
+            <!--<img class="fangda" src="../../img/fangdajing.png" alt=""/>-->
+        </div>
+
+    </div>
+</div>
+</div>
+<div style="position: relative;top:3rem">
+    <div class="search_bg">
+        <img src="../../img/search_bg.png" alt=""/>
+    </div>
+
+    <p style="text-align: center;font-size: 0.28rem;color:#333333">十分抱歉，没有找到您想要的相关店铺</p>
+    <p style="text-align: center;font-size: 0.26rem;color:#666666;margin-top: 0.4rem;">亲，我们换个词试试吧~</p>
+</div>
+
+
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script>
+    var vm=new Vue({
+        el:"#searchNothing",
+        methods:{
+            /*点击搜索框*/
+            goToSearch: function () {
+                var queryType = $("#search").val();
+                var keyword=$(".search_box").val();
+                var urlTemp=$.assemblyRequestString({queryType:queryType,keyword:keyword});
+                var goToPath='../../html/4_souSuoJieGuo/search.html'+"?"+urlTemp;
+                window.location=goToPath;
+            }
+        },
+        mounted: function () {
+            $(".search_box").val($.getUrlParam("keyword"));
+        }
+    })
+</script>
+</body>
+</html>

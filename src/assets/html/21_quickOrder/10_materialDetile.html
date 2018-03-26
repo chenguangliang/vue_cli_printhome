@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>物资明细</title>
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/21_quickOrder/0_quickOrderCommon.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/21_quickOrder/3_quickOrderDetile.css"/>
+</head>
+<body style="background-color: #f4f4f4;">
+<!--头部开始-->
+<header>
+    <div class="headerquickOrder">
+        <a href="javascript:history.back(-1);" class="fanHui"></a>
+        物资明细
+    </div>
+    <div style="height:0.8rem;"></div>
+</header>
+<!--主要内容-->
+<div class="mainConWrap" id="app">
+        <template v-if="materialInfo.auditStatus==-1">
+            <div class="refuseReason">
+                <span style="vertical-align: top">驳回原因:</span>
+                <div class="refuseCon">{{materialInfo.auditRemark}}</div>
+            </div>
+        </template>
+
+        <div class="contact">
+            <p class="font30">物资明细</p>
+            <p class="mart10">
+                <span class="infoKey"><span class="redWord">*</span>商品编码：</span>
+                <input type="text" class="grayInput" :value="materialInfo.itemId">
+            </p>
+            <p class="mart10">
+                <span class="infoKey"><span class="redWord">*</span>商品内容：</span>
+                <input type="text" class="grayInput" :value="materialInfo.itemInfo.itemName">
+            </p>
+            <p class="mart10">
+                <span class="infoKey"><span class="redWord">*</span>单价(元)：</span>
+                <input type="text" class="grayInput" :value="materialInfo.itemInfo.unitPrice">
+            </p>
+            <p class="mart10">
+                <span class="infoKey"><span class="redWord">*</span>单位：</span>
+                <input type="text" class="grayInput" :value="materialInfo.itemInfo.itemUnitName">
+            </p>
+            <p class="mart10">
+                <span class="infoKey">规格：</span>
+                <input type="text" class="grayInput" :value="materialInfo.itemInfo.standard">
+            </p>
+            <p class="mart10">
+                <span class="infoKey"><span class="redWord">*</span>品牌：</span>
+                <input type="text" class="grayInput" :value="materialInfo.itemInfo.brandName">
+            </p>
+            <p class="mart10">
+                <span class="infoKey"><span class="redWord">*</span>品类：</span>
+                <input type="text" class="grayInput" :value="materialInfo.itemInfo.cname">
+            </p>
+            <p class="mart10">
+                <span class="infoKey">备注：</span>
+                <textarea name="" class="grayArea" style="vertical-align: top;pointer-events: none;" id="" cols="30" rows="5" v-cloak>{{materialInfo.itemInfo.remark}}</textarea>
+            </p>
+        </div>
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/pullToRefresh_fixHead.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="./script/10_materialDetile.js"></script>
+</body>
+</html>

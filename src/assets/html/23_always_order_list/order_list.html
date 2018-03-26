@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html style="font-size: 64.6875px;">
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title>印刷家</title>
+    <link rel="stylesheet" href="../../css/common.css"/>
+    <link rel="stylesheet" href="../../css/animate.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/pullToRefresh.css"/>
+    <link rel="stylesheet" href="../../css/12_maiJiaZhongXin/3_shouCangZhongXin_shangPinShouCang.css" />
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+</head>
+<body>
+<div id="changgou_shangpin">
+    <header>
+        <div class="header">
+            <a href="../../html/12_maiJiaZhongXin/2_maiJiaZhongXin_maiJiaZhongXin.html" class="return"></a> 常购列表
+        </div>
+        <div class="zhanwei"></div>
+    </header>
+    <section>
+        <div id="wrapper" class="tab_box">
+                <div id="f" class="quanBU wrapScrool">
+                    <div style="height: 0.8rem;"></div>
+                    <template v-for="product in productArray">
+                        <a href="javascript:;" class="shangPinLieBiao">
+                            <div class="gouXuan" style=" display: inline-block;" @click="clickSelect(product.rbId)">
+                                <template v-if="ids.indexOf(product.rbId)>-1">
+                                    <img class="no-select" src="../../img/yes-select.png"  alt="" />
+                                </template>
+                                <template v-else>
+                                    <img class="no-select" src="../../img/no-select.png" alt="" />
+                                </template>
+                               <!-- <img src="../../img/no-select.png" alt="" class="no-select" />-->
+                            </div><div class="shangPinTuPian">
+                            <img :src="imgUrl + product.itemPic" alt=""  @click="toDetails(product.itemId,product.skuId)"/>
+                        </div><div class="shangPinXiangQing">
+                            <p class="mingZi"  @click="toDetails(product.itemId,product.skuId)">{{product.itemName}}</p>
+                            <p class="jiaGe">
+                                <template v-if="product.hasPrice">
+                                    ￥{{product.price}}
+                                </template>
+                                <template v-else>
+                                    欢迎询价
+                                </template>
+                            </p>
+                        </div>
+                            <img src="../../img/shanchuhong@3x.png" alt="" class="delete" @click="deleteOne(product.rbId)">
+                        </a>
+                    </template>
+                </div>
+            <div style="height: 1rem"></div>
+        </div>
+    </section>
+    <div class="zhezhao" id="zhezhao">
+        <div>
+            请选择要删除的商品！
+            <span class="close" @click="closediv('zhezhao')"></span>
+        </div>
+    </div>
+    <div class="zhezhao2" id="deleteAlert">
+        <div>
+            <p>确定删除么？</p>
+            <span class="quXiao" @click="closediv('deleteAlert')">取消</span>
+            <span class="queDing" @click="deleteOper()">确定</span>
+        </div>
+    </div>
+    <div class="zhezhao3" id="addCartBomb">
+        <div>
+            <p>添加购物车成功</p>
+            <span class="quXiao" style="font-size: 0.2rem;"@click="closediv('addCartBomb')">继续浏览</span>
+            <span class="queDing" style="font-size: 0.2rem;" @click="gotoCart()" >去购物车结算</span>
+        </div>
+    </div>
+    <!--底部按钮-->
+    <div id="foot">
+        <a href="#"  class="cancle" @click="batchAddToCart()">加入购物车</a>
+        <a href="#" class="next on" @click="batchDelete()">批量删除</a>
+    </div>
+</div>
+<!--回到顶部-->
+<section>
+    <div id="top"></div>
+</section>
+<!--底部占位-->
+<section>
+    <div class="zhanwei2"></div>
+</section>
+<script type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/iscroll.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/pullToRefresh_fixHead.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script type="text/javascript" src="../../js/vueFoot.js"></script>
+<script type="text/javascript" src="script/regularbuy.js"></script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title></title>
+    <script src="../../js/adjust.js"></script>
+    <link rel="stylesheet" href="../../css/common.css"/>
+    <link rel="stylesheet" href="../../css/20_BundlingUnbundling/BundlingUnbundling.css"/>
+</head>
+<body>
+<div id="unbinding">
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="javascript:;" onclick="javascript:history.back(-1);" class="return"></a>
+        解绑微信账号
+    </div>
+    <div style="height: 0.88rem;"></div>
+</header>
+<!--logo-->
+<section>
+    <div class="swicth">
+        <img src="../../img/weChatLogo.png" alt="" style="width: 1.06rem;height: 1.06rem;"/>
+        <img src="../../img/switchBunding.png" alt="" style="width: 1rem;height: 0.3rem;margin:0.4rem 0.2rem"/>
+        <img src="../../img/printHome.png" alt="" style="width: 1.2rem;height: 1.1rem;"/>
+    </div>
+    <div id="stepOne" v-show="comfirmDialog">
+        <p class="tit">
+            账号关联可快捷登录印刷家商城移动端，解绑后将不能通过该微信号登录印刷家
+        </p>
+        <a href="javascript:;" class="button" @click="comfirmDialog = !comfirmDialog ;bindingDialog = !bindingDialog;">确定解绑</a>
+    </div>
+    <div id="stepTwo" v-show="bindingDialog">
+        <p class="tit">
+            为保障您的数据安全，请输入印刷家账户登录密码完成解绑！
+        </p>
+        <input type="password" placeholder="请输入密码" class="password_input" maxlength="20" v-model="password"/>
+        <div class="handle_button">
+            <a href="javascript:;" id="cancel_button" @click="comfirmDialog = !comfirmDialog ;bindingDialog = !bindingDialog;">取&emsp;消</a>
+            <a href="javascript:;" id="sure_button2" @click="submitUnBinding">确&emsp;定</a>
+        </div>
+    </div>
+</section>
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery.cookie.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/jsonUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/20_BundlingUnbundling/BundlingUnbundling.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../html/20_BundlingUnbundling/script/accountUnBinding.js"></script>
+</body>
+</html>

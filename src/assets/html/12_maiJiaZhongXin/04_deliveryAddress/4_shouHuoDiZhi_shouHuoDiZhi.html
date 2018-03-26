@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>地址管理</title>
+    <link rel="stylesheet" href="../../../css/common.css"/>
+    <script type="text/javascript" src="../../../js/adjust.js"></script>
+    <link rel="stylesheet" href="../../../css/12_maiJiaZhongXin/4_shouHuoDiZhi_shouHuoDiZhi.css"/>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="addAddress">
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="javascript:;" onclick="javascript:history.back(-1);" class="return"></a>地址管理
+    </div>
+    <div class="zhanwei"></div>
+</header>
+<!--个人信息开始-->
+<section>
+    <div class="tianXie">
+        <div>
+            <span class="left"><label>＊</label>收货人：</span>
+            <span class="right"><input type="text" placeholder="姓名" id="xingMing" maxlength="11" v-model="address.contactperson"></span>
+        </div>
+        <div class="xingMing warm none">请填写收货人信息！</div>
+        <div>
+            <span class="left"><label>＊</label>手机：</span>
+            <span class="right"><input type="tel" onkeyup="this.value=this.value.replace(/\D/g,'')" placeholder="请输入手机号码" maxlength="11" id="shoujIHao" v-model="address.contactphone"></span>
+        </div>
+        <div class="telPhone warm none">请填写手机号！</div>
+        <div class="shoujIHao warm none">请填写正确的11位手机号！</div>
+        <div>
+            <span class="left">固定电话：</span>
+            <span class="right"><input type="text" maxlength="12" id="fixedTel"  placeholder="如:010-68272765" v-model="address.contacttel"></span>
+        </div>
+        <div class="fixedTel warm none">正确格式如:010-68272765</div>
+        <div>
+            <span class="left"><label>＊</label>省：</span>
+            <span class="right"><select  name="sel_Province" @change="changeValue($event)" v-model="address.provicecode" v-cloak>
+                <option value>请选择</option>
+                <option :value="addr.code"  v-for="addr in  oneAddressList">{{addr.name}}</option>
+            </select></span>
+        </div>
+        <div class="sel_Province warm none">请选择收货地址！</div>
+        <div>
+            <span class="left"><label>＊</label>市：</span>
+            <span class="right"><select  name="sel_City" v-model="address.citycode" v-cloak>
+                <option value="">请选择</option>
+                <option :value="addr.code"  v-for="addr in  twoAddressList">{{addr.name}}</option>
+            </select></span>
+        </div>
+        <div class="sel_City warm none">请选择收货地址！</div>
+        <div>
+            <span class="left"><label>＊</label>区：</span>
+            <span class="right"><select  name="sel_County" v-model="address.countrycode" v-cloak>
+                <option value="">请选择</option>
+                <option :value="addr.code"  v-for="addr in  threeAddressList">{{addr.name}}</option>
+            </select></span>
+        </div>
+        <div class="sel_County warm none">请选择收货地址！</div>
+        <div>
+            <span class="left"><label>＊</label>详细地址：</span>
+            <span class="right"><input type="text" placeholder="街道" maxlength="40" id="address" v-model="address.fulladdress"/></span>
+        </div>
+        <div class="fullAddress warm none">请填写详细地址！</div>
+        <div>
+            <span class="left"></span>
+            <span class="right" style="font-size: 0.24rem;color: #666;"><input type="checkbox"  v-model="defaultFlag">设为默认地址</span>
+        </div>
+    </div>
+</section>
+<!--保存按钮-->
+<section>
+    <a href="javascript:void(0)" class="saveAddress" @click="submitForm()">保存收货地址</a>
+</section>
+</div>
+<script charset="UTF-8" type="text/javascript" src="../../../bower_components/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../js/request.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../../js/popup.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../../js/jsonUtil.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../../bower_components/selectAdd.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../js/12_maiJiaZhongXin/4_shouHuoDiZhi_shouHuoDiZhi.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../html/commonScript/address/address.js"></script>
+<script charset="utf-8" type="text/javascript" src="script/addDeliveryAddress.js"></script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html style="height: 100%;">
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>全部分类</title>
+    <link rel="stylesheet" href="../../css/common.css"/>
+    <link rel="stylesheet" href="../../css/1_index/mallList.css"/>
+    <link rel="stylesheet" href="../../css/animate.css"/>
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+</head>
+<body style="height: 100%;">
+<div id="leimiVM" style="height: 100%;">
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="javascript:;" class="return" @click="returnPage"></a>全部分类
+    </div>
+    <div class="zhanwei"></div>
+</header>
+<section style="height: 90%;">
+    <div class="main" style="height: 100%;">>
+        <div id="main-l">
+            <ul id="main-l-ul">
+                <li class="active">为您推荐</li>
+                <template v-for="oneCate in categoryesList">
+                    <li @click="showLevel(oneCate)">{{oneCate.categoryCName}}</li>
+                </template>
+            </ul>
+        </div>
+        <div id="main-r">
+            <div class="tuijian">
+                <template v-if="queryLeiMuSource == 'secLev'">
+                    <div class="youxuan">
+                        <ul>
+                            <template v-for="bunner in bunnersList">
+                                <li>
+                                    <a href="javascript:;" @click="openNewUrl(bunner.adURL)">
+                                        <img :src="imgUrl + bunner.adSrc" alt=""/>
+                                    </a>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+                </template>
+                <template v-else>
+                    <div class="youxuan">
+                        <h3>优选商品</h3>
+                        <ul>
+                            <template v-for="item in itemList">
+                                <li>
+                                    <a href="javascript:;" @click="openNewUrl(item.url)">
+                                        <img :src="imgUrl + item.picSrc" alt=""/>
+                                    </a>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+                    <div class="jinpai">
+                        <h3>金牌卖家</h3>
+                        <ul>
+                            <template v-for="seller in sellerList">
+                                <li>
+                                    <a href="javascript:;" @click="openNewUrl(seller.url)">
+                                        <img :src="imgUrl + seller.picSrc" alt=""/>
+                                    </a>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+                </template>
+                <div style="height: 1.0rem"></div>
+            </div>
+            <div id="leimuList">
+                <template v-if="queryLeiMuSource != 'secLev'">
+                    <div class="leimu">
+                       <ul>
+                           <template v-for="secCate in rightCategoryList">
+                               <li>
+                                   <a href="javascript:;" class="title" @click="toSecdCates($event,secCate)">{{secCate.categoryCName}}</a>
+                                   <div class="neiRong">
+                                       <template v-for="thirCate in secCate.children">
+                                           <a href="javascript:;" @click="toThirdCates($event,secCate,thirCate)">{{thirCate.categoryCName}}</a>
+                                       </template>
+                                   </div>
+                               </li>
+                           </template>
+                       </ul>
+
+                    </div>
+
+                    <div class="pinpai">
+                        <ul>
+                            <template v-if="rightBunners.length > 0">
+                                <h3>推荐品牌</h3>
+                                <template v-for="bunner in rightBunners">
+                                    <li>
+                                        <a href="javascript:;" @click="openNewUrl(bunner.adURL)">
+                                            <img :src="imgUrl + bunner.adSrc" alt=""/>
+                                        </a>
+                                    </li>
+                                </template>
+                            </template>
+                        </ul>
+                    </div>
+                </template>
+                <template v-else>
+                    <div class="leimu">
+                        <ul>
+                            <template v-for="secCate in rightCategoryList">
+                                <li>
+                                    <a href="javascript:;" class="title" @click="querySecdCates($event,secCate)">{{secCate.attrAttrName}}</a>
+                                    <div class="neiRong">
+                                        <template v-for="thirCate in secCate.valueList">
+                                            <a href="javascript:;" @click="queryThirdCates($event,secCate,thirCate)">{{thirCate.attrValueName}}</a>
+                                        </template>
+                                    </div>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+                </template>
+                <div style="height: 1.0rem"></div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!--回到顶部-->
+<div id="top">
+</div>
+    <main-foot :user-info="userInfo" :current-position="0"></main-foot>
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/vueFoot.js"></script>
+<script charset="utf-8" type="text/javascript" src="script/leimu.js"></script>
+</body>
+</html>

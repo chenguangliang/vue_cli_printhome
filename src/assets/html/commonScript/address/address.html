@@ -1,0 +1,23 @@
+<div>
+    <span class="left"><label>＊</label>省：</span>
+            <span class="right"><select  name="sel_Province"  v-model="address.provicecode" v-cloak>
+                <option value="">请选择</option>
+                <option :value="addr.code"  v-for="addr in  oneAddressList">{{addr.name}}</option>
+            </select></span>
+</div>
+<div class="warm none">请选择</div>
+<div>
+    <span class="left"><label>＊</label>市：</span>
+            <span class="right"><select  name="sel_City" v-model="address.citycode" v-cloak>
+                <option value="">请选择</option>
+                <option :value="addr.code"  v-for="addr in  twoAddressList">{{addr.name}}</option>
+            </select></span>
+</div>
+<div class="warm none">请选择</div>
+<div>
+    <span class="left"><label>＊</label>区：</span>
+            <span class="right"><select  name="sel_County" v-model="address.countrycode" v-cloak>
+                <option value="">请选择</option>
+                <option :value="addr.code"  v-for="addr in  threeAddressList">{{addr.name}}</option>
+            </select></span>
+</div>

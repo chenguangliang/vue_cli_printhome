@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>求购明细</title>
+    <link type="text/css" rel="stylesheet" href="../../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/12_maiJiaZhongXin/10_xieYiGuanLi_xieYiChuangJian.css"/>
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+</head>
+<body>
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="javascript:;" onclick="javascript:history.back(-1);" onclick="self.location=document.referrer;" class="fanHui"></a>
+        求购明细
+    </div>
+    <div style="height:0.88rem;"></div>
+</header>
+<!--协议编号-->
+<div id="qiugouInfo">
+<section>
+    <div class="bianHao xunJia">
+        <template v-if="translationInfo.status == '4'">
+            <p>
+                <span><label>驳回原因：</label></span>
+                <i style="color: #e60012;" v-text="translationInfo.refuseReason"></i>
+            </p>
+        </template>
+
+        <p>
+            <span><label>＊</label>求购编码：</span>
+            <i v-text="translationInfo.translationNo"></i>
+        </p>
+        <p>
+            <span><label>＊</label>求购名称：</span>
+            <i v-text="translationInfo.translationName"></i>
+        </p>
+        <p>
+            <span><label>＊</label>求购日期：</span>
+            <i v-text="time(translationInfo.beginDate)"></i>
+        </p>
+        <p>
+            <span><label>＊</label>截至报价日期：</span>
+            <i v-text="time(translationInfo.endDate)"></i>
+        </p>
+        <p>
+            <span><label>＊</label>交货日期：</span>
+            <i v-text="time(translationInfo.deliveryDate)"></i>
+        </p>
+        <p>
+            <span><label>＊</label>采购方：</span>
+            <i v-text="printerName"></i>
+        </p>
+        <p>
+            <span>备注：</span>
+            <i v-text="translationInfo.remarks"></i>
+        </p>
+        <p>
+            <span>附件：</span>
+            <i>
+                <a :href="getImgUrl(translationInfo.annex)"  target='_blank' v-text="translationInfo.oldFileName"></a>
+            </i>
+        </p>
+    </div>
+</section>
+<section>
+    <div class="mingXi">
+        <template v-for="(detail,index) in details">
+
+            <div>
+                <p><span>供应商： </span><i v-text="detail.shopName"></i></p>
+                <p><span>类目名称：</span> <i v-text="detail.category_names"></i></p>
+                <p><span>物品名称：</span> <i v-text="detail.matDesc"></i></p>
+                <p><span>物品属性： </span><i v-text="detail.matAttribute"></i></p>
+                <p><span>接受状态：</span> <i v-text="detail.statusLabel"></i></p>
+                <p><span>物品数量：</span> <i v-text="detail.quantity"></i></p>
+                <p><span>物品单价： </span><i v-text="detail.matPrice"></i></p>
+                <p><span>有效时间（始）： </span><i v-text="detail.detailStartDate?detail.detailStartDate.replace('00:00:00.0',''):''"></i></p>
+                <p><span>有效时间（止）： </span><i v-text="detail.detailEndDate?detail.detailEndDate.replace('00:00:00.0',''):''"></i></p>
+            </div>
+            <template v-if="index<details.length-1">
+                <div class="line"></div>
+            </template>
+        </template>
+    </div>
+</section>
+</div>
+<!--回到顶部-->
+<section>
+    <div id="top">
+    </div>
+</section>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script type="text/javascript" src="script/13_qiugoumingxi.js"></script>
+</body>
+</html>

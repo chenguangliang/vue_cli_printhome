@@ -1,0 +1,170 @@
+<!--优惠券弹窗-->
+<transition name="coupon">
+    <div class="zheZhao" v-show="couponDialog">
+        <div class="lingQuan">
+            <p class="biaoTi">优惠券<span @click="couponDialog=!couponDialog"></span></p>
+            <div class="quan">
+                <template v-if="couponsDTOs == ''">
+                    暂无可以领取的优惠卷
+                </template>
+                <template v-else>
+                    <template v-for="coupon  in couponsDTOs">
+                        <div :class="getCouponType(coupon)">
+                            <div class="content" @click="coupon.isGet == 'true'?'' : getCoupons(coupon)">
+                                <div :class=" coupon.JJGuoqi == 'true' ? 'zhuangtai':''"></div>
+                                <p class="jine">
+                                    <template v-if="coupon.couponType == '1'">
+                                        ¥<span>{{coupon.couponAmount}}</span>
+                                    </template>
+                                    <template v-if="coupon.couponType == '2'">
+                                        <span>{{coupon.couponAmount}}</span>折
+                                    </template>
+                                    <template v-if="coupon.couponType == '3'">
+                                        ¥<span>{{coupon.couponAmount}}</span>
+                                    </template>
+                                </p>
+
+                                <p class="mingcheng">{{coupon.couponName}}</p>
+
+                                <p class="riqi">至<span>{{coupon.couponEndTime | timestampFormat('YYYY.MM.DD')}}</span>截止</p>
+
+                                <p class="shuliang">限领<span>{{coupon.allowGetNum}}</span>张</p>
+
+
+                                <p class="qian">
+                                    <template v-if="coupon.couponType == '1'">
+                                        满{{coupon.meetPrice}}元可用
+                                    </template>
+                                    <template v-if="coupon.couponType == '2'">
+                                        最高抵扣{{coupon.couponMax}}元
+                                    </template>
+                                    <template v-if="coupon.couponType == '3'">
+                                        无门槛
+                                    </template>
+                                </p>
+                                <!--是否过期、领取、领完-->
+                                <template v-if="coupon.state == '2' || coupon.state == '3'">
+                                    <img src="../../img/yiguoqi@3x.png" alt="" id="yiguoqi"/>
+                                </template>
+                                <template v-else-if="coupon.isGet=='true'">
+                                    <img src="../../img/yilingqu@3x.png" alt="" style="display: block;" class="yilingqu"/>
+                                </template>
+                                <template v-else-if="coupon.state=='7'">
+                                    <img src="../../img/yilingwan@3x.png" alt="" id="yilingwan"/>
+                                </template>
+                            </div>
+                            <div class="leibie">
+                                <div  @click="getCouponDetail(coupon.couponId)">
+                                    <template v-if="coupon.couponUsingRange == '1'">
+                                        平台通用类
+                                    </template>
+                                    <template v-if="coupon.couponUsingRange == '2'">
+                                        店铺通用类
+                                    </template>
+                                    <template v-if="coupon.couponUsingRange == '3'">
+                                        品类通用类
+                                    </template>
+                                    <template v-if="coupon.couponUsingRange == '4'">
+                                        指定商品类
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </template>
+            </div>
+        </div>
+    </div>
+</transition>
+
+<!--优惠卷详情弹框-->
+<transition name="fade">
+    <section v-show="couponDetailDialog" >
+        <div :class="getCouponDetailClass(couponDetail[0].couponUsingRange) ">
+            <template v-if="couponDetail[0].couponUsingRange == 1">
+                <div class="pingtai">
+                    <h3>平台通用类优惠券</h3>
+                    <p>此优惠券全平台所有商品均可使用</p>
+                    <span id="close"></span>
+                </div>
+            </template>
+        </div>
+        <template v-if="couponDetail[0].couponUsingRange != '1'" >
+            <div class="dianpu"  v-cloak>
+                <h3>
+                    <template v-if="couponDetail[0].couponUsingRange == '2'">
+                        适用店铺
+                    </template>
+                    <template v-if="couponDetail[0].couponUsingRange == '3'">
+                        适用分类
+                    </template>
+                    <template v-if="couponDetail[0].couponUsingRange == '4'">
+                        适用商品
+                    </template>
+                </h3>
+
+                <div class="liebiao">
+                    <template v-if="couponDetail[0].couponUsingRange == '2'">
+                        <h3 class="title">大家智合ABC旗舰店</h3>
+                        <ul>
+                            <li><a href="javascript:;">一二三四五六七八九十一二三四五六七八九十一</a></li>
+                            <li><a href="javascript:;">一二三四五六七八九十一二三四五六七八九十一</a></li>
+                            <li><a href="javascript:;">一二三四五六七八九十一二三四五六七八九十一</a></li>
+                            <li><a href="javascript:;">一二三四五六七八九十一二三四五六七八九十一</a></li>
+                            <li><a href="javascript:;">一二三四五六七八九十一二三四五六七八九十一</a></li>
+                            <li><a href="javascript:;">一二三四五六七八九十一二三四五六七八九十一</a></li>
+                            <li><a href="javascript:;">一二三四五六七八九十一二三四五六七八九十一</a></li>
+                            <li><a href="javascript:;">一二三四五六七八九十一二三四五六七八九十一</a></li>
+                            <li><a href="javascript:;">一二三四五六七八九十一二三四五六七八九十一</a></li>
+                            <li><a href="javascript:;">一二三四五六七八九十一二三四五六七八九十一</a></li>
+                            <li><a href="javascript:;">一二三四五六七八九十一二三四五六七八九十一</a></li>
+                        </ul>
+                        <p>printhome.com</p>
+                    </template>
+                    <template v-if="couponDetail[0].couponUsingRange == '3'">
+                        <div id="dianjiyu">
+                            <div class="kezi">
+                                <p class="yiji yijibg">薄膜／复合材料</p>
+                            </div>
+                            <ul>
+                                <li class="erji erjiColor">文化用纸（3453）</li>
+                                <div class="sanji">
+                                    <a href="javascript:;">标准光源/灯管</a>
+                                    <a href="javascript:;">标准光</a>
+                                    <a href="javascript:;">标准光</a>
+                                    <a href="javascript:;" class="noMargin">标准光</a>
+                                    <a href="javascript:;">标准光源/灯管</a>
+                                    <a href="javascript:;">标准光</a>
+                                    <a href="javascript:;">标准光</a>
+                                    <a href="javascript:;">标准光</a>
+                                    <a href="javascript:;">标准光源/灯管</a>
+                                    <a href="javascript:;">标准光</a>
+                                    <a href="javascript:;">标准光</a>
+                                    <a href="javascript:;" class="noMargin">标准光</a>
+                                    <a href="javascript:;">标准光源/灯管</a>
+                                    <a href="javascript:;">标准光</a>
+                                    <a href="javascript:;">标准光</a>
+                                    <a href="javascript:;">标准光</a>
+                                </div>
+                            </ul>
+                        </div>
+                        <p>printhome.com</p>
+                    </template>
+                    <template v-if="couponDetail[0].couponUsingRange == '4'">
+                        <h3 class="title">商品列表</h3>
+                        <ul>
+                            <template v-for="(key,value) in couponDetail">
+                                <template v-if="value > 0 &&  value < couponDetail.length -1  ">
+                                    <li><a href="javascript:;" @click="gotoProductDetail(key.itemId,key.skuId)">{{key.itemName}}</a></li>
+                                </template>
+                            </template>
+
+                        </ul>
+                        <p>printhome.com</p>
+                    </template>
+                </div>
+                <a href="javascript:void(0);" @click="couponDetailDialog=!couponDetailDialog" class="guanbi">关闭</a>
+            </div>
+        </template>
+    </section>
+</transition>

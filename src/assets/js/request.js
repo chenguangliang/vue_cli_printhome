@@ -1,13 +1,8 @@
-//let server_url="http://testwx.printhome.com/mall-web";
-var server_url="http://wx.printhome.com/mall-web";
-//let server_url="http://192.168.1.211:8095/mall-web";
-// let server_url="http://localhost:8080/mall-web";
-//let server_url="http://devwx.printhome.com:8080/mall-web";
-//let server_url="http://192.168.1.147:8095/mall-web"; //冬藏
-var img_url="http://img.printhome.com/imgs/";
-var img_url_cgl="http://img.printhome.com/imgs";
+var server_url="http://192.168.1.215:8095/mall-web"; //冬藏
+var img_url="http://192.168.1.215:8848/imgs/";
+var img_url_cgl="http://192.168.1.215:8848/imgs";
 var commonPlatformId = 3;
-var varants_commonPlatformId = "commonPlatformId";
+var constants_commonPlatformId = "commonPlatformId";
 //本地获取uid字符串
 var currentUserUid = "currentUserUid";
 //本地获取当前用户信息字符串
@@ -203,7 +198,7 @@ function setPlatformId(data){
         	if(url.indexOf("?") == -1){
         		return;
         	}
-        	return url.substring(url.indexOf("?")+1,url.length);
+        	return url.substring(url.indexOf("?")+1,url.length); 
         },
         /** 获取Form参数对象-用于Post请求 **/
         getFormParasObj: function (form) {
@@ -223,10 +218,10 @@ function setPlatformId(data){
         	$.each(form.serializeArray(), function(index) {
         		var key = this['name'], val = this['value'];
         		if(val && val.length > 0){
-        			o = o + key + "=" + val + "&";
+        			o = o + key + "=" + val + "&";        			
         		}
         	});
-        	return o.substring(0, o.length-1);
+        	return o.substring(0, o.length-1); 
         },
         /** 获取浏览器类型 **/
         getBrowser: function() {
@@ -478,26 +473,6 @@ function setPlatformId(data){
         }
     });
 })(jQuery);
-
-import jQuery from "jquery";
-export default {
-  server_url:server_url,
-  img_url:img_url,
-  commonPlatformId:commonPlatformId,
-  varants_commonPlatformId:varants_commonPlatformId,
-  currentUserUid:currentUserUid,
-  currentUserInfo:currentUserInfo,
-  myCartKey:myCartKey,
-  getUrl:getUrl,
-  getImgUrl:getImgUrl,
-  getval:getval,
-  flag_status:flag_status,
-  getImgCode:getImgCode,
-  adVisit:adVisit,
-  ajaxError:ajaxError,
-  setPlatformId:setPlatformId
-}
-
 
 
 

@@ -1,0 +1,182 @@
+{
+  "result": {
+    "pager": {
+      "records": [
+        {
+          "id": 88,
+          "buyerId": 1000000151,
+          "platformId": null,
+          "billsId": "K_20170721162816d1cb4",
+          "createTime": 1500625696000,
+          "modifyTime": 1500625696000,
+          "billItemDTOs": [
+            {
+              "billsId": "K_20170721162816d1cb4",
+              "orderId": "K_2017072002776",
+              "orderStatus": 1,
+              "unpaidAmount": 201.00,
+              "paidAmount": 0.00,
+              "totalAmount": 201.00
+            },
+            {
+              "billsId": "K_20170721162816d1cb4",
+              "orderId": "K_2017072002778",
+              "orderStatus": 1,
+              "unpaidAmount": 201.00,
+              "paidAmount": 0.00,
+              "totalAmount": 201.00
+            }
+          ],
+          "startCreateTime": null,
+          "endCreateTime": null,
+          "buyerUserIdList": null
+        },
+        {
+          "id": 87,
+          "buyerId": 1000000151,
+          "platformId": null,
+          "billsId": "K_20170721162753ca820",
+          "createTime": 1500625674000,
+          "modifyTime": 1500625673000,
+          "billItemDTOs": [
+            {
+              "billsId": "K_20170721162753ca820",
+              "orderId": "K_2017072102779",
+              "orderStatus": 2,
+              "unpaidAmount": 1.85,
+              "paidAmount": 0.00,
+              "totalAmount": 1.85
+            },
+            {
+              "billsId": "K_20170721162753ca820",
+              "orderId": "K_2017072102780",
+              "orderStatus": 1,
+              "unpaidAmount": 12.00,
+              "paidAmount": 0.00,
+              "totalAmount": 12.00
+            },
+            {
+              "billsId": "K_20170721162753ca820",
+              "orderId": "K_2017072102783",
+              "orderStatus": -1,
+              "unpaidAmount": 1235.00,
+              "paidAmount": 0.00,
+              "totalAmount": 1235.00
+            }
+          ],
+          "startCreateTime": null,
+          "endCreateTime": null,
+          "buyerUserIdList": null
+        },
+        {
+          "id": 86,
+          "buyerId": 1000000151,
+          "platformId": null,
+          "billsId": "K_201707211424357da18",
+          "createTime": 1500618275000,
+          "modifyTime": 1500618275000,
+          "billItemDTOs": [],
+          "startCreateTime": null,
+          "endCreateTime": null,
+          "buyerUserIdList": null
+        },
+        {
+          "id": 85,
+          "buyerId": 1000000151,
+          "platformId": null,
+          "billsId": "K_20170721142428ed34c",
+          "createTime": 1500618268000,
+          "modifyTime": 1500618268000,
+          "billItemDTOs": [],
+          "startCreateTime": null,
+          "endCreateTime": null,
+          "buyerUserIdList": null
+        },
+        {
+          "id": 84,
+          "buyerId": 1000000151,
+          "platformId": null,
+          "billsId": "K_20170721142419b3019",
+          "createTime": 1500618259000,
+          "modifyTime": 1500618259000,
+          "billItemDTOs": [],
+          "startCreateTime": null,
+          "endCreateTime": null,
+          "buyerUserIdList": null
+        },
+        {
+          "id": 83,
+          "buyerId": 1000000151,
+          "platformId": null,
+          "billsId": "K_2017072114124557d7c",
+          "createTime": 1500617565000,
+          "modifyTime": 1500617565000,
+          "billItemDTOs": [],
+          "startCreateTime": null,
+          "endCreateTime": null,
+          "buyerUserIdList": null
+        },
+        {
+          "id": 82,
+          "buyerId": 1000000151,
+          "platformId": null,
+          "billsId": "K_201707211412221c4b9",
+          "createTime": 1500617543000,
+          "modifyTime": 1500617542000,
+          "billItemDTOs": [],
+          "startCreateTime": null,
+          "endCreateTime": null,
+          "buyerUserIdList": null
+        },
+        {
+          "id": 81,
+          "buyerId": 1000000151,
+          "platformId": null,
+          "billsId": "K_20170721141207d6e54",
+          "createTime": 1500617527000,
+          "modifyTime": 1500617527000,
+          "billItemDTOs": [],
+          "startCreateTime": null,
+          "endCreateTime": null,
+          "buyerUserIdList": null
+        }
+      ],
+      "page": 1,
+      "rows": 10,
+      "pageOffset": 0,
+      "sort": null,
+      "order": null,
+      "totalPage": 1,
+      "totalCount": 8,
+      "startPageIndex": 1,
+      "endPageIndex": 1,
+      "pageCode": 5,
+      "previewPage": 1,
+      "nextPage": 1
+    },
+    "queryDto": {
+      "id": null,
+      "buyerId": null,
+      "platformId": null,
+      "billsId": null,
+      "createTime": null,
+      "modifyTime": null,
+      "billItemDTOs": null,
+      "startCreateTime": null,
+      "endCreateTime": null,
+      "buyerUserIdList": [
+        1000000151,
+        1000000171,
+        1000000173,
+        1000000174,
+        1000000444,
+        1000000583,
+        1000000714,
+        1000000717,
+        1000000718,
+        1000000746
+      ]
+    }
+  },
+  "msg": "安全数据"
+}

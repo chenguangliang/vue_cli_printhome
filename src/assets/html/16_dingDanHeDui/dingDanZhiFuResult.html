@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>订单支付</title>
+    <link rel="stylesheet" href="../../css/common.css">
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+    <link rel="stylesheet" href="../../css/16_dingDanHeDui/dingDanZhiFu.css"/>
+</head>
+<body >
+<div id="payResult" >
+    <section>
+    <template v-if="paying">
+        <h2>正在跳转支付页面。。。</h2>
+    </template>
+    <template v-else>
+        <div v-cloak>
+        <div class="zhiFuChengGong" >
+            <template v-if="payResultSuccess">
+                <img src="../../img/chenggongbg@3x.png" alt=""/>
+            </template>
+            <template v-else>
+                <img src="../../img/beishangbg@3x.png" alt=""/>
+            </template>
+        </div>
+        <template v-if="payResultSuccess">
+            <h2>订单支付成功！</h2>
+        </template>
+        <template v-else>
+            <h2>订单支付失败！</h2>
+            <template v-for="error in errorMessages">
+                <p>{{error}}</p>
+            </template>
+        </template>
+        <!--<p><span id="showTime5">30</span>秒后将跳转至我的订单！</p>-->
+        <p class="tiShi">如果您在支付过程中遇到问题<br/>请拨打客服电话：4006-770-878转3</p>
+            <template v-if="params.orderNo.indexOf('K')==-1">
+                <a href="javascript:void(0)" class="tiaoZhuan" @click="gotoMyOrder">查看详情</a>
+            </template>
+            <template v-else>
+                <a href="javascript:void(0)" class="tiaoZhuan" @click="gotoQuickOrder">查看详情</a>
+            </template>
+        <span class="printHome">printhome.com</span>
+        </div>
+    </template>
+
+</section>
+    <div v-html="toPayForm"></div>
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/cookieUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/vueUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/2_login_sign/loginSuccess.js"></script>
+<script charset="UTF-8" type="text/javascript" src="script/payResult.js"></script>
+</body>
+</html>

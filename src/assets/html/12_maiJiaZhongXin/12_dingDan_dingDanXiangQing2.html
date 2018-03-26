@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>订单详情</title>
+    <link type="text/css" rel="stylesheet" href="../../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/common1.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/12_maiJiaZhongXin/12_dingDan_dingDanXiangQing.css"/>
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+</head>
+<body>
+<div id="order_detail" v-cloak>
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="javascript:;" class="fanHui" v-on:click="toOrderList()"></a>
+        <!--已确定需求，不管哪个入口进入订单详情统一返回订单列表-->
+        <!--<a href="javascript:;" class="fanHui" onclick="javascript:history.back(-1);"></a>-->
+        订单详情
+    </div>
+    <div style="height: 0.88rem;"></div>
+</header>
+<!-- shipmentType  1立即支付，2延期支付,3分期支付，4定金支付,5新延期支付,-->
+<!--非立即支付订单才显示-->
+<template  v-if="orderInfo.tradeOrder.shipmentType && orderInfo.tradeOrder.shipmentType!=1">
+    <div class="stageTopBtn">
+        <span style="border-right: 1px solid #e8e8e8;" class="red_word">订单信息</span>
+        <template v-if="orderInfo.tradeOrder.shipmentType && orderInfo.tradeOrder.shipmentType==3">
+            <span @click="getPeriodInfo(orderInfo.tradeOrder.orderId)">分期信息</span>
+        </template>
+        <template v-if="orderInfo.tradeOrder.shipmentType && orderInfo.tradeOrder.shipmentType==4">
+            <span @click="getPeriodInfo(orderInfo.tradeOrder.orderId)">支付信息</span>
+        </template>
+        <template v-if="orderInfo.tradeOrder.shipmentType && orderInfo.tradeOrder.shipmentType==5">
+            <span @click="getPeriodInfo(orderInfo.tradeOrder.orderId)">延期信息</span>
+        </template>
+    </div>
+</template>
+<div class="orderDet" >
+    <section>
+        <div class="dingDanHao">
+            订单号：<i class="orderNum" >{{orderInfo.tradeOrder.orderId}}</i>
+            <span>
+            <template v-if="orderInfo.tradeOrder.shipmentType == 1"><!--普通订单-->
+                <template v-if="orderInfo.tradeOrder.state == 1">等待付款</template>
+                <template v-else-if="orderInfo.tradeOrder.state == 2">待配送</template>
+                <template v-else-if="orderInfo.tradeOrder.state == 3">卖家已发货</template>
+                <template v-else-if="orderInfo.tradeOrder.state == 4">待评价</template>
+                <template v-else-if="orderInfo.tradeOrder.state == 5">交易完成</template>
+                <template v-else-if="orderInfo.tradeOrder.state == 6">已取消</template>
+                <template v-else-if="orderInfo.tradeOrder.state == 7">已关闭</template>
+            </template>
+            <template v-else><!--其他订单  要再判断一下paid标志-->
+                <template v-if="orderInfo.tradeOrder.paid == 2">
+                    <template v-if="orderInfo.tradeOrder.state == 1">等待付款</template>
+                    <template v-else-if="orderInfo.tradeOrder.state == 2">待配送</template>
+                    <template v-else-if="orderInfo.tradeOrder.state == 3">卖家已发货</template>
+                    <template v-else-if="orderInfo.tradeOrder.state == 4">待评价</template>
+                    <template v-else-if="orderInfo.tradeOrder.state == 5">交易完成</template>
+                    <template v-else-if="orderInfo.tradeOrder.state == 6">已取消</template>
+                    <template v-else-if="orderInfo.tradeOrder.state == 7">已关闭</template>
+                </template>
+                <template v-else>
+                    <template v-if="orderInfo.tradeOrder.state == 1">等待付款</template>
+                    <template v-else-if="orderInfo.tradeOrder.state == 2">待配送</template>
+                    <template v-else-if="orderInfo.tradeOrder.state == 3">卖家已发货</template>
+                    <template v-else-if="orderInfo.tradeOrder.state == 4">待评价</template>
+                    <template v-else-if="orderInfo.tradeOrder.state == 5">待付款</template>
+                    <template v-else-if="orderInfo.tradeOrder.state == 6">已取消</template>
+                    <template v-else-if="orderInfo.tradeOrder.state == 7">已关闭</template>
+                </template>
+            </template>
+
+        </span>
+        </div>
+        <!--此处隐藏收货地址信息-->
+        <div class="xinxi">
+            <div class="address_xinxi">
+                <div class="shouJianRen">
+                    <p id="name">收货人：{{orderInfo.tradeOrder.name}}</p>
+                    <p id="number">{{orderInfo.tradeOrder.mobile}}</p>
+                </div>
+                <div class="diZhi">
+                    <span class="dingWei"></span>
+                    <p>
+                        {{orderInfo.tradeOrder.fullAddress}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="dingDan">
+            <div class="dianPu clearfix">
+                <span class="pingTai"></span>
+                <a href="javascript:;" class="name" v-on:click="toShop(orderInfo.tradeOrder.shopId)">{{orderInfo.tradeOrder.shopName}}</a>
+            </div>
+            <template v-for="item in orderInfo.tradeOrder.items">
+                <a class="xiangQing clearfix" href="javascript:;">
+                    <template v-if="item.itemBuyType == 4"><!--套餐订单-->
+                        <template v-for="mealitem in item.itemMealDTO.itemMealDetails">
+                            <div class="top clearfix">
+                            <img v-bind:src="img_url + mealitem.skuInfo.itemPicUrl" alt="" v-on:click="goodsDetail(mealitem.itemId,mealitem.skuId)"/>
+                                <div class="fr">
+                                    <p class="shangPin">
+                                        <span v-on:click="goodsDetail(mealitem.itemId,mealitem.skuId)">{{ mealitem.skuInfo.itemName }}</span>
+                                    </p>
+                                    <p class="leiXing" v-on:click="goodsDetail(mealitem.itemId,mealitem.skuId)">
+                                        <template v-for="array in mealitem.skuInfo.itemAttrList">
+                                            <span>
+                                                {{ array.name }} :
+                                                <template v-for="itemAttrValuePT in array.values">
+                                                    {{itemAttrValuePT.name}}
+                                                </template>
+                                            </span>
+                                        </template>
+                                    </p>
+                                    <span class="money">
+                                        <template>¥{{ mealitem.skuInfo.sellPrices[0].sellPrice }}</template>
+                                    </span>
+                                    <span class="num">X {{item.num}}</span>
+                                </div>
+                            </div>
+                        </template>
+                    </template>
+                    <template v-else="">
+                        <div class="top clearfix">
+                            <template v-for="array in orderInfo.jsonArray">
+                                <template v-if="array.skuId == item.skuId">
+                                    <img v-bind:src="img_url + array.skuPicUrl" alt="" v-on:click="goodsDetail(item.itemId,item.skuId,item)"/>
+                                </template>
+                            </template>
+                            <div class="fr">
+                                <p class="shangPin">
+                                    <template v-for="array in orderInfo.jsonArray">
+                                        <template v-if="array.skuId == item.skuId">
+                                            <span v-on:click="goodsDetail(item.itemId,item.skuId,item)">{{array.itemName}}</span>
+                                        </template>
+                                    </template>
+                                </p>
+                                <p class="leiXing" v-on:click="goodsDetail(item.itemId,item.skuId,item)">
+                                    <template v-for="array in orderInfo.jsonArray">
+                                        <template v-if="array.skuId == item.skuId">
+                                                <template v-if="item.itemBuyType == 2 || item.itemBuyType == 3">
+                                                    {{ item.boardItemSkuStr }}
+                                                </template>
+                                                <template v-else="">
+                                                <template v-for="itemAttrName in array.itemAttr">
+                                                <span>
+                                                    {{itemAttrName.name}} :
+                                                    <template v-for="itemAttrValue in itemAttrName.values">
+                                                        {{itemAttrValue.name}}
+                                                    </template>
+                                                </span>
+                                                </template>
+                                            </template>
+                                        </template>
+                                    </template>
+                                </p>
+                                <span class="money">
+                                <template v-if="orderInfo.tradeOrder.paymentMethod == 3">{{item.payPrice}}积分</template>
+                                <template v-else>¥{{item.payPrice}}</template>
+                            </span>
+                                <span class="num">X {{item.num}}</span>
+                            </div>
+                        </div>
+                    </template>
+                    <div class="caoZuo clearfix">
+                        <template v-for="array in orderInfo.jsonArray">
+                            <template v-if="array.skuId == item.skuId">
+                                <template v-if="orderInfo.tradeOrder.state == 4 || orderInfo.tradeOrder.state==5">
+                                    <template v-if="item.itemBuyType != 4"> <!--套餐商品没有加入常购列表按钮-->
+                                        <a href="javascript:;" v-on:click="add_order_list(orderInfo.tradeOrder.orderId,item.itemId,item.skuId)">加入常购列表</a>
+                                    </template>
+                                </template>
+                                <template v-if="!array.refundFlag">
+                                   	<template v-if="orderInfo.tradeOrder.paymentType!=3 && orderInfo.tradeOrder.paymentType!=4 && orderInfo.tradeOrder.paymentType!=5">
+                                    	<template v-if="orderInfo.tradeOrder.shipmentType!=3 && orderInfo.tradeOrder.shipmentType!=4 && orderInfo.tradeOrder.shipmentType!=5">
+                                    		<template v-if="orderInfo.tradeOrder.paid==2">
+		                                        <template v-if="orderInfo.tradeOrder.state == 2 || orderInfo.tradeOrder.state == 3">
+		                                            <a href="javascript:;"  v-on:click="applySaleAfter(orderInfo.tradeOrder.orderId,item.skuId)">申请售后</a>
+		                                        </template>
+		                                        <template v-else-if="orderInfo.tradeOrder.state > 3 && orderInfo.tradeOrder.state < 6">
+		                                            <a href="javascript:;"  v-on:click="applySaleAfter(orderInfo.tradeOrder.orderId,item.skuId)">申请售后</a>
+		                                        </template>
+	                                        </template>
+	                                	</template>
+                                    </template>
+                                </template>
+                                <template v-else>
+                                    <a href="javascript:;" v-on:click="lookProgress(array.refundId,item.skuId)">售后进度</a>
+                                </template>
+
+                                <template v-if="orderInfo.tradeOrder.state >= 3">
+                                    <template v-if="array.deliveryId == ''">
+                                        <!--<a href="javascript:;" v-on:click="logisticsInformationNone2Win()">查看物流</a>-->
+                                    </template>
+                                    <template v-else>
+                                        <!--<a href="javascript:;" v-on:click="checkLogistic(array.orderItemId)">查看物流</a>-->
+                                    </template>
+                                </template>
+                            </template>
+                        </template>
+                    </div>
+                </a>
+                <div style="width: 6rem;border: 1px dashed #E8E8E8;margin: 0 auto;"></div>
+            </template>
+        </div>
+    </section>
+    <section>
+        <div class="zhiFuFangShi">
+            支付类型
+            <span>
+                <!--<template v-if="orderInfo.tradeOrder.paymentMethod == 1">个人支付</template>
+                <template v-else-if="orderInfo.tradeOrder.paymentMethod == 2">
+                    企业支付<template v-if="orderInfo.tradeOrder.shipmentType == 2">-(延期)</template>
+                </template>
+                <template v-else-if="orderInfo.tradeOrder.paymentMethod == 3">积分支付</template>-->
+                <template v-if="orderInfo.tradeOrder.shipmentType == 1">
+                    立即支付
+                </template>
+                <template v-if="orderInfo.tradeOrder.shipmentType == 2">
+                    延期支付
+                </template>
+                <template v-if="orderInfo.tradeOrder.shipmentType == 3">
+                    分期支付
+                </template>
+                 <template v-if="orderInfo.tradeOrder.shipmentType == 4">
+                    定金支付
+                </template>
+                 <template v-if="orderInfo.tradeOrder.shipmentType == 5">
+                    延期支付
+                </template>
+            </span>
+        </div>
+    </section>
+    <template v-if="orderInfo.tradeOrder.paymentType != null && orderInfo.tradeOrder.shipmentType != 4">
+        <section>
+            <div class="zhiFuFangShi">
+                支付工具
+                <span>
+        <template v-if="orderInfo.tradeOrder.paymentMethod == 4">转账支付</template>
+        <template v-else-if="orderInfo.tradeOrder.paymentType == 0">支付宝</template>
+        <template v-else-if="orderInfo.tradeOrder.paymentType == 1">京东支付</template>
+        <template v-else-if="orderInfo.tradeOrder.paymentType == 2">小印支付</template>
+        <template v-else-if="orderInfo.tradeOrder.paymentType == 3">
+            <template v-if="orderInfo.offLinePayMean != null">
+                {{orderInfo.offLinePayMean}}
+            </template>
+        </template>
+        <template v-else-if="orderInfo.tradeOrder.paymentType == 4">支付宝<!--支付宝其他银行--></template>
+        <template v-else-if="orderInfo.tradeOrder.paymentType == 5">微信支付</template>
+        <template v-else-if="orderInfo.tradeOrder.paymentType == 6">微信支付</template>
+        <template v-else-if="orderInfo.tradeOrder.paymentType == 7">积分支付</template>
+        <template v-else-if="orderInfo.tradeOrder.paymentType == 100">支付宝<!--支付宝手机端--></template>
+        <template v-else-if="orderInfo.tradeOrder.paymentType == 101">京东支付<!--京东快捷支付--></template>
+    </span>
+            </div>
+        </section>
+    </template>
+
+    <section>
+        <div class="faPiaoXinXi">
+            <template v-if="orderInfo.invoiceDTO==null"> <!--这只是判断没有补开，不能判断下单时没开发票-->
+                发票信息
+                <template v-if="orderInfo.tradeOrder.invoice == 1 || orderInfo.tradeOrder.invoice == null"><!--这判断下单时没开发票-->
+                    <span style="float: right;margin-right: 0.1rem;">不开发票</span>
+                    <p style="clear: both;overflow: hidden">
+                        <span @click="addInvoice(orderInfo.tradeOrder.sellerId,orderInfo.tradeOrder.orderId)" style="float: right; display: inline-block;background-color: #e60012;color: white;height: 0.5rem;line-height:0.5rem;border-radius: 0.1rem;padding: 0 0.1rem;" >申请补开</span>
+                    </p>
+                </template>
+            </template>
+            <template v-else> <!--下单时开发票了和申请补开，orderInfo.invoiceDTO就有值-->
+                <template v-if="orderInfo.invoiceDTO.isApply && orderInfo.invoiceDTO.isApply==1">
+                    补开发票信息
+                </template>
+                <template v-else>
+                    发票信息
+                </template>
+                <template v-if="orderInfo.invoiceDTO.invoice == 2">
+                    <template v-if="orderInfo.invoiceDTO.isApply && orderInfo.invoiceDTO.isApply==1"><!--是补开的-->
+                        <a href="javascript:;" id="commonInvoiceAdd">增值税普通发票<span></span></a>
+                        <template v-if="orderInfo.invoiceDTO.state==2"><!--待卖家确认-->
+                            <p style="text-align: right">温馨提示：请耐心等待卖家进行处理</p>
+                        </template>
+                        <template v-else><!--补开发票，卖家已确认-->
+                            <template v-if="orderInfo.invoiceDTO.state==3"><!--待买家接受-->
+                                <p style="clear: both;overflow: hidden">
+                                    <span @click="getInvoice()" style="float: right; display: inline-block;background-color: #e60012;color: white;height: 0.5rem;line-height:0.5rem;border-radius: 0.1rem;padding: 0 0.1rem;" >确认收到发票</span>
+                                </p>
+                            </template>
+                        </template>
+                    </template>
+                    <template v-else><!--不是补开的-->
+                        <a href="javascript:;">增值税普通发票</a>
+                        <p>发票抬头：{{orderInfo.invoiceDTO.invoiceTitle}}</p>
+                        <p>纳税人识别码：{{orderInfo.invoiceDTO.taxpayerCode}}</p>
+                    </template>
+                </template>
+                <template v-if="orderInfo.invoiceDTO.invoice == 3">
+                    <a href="javascript:;" id="zengZhiShui">增值税专用发票<span></span></a>
+                    <template v-if="orderInfo.invoiceDTO.isApply && orderInfo.invoiceDTO.isApply==1"><!--是补开的-->
+                        <template v-if="orderInfo.invoiceDTO.state==2"><!--待卖家确认-->
+                            <p style="text-align: right">温馨提示：请耐心等待卖家进行处理</p>
+                            <p style="clear: both;overflow: hidden">
+                                <span @click="getInvoice()" style="float: right; display: inline-block;background-color: #e60012;color: white;height: 0.5rem;line-height:0.5rem;border-radius: 0.1rem;padding: 0 0.1rem;" >确认收到发票</span>
+                            </p>
+                        </template>
+                        <template v-else><!--补开发票，卖家已确认-->
+                            <template v-if="orderInfo.invoiceDTO.state==3"><!--待买家接受-->
+                                <p style="clear: both;overflow: hidden">
+                                    <span @click="getInvoice()" style="float: right; display: inline-block;background-color: #e60012;color: white;height: 0.5rem;line-height:0.5rem;border-radius: 0.1rem;padding: 0 0.1rem;" >确认收到发票</span>
+                                </p>
+                            </template>
+                        </template>
+                    </template>
+                </template>
+            </template>
+
+        </div>
+    </section>
+    <!--<section>-->
+    <!--<template v-if="orderInfo.tradeOrder.deliverys != null && orderInfo.tradeOrder.deliverys.length > 0">-->
+    <!--<template v-for="delivery in orderInfo.tradeOrder.deliverys">-->
+    <!--<div class="wuLiuXinXi">-->
+    <!--物流信息<a href="javascript:;"><span>{{delivery.deliveryCompanyCode}}</span>{{delivery.deliveryCompanyName}}</a>-->
+    <!--</div>-->
+    <!--</template>-->
+    <!--</template>-->
+    <!--</section>-->
+    <section>
+        <div class="jiaQian">
+            <p>商品总金额
+                <span>
+                <!--立即支付订单和其他支付订单取得总金额的变量不一样-->
+                <template v-if="orderInfo.tradeOrder.shipmentType && orderInfo.tradeOrder.shipmentType ==1">
+                    <template v-if="orderInfo.tradeOrder.totalPrice != null">￥{{orderInfo.tradeOrder.totalPrice}}</template>
+                    <template v-else>￥0.00</template>
+                </template>
+                <template v-else>
+                    <template v-if="orderInfo.tradeOrder.orderApInfo && orderInfo.tradeOrder.orderApInfo.length>0 && orderInfo.tradeOrder.orderApInfo[0].allPayPirce">￥{{orderInfo.tradeOrder.orderApInfo[0].allPayPirce}}</template>
+                    <template v-else>￥0.00</template>
+                </template>
+
+                </span>
+            </p>
+            <p>运费
+                <span>
+                <template v-if="orderInfo.tradeOrder.freight != null">￥{{orderInfo.tradeOrder.freight}}</template>
+                <template v-else>￥0.00</template>
+            </span>
+            </p>
+            <p>优惠总金额
+                <span>
+                    <template v-if="orderInfo.tradeOrder.totalDiscount != null">-￥{{orderInfo.tradeOrder.totalDiscount}}</template>
+                    <template v-else>￥0.00</template>
+                </span>
+            </p>
+            <div style="width: 6rem;border: 1px dashed #ccc;margin: 0.2rem auto;"></div>
+            <p><i>订单实付款</i>
+                <span>
+                <template v-if="orderInfo.tradeOrder.shipmentType && orderInfo.tradeOrder.shipmentType ==1"><!--立即支付-->
+                    <template v-if="orderInfo.tradeOrder.paymentMethod == 3">{{orderInfo.tradeOrder.integral}}积分</template>
+                    <template v-else>￥{{orderInfo.tradeOrder.paymentPrice}}</template>
+                </template>
+                    <template v-else><!--其他支付-->
+                    <template v-if="orderInfo.tradeOrder.orderApInfo && orderInfo.tradeOrder.orderApInfo.length>0 && orderInfo.tradeOrder.orderApInfo[0].allPayPirce">￥{{orderInfo.tradeOrder.orderApInfo[0].allPayPirce}}</template>
+                    <template v-else>￥0.00</template>
+                </template>
+            </span>
+            </p>
+        </div>
+    </section>
+    <section>
+        <div class="dingDanShiJian">
+            <p class="mar">订单时间</p>
+            <template v-if="orderInfo.tradeOrder.createTime != null">
+                <p>创建时间：{{orderInfo.tradeOrder.createTime | longToDate(orderInfo.tradeOrder.createTime)}}</p>
+            </template>
+            <template v-if="orderInfo.tradeOrder.paymentTime != null">
+                <p>付款时间：{{orderInfo.tradeOrder.paymentTime | longToDate(orderInfo.tradeOrder.paymentTime)}}</p>
+            </template>
+            <template v-if="orderInfo.tradeOrder.deliverTime != null">
+                <p>发货时间：{{orderInfo.tradeOrder.deliverTime | longToDate(orderInfo.tradeOrder.deliverTime)}}</p>
+            </template>
+            <template v-if="orderInfo.tradeOrder.updateTime != null">
+                <template v-if="orderInfo.tradeOrder.state == 5">
+                    <p>完成时间：{{orderInfo.tradeOrder.updateTime | longToDate(orderInfo.tradeOrder.updateTime)}}</p>
+                </template>
+                <template v-else-if="orderInfo.tradeOrder.state == 6">
+                    <p>取消时间：{{orderInfo.tradeOrder.updateTime | longToDate(orderInfo.tradeOrder.updateTime)}}</p>
+                </template>
+            </template>
+        </div>
+    </section>
+    <!--产品推荐-->
+    <section>
+        <div class="chanPinTuiJian" style="display: none">
+            <div class="title">
+                <div><img src="../../img/chanPinTuiJian.png" alt=""/>产品推荐</div>
+            </div>
+            <div class="neiRong">
+                <a href="javascript:;">
+                    <img src="../../img/banner.png" alt=""/>
+                </a>
+                <a href="javascript:;">
+                    <img src="../../img/banner.png" alt=""/>
+                </a>
+                <a href="javascript:;">
+                    <img src="../../img/banner.png" alt=""/>
+                </a>
+                <a href="javascript:;">
+                    <img src="../../img/banner.png" alt=""/>
+                </a>
+            </div>
+        </div>
+    </section>
+</div>
+<div class="stageDet" style="display:none">
+    <template v-if="orderInfo.tradeOrder.shipmentType && orderInfo.tradeOrder.shipmentType==3">
+        <template v-for="(periodItem,index) in periodItemList">
+            <div class="oneStage">
+                <p>N{{index < 9 ? '0'+(index+1):(index+1)}}</p>
+                <p class="marT_20">
+                    <span class="stageKey">分 期 比 例：</span>{{periodItem.payScale | toDecimal2}}%
+                </p>
+                <p class="marT_20">
+                    <span class="stageKey">金&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;额：</span>￥{{periodItem.apPayCapital |toDecimal2}}
+                </p>
+                <p class="marT_20">
+                    <span class="stageKey">逾期手续费：</span>￥{{periodItem.apOverdueFee | toDecimal2}}
+                </p>
+                <p class="marT_20">
+                    <span class="stageKey">支 付 状 态：</span><template v-if="periodItem.isPay==1">已支付</template><template v-else>未支付</template>
+                </p>
+                <p class="marT_20">
+                    <!--<span class="stageKey">应支付时间：</span><template v-if="periodItem.apStartTime && periodItem.apStartTime!=null">{{ periodItem.apStartTime|longToDateNoTime}} 至</template> <template v-if="periodItem.apEndTime && periodItem.apEndTime!=null">{{ periodItem.apEndTime |longToDateNoTime}}</template>-->
+                    <span class="stageKey">最晚支付时间：</span> <template v-if="periodItem.apEndTime && periodItem.apEndTime!=null">{{ (periodItem.apEndTime-60*24*60*1000) |longToDateNoTime}}</template>
+                </p>
+                <p class="marT_20">
+                    <span class="stageKey">支 付 时 间：</span><template v-if="periodItem.payTime && periodItem.payTime!=null">{{ periodItem.payTime |longToDateNoTime}}</template>
+                </p>
+            </div>
+            <!--延期信息-->
+            <!--<div class="oneStage">
+                <p class="marT_20">
+                    <span class="stageKey">金&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;额：</span>￥{{periodItem.apPayCapital |toDecimal2}}
+                </p>
+                <p class="marT_20">
+                    <span class="stageKey">逾期手续费：</span>￥{{periodItem.apOverdueFee | toDecimal2}}
+                </p>
+                <p class="marT_20">
+                    <span class="stageKey">支 付 状 态：</span><template v-if="periodItem.isPay==1">已支付</template><template v-else>未支付</template>
+                </p>
+                <p class="marT_20">
+                    <span class="stageKey">账&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;期：</span>提交订单后10天
+                </p>
+                <p class="marT_20">
+                    &lt;!&ndash;<span class="stageKey">应支付时间：</span><template v-if="periodItem.apStartTime && periodItem.apStartTime!=null">{{ periodItem.apStartTime|longToDateNoTime}} 至</template> <template v-if="periodItem.apEndTime && periodItem.apEndTime!=null">{{ periodItem.apEndTime |longToDateNoTime}}</template>&ndash;&gt;
+                    <span class="stageKey">最晚还款时间：</span> <template v-if="periodItem.apEndTime && periodItem.apEndTime!=null">{{ (periodItem.apEndTime-60*24*60*1000) |longToDateNoTime}}</template>
+                </p>
+                <p class="marT_20">
+                    <span class="stageKey">支 付 时 间：</span><template v-if="periodItem.payTime && periodItem.payTime!=null"></template>
+                </p>
+                <p class="marT_20">
+                    <span class="stageKey">支 付 方 式：</span><template v-if="periodItem.payTime && periodItem.payTime!=null"></template>
+                </p>
+            </div>-->
+        </template>
+    </template>
+    <template v-if="orderInfo.tradeOrder.shipmentType && orderInfo.tradeOrder.shipmentType==4 && periodItemList.length>0">
+            <div class="oneStage">
+                <p class="font_bold">定金阶段</p>
+                <p><span class="stageKey">金&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; 额：</span>￥{{periodItemList[0].apPayCapital |toDecimal2}}</p>
+                <p><span class="stageKey">交&nbsp;&nbsp;&nbsp;易 &nbsp;状 &nbsp;态：</span>{{periodItemList[0].tranStatus}}</p>
+                <p><span class="stageKey">支&nbsp; &nbsp;付 &nbsp;状 &nbsp;态：</span><template v-if="periodItemList[0].isPay==1">已支付</template><template v-else>未支付</template></p>
+                <p><span class="stageKey">最晚支付日期：</span><template v-if="periodItemList[0].apEndTime && periodItemList[0].apEndTime!=null">{{ (periodItemList[0].apEndTime-60*24*60*1000) |longToDateNoTime}}</template></p>
+                <p><span class="stageKey">支&nbsp; &nbsp;付 &nbsp;时 &nbsp;间：</span><template v-if="periodItemList[0].payTime && periodItemList[0].payTime!=null">{{ periodItemList[0].payTime |longToDateNoTime}}</template></p>
+                <p><span class="stageKey">付&nbsp; &nbsp;款 &nbsp;方 &nbsp;式：</span>
+                    <template v-if="periodItemList[0].paymentType == 0">支付宝</template>
+                    <template v-else-if="periodItemList[0].paymentType == 1">京东支付</template>
+                    <template v-else-if="periodItemList[0].paymentType == 2">小印支付</template>
+                    <template v-else-if="periodItemList[0].paymentType == 3">线下付款</template>
+                    <template v-else-if="periodItemList[0].paymentType == 4">支付宝其他银行</template>
+                    <template v-else-if="periodItemList[0].paymentType == 5 || periodItemList[0].paymentType == 6">微信支付</template>
+                    <template v-else-if="periodItemList[0].paymentType == 7">积分支付</template>
+                    <template v-else-if="periodItemList[0].paymentType == 8">转账支付</template>
+                    <template v-else-if="periodItemList[0].paymentType == 100">支付宝手机端</template>
+                    <template v-else-if="periodItemList[0].paymentType == 101">京东快捷支付</template>
+                </p>
+            </div>
+            <div class="oneStage">
+                <p class="font_bold">尾款阶段</p>
+                <p><span class="stageKey">金&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; 额：</span>￥{{periodItemList[1].apPayCapital |toDecimal2}}</p>
+                <p><span class="stageKey">交&nbsp;&nbsp;&nbsp;易 &nbsp;状 &nbsp;态：</span>{{periodItemList[1].tranStatus}}</p>
+                <p><span class="stageKey">支&nbsp; &nbsp;付 &nbsp;状 &nbsp;态：</span><template v-if="periodItemList[1].isPay==1">已支付</template><template v-else>未支付</template></p>
+                <p><span class="stageKey">最晚支付日期：</span><template v-if="periodItemList[1].apEndTime && periodItemList[1].apEndTime!=null">{{ (periodItemList[1].apEndTime-60*24*60*1000) |longToDateNoTime}}</template></p>
+                <p><span class="stageKey">支&nbsp; &nbsp;付 &nbsp;时 &nbsp;间：</span><template v-if="periodItemList[1].payTime && periodItemList[1].payTime!=null">{{ periodItemList[1].payTime |longToDateNoTime}}</template></p>
+                <p><span class="stageKey">付&nbsp; &nbsp;款 &nbsp;方 &nbsp;式：</span>
+                    <template v-if="periodItemList[1].paymentType == 0">支付宝</template>
+                    <template v-else-if="periodItemList[1].paymentType == 1">京东支付</template>
+                    <template v-else-if="periodItemList[1].paymentType == 2">小印支付</template>
+                    <template v-else-if="periodItemList[1].paymentType == 3">线下付款</template>
+                    <template v-else-if="periodItemList[1].paymentType == 4">支付宝其他银行</template>
+                    <template v-else-if="periodItemList[1].paymentType == 5 || periodItemList[1].paymentType == 6">微信支付</template>
+                    <template v-else-if="periodItemList[1].paymentType == 7">积分支付</template>
+                    <template v-else-if="periodItemList[1].paymentType == 8">转账支付</template>
+                    <template v-else-if="periodItemList[1].paymentType == 100">支付宝手机端</template>
+                    <template v-else-if="periodItemList[1].paymentType == 101">京东快捷支付</template>
+                </p>
+            </div>
+    </template>
+    <template v-if="orderInfo.tradeOrder.shipmentType && orderInfo.tradeOrder.shipmentType==5 && periodItemList.length>0">
+        <div class="oneStage">
+            <p><span class="stageKey">金&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; 额：</span>￥{{apInfo.totalApPayCapital}}</p>
+            <p><span class="stageKey">逾&nbsp;期&nbsp;手&nbsp;续&nbsp;费：</span>
+                <template v-if="apInfo.apOverdueFeeFlag==1">{{apInfo.apOverdueFee}}
+                    <template v-if="apInfo.apOverdueFeeUnit==1">%</template><!--apOverdueFeeUnit 1为%，2为元-->
+                    <template v-else>元</template>
+                    <template v-if="apInfo.apOverdueFeeType==1">/期</template><!--apOverdueFeeType 1为按期收费，2为按天收费-->
+                    <template v-else>/天</template>
+                </template>
+                <template v-else>无</template>
+            </p>
+            <p><span class="stageKey">支&nbsp; &nbsp;付 &nbsp;状 &nbsp;态：</span>
+                <template v-if="periodItemList[0].isPay==0">未支付</template>
+                <template v-else>已支付</template>
+            </p>
+            <p><span class="stageKey">账&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; 期：</span>提交订单后{{periodItemList[0].payInterval}}天</p>
+
+            <p><span class="stageKey">最晚还款时间：</span><template v-if="periodItemList[0].apEndTime && periodItemList[0].apEndTime!=null">{{periodItemList[0].apEndTime |longToDateNoTime}}</template></p>
+            <p><span class="stageKey">支&nbsp; &nbsp;付 &nbsp;时 &nbsp;间：</span><template v-if="periodItemList[0].payTime && periodItemList[0].payTime!=null">{{periodItemList[0].payTime |longToDateNoTime}}</template></p>
+            <p><span class="stageKey">支&nbsp; &nbsp;付 &nbsp;方 &nbsp;式：</span>
+            	<template v-if="periodItemList[0].payTime && periodItemList[0].payTime!=null">
+            		<template v-if="periodItemList[0].paymentType == 0">支付宝</template>
+                    <template v-else-if="periodItemList[0].paymentType == 1">京东支付</template>
+                    <template v-else-if="periodItemList[0].paymentType == 2">小印支付</template>
+                    <template v-else-if="periodItemList[0].paymentType == 3">线下付款</template>
+                    <template v-else-if="periodItemList[0].paymentType == 4">支付宝其他银行</template>
+                    <template v-else-if="periodItemList[0].paymentType == 5 || periodItemList[1].paymentType == 6">微信支付</template>
+                    <template v-else-if="periodItemList[0].paymentType == 7">积分支付</template>
+                    <template v-else-if="periodItemList[0].paymentType == 8">转账支付</template>
+                    <template v-else-if="periodItemList[0].paymentType == 100">支付宝手机端</template>
+                    <template v-else-if="periodItemList[0].paymentType == 101">京东快捷支付</template>
+                </template>
+            </p>
+        </div>
+    </template>
+</div>
+ <!--底部网址-->
+<section>
+   <p class="printHome">printhome.com</p>
+</section>
+<div style="height: 0.84rem;"></div>
+<!--回到顶部-->
+<section>
+    <div id="top" @click="goToTop()">
+    </div>
+</section>
+<footer>
+    <div class="foot">
+        <!--<template v-if="orderType && orderType=='periodOrder'">
+            <div class="stageFoot">
+                <input type="button" value="本期支付" class="on" v-on:click="toOrderEvaluate(orderInfo.tradeOrder.orderId)"/>
+                &lt;!&ndash;<input type="button" value="跨期支付" class="crossPayBtn" @click="crossPay(orderInfo.tradeOrder.orderId)"/>&ndash;&gt;
+                <input type="button" value="取消订单" v-on:click="toOrderEvaluate(orderInfo.tradeOrder.orderId)"/>
+            </div>
+        </template>-->
+        <template v-if="orderInfo.tradeOrder.locked == 1">
+            <!--延期订单-->
+            <!--<input type="button" value="去支付" class="on" v-on:click="toOrderEvaluate(orderInfo.tradeOrder.orderId)"/>-->
+            <!--<input type="button" value="取消订单" v-on:click="toOrderEvaluate(orderInfo.tradeOrder.orderId)"/>-->
+                <template v-if="orderInfo.tradeOrder.shipmentType == 2"><!--延期订单-->
+                    <template v-if="orderInfo.tradeOrder.paid == 2">
+                        <template v-if="orderInfo.tradeOrder.state == 1"></template>
+                        <template v-else-if="orderInfo.tradeOrder.state == 2">
+                            <!--分期订单付了一期就会变为待配送,因此要判断是否付清-->
+                            <template v-if="orderInfo.tradeOrder.orderApInfo && orderInfo.tradeOrder.orderApInfo.length>0 && orderInfo.tradeOrder.orderApInfo.length>0 && orderInfo.tradeOrder.orderApInfo[0].isAllPay==0"> <!--必须付的第一期-->
+                                <template v-if="orderInfo.tradeOrder.currentPeriodPayInfo">
+                                    <input type="button" value="本期支付"  class="on" :paytotal="orderInfo.tradeOrder.currentPeriodPayInfo.apPayTotal" :overdueday="orderInfo.tradeOrder.currentPeriodPayInfo.apOverdueDay" :overduefee="orderInfo.tradeOrder.currentPeriodPayInfo.apOverdueFee" v-on:click="toPayForAp($event,orderInfo.tradeOrder.orderId,orderInfo.tradeOrder.currentPeriodPayInfo.orderAccountPeriodId,orderInfo.tradeOrder.currentPeriodPayInfo.id)"/>
+                                </template>
+                            </template>
+                        </template>
+                        <template v-else-if="orderInfo.tradeOrder.state == 3">
+                            <input type="button" value="确认收货" class="on" v-on:click="toConfirmReceipt(orderInfo.tradeOrder)"/>
+                            <template v-if="orderInfo.tradeOrder.delay == 1">
+                                <input type="button" value="延期收货" v-on:click="toDelayReceipt(orderInfo.tradeOrder)"/>
+                            </template>
+                            <template v-else-if="orderInfo.tradeOrder.delay == 2">
+                                <div>已延期收货</div>
+                            </template>
+                        </template>
+                        <template v-else-if="orderInfo.tradeOrder.state == 4">
+                            <input type="button" value="去评价" class="on" v-on:click="toOrderEvaluate(orderInfo.tradeOrder.orderId)"/>
+                        </template>
+                        <template v-else-if="orderInfo.tradeOrder.state == 5">
+                            <input type="button" value="删除订单" class="on" v-on:click="toDeleteOrder(orderInfo.tradeOrder)"/>
+                        </template>
+                        <template v-else-if="orderInfo.tradeOrder.state == 6">
+                            <input type="button" value="删除订单" class="on" v-on:click="toDeleteOrder(orderInfo.tradeOrder)"/>
+                        </template>
+                    </template>
+                    <template v-else>
+                        <template v-if="orderInfo.tradeOrder.state == 1">
+                            <template v-if="orderInfo.tradeOrder.shipmentType == 3 || orderInfo.tradeOrder.shipmentType == 4 || orderInfo.tradeOrder.shipmentType == 5">  <!--分期订单-->
+                                <template v-if="orderInfo.tradeOrder.currentPeriodPayInfo">
+                                    <input type="button" value="本期支付"  class="on" :paytotal="orderInfo.tradeOrder.currentPeriodPayInfo.apPayTotal" :overdueday="orderInfo.tradeOrder.currentPeriodPayInfo.apOverdueDay" :overduefee="orderInfo.tradeOrder.currentPeriodPayInfo.apOverdueFee" v-on:click="toPayForAp($event,orderInfo.tradeOrder.orderId,orderInfo.tradeOrder.currentPeriodPayInfo.orderAccountPeriodId,orderInfo.tradeOrder.currentPeriodPayInfo.id)"/>
+                                </template>
+                                <template v-if="!orderInfo.tradeOrder.orderApInfo[0].existsPayInfo">
+                                    <input type="button" value="取消订单" v-on:click="toCancleOrder(orderInfo.tradeOrder)"/>
+                                </template>
+                            </template>
+                            <template v-else>
+                                <input type="button" value="去支付" class="on" v-on:click="toPay(orderInfo.tradeOrder.orderId)"/>
+                                <input type="button" value="取消订单" v-on:click="toCancleOrder(orderInfo.tradeOrder)"/>
+                            </template>
+                        </template>
+                        <template v-else-if="orderInfo.tradeOrder.state == 2">
+                            <template v-if="orderInfo.tradeOrder.shipmentType == 3 || orderInfo.tradeOrder.shipmentType == 4 || orderInfo.tradeOrder.shipmentType == 5">  <!--分期订单-->
+                                <template v-if="orderInfo.tradeOrder.currentPeriodPayInfo">
+                                    <input type="button" value="本期支付"  class="on" :paytotal="orderInfo.tradeOrder.currentPeriodPayInfo.apPayTotal" :overdueday="orderInfo.tradeOrder.currentPeriodPayInfo.apOverdueDay" :overduefee="orderInfo.tradeOrder.currentPeriodPayInfo.apOverdueFee" v-on:click="toPayForAp($event,orderInfo.tradeOrder.orderId,orderInfo.tradeOrder.currentPeriodPayInfo.orderAccountPeriodId,orderInfo.tradeOrder.currentPeriodPayInfo.id)"/>
+                                </template>
+                                <template v-if="!orderInfo.tradeOrder.orderApInfo[0].existsPayInfo">
+                                    <input type="button" value="取消订单" v-on:click="toCancleOrder(orderInfo.tradeOrder)"/>
+                                </template>
+                            </template>
+                            <template v-else>
+                                <input type="button" value="去支付" class="on" v-on:click="toPay(orderInfo.tradeOrder.orderId)"/>
+                                <input type="button" value="取消订单" v-on:click="toCancleOrder(orderInfo.tradeOrder)"/>
+                            </template>
+                        </template>
+                        <template v-else-if="orderInfo.tradeOrder.state == 3">
+                            <template v-if="orderInfo.tradeOrder.shipmentType == 3 || orderInfo.tradeOrder.shipmentType == 4 || orderInfo.tradeOrder.shipmentType == 5">  <!--分期订单-->
+                                <template v-if="orderInfo.tradeOrder.currentPeriodPayInfo">
+                                    <input type="button" value="本期支付"  class="on" :paytotal="orderInfo.tradeOrder.currentPeriodPayInfo.apPayTotal" :overdueday="orderInfo.tradeOrder.currentPeriodPayInfo.apOverdueDay" :overduefee="orderInfo.tradeOrder.currentPeriodPayInfo.apOverdueFee" v-on:click="toPayForAp($event,orderInfo.tradeOrder.orderId,orderInfo.tradeOrder.currentPeriodPayInfo.orderAccountPeriodId,orderInfo.tradeOrder.currentPeriodPayInfo.id)"/>
+                                </template>
+                            </template>
+                            <template v-else>
+                                <input type="button" value="去支付" class="on" v-on:click="toPay(orderInfo.tradeOrder.orderId)"/>
+                            </template>
+                            <input type="button" value="确认收货" v-on:click="toConfirmReceipt(orderInfo.tradeOrder)"/>
+                            <template v-if="orderInfo.tradeOrder.delay == 1">
+                                <input type="button" value="延期收货" v-on:click="toDelayReceipt(orderInfo.tradeOrder)"/>
+                            </template>
+                            <template v-else-if="orderInfo.tradeOrder.delay == 2">
+                                <div>已延期收货</div>
+                            </template>
+                        </template>
+                        <template v-else-if="orderInfo.tradeOrder.state == 4">
+                            <template v-if="orderInfo.tradeOrder.shipmentType == 3 || orderInfo.tradeOrder.shipmentType == 4 || orderInfo.tradeOrder.shipmentType == 5">  <!--分期订单-->
+                                <template v-if="orderInfo.tradeOrder.currentPeriodPayInfo">
+                                    <input type="button" value="本期支付"  class="on" :paytotal="orderInfo.tradeOrder.currentPeriodPayInfo.apPayTotal" :overdueday="orderInfo.tradeOrder.currentPeriodPayInfo.apOverdueDay" :overduefee="orderInfo.tradeOrder.currentPeriodPayInfo.apOverdueFee" v-on:click="toPayForAp($event,orderInfo.tradeOrder.orderId,orderInfo.tradeOrder.currentPeriodPayInfo.orderAccountPeriodId,orderInfo.tradeOrder.currentPeriodPayInfo.id)"/>
+                                </template>
+                            </template>
+                            <template v-else>
+                                <input type="button" value="去支付" class="on" v-on:click="toPay(orderInfo.tradeOrder.orderId)"/>
+                            </template>
+                            <input type="button" value="去评价"  v-on:click="toOrderEvaluate(orderInfo.tradeOrder.orderId)"/>
+                        </template>
+                        <template v-else-if="orderInfo.tradeOrder.state == 5">
+                            <template v-if="orderInfo.tradeOrder.shipmentType == 3 || orderInfo.tradeOrder.shipmentType == 4 || orderInfo.tradeOrder.shipmentType == 5">  <!--分期订单-->
+                                <template v-if="orderInfo.tradeOrder.currentPeriodPayInfo">
+                                    <input type="button" value="本期支付"  class="on" :paytotal="orderInfo.tradeOrder.currentPeriodPayInfo.apPayTotal" :overdueday="orderInfo.tradeOrder.currentPeriodPayInfo.apOverdueDay" :overduefee="orderInfo.tradeOrder.currentPeriodPayInfo.apOverdueFee" v-on:click="toPayForAp($event,orderInfo.tradeOrder.orderId,orderInfo.tradeOrder.currentPeriodPayInfo.orderAccountPeriodId,orderInfo.tradeOrder.currentPeriodPayInfo.id)"/>
+                                </template>
+                            </template>
+                            <template v-else>
+                                <input type="button" value="去支付" class="on" v-on:click="toPay(orderInfo.tradeOrder.orderId)"/>
+                            </template>
+                        </template>
+                        <template v-else-if="orderInfo.tradeOrder.state == 6">
+                            <input type="button" value="删除订单" class="on" v-on:click="toDeleteOrder(orderInfo.tradeOrder)"/>
+                        </template>
+                    </template>
+                </template>
+                <template v-else><!--普通订单-->
+                    <template v-if="orderInfo.tradeOrder.state == 1">
+                        <template v-if="orderInfo.tradeOrder.shipmentType == 3 || orderInfo.tradeOrder.shipmentType == 4 || orderInfo.tradeOrder.shipmentType == 5">  <!--分期订单-->
+                            <template v-if="orderInfo.tradeOrder.currentPeriodPayInfo">
+                                <input type="button" value="本期支付"  class="on" :paytotal="orderInfo.tradeOrder.currentPeriodPayInfo.apPayTotal" :overdueday="orderInfo.tradeOrder.currentPeriodPayInfo.apOverdueDay" :overduefee="orderInfo.tradeOrder.currentPeriodPayInfo.apOverdueFee" v-on:click="toPayForAp($event,orderInfo.tradeOrder.orderId,orderInfo.tradeOrder.currentPeriodPayInfo.orderAccountPeriodId,orderInfo.tradeOrder.currentPeriodPayInfo.id)"/>
+                            </template>
+                            <template v-if="!orderInfo.tradeOrder.orderApInfo[0].existsPayInfo">
+                                <input type="button" value="取消订单" v-on:click="toCancleOrder(orderInfo.tradeOrder)"/>
+                            </template>
+                        </template>
+                        <template v-else>
+                            <input type="button" value="去支付" class="on" v-on:click="toPay(orderInfo.tradeOrder.orderId)"/>
+                            <input type="button" value="取消订单" v-on:click="toCancleOrder(orderInfo.tradeOrder)"/>
+                        </template>
+                    </template>
+                    <template v-else-if="orderInfo.tradeOrder.state == 2"> <!--分期订单付了一期就会变为待配送,因此要判断是否付清-->
+                        <template v-if="orderInfo.tradeOrder.orderApInfo && orderInfo.tradeOrder.orderApInfo.length>0 && orderInfo.tradeOrder.orderApInfo[0].isAllPay !=1"> <!--必须付的第一期-->
+                            <template v-if="orderInfo.tradeOrder.currentPeriodPayInfo">
+                                <template v-if="orderInfo.tradeOrder.shipmentType == 4 || orderInfo.tradeOrder.shipmentType == 3">
+                                	<input type="button" value="本期支付"  class="on" :paytotal="orderInfo.tradeOrder.currentPeriodPayInfo.apPayTotal" :overdueday="orderInfo.tradeOrder.currentPeriodPayInfo.apOverdueDay" :overduefee="orderInfo.tradeOrder.currentPeriodPayInfo.apOverdueFee" v-on:click="toPayForAp($event,orderInfo.tradeOrder.orderId,orderInfo.tradeOrder.currentPeriodPayInfo.orderAccountPeriodId,orderInfo.tradeOrder.currentPeriodPayInfo.id)"/>
+                            	</template>
+                            	 <template v-if="orderInfo.tradeOrder.shipmentType == 5">
+                                	<input type="button" value="去支付"  class="on" :paytotal="orderInfo.tradeOrder.currentPeriodPayInfo.apPayTotal" :overdueday="orderInfo.tradeOrder.currentPeriodPayInfo.apOverdueDay" :overduefee="orderInfo.tradeOrder.currentPeriodPayInfo.apOverdueFee" v-on:click="toPayForAp($event,orderInfo.tradeOrder.orderId,orderInfo.tradeOrder.currentPeriodPayInfo.orderAccountPeriodId,orderInfo.tradeOrder.currentPeriodPayInfo.id)"/>
+                            	</template>
+                            </template>
+                             <template v-if="!orderInfo.tradeOrder.orderApInfo[0].existsPayInfo">
+                                <input type="button" value="取消订单" v-on:click="toCancleOrder(orderInfo.tradeOrder)"/>
+                            </template>
+                        </template>
+                    </template>
+                    <template v-else-if="orderInfo.tradeOrder.state == 3">
+                        <input type="button" value="确认收货" class="on" v-on:click="toConfirmReceipt(orderInfo.tradeOrder)"/>
+                        <template v-if="orderInfo.tradeOrder.delay == 1">
+                            <input type="button" value="延期收货" v-on:click="toDelayReceipt(orderInfo.tradeOrder)"/>
+                        </template>
+                        <template v-else-if="orderInfo.tradeOrder.delay == 2">
+                            <div>已延期收货</div>
+                        </template>
+                    </template>
+                    <template v-else-if="orderInfo.tradeOrder.state == 4">
+                        <template v-if="orderInfo.tradeOrder.orderApInfo && orderInfo.tradeOrder.orderApInfo.length>0&&orderInfo.tradeOrder.orderApInfo[0].isAllPay==0">
+                            <!--state为4时，分期订单要检测是否付清，如果未付清要显示本期支付，非分期订单没有此逻辑-->
+                            <template v-if="orderInfo.tradeOrder.currentPeriodPayInfo">
+                                <input type="button" value="本期支付"  class="on" :paytotal="orderInfo.tradeOrder.currentPeriodPayInfo.apPayTotal" :overdueday="orderInfo.tradeOrder.currentPeriodPayInfo.apOverdueDay" :overduefee="orderInfo.tradeOrder.currentPeriodPayInfo.apOverdueFee" v-on:click="toPayForAp($event,orderInfo.tradeOrder.orderId,orderInfo.tradeOrder.currentPeriodPayInfo.orderAccountPeriodId,orderInfo.tradeOrder.currentPeriodPayInfo.id)"/>
+                            </template>
+                            <input type="button" value="去评价"  v-on:click="toOrderEvaluate(orderInfo.tradeOrder.orderId)"/>
+                        </template>
+                        <template v-else>
+                            <input type="button" value="去评价" class="on" v-on:click="toOrderEvaluate(orderInfo.tradeOrder.orderId)"/>
+                        </template>
+                    </template>
+                    <template v-else-if="orderInfo.tradeOrder.state == 5">
+                        <input type="button" value="删除订单" class="on" v-on:click="toDeleteOrder(orderInfo.tradeOrder)"/>
+                    </template>
+                    <template v-else-if="orderInfo.tradeOrder.state == 6">
+                        <input type="button" value="删除订单" class="on" v-on:click="toDeleteOrder(orderInfo.tradeOrder)"/>
+                    </template>
+                </template>
+            </template>
+    </div>
+</footer>
+    <!--加入常购列表弹窗-->
+    <!--case1-->
+    <div class="commonWin add_list" id="add_list">
+        <div class="commonWinCon">
+            <h5>加入常采购列表</h5>
+            <p class="commonWinMsg">确认加入常采购列表？</p>
+            <div class="commonWinLine"></div>
+            <div class="commonWinBtnWrap">
+                <span class="commonWinBtn cancle" v-on:click="closeAdd_order_list()">取消</span>
+                <span class="commonWinBtn sure"  onclick="addToReguBuyList('addNew')">确定</span>
+            </div>
+        </div>
+    </div>
+    <!--case2-->
+    <div class="commonWin add_list" id="change_list">
+        <div class="commonWinCon">
+            <h5>提示</h5>
+            <p class="commonWinMsg">您的列表已满，是否替换最后一件商品？</p>
+            <div class="commonWinLine"></div>
+            <div class="commonWinBtnWrap">
+                <span class="commonWinBtn cancle" v-on:click="closeAdd_order_list()">取消</span>
+                <span class="commonWinBtn sure"  onclick="addToReguBuyList('addOld')">确定</span>
+            </div>
+        </div>
+    </div>
+<!--增值税弹窗-->
+<template v-if="orderInfo.invoiceDTO && orderInfo.invoiceDTO.invoice == 3">
+    <div class="zheZhao">
+        <div class="zengZhiShuiXinXi">
+            <p class="biaoTi">发票信息<span></span></p>
+            <div class="xinXi">
+                <div class="kaiPiao">
+                    <p>开票信息</p>
+                    <div class="box">
+                        <span class="left"><label>＊</label>单位名称：</span>
+                        <span class="right">{{orderInfo.invoiceDTO.companyName}}</span>
+                    </div>
+                    <div class="box">
+                        <span class="left"><label>＊</label>纳税人识别码：</span>
+                        <span class="right">{{orderInfo.invoiceDTO.taxpayerCode}}</span>
+                    </div>
+                    <div class="box">
+                        <span class="left">注册地址：</span>
+                        <span class="right">{{orderInfo.invoiceDTO.registeredAddress}}</span>
+                    </div>
+                    <div class="box">
+                        <span class="left">注册电话：</span>
+                        <span class="right">{{orderInfo.invoiceDTO.registeredPhone}}</span>
+                    </div>
+                    <div class="box">
+                        <span class="left">开户银行：</span>
+                        <span class="right">{{orderInfo.invoiceDTO.bankName}}</span>
+                    </div>
+                    <div class="box">
+                        <span class="left"><label>＊</label>银行账户：</span>
+                        <span class="right">{{orderInfo.invoiceDTO.bankAccount}}</span>
+                    </div>
+                </div>
+                <div class="zhaoPian">
+                    <span>营业执照</span>
+                    <div class="img-block" style="width: 1rem;height: 1.4rem;margin-right:0.34rem;float: left;">
+                        <template v-for="picUrl in orderInfo.invoiceDTO.businessLicensePicUrl" >
+                            <img v-bind:src="img_url + picUrl" alt="" style="width: 1rem;height: 1.4rem;" @click="showIMG('businessLicensePicUrl',picUrl)"/>
+                        </template>
+                    </div>
+                    <span>税务登记证</span>
+                    <div class="img-block"  style="width: 1rem;height: 0.7rem;margin-right:0.34rem;float: left;">
+                        <template v-for="picUrl in orderInfo.invoiceDTO.taxRegistrationCertificatePicUrl">
+                            <img v-bind:src="img_url + picUrl" alt="" style="width: 1rem;height: 0.7rem;"  @click="showIMG('taxRegistrationCertificatePicUrl',picUrl)"/>
+                        </template>
+                    </div>
+                    <span>一般纳税人证明</span>
+                    <div class="img-block" style="width: 1rem;height: 0.7rem;margin-right:0.34rem;float: left;">
+                        <template v-for="picUrl in orderInfo.invoiceDTO.generalTaxpayerPicUrl">
+                            <img v-bind:src="img_url + picUrl" alt="" style="width: 1rem;height: 0.7rem;" @click="showIMG('generalTaxpayerPicUrl',picUrl)"/>
+                        </template>
+                    </div>
+                </div>
+                <div style="border: 1px dashed #ccc;width: 5.8rem;margin: 0.2rem auto;"></div>
+                <div class="kaiPiao">
+                    <p>开票信息</p>
+                    <div class="box">
+                        <span class="left">收票人姓名：</span>
+                        <span class="right">{{orderInfo.invoiceDTO.consigneeName}}</span>
+                    </div>
+                    <div class="box">
+                        <span class="left">收票人手机：</span>
+                        <span class="right">{{orderInfo.invoiceDTO.consigneeMobile}}</span>
+                    </div>
+                    <div class="box">
+                        <span class="left">收票人地址：</span>
+                        <span class="right">{{orderInfo.invoiceDTO.detailAddress}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+    <!--补开普通发票弹窗-->
+<template v-if="orderInfo.invoiceDTO &&  orderInfo.invoiceDTO.invoice == 2">
+    <div class="zheZhaoCommonInvoice">
+        <div class="zengZhiShuiXinXi1">
+            <p class="biaoTi">发票信息<span></span></p>
+            <div class="xinXi">
+                <div class="kaiPiao">
+                    <p>开票信息</p>
+                    <div class="box">
+                        <span class="left"><label>＊</label>发票抬头：</span>
+                        <span class="right">{{orderInfo.invoiceDTO.invoiceTitle}}</span>
+                    </div>
+                    <div class="box">
+                        <span class="left"><label>＊</label>纳税人识别码：</span>
+                        <span class="right">{{orderInfo.invoiceDTO.taxpayerCode}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+    <!--弹窗-->
+    <!--跨期支付弹窗-->
+    <section>
+        <div class="crossPay" id="crossPay" style="display: none">
+            <div class="dianpu" id="dian">
+                <img src="../../img/cha.png" class="chahao" alt="" @click="closeWin()">
+                <h3>跨期支付</h3>
+                <div class="liebiao">
+                    <p class="firstTit" style="">
+                        <span class="tit1" style="text-align: center">期数</span>
+                        <span  class="tit2">分期编号</span>
+                        <span  class="tit3">金额</span>
+                    </p>
+                    <!--第一期要单独拿出来，后边的可以循环-->
+                    <!--<p style="border: none">
+                        <span class="tit1"><img src="../../img/quickOrder/fang_defaultBtn.png" alt="" class="selStageBtn">首期</span>
+                        <span class="tit2">NO1</span>
+                        <span class="tit3">￥12346.00</span>
+                    </p>-->
+
+                    <template >
+                        <p v-for="(periodItem,index) in periodItemList">
+                            <span class="tit1">
+                               <template v-if="periodItem.isPay==0">
+                                        <img :src="selBtnIndex==index?'../../img/quickOrder/fang_selBtn.png':'../../img/quickOrder/fang_defaultBtn.png'" alt="" class="selStageBtn" @click="selPeriod(index)">
+                                </template>
+                                <template v-else>
+                                    <span style="display: inline-block;width: 0.4rem"></span>
+                                </template>{{periodItemList.length==(index+1)?'尾':periodName[index]}}期
+                            </span>
+                            <span class="tit2">N{{index < 9 ? '0'+(index+1):(index+1)}}</span>
+                            <span class="tit3">￥{{periodItem.apPayTotal}}</span>
+                        </p>
+                    </template>
+
+                </div>
+                <a href="javascript:;" class="guanbi" @click="hideDiv('dianputanchuang')">去支付</a>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="zhezhao" id="cancle_order_notice">
+            <div class="cancel_order_content">
+                <h5>是否取消订单</h5>
+                <p>您确定要取消此订单吗？</p>
+                <div></div>
+                <span class="sure_button" v-on:click="cancleOrder()">确定</span><span class="save_button" v-on:click="closeCancleOrderWin()">先留着</span>
+            </div>
+        </div>
+        <div class="zhezhao" id="delay_receipt_notice">
+            <div class="cancel_order_content">
+                <h5>提示</h5>
+                <p>订单收货延期，最长14天</p>
+                <div></div>
+                <span class="sure_button" v-on:click="delayReceipt()">确定</span>
+                <span class="save_button" v-on:click="closedelayReceiptNotice()">先留着</span>
+            </div>
+        </div>
+    </section>
+    <!--弹出层-->
+    <section>
+        <!--删除订单弹出层-->
+        <div class="zhezhao" id="delete_order_notice">
+            <div class="delete_order_content">
+                <h5>是否删除订单</h5>
+                <p>您确定要删除此订单吗？</p>
+                <div></div>
+                <span class="save_button" v-on:click="closeDeleteOrderNotice()">先留着</span>
+                <span class="sure_button" v-on:click="deleteOrder()">确定</span>
+            </div>
+        </div>
+    </section>
+    <!--确认收货弹窗-->
+    <div class="zhezhao" id="confirm_receipt_notice">
+        <div class="confirm_receipt_content">
+            <h5>确认收货</h5>
+            <p>请再次确认是否已收到货品！</p>
+            <div>
+                <input type="password" placeholder="请输入支付密码完成确认" class="miMa" v-model="payPassword" maxlength="20"/>
+                <i class="see img01"></i>
+            </div>
+            <a href="../../html/12_maiJiaZhongXin/6_anQuanXinXiSheZhi_zhaoHuiZhiFuMiMa.html">忘记密码？</a>
+            <div style="height: 1px;border: 1px dashed #ccc;clear: both;width: 4.1rem;margin: 0.2rem auto;"></div>
+            <div>
+                <input type="button" class="no_confirm" value="还没有收货" v-on:click="closeReceiptNotice()" />
+                <input type="button" class="sure_confirmed" value="确认已收货" v-on:click="confirmReceipt()" />
+            </div>
+        </div>
+    </div>
+    <!--延期收货提示-->
+    <div class="delay_tit">订单收货以延期，最长14天</div>
+    <!--点击放大图片-->
+    <section>
+        <div class="zhezhao" @click="closeIMG()" id="enlargeImg">
+            <div class="enlargeImg_content">
+                <img alt="" :src="img_url + picUrl" >
+                <i class="close_enlargeImg"></i>
+            </div>
+        </div>
+    </section>
+    <div class="zhezhao" id="payForPeriod">
+        <div class="delete_order_content" style="height: 3rem;margin-top: -2rem;">
+            <h5>逾期提示</h5>
+            <p style="height: 1.5rem;text-align: left;padding: 0 0.2rem">您的订单已逾期<i id="overDueDay" style="color: #e60012"></i>天，逾期手续费为:<i id="apOverdueFee"  style="color: #e60012"></i>元。本金加手续费合计为：<i id="paytotal"  style="color: #e60012"></i>。</p>
+            <div></div>
+            <span class="save_button">取消</span>
+            <span class="sure_button" v-on:click="toPayForApForOverDue()" style="padding: 0 0.1rem;width: auto">立即支付</span>
+        </div>
+    </div>
+    <!--物流弹窗-->
+    <div id="logistics_information_none">
+        <div class="zhezhao" style="display: block" v-on:click="closeLogisticsInformationNoneWin()"></div>
+        <div class="information">
+            <div class="heading">无物流信息</div>
+            <img src="../../img/dingdanpeihuo@3x.png" alt="" class="symbol"/>
+            <div class="detail">您的订单已配货<br/>物流详情暂未更新，请稍后查看</div>
+            <i class="close" v-on:click="closeLogisticsInformationNoneWin()"></i>
+        </div>
+    </div>
+    <div id="logistics_information_none2">
+        <div class="zhezhao" style="display: block" v-on:click="closeLogisticsInformationNone2Win()"></div>
+        <div class="information">
+            <div class="heading">无物流信息</div>
+            <img src="../../img/weiweihu@3x.png" alt="" class="symbol"/>
+            <div class="detail">很遗憾，卖家还没有维护物流信息。<br/>您可以通过<a href="javascript:;" class="custom_service">小印客服</a>询问订单配送状态。</div>
+            <i class="close" v-on:click="closeLogisticsInformationNone2Win()"></i>
+        </div>
+    </div>
+    <div id="logistics_information">
+        <div class="zhezhao"  style="display: block" v-on:click="closeLogistic()"></div>
+        <div class="information">
+            <div class="headline">
+                <p>{{logisticsScheduleInfo.deliveryCompanyName}}</p>
+                <p>物流编号：<i>{{logisticsScheduleInfo.deliveryNumber}}</i></p>
+            </div>
+            <div class="main_information">
+                <!--<div class="clearfix loop_list">
+                    <div class="float_left"></div>
+                    <div class="float_right">
+                        <img src="../../img/dizhi@3x.png" alt="" class="receive"/>
+                        <p class="receive_address">
+                            ［收货地址］北京市海淀区  万寿路中国印刷科学技术研究院B座3层
+                        </p>
+                    </div>
+                </div>-->
+                <template v-for="(schedule,index) in logisticsScheduleInfo.logisticsSchedules">
+                    <template v-if="index == 0">
+                        <div class="clearfix loop_list">
+                            <div class="float_left">
+                                <p class="date">{{schedule.time | longToDate(schedule.time)}}</p>
+                            </div>
+                            <div class="float_right">
+                                <img src="../../img/qianshou@3x.png" alt="" class="send"/>
+                                <p class="received">{{schedule.context}}</p>
+                            </div>
+                        </div>
+                    </template>
+                    <template v-if="index != 0 && index != (logisticsScheduleInfo.logisticsSchedules.length - 1)">
+                        <div class="clearfix loop_list">
+                            <div class="float_left">
+                                <p class="date">{{schedule.time | longToDate(schedule.time)}}</p>
+                            </div>
+                            <div class="float_right">
+                                <img src="../../img/upjianTou@3x.png" alt="" class="process"/>
+                                <p class="overdue">{{schedule.context}}</p>
+                            </div>
+                        </div>
+                    </template>
+                    <template v-if="index == (logisticsScheduleInfo.logisticsSchedules.length - 1)">
+                        <div class="clearfix loop_list">
+                            <div class="float_left">
+                                <p class="date">{{schedule.time | longToDate(schedule.time)}}</p>
+                            </div>
+                            <div class="float_right no_border">
+                                <img src="../../img/fa@3x.png" alt="" class="send"/>
+                                <p class="overdue">{{schedule.context}}</p>
+                            </div>
+                        </div>
+                    </template>
+                </template>
+            </div>
+            <i class="close" v-on:click="closeLogistic()"></i>
+        </div>
+    </div>
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/jsonUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/12_maiJiaZhongXin/12_dingDan_dingDanXiangQing.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/vueFilter.js"></script>
+<script charset="utf-8" type="text/javascript" src="script/buyer-order-detail.js"></script>
+</body>
+</html>

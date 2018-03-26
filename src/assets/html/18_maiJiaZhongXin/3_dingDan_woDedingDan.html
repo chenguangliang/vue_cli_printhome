@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>我的订单</title>
+    <link type="text/css" rel="stylesheet" href="../../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/common1.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/pullToRefresh.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/12_maiJiaZhongXin/12_dingDan_woDedingDan.css"/>
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+</head>
+<body>
+<div id="seller_order_list" v-cloak>
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="../../html/18_maiJiaZhongXin/8_maiJiaZhongXin_maiJiaZhongXin.html" class="fanHui"></a>
+        我的订单
+        <a href="javascript:;" class="suoSou" v-on:click="toSearch()"></a>
+    </div>
+    <div style="height: 1.58rem;"></div>
+</header>
+<!--选项卡-->
+<section>
+    <div class="scroll" id="navigation_bar">
+        <li state="999" v-on:click="changeOrderPanel('')" class="on">全部</li>
+        <div class="box">
+            <div class="scroll_list">
+                    <li state="1" v-on:click="changeOrderPanel(1)">待付款</li>
+                    <li state="2" v-on:click="changeOrderPanel(2)">待发货</li>
+                    <li v-on:click="changeOrderPanel(3)">待收货</li>
+                    <li v-on:click="changeOrderPanel(4)">待评价</li>
+                    <li v-on:click="changeOrderPanel(5)">已完成</li>
+                    <li v-on:click="changeOrderPanel(6)">已取消</li>
+            </div>
+        </div>
+        <span class="arrow-right"></span>
+    </div>
+</section>
+<section>
+    <div id="wrapper">
+        <div class="tab_box" id="scroller">
+            <div class="quanBU wrapScrool">
+                <div style="height: 1.6rem"></div>
+                <template v-if="orderList != null && orderList.length > 0">
+                <template v-for="order in orderList">
+                    <div class="dingDan">
+                        <div class="dianPu">
+                            <template v-if="order.platformId == 2">
+                                <span class="greenPHLogo"></span>
+                            </template>
+                            <template v-else-if="order.platformId == null || order.platformId == 1">
+                                <span class="phLogo"></span>
+                            </template>
+                            <a href="javascript:void(0);" class="name">{{order.orderId}}</a>
+                            <a href="javascript:void(0);" class="zhuangTai">
+                                <template v-if="order.shipmentType == 2"><!--延期订单-->
+                                    <template v-if="order.paid == 2">
+                                        <template v-if="order.state == 1">等待付款</template>
+                                        <template v-else-if="order.state == 2">待配送</template>
+                                        <template v-else-if="order.state == 3">待买家收货</template>
+                                        <template v-else-if="order.state == 4">买家已收货</template>
+                                        <template v-else-if="order.state == 5">交易完成</template>
+                                        <template v-else-if="order.state == 6">已取消</template>
+                                        <template v-else-if="order.state == 7">已关闭</template>
+                                    </template>
+                                    <template v-else>
+                                        <template v-if="order.state == 1">等待付款</template>
+                                        <template v-else-if="order.state == 2">待配送</template>
+                                        <template v-else-if="order.state == 3">待买家收货</template>
+                                        <template v-else-if="order.state == 4">买家已收货</template>
+                                        <template v-else-if="order.state == 5">等待付款</template>
+                                        <template v-else-if="order.state == 6">已取消</template>
+                                        <template v-else-if="order.state == 7">已关闭</template>
+                                    </template>
+                                </template>
+                                <template v-else><!--普通订单-->
+                                    <template v-if="order.state == 1">等待付款</template>
+                                    <template v-else-if="order.state == 2">待配送</template>
+                                    <template v-else-if="order.state == 3">待买家收货</template>
+                                    <template v-else-if="order.state == 4">买家已收货</template>
+                                    <template v-else-if="order.state == 5">交易完成</template>
+                                    <template v-else-if="order.state == 6">已取消</template>
+                                    <template v-else-if="order.state == 7">已关闭</template>
+                                </template>
+                            </a>
+                        </div>
+                        <a class="xiangQing" href="javascript:void(0);">
+                            <template v-for="entityItem in order.items">
+                                <template v-for="json in jsonArray">
+                                    <template v-if="order.orderId == json.orderId">
+                                        <template v-for="jsonItem in json.items">
+                                            <template v-if="entityItem.skuId == jsonItem.skuId">
+                                                <template v-if="jsonItem.itemBuyType == 4 ">
+                                                    <template v-for="jsonMealItem in jsonItem.itemMeal.itemMealDetails">
+                                                        <div class="top clearfix">
+                                                            <img v-bind:src="img_url + jsonMealItem.skuInfo.itemPicUrl" alt="" class="dianPuLogo" v-on:click="toOrderDetail(order.orderId,order.passKey,order.orderType)"/>
+                                                            <p class="shangPin" v-on:click="toOrderDetail(order.orderId,order.passKey,order.shipmentType)">{{ jsonMealItem.skuInfo.itemName | substringFilter(0,15)}}</p>
+                                                            <p class="leiXing" v-on:click="toOrderDetail(order.orderId,order.passKey,order.shipmentType)">
+                                                                <template v-for="itemAttrName in jsonMealItem.skuInfo.itemAttrList">
+                                                        <span style="margin-right:5px">
+                                                            {{itemAttrName.name}} :
+                                                            <template v-for="itemAttrValue in itemAttrName.values">
+                                                                {{itemAttrValue.name}}
+                                                            </template>
+                                                        </span>
+                                                                </template>
+                                                            </p>
+                                                            <p class="money">
+                                                                <template>¥{{ jsonMealItem.skuInfo.minPrice }}</template>
+                                                            </p>
+                                                            <p class="num">X {{jsonItem.num}}</p>
+                                                        </div>
+                                                    </template>
+                                                </template>
+                                                <template v-else>
+                                                    <div class="top clearfix">
+                                                        <img v-bind:src="img_url + jsonItem.skuPicUrl" alt="" class="dianPuLogo" v-on:click="toOrderDetail(order.orderId,order.passKey,order.orderType)"/>
+                                                        <p class="shangPin" v-on:click="toOrderDetail(order.orderId,order.passKey,order.shipmentType)">{{jsonItem.itemName | substringFilter(0,15)}}</p>
+                                                        <p class="leiXing" v-on:click="toOrderDetail(order.orderId,order.passKey,order.shipmentType)">
+                                                            <template v-if="jsonItem.itemBuyType == 2 || jsonItem.itemBuyType == 3">
+                                                                        <span style="margin-right:5px">{{ jsonItem.boardItemSkuStr }}
+                                                                        </span>
+                                                            </template>
+                                                            <template v-else>
+                                                                <template v-for="itemAttrName in jsonItem.itemAttr">
+                                                            <span style="margin-right:5px">
+                                                                {{itemAttrName.name}} :
+                                                                <template v-for="itemAttrValue in itemAttrName.values">
+                                                                    {{itemAttrValue.name}}
+                                                                </template>
+                                                            </span>
+                                                                </template>
+                                                            </template>
+                                                        </p>
+                                                        <p class="money">
+                                                            <template v-if="order.paymentMethod == 3">{{jsonItem.payPrice}}积分</template>
+                                                            <template v-else>¥{{jsonItem.payPrice}}</template>
+                                                        </p>
+                                                        <p class="num">X {{jsonItem.num}}</p>
+                                                    </div>
+                                                </template>
+                                                <!--<div class="top clearfix">
+                                                    <img v-bind:src="img_url + jsonItem.skuPicUrl" alt="" class="dianPuLogo" v-on:click="toOrderDetail(order.orderId,order.passKey,order.shipmentType)"/>
+                                                    <p class="shangPin" v-on:click="toOrderDetail(order.orderId,order.passKey,order.shipmentType)">{{jsonItem.itemName | substringFilter(0,15)}}</p>
+                                                    <p class="leiXing" v-on:click="toOrderDetail(order.orderId,order.passKey,order.shipmentType)">
+                                                        <template v-for="itemAttrName in jsonItem.itemAttr">
+                                                        <span style="margin-right:5px">
+                                                            {{itemAttrName.name}} :
+                                                            <template v-for="itemAttrValue in itemAttrName.values">
+                                                                {{itemAttrValue.name}}
+                                                            </template>
+                                                        </span>
+                                                        </template>
+                                                    </p>
+                                                    <p class="money">
+                                                        <template v-if="order.paymentMethod == 3">{{jsonItem.payPrice}}积分</template>
+                                                        <template v-else>¥{{jsonItem.payPrice}}</template>
+                                                    </p>
+                                                    <p class="num">X {{jsonItem.num}}</p>
+                                                </div>-->
+                                                <div class="goodsChangePrice clearfix">
+                                                    <template v-if="order.paid == 1 && order.state < 4 && order.items[0].itemBuyType!=4">
+                                                        <template v-if="(order.shipmentType != 3 && order.shipmentType != 4 && order.shipmentType != 5)">
+                                                            <div class="shangPinGaiJia" v-on:click="showOrderChangePriceDiv(order.orderId, entityItem.itemId, entityItem.skuId, jsonItem.payPriceTotal, jsonItem.promotionDiscount, jsonItem.sumDiscount, order.freight,jsonItem.primitivePrice,jsonItem.integralDiscount)">商品改价</div>
+                                                        </template>
+                                                    </template>
+
+                                                    <!--部分发货 并且已经有发货记录-->
+                                                    <template v-if="order.state == 2 && json.existPortionDelivery && entityItem.deliveryGoodsType && entityItem.deliveryGoodsType == 2 && jsonItem.deliveriedNum > 0">
+                                                        <div class="shangPinGaiJia" v-on:click="updatePortionDeliveryShow(jsonItem);">修改物流</div>
+                                                        <div class="shangPinGaiJia" v-on:click="portionDeliveryShow(jsonItem)">查看物流</div>
+                                                    </template>
+
+                                                    <template v-if="order.state == 3">
+                                                        <!--部分发货-->
+                                                        <template v-if="json.existPortionDelivery">
+                                                            <!--并且已经有发货记录 否则不显示-->
+                                                            <template  v-if="jsonItem.deliveriedNum > 0">
+                                                                <div class="shangPinGaiJia" v-on:click="updatePortionDeliveryShow(jsonItem);">修改物流</div>
+                                                            </template>
+                                                        </template>
+                                                        <template v-else>
+                                                            <template v-if="jsonItem.deliveryId == ''">
+                                                                <div class="shangPinGaiJia" v-on:click="showLogisticsDiv(jsonItem.orderItemId,entityItem.itemId,order.orderId,jsonItem.shopFreightTemplateId)">添加物流</div>
+                                                            </template>
+                                                            <template v-else>
+                                                                <div class="shangPinGaiJia" v-on:click="showLogisticsDiv(jsonItem.orderItemId,entityItem.itemId,order.orderId,jsonItem.shopFreightTemplateId)">修改物流</div>
+                                                            </template>
+                                                        </template>
+
+                                                    </template>
+
+                                                    <template v-if="order.state >= 3">
+                                                        <!--部分发货 -->
+                                                        <template v-if="json.existPortionDelivery">
+                                                            <!--并且已经有发货记录 否则不显示-->
+                                                            <template  v-if="jsonItem.deliveriedNum > 0">
+                                                                <div class="shangPinGaiJia" v-on:click="portionDeliveryShow(jsonItem)">查看物流</div>
+                                                            </template>
+                                                        </template>
+                                                        <template v-else>
+                                                            <template v-if="jsonItem.deliveryId == ''">
+                                                                <div class="shangPinGaiJia" v-on:click="logisticsInformationNone2Win()">查看物流</div>
+                                                            </template>
+                                                            <template v-else>
+                                                                <div class="shangPinGaiJia" v-on:click="checkLogistic(jsonItem.orderItemId)">查看物流</div>
+                                                            </template>
+                                                        </template>
+                                                    </template>
+                                                </div>
+                                            </template>
+                                        </template>
+                                    </template>
+                                </template>
+                            </template>
+                            <div class="bottom">
+                                <!--<p>共计<span>12345678901234567890.12</span>件商品</p>-->
+                                <p>合计：
+                                <span>
+                                <template v-if="order.paymentMethod == 3">{{order.integral}}积分</template>
+                                <template v-else>¥{{order.paymentPrice}}</template>
+                                </span>
+                                </p>
+                               <template v-if="order.shipmentType == 3">
+                                   <p style="overflow: hidden;margin-top: 0.2rem;">
+                                       <img src="../../img/fenqi.png" alt="" style="height: 0.3rem;width: 0.9rem;float: right;">
+                                   </p>
+                               </template>
+                               <template v-if="order.shipmentType == 4">
+                                   <p style="overflow: hidden;margin-top: 0.2rem;">
+                                       <img src="../../img/dingjin1.png" alt="" style="height: 0.3rem;width: 0.9rem;float: right;">
+                                   </p>
+                               </template>
+                               <template v-if="order.shipmentType == 5">
+                                   <p style="overflow: hidden;margin-top: 0.2rem;">
+                                       <img src="../../img/yanqi.png" alt="" style="height: 0.3rem;width: 0.9rem;float: right;">
+                                   </p>
+                               </template>
+
+                                <!--<p>（含运费￥123456789.12）</p>-->
+                            </div>
+                        </a>
+                        <div class="caoZuo">
+                            <template v-if="order.locked == 1">
+                                <template v-if="order.shipmentType == 2">
+                                    <template v-if="order.paid == 2">
+                                        <template v-if="order.state == 1">
+                                            <!--<span class="orderGrayBtn">发货单</span>-->
+                                            <span class="orderRedBtn" v-on:click="toReceivePay(order)">收到货款</span>
+                                        </template>
+                                        <template v-else-if="order.state == 2">
+                                            <span class="orderRedBtn" v-on:click="toConfirmDeliver(order)">确认发货</span>
+                                            <!--<span class="orderRedBtn">发货单</span>-->
+                                        </template>
+                                        <template v-else-if="order.state == 3">
+                                            <!--<span class="orderRedBtn">发货单</span>-->
+                                        </template>
+                                        <template v-else-if="order.state == 4">
+                                            <!--<span class="orderRedBtn">发货单</span>-->
+                                        </template>
+                                        <template v-else-if="order.state == 5">
+                                            <template v-if="order.sellerEvaluate=='1'">
+                                                <span class="orderRedBtn" v-on:click="toOrderEvaluate(order.orderId)">去评价</span>
+                                            </template>
+                                            <template v-else>
+                                                <span class="orderFreeze">已评价</span>
+                                            </template>
+                                            <!--<span class="orderRedBtn">发货单</span>-->
+                                        </template>
+                                    </template>
+                                    <template v-else>
+                                        <template v-if="order.state == 1">
+                                            <!--<span class="orderGrayBtn">发货单</span>-->
+                                            <span class="orderRedBtn" v-on:click="toReceivePay(order)">收到货款</span>
+                                        </template>
+                                        <template v-else-if="order.state == 2">
+                                            <!--<span class="orderGrayBtn">发货单</span>-->
+                                            <span class="orderRedBtn" v-on:click="toReceivePay(order)">收到货款</span>
+                                            <span class="orderGrayBtn" v-on:click="toConfirmDeliver(order)">确认发货</span>
+                                        </template>
+                                        <template v-else-if="order.state == 3">
+                                            <!--<span class="orderGrayBtn">发货单</span>-->
+                                            <span class="orderRedBtn" v-on:click="toReceivePay(order)">收到货款</span>
+                                        </template>
+                                        <template v-else-if="order.state == 4">
+                                            <!--<span class="orderGrayBtn">发货单</span>-->
+                                            <span class="orderRedBtn" v-on:click="toReceivePay(order)">收到货款</span>
+                                        </template>
+                                        <template v-else-if="order.state == 5">
+                                            <!--<span class="orderGrayBtn">发货单</span>-->
+                                            <span class="orderRedBtn" v-on:click="toReceivePay(order)">收到货款</span>
+                                        </template>
+                                    </template>
+                                </template>
+                                <template v-else>
+                                    <template v-if="order.state == 1">
+                                        <!--<span class="orderRedBtn">发货单</span>-->
+                                        <span class="orderRedBtn" v-on:click="toReceivePay(order)">收到货款</span>
+                                    </template>
+                                    <template v-else-if="order.state == 2">
+                                        <span class="orderRedBtn" v-on:click="toConfirmDeliver(order)">确认发货</span>
+                                        <!--<span class="orderRedBtn">发货单</span>-->
+                                    </template>
+                                    <template v-else-if="order.state == 3">
+                                        <!--<span class="orderRedBtn">发货单</span>-->
+                                    </template>
+                                    <template v-else-if="order.state == 4">
+                                        <!--<span class="orderRedBtn">发货单</span>-->
+                                    </template>
+                                    <template v-else-if="order.state == 5">
+                                        <template v-if="order.sellerEvaluate=='1'">
+                                            <span class="orderRedBtn" v-on:click="toOrderEvaluate(order.orderId)">去评价</span>
+                                        </template>
+                                        <template v-else>
+                                            <span class="orderFreeze">已评价</span>
+                                        </template>
+                                        <!--<span class="orderRedBtn">发货单</span>-->
+                                    </template>
+                                </template>
+                            </template>
+                            <template v-else>
+                                <span class="orderFreeze">订单已被冻结</span>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+                <p  class="printHome">printhome.com</p>
+                </template>
+                <template v-else>
+                    <div class="wuDingDan" style="background: #fff;height: 12rem;margin-top: -1rem;padding-top: 1rem;">
+                        <div class="zhiFuChengGong">
+                            <img src="../../img/chenggongbg@3x.png" alt=""/>
+                        </div>
+                        <h2>您还没有订单信息哦！</h2>
+                        <!--<a href="../../html/1_index/index.html" class="tiaoZhuan">立即选购</a>-->
+                        <p  class="printHome">printhome.com</p>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+</section>
+<!--回到顶部-->
+<section>
+    <div id="top">
+    </div>
+</section>
+<!--弹窗-->
+<section>
+    <div class="zhezhao" id="delete_order_notice">
+        <div class="con">
+            <h5>是否删除订单</h5>
+            <p>您确定要删除此订单吗？</p>
+            <div class="dashed-line"></div>
+            <span class="queDing">先留着</span><span class="liuZhe" v-on:click="deleteOrder()">确定</span>
+        </div>
+    </div>
+    <div class="zhezhao" id="receive_pay_method">
+        <div class="neiRong">
+            <h5>请确认您收到货款的途径，以防钱货两空</h5>
+            <p class="jiJiang">即期付款</p>
+            <div class="clearfix xuanXiang">
+                <div class="left">
+                    <img src="../../img/no-select.png" name="payMethod" alt="" payName="网银汇款转账" v-on:click="choosePayMethod($event)" class="no-select"/>网银汇款转账
+                </div>
+                <div class="right">
+                    <img src="../../img/no-select.png" name="payMethod" alt="" payName="银行柜台汇款" v-on:click="choosePayMethod($event)" class="no-select"/>银行柜台汇款
+                </div>
+            </div>
+            <div class="clearfix xuanXiang">
+                <div class="left">
+                    <img src="../../img/no-select.png" name="payMethod" alt="" payName="转账支票" v-on:click="choosePayMethod($event)" class="no-select"/>转账支票
+                </div>
+                <div class="right">
+                    <img src="../../img/no-select.png" name="payMethod" alt="" payName="现金面付" v-on:click="choosePayMethod($event)" class="no-select"/>现金面付
+                </div>
+            </div>
+            <p class="xieYi">协议付款</p>
+            <div class="clearfix xuanXiang">
+                <div class="left">
+                    <img src="../../img/no-select.png" name="payMethod" alt="" payName="银行承兑汇票" v-on:click="choosePayMethod($event)" class="no-select qita"/>银行承兑汇票
+                </div>
+                <div class="right">
+                    <img src="../../img/no-select.png" name="payMethod" alt="" payName="银行支票" v-on:click="choosePayMethod($event)" class="no-select qita"/>银行支票
+                </div>
+            </div>
+            <div class="clearfix xuanXiang">
+                <div class="left">
+                    <img src="../../img/no-select.png" name="payMethod" alt="" payName="商业承兑汇票" v-on:click="choosePayMethod($event)" class="no-select qita"/>商业承兑汇票
+                </div>
+                <div class="right">
+                    <img src="../../img/no-select.png" name="payMethod" alt="" payName="其他" v-on:click="choosePayMethod($event)" class="no-select qita"/>其他
+                </div>
+            </div>
+            <div class="shuRu">
+                <input type="text" placeholder="请填写到账时间/说明理由" v-model="pay_date"/>
+            </div>
+            <div class="operation_btn">
+                <span class="quxiao" v-on:click="closeReceivePay()">取消</span><span class="queding" v-on:click="receivePay()">确定</span>
+            </div>
+            <i class="close" v-on:click="closeReceivePay()"></i>
+        </div>
+    </div>
+    <div class="zhezhao" id="logistics_div">
+        <div class="xiangxi">
+            <h5>物流信息</h5>
+            <div class="wuLiu clearfix">
+                <span><lable style="color: #e32529">＊</lable>物流编号:</span>
+                <input type="text" value="" v-model="deliveryNumber"/>
+            </div>
+            <div class="wuLiu clearfix">
+                <span><lable style="color: #e32529">＊</lable>物流公司:</span>
+                <select v-model="deliveryCompanyCode">
+                    <option value="">请选择</option>
+                    <option value="ztky">中铁物流</option>
+                    <option value="zhongtiewuliu">中铁快运</option>
+                    <option value="debangwuliu">德邦物流</option>
+                    <option value="shunfeng">顺丰速运</option>
+                    <option value="ems">中国邮政速递物流EMS</option>
+                    <option value="zhongtong">中通快递</option>
+                    <option value="shentong">申通快递</option>
+                    <option value="yunatong">圆通速递</option>
+                    <option value="yunda">韵达快递</option>
+                </select>
+            </div>
+            <div class="wuLiu clearfix">
+                <span>备注:</span>
+                <textarea v-model="deliveryRemark"></textarea>
+            </div>
+            <p class="shifou">是否将物流信息应用到该订单下相同运费模版的其他商品</p>
+            <p class="tixing">提示：单独编辑商品物流信息时，请选择“否”。</p>
+            <div class="xuanze">
+                <img src="../../img/no-select.png" alt="" class="no-select" isCheck="yes" v-on:click="chooseSametemplate($event)"/>是
+                <img src="../../img/yes-select.png" alt="" class="no-select mar" isCheck="no" v-on:click="chooseSametemplate($event)"/>否
+            </div>
+            <div class="btn">
+                <span class="quxiao" v-on:click="closeLogisticsDiv()">取消</span><span class="queding" v-on:click="addLogisticsInfo()">确定</span>
+            </div>
+            <i class="close" v-on:click="closeLogisticsDiv()"></i>
+        </div>
+    </div>
+    <!--商品改价弹窗-->
+    <div class="ChangePriceBg" id="order_change_price_div">
+        <div class="ChangePrice" style="height: auto">
+            <p>订单改价</p>
+            <div class="ChangePriceList">
+                <span class="left">订单总额：</span>
+                <span class="right">￥{{changePriceInfo.pay_price_total}}</span>
+            </div>
+            <div class="ChangePriceList">
+                <span class="left">优惠金额：</span>
+                <span class="right">￥{{changePriceInfo.promotionDiscount}}</span>
+            </div>
+            <div class="ChangePriceList">
+                <span class="left">积分抵扣：</span>
+                <span class="right" id="integralDiscountText">{{changePriceInfo.integralDiscountText}}元</span>
+            </div>
+            <div class="ChangePriceList">
+                <span class="left" style="line-height: 0.58rem">改价金额：</span>
+                <span class="right" style="line-height: 0.58rem"><input type="number" @keyup.self="numInputForLengthForVue($event,9,2,changePriceInfo,'changedPrice')" v-on:blur="checkNum($event)" v-model="changePriceInfo.changedPrice"/>元</span>
+            </div>
+            <div style="border: 1px dashed #ccc;width: 5.34rem;margin: 0 auto 0.15rem;"></div>
+            <div class="ChangePriceList">
+                <a href="javascript:;" v-on:click="closeOrderChangePriceDiv()">取消</a>
+                <a href="javascript:;" v-on:click="changeOrderPrice()">确定</a>
+            </div>
+        </div>
+    </div>
+    <!--物流弹窗-->
+    <div id="logistics_information_none">
+        <div class="zhezhao" style="display: block" v-on:click="closeLogisticsInformationNoneWin()"></div>
+        <div class="information">
+            <div class="heading">无物流信息</div>
+            <img src="../../img/dingdanpeihuo@3x.png" alt="" class="symbol"/>
+            <div class="detail">您的订单已配货<br/>物流详情暂未更新，请稍后查看</div>
+            <i class="close" v-on:click="closeLogisticsInformationNoneWin()"></i>
+        </div>
+    </div>
+    <div id="logistics_information_none2">
+        <div class="zhezhao" style="display: block" v-on:click="closeLogisticsInformationNone2Win()"></div>
+        <div class="information">
+            <div class="heading">无物流信息</div>
+            <img src="../../img/weiweihu@3x.png" alt="" class="symbol"/>
+            <div class="detail">很遗憾，卖家还没有维护物流信息。<br/>您可以通过<a href="javascript:;" class="custom_service">小印客服</a>询问订单配送状态。</div>
+            <i class="close" v-on:click="closeLogisticsInformationNone2Win()"></i>
+        </div>
+    </div>
+    <div id="logistics_information">
+        <div class="zhezhao"  v-on:click="closeLogistic()" style="display: block"></div>
+        <div class="information">
+            <div class="headline">
+                <p>{{logisticsScheduleInfo.deliveryCompanyName}}</p>
+                <p>物流编号：<i>{{logisticsScheduleInfo.deliveryNumber}}</i></p>
+            </div>
+            <div class="main_information">
+                <!--<div class="clearfix loop_list">
+                    <div class="float_left"></div>
+                    <div class="float_right">
+                        <img src="../../img/dizhi@3x.png" alt="" class="receive"/>
+                        <p class="receive_address">
+                            ［收货地址］北京市海淀区  万寿路中国印刷科学技术研究院B座3层
+                        </p>
+                    </div>
+                </div>-->
+                <template v-for="(schedule,index) in logisticsScheduleInfo.logisticsSchedules">
+                    <template v-if="index == 0">
+                        <div class="clearfix loop_list">
+                            <div class="float_left">
+                                <p class="date">{{schedule.time | longToDate(schedule.time)}}</p>
+                            </div>
+                            <div class="float_right">
+                                <img src="../../img/qianshou@3x.png" alt="" class="send"/>
+                                <p class="received">{{schedule.context}}</p>
+                            </div>
+                        </div>
+                    </template>
+                    <template v-if="index != 0 && index != (logisticsScheduleInfo.logisticsSchedules.length - 1)">
+                        <div class="clearfix loop_list">
+                            <div class="float_left">
+                                <p class="date">{{schedule.time | longToDate(schedule.time)}}</p>
+                            </div>
+                            <div class="float_right">
+                                <img src="../../img/upjianTou@3x.png" alt="" class="process"/>
+                                <p class="overdue">{{schedule.context}}</p>
+                            </div>
+                        </div>
+                    </template>
+                    <template v-if="index == (logisticsScheduleInfo.logisticsSchedules.length - 1)">
+                        <div class="clearfix loop_list">
+                            <div class="float_left">
+                                <p class="date">{{schedule.time | longToDate(schedule.time)}}</p>
+                            </div>
+                            <div class="float_right no_border">
+                                <img src="../../img/fa@3x.png" alt="" class="send"/>
+                                <p class="overdue">{{schedule.context}}</p>
+                            </div>
+                        </div>
+                    </template>
+                </template>
+            </div>
+            <i class="close" v-on:click="closeLogistic()"></i>
+        </div>
+    </div>
+
+
+
+
+    <!--部分配送代码 start  2018年1月25日10:39:51 fdc-->
+
+    <!--分开配送第一次填写物流弹窗 start-->
+    <div class="portion_logistics_information"  v-if="fisrtDeliveryDialogShow">
+        <div class="common_win_main wid_580" style="margin-left: -2.9rem;margin-top: -4rem;">
+            <div class="font_24 color_666 text_cen hei_line_60 bg_f8f8f8 confirm_deliver_tit">提示</div>
+            <div class="color_333">
+                <p class="font_28 pad_l10 hei_line_60">您确认发货吗？</p>
+                <p class="font_24 color_333">
+                    <img  @click="deliveryType='1'"   :src="  deliveryType == '1' ?  '../../img/yes-select.png' : '../../img/no-select.png'" alt="" class="mar_l40 cur_po inline_block hei_30 btn_allGoods"><span class="ver_top mar_l10">全部商品</span>
+                    <img  @click="deliveryType='2'"   :src="  deliveryType == '2' ?  '../../img/yes-select.png' : '../../img/no-select.png'" alt="" class="mar_l30 cur_po inline_block hei_30 btn_someGoods"><span class="ver_top mar_l10">部分商品</span>
+                </p>
+                <div class="allGoods_info" v-show="deliveryType=='2'">
+                    <p class="font_24 pad_l10"><span class="color_e60012">*</span>商品信息</p>
+                    <div class="pad_t10 borderb_dash_e8" style="max-height: 5rem;overflow-y: auto;">
+                        <div  v-for="item in  orderJson.items"  class="oneGoods font_24 pad_l30 mar_b10">
+                            <input type="hidden"  v-model="item.shopFreightTemplateId">
+                            <input type="hidden"  v-model="item.orderItemId">
+                            <input type="hidden"  v-model="item.orderId" :value="orderJson.orderId">
+                            <input type="hidden"  v-model="item.itemId">
+                            <!-- 如果itemBuyType为4，那么是套餐商品 -->
+                            <template v-if="item.itemBuyType == 4">
+                                <img  @click="item.checked = !item.checked"  :src="item.checked ? '../../img/yes-select.png':'../../img/no-select.png'" alt="" class="cur_po inline_block hei_30 one_goods_btn"><span class=" mar_l5 dis_inb oneLine ver_top" style="width: 5rem">套餐商品</span>
+                            </template>
+                            <template v-else-if="item.itemBuyType == 2 || item.itemBuyType == 3">
+                                <img  @click="item.checked = !item.checked"  :src="item.checked ? '../../img/yes-select.png':'../../img/no-select.png'" alt="" class="cur_po inline_block hei_30 one_goods_btn"><span class=" mar_l5 dis_inb oneLine ver_top" style="width: 5rem">{{item.itemName}} <span class="color_999 ver_top">({{item.boardItemSkuStr}})</span></span>
+                            </template>
+                            <template v-else>
+                                <img  @click="item.checked = !item.checked"  :src="item.checked ? '../../img/yes-select.png':'../../img/no-select.png'" alt="" class="cur_po inline_block hei_30 one_goods_btn"><span class=" mar_l5 dis_inb oneLine ver_top" style="width: 5rem">{{item.itemName}} <span class="color_999 ver_top">({{item.itemAttrTitle}})</span></span>
+                            </template>
+
+                            <div class="one_goods_hide mar_b20 pad_l35" v-show="item.checked">
+                                <!--<p class="font_24">物流信息</p>-->
+                                <p class="font_24"><span class="col_666">数 &nbsp; &nbsp; &nbsp; 量：</span><input type="text" v-model="item.num" class="input_Style2" placeholder="请输入商品数量" @keyup="numInputForLengthForVue($event,7, getItemUnitLength(item.itemUnit) ,item,'num');checkMax($event,item,'num');"></p>
+                                <p class="font_24 mar_t10"><span class="col_666">物流公司：</span>
+                                    <select  class="input_Style2" v-model="item.deliveryCompanyCode">
+                                        <option value="">请选择物流公司</option>
+                                        <option v-for="deliveryCompany in deliveryCompanys" :value="deliveryCompany.code">{{deliveryCompany.name}}</option>
+                                    </select>
+                                </p>
+                                <p class="font_24 mar_t10"><span class="col_666">物流编号：</span><input type="text" class="input_Style2" placeholder="请输入物流编号" v-model="item.deliveryNumber" maxlength="20"></p>
+                                <p class="font_24 mar_t10"><span class="col_666" style="vertical-align: top;">备 &nbsp; &nbsp; &nbsp; 注：</span><textarea type="text" class="input_Style2" maxlength="100" style="width: 220px;resize:none;" placeholder="最多输入100字" v-model="item.deliveryRemark"></textarea></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="po_re pad_t20" style="height: 0.9rem;">
+                <span class="yellowBtn po_ab common_win_cancel " style="left: 1.5rem" @click="fisrtDeliveryDialogShow= !fisrtDeliveryDialogShow"> 取 消 </span>
+                <span class="redBtn  mar_l40 po_ab common_win_sure" style="left: 2.5rem" @click="deliveryFisrt();"> 确 定 </span>
+            </p>
+
+        </div>
+    </div>
+    <!--分开配送第一次填写物流弹窗 end-->
+    <!--分开配送非第一次填写物流弹窗 start-->
+    <div class="portion_logistics_information"  v-if="otherDeliveryDialog">
+        <div class="common_win_main wid_580" style="margin-left: -2.9rem;margin-top: -4rem;">
+            <div class="font_24 color_666 text_cen hei_line_60 bg_f8f8f8 confirm_deliver_tit">提示</div>
+            <div class="color_333">
+                <p class="font_28 pad_l10 hei_line_60">您确认发货吗？</p>
+                <p class="font_24 color_333">
+                    <img @click="deliveryType='1'" :src="  deliveryType == '1' ?  '../../img/yes-select.png' : '../../img/no-select.png'" alt="" class="mar_l40 cur_po inline_block hei_30 btn_allGoods" value="1"><span class="ver_top mar_l10">剩余全部商品</span>
+                    <img @click="deliveryType='2'" :src="  deliveryType == '2' ?  '../../img/yes-select.png' : '../../img/no-select.png'" alt="" class="mar_l30 cur_po inline_block hei_30 btn_someGoods" value="2"><span class="ver_top mar_l10">部分商品</span>
+                </p>
+                <div class="pad_l20 goods_delivery_lave " v-show="deliveryType=='1'">
+                    <p class="font_24 mar_t10 pad_l25"><span class="col_666">物流公司：</span>
+                        <select  class="input_Style2" v-model="deliveryCompanyCode">
+                            <option value="">请选择物流公司</option>
+                            <option v-for="deliveryCompany in deliveryCompanys" :value="deliveryCompany.code">{{deliveryCompany.name}}</option>
+                        </select>
+                    </p>
+                    <p class="font_24 mar_t10 pad_l25"><span class="col_666">物流编号：</span><input type="text" class="input_Style2" style="width: 3rem" placeholder="请输入物流编号" v-model="deliveryNumber" maxlength="20"></p>
+                    <p class="font_24 mar_t10 pad_l25"><span class="col_666" style="vertical-align: top;">备 &nbsp; &nbsp; &nbsp; 注：</span>
+                        <textarea type="text" class="input_Style2" style="width: 220px;resize:none;" v-model="deliveryRemark" placeholder="最多输入100字" maxlength="100"></textarea>
+                    </p>
+                </div>
+                <div class="allGoods_info" v-show="deliveryType=='2'">
+                    <p class="font_24 pad_l10"><span class="color_e60012">*</span>商品信息</p>
+                    <div class="pad_t10 borderb_dash_e8" style="max-height: 5rem;overflow-y: auto;">
+                        <div v-for="item in  orderJson.items" class="oneGoods font_24 pad_l30 mar_b10" v-if="item.maxValue > 0">
+                            <input type="hidden"  v-model="item.shopFreightTemplateId">
+                            <input type="hidden"  v-model="item.orderItemId">
+                            <input type="hidden"  v-model="item.orderId" :value="orderJson.orderId">
+                            <input type="hidden"  v-model="item.itemId">
+                            <!-- 如果itemBuyType为4，那么是套餐商品 -->
+                            <template v-if="item.itemBuyType == 4">
+                                <img  @click="item.checked = !item.checked"  :src="item.checked ? '../../img/yes-select.png':'../../img/no-select.png'" alt="" class="cur_po inline_block hei_30 one_goods_btn"><span class=" mar_l5 dis_inb oneLine ver_top" style="width: 5rem">套餐商品</span>
+                            </template>
+                            <template v-else-if="item.itemBuyType == 2 || item.itemBuyType == 3">
+                                <img  @click="item.checked = !item.checked"  :src="item.checked ? '../../img/yes-select.png':'../../img/no-select.png'" alt="" class="cur_po inline_block hei_30 one_goods_btn"><span class=" mar_l5 dis_inb oneLine ver_top" style="width: 5rem">{{item.itemName}} <span class="color_999 ver_top">({{item.boardItemSkuStr}})</span></span>
+                            </template>
+                            <template v-else>
+                                <img  @click="item.checked = !item.checked"  :src="item.checked ? '../../img/yes-select.png':'../../img/no-select.png'" alt="" class="cur_po inline_block hei_30 one_goods_btn"><span class=" mar_l5 dis_inb oneLine ver_top" style="width: 5rem">{{item.itemName}} <span class="color_999 ver_top">({{item.itemAttrTitle}})</span></span>
+                            </template>
+                            <div class=" one_goods_hide mar_b20 pad_l35" v-show="item.checked">
+                                <!--<p class="font_24">物流信息</p>-->
+                                <p class="font_24"><span class="col_666">数 &nbsp; &nbsp; &nbsp; 量：</span><input type="text" class="input_Style2" placeholder="请输入商品数量" v-model="item.unDeliveriedNum" @keyup="numInputForLengthForVue($event,7, getItemUnitLength(item.itemUnit) ,item,'unDeliveriedNum');checkMax($event,item,'unDeliveriedNum');"></p>
+                                <p class="font_24 mar_t10"><span class="col_666">物流公司：</span>
+                                    <select  class="input_Style2" v-model="item.deliveryCompanyCode">
+                                        <option value="">请选择物流公司</option>
+                                        <option v-for="deliveryCompany in deliveryCompanys" :value="deliveryCompany.code">{{deliveryCompany.name}}</option>
+                                    </select>
+                                </p>
+                                <p class="font_24 mar_t10"><span class="col_666">物流编号：</span><input type="text" class="input_Style2" placeholder="请输入物流编号" v-model="item.deliveryNumber" maxlength="20"></p>
+                                <p class="font_24 mar_t10"><span class="col_666" style="vertical-align: top;">备 &nbsp; &nbsp; &nbsp; 注：</span><textarea type="text" class="input_Style2" style="width: 220px;resize:none;" placeholder="最多输入100字" maxlength="100" v-model="item.deliveryRemark"></textarea></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="po_re pad_t20" style="height: 0.9rem;">
+                <span class="yellowBtn po_ab common_win_cancel " style="left: 1.5rem" @click="otherDeliveryDialog= !otherDeliveryDialog"> 取 消 </span>
+                <span class="redBtn  mar_l40 po_ab common_win_sure" style="left: 2.5rem" @click="deliveryRemain();"> 确 定 </span>
+            </p>
+
+        </div>
+    </div>
+    <!--分开配送非第一次填写物流弹窗 end-->
+    <!--分开配送查看物流弹窗 start-->
+    <div  v-if="portionDeliveryDialogShow" v-cloak class="portion_logistics_information">
+        <div class="zhezhao"  v-on:click="portionDeliveryDialogShow=!portionDeliveryDialogShow" ></div>
+        <div class="information">
+            <div class="headline" style="height: 0.6rem">
+                <p>物流信息</p>
+            </div>
+            <div class="main_information">
+
+                <div class="one_delivery font_24" v-for="deliveryDTO in itemInfo.deliveryDTOs" >
+                    <p class="font_28 pad_l10">第{{deliveryDTO.deliverySort}}次配送信息</p>
+                    <p class="pad_l30 mar_t10">
+                        <span class="col_666">商品数量：</span>{{deliveryDTO.deliveryNum}}
+                    </p>
+                    <p class="pad_l30 mar_t10">
+                        <span class="col_666">物流公司：</span>{{getCompanyDeliveryName(deliveryDTO.deliveryCompanyCode)}}
+                    </p>
+                    <p class="pad_l30 mar_t10">
+                        <span class="col_666">物流单号：</span>{{deliveryDTO.deliveryNumber}}
+                    </p>
+                    <p class="col_333 oneLine pad_l30 mar_t10"><span class="col_666">备 &nbsp; &nbsp; &nbsp; 注：</span>{{deliveryDTO.deliveryRemark}}</p>
+                    <p class="mar_t10">
+                        <span class="mar_l30 dis_inb redBtn_hollow delivery_btn" v-show="deliveryDTO.message" @click="deliveryDTO.showFlag=!deliveryDTO.showFlag;queryDeliveryById(deliveryDTO);">查看物流详情</span>
+                    </p>
+                    <div class="one_delivery_detile mar_t10 bg_f8f8f8" style="padding: 0.1rem 0;" v-show="deliveryDTO.showFlag">
+                        <template v-for="(schedule,index) in deliveryDTO.deliveryContexts">
+                            <template v-if="index == 0">
+                                <div class="clearfix loop_list">
+                                    <div class="float_left">
+                                        <p class="date">{{schedule.time | longToDate(schedule.time)}}</p>
+                                    </div>
+                                    <div class="float_right">
+                                        <img src="../../img/qianshou@3x.png" alt="" class="send"/>
+                                        <p class="received">{{schedule.context}}</p>
+                                    </div>
+                                </div>
+                            </template>
+                            <template v-if="index != 0 && index != (deliveryDTO.deliveryContexts.length - 1)">
+                                <div class="clearfix loop_list">
+                                    <div class="float_left">
+                                        <p class="date">{{schedule.time | longToDate(schedule.time)}}</p>
+                                    </div>
+                                    <div class="float_right">
+                                        <img src="../../img/upjianTou@3x.png" alt="" class="process"/>
+                                        <p class="overdue">{{schedule.context}}</p>
+                                    </div>
+                                </div>
+                            </template>
+                            <template v-if="index == (deliveryDTO.deliveryContexts.length - 1)">
+                                <div class="clearfix loop_list">
+                                    <div class="float_left">
+                                        <p class="date">{{schedule.time | longToDate(schedule.time)}}</p>
+                                    </div>
+                                    <div class="float_right no_border">
+                                        <img src="../../img/fa@3x.png" alt="" class="send"/>
+                                        <p class="overdue">{{schedule.context}}</p>
+                                    </div>
+                                </div>
+                            </template>
+                        </template>
+                    </div>
+                </div>
+
+            </div>
+            <i class="close" v-on:click="portionDeliveryDialogShow=!portionDeliveryDialogShow"></i>
+        </div>
+    </div>
+    <!--分开配送查看物流弹窗 end-->
+
+    <!--分开配送修改物流弹窗 start-->
+    <div  v-if="portionDeliveryDialogUpdateShow" v-cloak class="portion_logistics_information">
+        <div class="zhezhao"  v-on:click="portionDeliveryDialogUpdateShow=!portionDeliveryDialogUpdateShow" ></div>
+        <div class="information">
+            <div class="headline" style="height: 0.6rem">
+                <p>物流信息</p>
+            </div>
+            <div class="main_information">
+
+                <div class="one_delivery font_24" v-for="deliveryDTO in itemInfo.deliveryDTOs" >
+                    <p class="font_28 pad_l10">第{{deliveryDTO.deliverySort}}次配送信息</p>
+                    <p class="pad_l30 mar_t10">
+                        <span class="col_666">商品数量：</span>{{deliveryDTO.deliveryNum}}
+                    </p>
+                    <p class="pad_l30 mar_t10">
+                        <span class="col_666">物流公司：</span>
+                        <select  class="input_Style2" v-model="deliveryDTO.deliveryCompanyCode">
+                            <option value="">请选择物流公司</option>
+                            <option v-for="deliveryCompany in deliveryCompanys" :value="deliveryCompany.code">{{deliveryCompany.name}}</option>
+                        </select>
+                    </p>
+                    <p class="pad_l30 mar_t10">
+                        <span class="col_666">物流单号：</span>
+                        <input type="text" class="input_Style2" placeholder="请输入物流编号" v-model="deliveryDTO.deliveryNumber" maxlength="20">
+                    </p>
+                    <p class="col_333 oneLine pad_l30 mar_t10"><span class="col_666" style="vertical-align: top;">备 &nbsp; &nbsp; &nbsp; 注：</span>
+                        <textarea type="text" class="input_Style2" style="width: 220px;resize:none;" placeholder="最多输入100字" maxlength="100" v-model="deliveryDTO.deliveryRemark"></textarea>
+                    </p>
+                </div>
+
+            </div>
+            <p class="po_re pad_t20" style="height: 0.9rem;">
+                <span class="yellowBtn po_ab common_win_cancel " style="left: 1.5rem" @click="portionDeliveryDialogUpdateShow= !portionDeliveryDialogUpdateShow"> 取 消 </span>
+                <span class="redBtn  mar_l40 po_ab common_win_sure" style="left: 2.5rem" @click="updatePortionDelivery();"> 确 定 </span>
+            </p>
+            <i class="close" v-on:click="portionDeliveryDialogUpdateShow=!portionDeliveryDialogUpdateShow"></i>
+        </div>
+
+    </div>
+    <!--分开配送修改物流弹窗 end-->
+
+    <!--部分配送代码 end  2018年1月25日10:39:51 fdc-->
+
+
+
+
+
+
+</section>
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/iscroll.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/pullToRefresh_fixHead.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/12_maiJiaZhongXin/12_dingDan_woDedingDan.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/jsonUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/vueFilter.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/mathUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../commonScript/delivery/portionDelivery.js"></script>
+<script charset="utf-8" type="text/javascript" src="script/seller-order-list.js"></script>
+</body>
+</html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>商品清单</title>
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/common1.css"/>
+    <link rel="stylesheet" href="../../css/16_dingDanHeDui/shangPinQingDan.css"/>
+    <link rel="stylesheet" href="../../css/common1.css"/>
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+</head>
+<body>
+<div  id="productList">
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="javascript:void(0)" class="return" @click="gotoOrderView"></a>商品清单
+    </div>
+    <div class="zhanwei"></div>
+</header>
+    <!--商品列表-->
+    <template v-for="(shop,index) in  orderInfo.myCart.shops">
+        <template v-if="shop.quantity > 0">
+            <section>
+                <div class="qingDan">
+                    <h2 class="title">
+                        <span></span>{{shop.shopTitle}}
+                        <select name="pay_type" :id="'pay_type_'+shop.shopId"  style="float: right;margin: 0.15rem;" @change="submitInfo.changeFlag = true;divide_PayPopups($event,shop.shopId,shop.temType)">
+                            <template v-if="shop.temTypes == null"> <!--如果是默认支付方式，没有修改过，就取temType-->
+                                    <template v-if="shop.temType==1">
+                                        <option :value="'FENQI_'+shop.shopId">分期支付</option>
+                                        <!--这个地方用了一点技巧，一旦支付方式改变后台要我把每个店铺的店铺id和店铺支付方式传过去，形式就是‘支付方式-shopId’-->
+                                    </template>
+                                    <template v-else-if="shop.temType==2">
+                                        <option :value="'YANQI_'+shop.shopId">延期支付</option>
+                                    </template>
+                                    <template v-else-if="shop.temType==3">
+                                        <option :value="'DINGJIN_'+shop.shopId">定金支付</option>
+                                    </template>
+                                    <option :value="'LIJI_'+shop.shopId">立即支付</option>
+                            </template>
+                            <template v-else><!--修改过支付方式，就根据temTypes看谁选中-->
+                                    <template v-if="shop.temTypes==0"> <!--如果修改为立即支付，立即支付要前置，否则就跟在下面-->
+                                        <option :value="'LIJI_'+shop.shopId">立即支付</option>
+                                    </template>
+                                    <template v-if="shop.temType==1">
+                                        <option :value="'FENQI_'+shop.shopId">分期支付</option>
+                                        <!--这个地方用了一点技巧，一旦支付方式改变后台要我把每个店铺的店铺id和店铺支付方式传过去，形式就是‘支付方式-shopId’-->
+                                    </template>
+                                    <template v-else-if="shop.temType==2">
+                                        <option :value="'YANQI_'+shop.shopId">延期支付</option>
+                                    </template>
+                                    <template v-else-if="shop.temType==3">
+                                        <option :value="'DINGJIN_'+shop.shopId">定金支付</option>
+                                    </template>
+                                    <template v-if="shop.temTypes != 0">
+                                        <option :value="'LIJI_'+shop.shopId">立即支付</option>
+                                    </template>
+                            </template>
+                        </select>
+
+                    </h2>
+                        <template v-for="(product,key) in shop.groupProducts">
+                             <template v-if="product[0].itemBuyType !=4"><!--套餐商品过滤掉，在下边加-->
+                                 <!--<span>{{key}}</span>-->
+                                 <ul class="content">
+                                     <template v-for="product in shop.groupProducts[key] ">
+                                         <template v-if="product.checked">
+                                             <li>
+                                                 <img :src=" imgUrl +  product.src" alt=""/>
+                                                 <div class="xinXi">
+                                                     <h3>{{product.title}}</h3>
+                                                     <p class="leiXing"  >
+                                                         <template v-if="product.itemBuyType==2 || product.itemBuyType==3">
+                                                             <!--板材类商品-->
+                                                             {{product.boardItemSkuStr}}
+                                                         </template>
+                                                         <template v-else>
+                                                             <template  v-for="attr in product.attrs">
+                                                                 {{attr.name | deleteSpace}}:{{attr.value | deleteSpace}};
+                                                             </template>
+                                                         </template>
+                                                     </p>
+                                                     <p class="jiaGe">¥<span>{{product.payPrice |toDecimal2(2) }}</span>
+                                                         <!-- <template v-if="shop.temType==3" >
+                                                             <span class="color_666">定金:{{product.accountPeriodTemplateDTO.apPrice}}</span>
+                                                         </template> -->
+                                                         <span></span>
+                                                     </p>
+                                                 </div>
+                                                 <span class="shuLiang">X{{product.quantity}}</span>
+                                                 <span class="payTypeImg" :class="'payTypeImg_'+shop.shopId">
+                                                    <template v-if="(shop.temType==1 && shop.temTypes == null) || shop.temTypes == 1">
+                                                        <img src="../../img/fenqi.png" alt="" style="">
+                                                    </template>
+                                                    <template v-if="(shop.temType==2 && shop.temTypes == null) || shop.temTypes == 2">
+                                                        <img src="../../img/yanqi.png" alt="" style="">
+                                                    </template>
+                                                    <template v-if="(shop.temType==3 && shop.temTypes == null) || shop.temTypes == 3">
+                                                        <img src="../../img/dingjin1.png" alt="" style="">
+                                                    </template>
+                                                </span>
+                                             </li>
+                                         </template>
+                                     </template>
+                                 </ul>
+                                 <!--配送方式-->
+                                 <template v-if="shop.groupDeliveryTypes && shop.groupDeliveryTypes[key] && shop.groupDeliveryTypes[key].length > 0">
+                                     <div class="peiSong">
+                                         配送方式
+                                         <!--暂时删除配送方式-->
+                                         <!-- <span>¥<span>{{shop.groupFreight[key] | toDecimal2(2) }}</span></span>-->
+                                         <select name="freightDeliveryType" @change="submitInfo.changeFlag = true;getOrderView('',1)">
+                                             <option v-for="shopDeliveryType in shop.groupDeliveryTypes[key]"
+                                                     :value="shopDeliveryType.templateId + '-' + shopDeliveryType.deliveryType"
+                                                     :selected="orderInfo.freightDeliveryType[key] == shopDeliveryType.deliveryType">
+                                                 <template v-if="shopDeliveryType.deliveryType==1">快递</template>
+                                                 <template v-else-if="shopDeliveryType.deliveryType==2">EMS</template>
+                                                 <template v-else-if="shopDeliveryType.deliveryType==3">平邮</template>
+                                                 <template v-if="shopDeliveryType.groupFreight == 0">包邮</template>
+                                                 <template v-else>¥{{shopDeliveryType.groupFreight | toDecimal2(2) }}</template>
+                                             </option>
+                                         </select>
+                                     </div>
+                                 </template>
+                                 <!--运费优惠-->
+                                 <template v-if="getShopDeliveryPreferentialWay(shop,key,orderInfo.freightDeliveryType)">
+                                     <div class="youHuiJinE">运费优惠<span><i>
+                                    <template v-if="(getShopDeliveryPreferentialWay(shop,key,orderInfo.freightDeliveryType)).full">
+                                        满
+                                        <template v-if="(getShopDeliveryPreferentialWay(shop,key,orderInfo.freightDeliveryType)).deliveryType == 4">
+                                            ¥{{(getShopDeliveryPreferentialWay(shop,key,orderInfo.freightDeliveryType)).full}}
+                                        </template>
+                                        <template v-else>
+                                            {{(getShopDeliveryPreferentialWay(shop,key,orderInfo.freightDeliveryType)).full | toDecimal2(2)}}
+                                        </template>
+                                        <template v-if="(getShopDeliveryPreferentialWay(shop,key,orderInfo.freightDeliveryType)).deliveryType == 1">
+                                            件
+                                        </template>
+                                        <template v-else-if="(getShopDeliveryPreferentialWay(shop,key,orderInfo.freightDeliveryType)).deliveryType == 2">
+                                            kg
+                                        </template>
+                                        <template v-else-if="(getShopDeliveryPreferentialWay(shop,key,orderInfo.freightDeliveryType)).deliveryType == 3">
+                                            m³
+                                        </template>
+                                        <template v-if="shop.groupFreight[key] == 0">
+                                            包邮
+                                        </template>
+                                        <template v-else>
+                                            减￥{{(getShopDeliveryPreferentialWay(shop,key,orderInfo.freightDeliveryType)).reduce}}
+                                        </template>
+                                    </template>
+                                </i></span></div>
+                                 </template>
+                             </template>
+                         </template>
+                        <template v-if="checkCanLock(shop.sellerId)">
+                            <div style="height: 0.6rem;line-height: 0.6rem;font-weight: normal;padding-left: 0.2rem;font-size: 0.24rem;color: #666;">
+                                <label >使用锁定价格</label>
+                                <img :src="checkIsLocked(shop.sellerId) ? '../../img/yes-select.png' :'../../img/no-select.png' " alt="" style="width: 0.3rem; height: 0.3rem;float: left; margin: 0.16rem 0.16rem 0;" @click="submitInfo.changeFlag = true;changeIsLocked(shop.sellerId);"/>
+                            </div>
+                        </template>
+                        <!--显示商品的分期信息-->
+                        <template v-if="shop.existApInfos && ((shop.temType==1 && shop.temTypes == null) || shop.temTypes == 1) ">
+                                <template v-if="shop.existAP">
+                                    <div class="stageRooler">
+                                        <span style="display: inline-block;width: 2rem">分期还款规则</span>
+                                        <span style="display: inline-block;width: 3.8rem;vertical-align: top;text-align: right">
+                                                        <span>￥{{shop.apAllTotalPay}}({{shop.currentApTemplate.apNum}}期，含手续费{{shop.currentApFirstItem.apFee}}元/期</span>
+                                                        <template v-if="shop.currentApTemplate.apOverdueFeeFlag">
+                                                            ;<br><span>逾期:
+                                                            <template v-if="shop.currentApTemplate.apOverdueFeeType == 1"><!--期-->
+                                                                <template v-if="shop.currentApTemplate.apOverdueFeeUnit == 1">
+                                                                    当期未还款额X{{shop.currentApTemplate.apOverdueFee}}%/期
+                                                                </template><!--百分比-->
+                                                                <template v-if="shop.currentApTemplate.apOverdueFeeUnit == 2">
+                                                                    {{shop.currentApTemplate.apOverdueFee}}元/期
+                                                                </template><!--元-->
+                                                            </template>
+                                                            <template v-if="shop.currentApTemplate.apOverdueFeeType == 2"><!--天-->
+                                                                <template v-if="shop.currentApTemplate.apOverdueFeeUnit == 1">
+                                                                    当期未还款额X{{shop.currentApTemplate.apOverdueFee}}%/天
+                                                                </template><!--百分比-->
+                                                                <template v-if="shop.currentApTemplate.apOverdueFeeUnit == 2">
+                                                                   {{shop.currentApTemplate.apOverdueFee}}元/天
+                                                                </template><!--元-->
+                                                            </template>
+
+                                                                )</span>
+                                                        </template>
+                                                        <template v-else>
+                                                            )
+                                                        </template>
+                                                    </span>
+                                    </div>
+                                </template>
+                                <template v-else>
+                                    <template v-if="shop.apTemplates.length > 1">
+                                        <div>
+                                            <p style="color:#e60012;text-align: center;font-size: 0.22rem;margin:0.2rem 0 0.3rem 0;">分期条件不一致，请分开结算。若合并结算，分期商品将不具备分期性质</p>
+                                        </div>
+                                    </template>
+                                    <template v-else>
+                                        <div>
+                                            <p style="color:#e60012;text-align: center;font-size: 0.22rem;margin:0.2rem 0 0.3rem 0;">分期商品和普通商品合并结算,分期商品将不具备分期性质</p>
+                                        </div>
+                                    </template>
+                                </template>
+                        </template>
+                        <!--延期信息-->
+						
+                        <div class="delay_info" v-if="(shop.temType==2 && shop.temTypes == null) || shop.temTypes == 2" :class="'delay_info_'+shop.shopId">
+                            <p>
+                                延期规则<span style="float: right;">￥{{shop.apAllTotalPay+shop.fare | toDecimal2(2)}}（
+                                	<!--  手续费
+                                 <template v-if="shop.products[0].accountPeriodTemplateDTO.apFeeFlag==1">
+                                 {{shop.products[0].accountPeriodTemplateDTO.apFee | toDecimal2(2)}}
+                                 <template v-if="shop.products[0].accountPeriodTemplateDTO.apFeeUnit==1">%</template>
+                                 <template v-else>元</template>
+                                 </template>
+                                 <template v-else>无</template>
+                                    ;-->
+                                    账期：提交订单后{{shop.products[0].accountPeriodTemplateDTO.apTempItemList[0].payInterval}}天)</span>
+                            </p>
+                            <!--<p style="text-align: right;"><br>逾期手续费：
+                                <template v-if="shop.products[0].accountPeriodTemplateDTO.apOverdueFeeFlag==1">
+                                    未还款金额:{{shop.products[0].accountPeriodTemplateDTO.apOverdueFee | toDecimal2(2)}}
+
+                                    <template v-if="shop.products[0].accountPeriodTemplateDTO.apOverdueFeeUnit==1">%</template>
+                                    <template v-else>元</template>
+                                    <template v-if="shop.products[0].accountPeriodTemplateDTO.apOverdueFeeType==1">/期</template>
+                                    <template v-else>/天</template>
+                                </template>
+                                <template v-else>无</template>
+                            </p>-->
+                    </div>
+                        <!--定金金额-->
+                        <div class="delay_info" v-if="(shop.temType==3 && shop.temTypes == null) || shop.temTypes == 3" :class="'delay_info_'+shop.shopId">
+                            <div class="font_20 depositTip">定金支付完成后请在{{shop.payInterval}}天内支付尾款，<span class="font_bold">如未按时支付尾款定金恕不退还。</span>定金不支持使用优惠券，运费均在尾款阶段支付。</div>
+                            <p>
+                                定金规则<span style="float: right;">￥{{shop.apAllTotalPay+shop.fare | toDecimal2(2)}}（<span class="color_e60012">定金：￥{{shop.apPirce | toDecimal2(2)}}；</span>尾款：￥{{shop.total+shop.fare-shop.apPirce-shop.discountAmountTotal | toDecimal2(2)}}）</span>
+                            </p>
+                        </div>
+                        <!-- 套餐商品 李国庆-->
+                        <template v-for="(product,key) in shop.products">
+                            <template v-if="product.itemBuyType==4">
+                                <div class="font_24 height_60 pad_l20 pad_r20" style="background: #f8f8f8; line-height: 0.6rem;">
+                                    <span class="fl">商品套餐</span>
+                                    <span class="fr">x{{product.quantity}}</span>
+                                    <span class="color_e60012 fr mar_r20">￥{{product.total}}</span>
+                                </div>
+                                <ul class="content">
+                                    <template v-for="meal in product.mealFreightList">
+                                        <!-- 套餐商品 -->
+                                        <template v-for="mealProduct in meal.productList">
+                                            <li>
+                                                <img :src=" imgUrl +  mealProduct.skuPic" alt=""/>
+                                                <div class="xinXi">
+                                                    <h3>{{mealProduct.itemName}}</h3>
+                                                    <p class="leiXing" v-substring="[0,20]">
+                                                        {{mealProduct.skuAttr}}
+                                                    </p>
+                                                    <p class="jiaGe">¥<span>{{mealProduct.mealSkuPrice |toDecimal2(2) }}</span>
+                                                        <span></span>
+                                                    </p>
+                                                </div>
+                                            </li>
+                                        </template>
+                                        <!-- 配送方式 -->
+                                        <div class="peiSong">
+                                            配送方式
+                                            <!--暂时删除配送方式-->
+                                            <!-- <span>¥<span>{{shop.groupFreight[key] | toDecimal2(2) }}</span></span>-->
+                                            <select name="freightDeliveryType" @change="submitInfo.changeFlag = true;getOrderView('',1)">
+                                                <option v-for="shopDeliveryType in meal.deliveryTypeFreightList"
+                                                        :value="shopDeliveryType.templateId + '-' + shopDeliveryType.deliveryType"
+                                                        :selected="orderInfo.freightDeliveryType[key] == shopDeliveryType.deliveryType">
+                                                    <template v-if="shopDeliveryType.deliveryType==1">快递</template>
+                                                    <template v-else-if="shopDeliveryType.deliveryType==2">EMS</template>
+                                                    <template v-else-if="shopDeliveryType.deliveryType==3">平邮</template>
+                                                    <template v-if="shopDeliveryType.groupFreight == 0">包邮</template>
+                                                    <template v-else>¥{{shopDeliveryType.groupFreight | toDecimal2(2) }}</template>
+                                                </option>
+                                            </select>
+                                        </div>
+                                </template>
+                                </ul>
+                            </template>
+                        </template>
+                        <!-- 套餐商品 李国庆-->
+                        <!--优惠金额-->
+                        <template v-if="shop.discountAmountTotal && shop.discountAmountTotal !=0 ">
+                            <div class="youHuiJinE">优惠金额<span>¥<i>{{shop.discountAmountTotal | toDecimal2(2)}}</i></span></div>
+                        </template>
+                        <div class="shangPinShuLiang" style="padding-bottom: 0;">已选择<span>{{shop.quantity}}</span>件商品</div>
+                        <div class="zongJi">总计：<span>¥<i>
+                            <template v-if="shop.existAP && shop.temTypes!=0"> <!--分期显示的总额-->
+                                {{shop.apAllTotalPay+shop.fare | toDecimal2(2)}}
+                              <!--    {{shop.allTotal+shop.fare | toDecimal2(2)}} -->
+                            </template>
+                            <template v-else>
+                                {{shop.allTotal+shop.fare | toDecimal2(2)}}
+                            </template>
+                        </i></span></div>
+                </div>
+            </section>
+        </template>
+    </template>
+    <div class="confirmWrap pay_popup">
+        <div class="confirmCon">
+            <h5>提示</h5>
+            <p class="confirmMsg" id="confirm_msg">
+                选择立即支付之后，延期商品将不具备延期性质，支付时需立即全款支付,您确定使用立即支付吗？
+            </p>
+            <div class="confirmLine"></div>
+            <div class="btnWrap">
+                <span class="confirmBtn cancle" id="is_cancleAp" @click ="apJsCancle(shopIds,temTypes)">取消</span>
+                <span class="confirmBtn sure" @click="chanGeOrderView()">确定</span>
+            </div>
+        </div>
+    </div>
+    <div class="confirmWrap confirmWrap_pay_popup">
+        <div class="confirmCon">
+            <h5>提示</h5>
+            <p class="confirmMsg">
+               正在切换请稍后....
+            </p>
+        </div>
+    </div>
+<!--回到顶部-->
+<div id="top">
+</div>
+</div>
+<script type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/jsonUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/vueDirective.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/vueFilter.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/StorageUtil.js"></script>
+<script type="text/javascript" src="../../js/16_dingDanHeDui/dingDanHeDui.js"></script>
+<script charset="UTF-8" type="text/javascript" src="script/productList.js"></script>
+</body>
+</html>

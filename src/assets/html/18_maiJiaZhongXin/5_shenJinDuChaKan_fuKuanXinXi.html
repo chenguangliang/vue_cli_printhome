@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>付款信息查看</title>
+    <link type="text/css" rel="stylesheet" href="../../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/18_maiJiaZhongXin/5_shenJinDuChaKan_fuKuanXinXi.css"/>
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+</head>
+<body>
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="javascript:history.back(-1);" class="fanHui"></a>
+        付款信息查看
+    </div>
+</header>
+<!--选项卡-->
+<div id="fukuan" v-cloak>
+<section>
+    <div class="xuanXiangKa">
+        <ul>
+            <li class="on" onclick="showLabel('1');">平台质量保证金</li>
+            <li onclick="showLabel('2');">平台使用费</li>
+        </ul>
+    </div>
+</section>
+<div style="height: 1.58rem;"></div>
+<section>
+    <div class="tab_box">
+        <div id="baoZhengJin" class="baoZhengJin">
+            <div class="biaoTi">
+                <div class="bg">
+                    <p>平台租赁确认：平台资费已更新<br>请确认并线下缴纳相关费用</p>
+                    <span class="left"></span>
+                    <span class="right"></span>
+                    <div></div>
+                </div>
+                <p class="zongJie">平台质量保证金：您一共选择了{{shopCategorySum}}个项目<br>平台质量保证金共计：<i class="red">{{marginSummary}}</i> 元</p>
+            </div>
+            <div class="lieBiao">
+                <template v-for="(margin,index) in marginList">
+                    <div class="leiMu">
+                        <span class="xuLie">{{index+1}}</span>
+                        <span class="left"></span>
+                        <span class="right"></span>
+                        <ul>
+                            <li>
+                                <h2>一级类目</h2>
+                                <p>{{margin[0]}}</p>
+                            </li>
+                            <li>
+                                <h2>二级类目</h2>
+                                <p>{{margin[1]}}</p>
+                            </li>
+                            <li>
+                                <h2>三级类目</h2>
+                                <p>{{margin[2]}}</p>
+                            </li>
+                            <li>
+                                <h2>金额</h2>
+                                <p>{{margin[3]}}</p>
+                            </li>
+                        </ul>
+                        <span class="lineX"></span>
+                        <span class="lineY"></span>
+                    </div>
+                </template>
+                <div class="leiMu">
+                    <p class="shuoMing">平台质量保证金采用平台代收托管的形式，是卖家为保障交易安全和售后质量对买家做出的一种服务承诺请查看<a href="javascript:;">《平台质量保证金协议》</a>。</p>
+                    <span class="left"></span>
+                    <span class="right"></span>
+                </div>
+            </div>
+        </div>
+        <div id="shiYongFei" class="shiYongFei">
+            <div class="biaoTi">
+                <div class="bg">
+                    <p>平台租赁确认：平台资费已更新<br>请确认并线下缴纳相关费用</p>
+                    <span class="left"></span>
+                    <span class="right"></span>
+                    <div></div>
+                </div>
+                <p class="zongJie">平台使用费：您一共选择了{{shopCategorySum}}个项目<br>平台使用费共计：<i class="red">{{royaltiesSummary}}</i> 元</p>
+            </div>
+            <div class="lieBiao">
+                <template v-for="(royalties,index) in royaltiesList">
+                    <div class="leiMu">
+                        <span class="xuLie">{{index+1}}</span>
+                        <span class="left"></span>
+                        <span class="right"></span>
+                        <ul>
+                            <li>
+                                <h2>一级类目</h2>
+                                <p>{{royalties[0]}}</p>
+                            </li>
+                            <li>
+                                <h2>二级类目</h2>
+                                <p>{{royalties[1]}}</p>
+                            </li>
+                            <li>
+                                <h2>三级类目</h2>
+                                <p>{{royalties[2]}}</p>
+                            </li>
+                            <li>
+                                <h2>金额</h2>
+                                <p>{{royalties[3]}}</p>
+                            </li>
+                        </ul>
+                        <span class="lineX"></span>
+                        <span class="lineY"></span>
+                    </div>
+                </template>
+                <div class="leiMu">
+                    <p class="shuoMing">平台使用费是卖家使用平台而支付的相关费用，以按年收费的形式，请查看<a href="javascript:;">《平台使用费协议》</a>。</p>
+                    <span class="left"></span>
+                    <span class="right"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+<!--回到顶部-->
+<section>
+    <div id="top">
+    </div>
+</section>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="script/5_fukuanInfo.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/12_maiJiaZhongXin/10_xieYiGuanLi_xieYiGuanLi.js"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>地址管理</title>
+    <link rel="stylesheet" href="../../../css/common.css"/>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+    <script type="text/javascript" src="../../../js/adjust.js"></script>
+    <link rel="stylesheet" href="../../../css/12_maiJiaZhongXin/4_shouHuoDiZhi_shouHuoDiZhi2.css"/>
+</head>
+<body>
+<div id="addressManage">
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="javascript:;" onclick="javascript:history.back(-1);" class="return"></a>地址管理
+    </div>
+    <div class="zhanwei"></div>
+</header>
+<!--地址列表-->
+    <template v-for="address in addressList">
+        <section>
+            <div class="moRenDiZhi" >
+                <div class="left" @click="submitInfo.gotoType == 'orderView' ? orderChecked(address) : ''">
+                    <div class="l" >
+                        <div class="moRen" v-show="address.defaultFlag">默认</div>
+                        <div class="xuanZhong" v-show="address.isCheckedAddress"></div>
+                    </div>
+                    <div class="m" style="width: 4.7rem;margin-left: 0px;">
+                        <p class="name"><span>{{address.contactperson}}</span>&emsp;<span>{{address.contactphone}}</span>&emsp;<span>{{address.contacttel}}</span></p>
+                        <p class="adderess">{{address.provicecodeName}} {{address.citycodeName}} {{address.countrycodeName}} {{address.fulladdress}}</p>
+                        <input style="display: none" type="checkbox" v-model="address.defaultFlag" :disabled="address.defaultFlag" @change="setDefault(address)"/><span style="display: none">&ensp;设为默认地址</span>
+                    </div>
+                </div>
+                <div class="r">
+                    <a href="javascript:void(0);" class="bianJi"  @click="gotoAddAddress(address.id)"><img src="../../../img/bianji@3x.png" alt="" />编辑</a>
+                    <a href="javascript:void(0);" class="shanChu" @click="delAddr = address;delDialog = !delDialog ;"><img src="../../../img/shanchu-@3x.png" alt=""/>删除</a>
+                </div>
+            </div>
+        </section>
+    </template>
+
+<!--新增按钮-->
+<section>
+    <a href="javascript:void(0)" class="saveAddress" @click="gotoAddAddress()">+新增收货地址</a>
+</section>
+<!--删除提示-->
+<div class="zhezhao" v-show="delDialog" v-cloak>
+    <div>
+        <p>确定删除么？</p>
+        <span class="quXiao" @click="delDialog = !delDialog ; delAddr = ''">取消</span>
+        <span class="queDing" @click="delDialog = !delDialog ;delAddress(delAddr); ">确定</span>
+    </div>
+</div>
+</div>
+<script charset="UTF-8" type="text/javascript" src="../../../bower_components/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../js/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../js/jsonUtil.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../../js/common.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="script/deliveryAddress.js"></script>
+</body>
+</html>

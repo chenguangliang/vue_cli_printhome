@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>退款/售后</title>
+    <link type="text/css" rel="stylesheet" href="../../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/12_maiJiaZhongXin/12_dingDan_woDedingDan.css"/>
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+</head>
+<body>
+<div id="apply_sale_after" v-cloak>
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="javascript:;" class="fanHui" onclick="javascript:history.back(-1);"></a><!--v-on:click="goBackOrderList()"-->
+        退款/售后
+    </div>
+    <div style="height: 0.88rem;"></div>
+</header>
+<section>
+    <div class="dingDan tui">
+            <a class="xiangQing" href="javascript:;">
+                <h2>退款商品</h2>
+                <template v-for="entityItem in resultData.jsonObject.items">
+                <div class="top clearfix">
+                    <img v-bind:src="img_url + entityItem.skuPicUrl" alt="" class="dianPuLogo"/>
+                    <p class="shangPin">{{entityItem.itemName}}</p>
+                    <template v-if="resultData.tradeOrdersDTO.paymentMethod == 3">
+                        <p class="money">{{entityItem.integral}}积分</p>
+                    </template>
+                    <template v-else>
+                        <p class="money">¥{{entityItem.payPrice}}</p>
+                    </template>
+                    <p class="num">X {{entityItem.num}}</p>
+                </div>
+                </template>
+            </a>
+            <div style="border: 1px dashed #ccc;width: 6rem;margin: 0 auto"></div>
+            <div class="dianJiZhanKai">点击展开详情<span class="arrow xiaLa"></span></div>
+            <div class="zhaiYao">
+                <h3>订单摘要</h3>
+                <div class="heZi">
+                    <span class="left">订单号：</span>
+                    <span class="right">{{resultData.tradeOrdersDTO.orderId}}</span>
+                </div>
+                <div class="heZi">
+                    <span class="left">下单时间：</span>
+                    <span class="right">{{resultData.tradeOrdersDTO.createTime | longToDate(resultData.tradeOrdersDTO.createTime)}}</span>
+                </div>
+                <div class="heZi">
+                    <span class="left">付款时间：</span>
+                    <span class="right">{{resultData.tradeOrdersDTO.paymentTime | longToDate(resultData.tradeOrdersDTO.paymentTime)}}</span>
+                </div>
+                <div class="heZi">
+                    <span class="left">订单状态：</span>
+                    <span class="right">
+                        <template v-if="resultData.tradeOrdersDTO.state == 1">
+                            待付款
+                        </template>
+                        <template v-else-if="resultData.tradeOrdersDTO.state == 2">
+                            待配送
+                        </template>
+                        <template v-else-if="resultData.tradeOrdersDTO.state == 3">
+                            待收货
+                        </template>
+                        <template v-else-if="resultData.tradeOrdersDTO.state == 4">
+                            待评价
+                        </template>
+                        <template v-else-if="resultData.tradeOrdersDTO.state == 5">
+                            已完成
+                        </template>
+                        <template v-else-if="resultData.tradeOrdersDTO.state == 6">
+                            已取消
+                        </template>
+                        <template v-else-if="resultData.tradeOrdersDTO.state == 7">
+                            已关闭
+                        </template>
+                    </span>
+                </div>
+                <div class="heZi">
+                    <span class="left">运费：</span>
+                    <span class="right">{{resultData.tradeOrdersDTO.freight}}元</span>
+                </div>
+                <div class="heZi">
+                    <span class="left">实付款：</span>
+                    <span class="right"><span class="red">{{resultData.tradeOrdersDTO.paymentPrice}}</span>元</span>
+                </div>
+            </div>
+        </div>
+</section>
+<section>
+    <div class="tuiKuanXiangQing">
+        <p><label class="red">＊</label>退款理由</p>
+        <p>
+            <select class="ccc_border gray_word" v-model="returnResult">
+                <option value="">请选择退款原因</option>
+                <option value="不想买了">不想买了</option>
+                <option value="信息填写错误重新买">信息填写错误重新买</option>
+                <option value="卖家缺货">卖家缺货</option>
+                <option value="未收到货">未收到货</option>
+                <option value="收到商品破损"> 收到商品破损</option>
+                <option value="商品错发／漏发">商品错发／漏发</option>
+                <option value="商品需要维修">商品需要维修</option>
+                <option value="收到商品与描述不符">收到商品与描述不符</option>
+                <option value="商品质量问题">商品质量问题</option>
+            </select>
+        </p>
+        <p>
+            <label class="red">＊</label>申请数量
+            <template v-for="entityItem in resultData.jsonObject.items">
+                <span v-if="resultData.num">最多{{entityItem.num-resultData.num}}件</span>
+                <span v-else>最多{{entityItem.num}}件</span>
+            </template>
+        </p>
+        <p>
+            <input type="number" class="shenQingShuLiang ccc_border gray_word" v-model="amountNum"/><i>件</i>
+        </p>
+        <p>
+            <label class="red">＊</label>退款金额
+            <template v-for="entityItem in resultData.jsonObject.items">
+	            <span v-if="resultData.fundMoney">最多{{(entityItem.payPriceTotal-resultData.fundMoney)|toDecimal2}}元</span>
+	            <span v-else>最多{{entityItem.payPriceTotal}}元</span>
+            </template>
+        </p>
+        <p><input type="number" class="tuiKuanJinE ccc_border gray_word" v-model="refundMoney"/><i>元</i></p>
+        <p class="tiShi">一个商品仅支持退款（或售后）一次，请核实退款金额</p>
+        <p><label class="red">＊</label>问题描述</p>
+        <p>
+        <textarea v-model="remark" placeholder="请说明退款原因，最多不超过300字" class="ccc_border gray_word"></textarea>
+        </p>
+        <p>上传凭证</p>
+        <p class="tiShi2">最多5张，单张不超过10M，限png、bmp、jpg或jpeg文件格式</p>
+        <p class="clearfix" id="certificate_pic_div">
+            <span class="xiangJi">
+                <img src="../../img/xiangJi.png" alt="" />
+                <input type="file" class="fuJian" id="fileupload" name="file" onchange="startUpload(this)"/>
+            </span>
+        </p>
+    </div>
+</section>
+<div style="height: 0.84rem;"></div>
+<footer>
+    <div class="shenQingTuiKuan"><a href="javascript:void(0);" v-on:click="applyRefund()">立即申请退款</a></div><!--12_dingDan_tuiKuanZhong.html-->
+</footer>
+<!--回到顶部-->
+<section>
+    <div id="top">
+    </div>
+</section>
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../bower_components/attachment/jquery.form.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/jsonUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/12_maiJiaZhongXin/12_dingDan_woDedingDan.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/vueFilter.js"></script>
+<script charset="utf-8" type="text/javascript" src="script/apply-sale-after.js"></script>
+</body>
+</html>

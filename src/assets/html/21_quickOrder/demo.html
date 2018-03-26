@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            font-size: 500px;
+        }
+    </style>
+</head>
+<body>
+<input type="date" id="aa">
+<button onclick="getTime()">得到</button>
+<button onclick="setTime()">赋值</button>
+
+<script src="../../bower_components/jquery-2.1.4.js"></script>
+<script>
+    function getTime() {
+        console.log($("#aa").val());
+    }
+    function setTime() {
+        $("#aa").val('')
+    }
+
+</script>
+</body>
+</html>

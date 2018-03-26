@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>找回支付密码1：确认账号</title>
+    <link rel="stylesheet" href="../../css/common.css"/>
+    <link rel="stylesheet" href="../../css/12_maiJiaZhongXin/6_anQuanXinXiSheZhi_zhaoHuiZhiFuMiMa.css"/>
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+</head>
+<body style="background: white;font-size: 0.3rem;padding: 0.2rem">
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="javascript:gotoBackPreviousPage()" class="return"></a>找回支付密码
+        <!--<a href="../../html/12_maiJiaZhongXin/6_anQuanXinXiSheZhi_anQuanXinXiSheZhi.html" class="return"></a>找回支付密码-->
+    </div>
+    <div class="zhanwei"></div>
+</header>
+<div>
+    <div class="title">
+        <img style="width: 2.9rem;" src="../../img/yz-bg.png" alt=""/>
+
+        <div>1.确认已绑定手机号</div>
+    </div>
+    <div style="padding: 0.2rem;margin-top: 0.1rem;">
+        <div id="userInfo" v-cloak>
+            <span style="font-size: 0.3rem;color: #333333;margin-right: 0.2rem;">确认已绑定手机号</span>
+            <br/>
+            <template v-if="userInfo.umobile">
+                <span style="font-size: 0.26rem;color: #666666">验证信息将发送至{{getPhone(userInfo.umobile)}},请确认手机号正确。如需修改请前往<a style="color:blue;" href="../../html/12_maiJiaZhongXin/6_anQuanXinXiSheZhi_xiuGaiShouJi.html">修改绑定手机号</a></span>
+            </template>
+            <template v-else>
+                <span style="font-size: 0.26rem;color: #666666">用户未绑定手机号！请前往<a style="color:blue;" href="../../html/12_maiJiaZhongXin/6_anQuanXinXiSheZhi_bangDingShouJi.html">绑定手机号</a>绑定手机</span>
+            </template>
+        </div>
+        <div style="margin-top: 0.3rem;">
+            <span style="font-size: 0.3rem;color: #333333;margin-right: 0.2rem;">验证码</span>
+            <span style="font-size: 0.26rem;color: #666666">验证码请输入下图中显示的数字</span>
+        </div>
+        <div class="code">
+            <img src="../../img/yanzhengma.png" alt="" id="imgCaptcha" onclick="getImgcaptcha()"/>
+            <input id="picCaptcha" class="code_input ccc_border gray_word"  type="text" maxlength="4" onchange="if(/\D/.test(this.value)){printAlert('只能输入数字');this.value='';}" onkeypress="keyPress()" placeholder="验证码"  />
+        </div>
+        <div class="code_error none">验证码错误，请重新输入</div>
+        <div class="code_expire none">验证码已过期，请重新获取</div>
+
+    </div>
+</div>
+<div class="btn">
+    <a  href="javascript:;"><input class="red_bg" type="button" onclick="oneStepSubmit()" value="确  定"/></a>
+</div>
+<script charset="UTF-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../js/common.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../js/StorageUtil.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../js/2_login_sign/zhaoHuiMiMa.js"></script>
+<script charset="UTF-8" type="text/javascript" src="script/6_findPayPwd.js"></script>
+</body>
+</html>

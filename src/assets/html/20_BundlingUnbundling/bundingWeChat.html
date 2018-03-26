@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>注册</title>
+    <link rel="stylesheet" href="../../css/common.css"/>
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+</head>
+<body style="background-color: #fff;" onload="lodWechat()">
+    <a href="javascript:;">
+        <img src="../../img/loginLogo.png" alt="" style="width: 3.2rem;height: 1.08rem;display: block;margin: 1.3rem auto 1rem;"/>
+    </a>
+    <h3 style="width: 5.12rem;margin: 0 auto 0.6rem;font-size: 0.28rem;color: #333;font-weight: normal;line-height: 0.4rem;">
+        很遗憾系统未检测到与您匹配的印刷家账号，请前往绑定微信免密登录。<br/>
+        如您还未注册印刷家，请前往注册。<br/>
+        <span style="font-size: 0.24rem;color: #e60012;"><span id="showTime_Wechat">10</span>秒后将回到登录页</span></h3>
+        <a href="../../html/20_BundlingUnbundling/bundling.html" style="width:5.12rem;height: 0.78rem;display: block;margin: 0 auto 0.2rem;background-color: #e60012;border-radius: 0.05rem;color: #fff;font-size: 0.3rem;line-height: 0.78rem;text-align: center;">绑定微信账号</a>
+    <div style="width: 5.12rem;margin: 0 auto;overflow:hidden;">
+        <a href='javascript: new function () { window.location = getUrl("person/wechatOauth2Url?origin=微信快速注册");  }' style="font-size: 0.26rem;color: #666;float:left;">注册</a>
+        <!--<a href="../../html/2_login_sign/sign.html" style="font-size: 0.26rem;color: #666;float:left;">注册</a>-->
+        <a href="../../html/2_login_sign/login_common.html" style="font-size: 0.3rem;color: #333;float: right;">登录</a>
+    </div>
+    <div style="font-size: 0.22rem;color: #999;position: absolute;bottom: 0.2rem;left: 50%;margin-left: -0.88rem;">printhome.com</div>
+<script src="../../bower_components/jquery-2.1.4.js"></script>
+    <script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/2_login_sign/loginSuccess.js"></script>
+</body>
+</html>

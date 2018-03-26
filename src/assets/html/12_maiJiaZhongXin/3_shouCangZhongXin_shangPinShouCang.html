@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>印刷家</title>
+    <link rel="stylesheet" href="../../css/common.css"/>
+    <link rel="stylesheet" href="../../css/animate.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/pullToRefresh.css"/>
+    <link rel="stylesheet" href="../../css/12_maiJiaZhongXin/3_shouCangZhongXin_shangPinShouCang.css"/>
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+</head>
+<body>
+<div id="shoucang_shangpin">
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="javascript:;" onclick="javascript:history.back(-1);" class="return"></a>
+        商品收藏
+        <a href="javascript:;" class="bianJi">编辑</a>
+        <div class="twoButton">
+            <a href="javascript:;" class="shanChu">删除</a>
+            <a href="javascript:;" class="baoCun">完成</a>
+        </div>
+    </div>
+    <div class="zhanwei"></div>
+</header>
+<!--头部结束-->
+<!--商品列表开始-->
+<template v-if="productlist.length !=0">
+    <section>
+        <div class="tab_box" id="wrapper">
+            <div class="quanBU wrapScrool" id="f">
+                <div style="height: 0.8rem"></div>
+                <template v-for="product in productlist">
+                    <a class="shangPinLieBiao" href="javascript:;" @click="gotoGoods(product)">
+                        <div class="gouXuan" :style="bianji?'display: inline-block':'display: none'" >
+                            <template v-if="ids.indexOf(product.id)>-1">
+                                <img class="no-select" src="../../img/yes-select.png"  alt="" />
+                            </template>
+                            <template v-else>
+                                <img class="no-select" src="../../img/no-select.png" alt="" />
+                            </template>
+                        </div><div class="shangPinTuPian"><img :src="getImgUrl(product.picUrl)"  alt=""/></div><div class="shangPinXiangQing"><p class="mingZi" v-text="product.itemName"></p><p class="jiaGe" v-text="product.hasPrice?'￥'+product.price:'暂无报价'"></p>
+                    </div>
+                    </a>
+                </template>
+            </div>
+        </div>
+    </section>
+</template>
+<template v-else>
+    <div class="haveNoGoods" >
+        <div>
+            <img src="../../img/chenggongbg@3x.png" alt=""/>
+        </div>
+        <h2>您还没有收藏商品哦！</h2>
+        <a class="selectGoods" href="../../html/1_index/index.html">立即挑选</a>
+        <!--<a href="../../html/1_index/index.html" class="tiaoZhuan">立即选购</a>-->
+        <p  class="printHome">printhome.com</p>
+    </div>
+</template>
+
+<!--商品列表结束-->
+<!--未选中弹出提示-->
+<div class="zhezhao">
+    <div>
+        请选择要删除的商品！
+        <span class="close"></span>
+    </div>
+</div>
+<!--选中弹出提示-->
+<div class="zhezhao2">
+    <div>
+        <p>确定删除么？</p>
+        <span class="quXiao">取消</span>
+        <span class="queDing" @click="quedingShanchu()">确定</span>
+    </div>
+</div>
+    <main-foot :user-info="userInfo" :current-position="4"></main-foot>
+</div>
+<!--回到顶部-->
+<section>
+    <div id="top"></div>
+</section>
+<!--底部占位-->
+<section>
+    <div class="zhanwei2"></div>
+</section>
+
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/iscroll.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/pullToRefresh_fixHead.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script type="text/javascript" src="../../js/vueFoot.js"></script>
+<!--<script charset="utf-8" type="text/javascript" src="../../js/12_maiJiaZhongXin/3_shouCangZhongXin_shangPinShouCang.js"></script>-->
+<script type="text/javascript" src="script/3_shoucang_shangpin.js"></script>
+<!--<script charset="utf-8" type="text/javascript" src="../../js/footer.js"></script>-->
+</body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>店铺基本信息修改</title>
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/18_maiJiaZhongXin/13_dianPuXinXiXiuGai_dianPuJiBenXinXiXiuGai.css"/>
+</head>
+<body>
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="javascript:gotoBackPreviousPage()" class="return"></a>
+        店铺基本信息修改
+    </div>
+    <div style="height: 0.88rem;"></div>
+</header>
+<!--联系人开始-->
+<div id="shopInfoEdit">
+<section>
+    <div class="lianxiren">
+        <p class="clearfix">
+            <span class="left">
+                <label>＊</label>店铺名称：</span>
+            <span class="right">
+                <input type="text" v-model="shopInfo.shopName" placeholder="输入店铺名称..." class="ccc_border gray_word dianPuMingCheng" maxlength="25"/>
+            </span>
+        </p>
+        <div class="warm none">店铺名称必须填写！</div>
+        <p class="clearfix">
+            <span class="left">店铺logo：</span>
+            <span class="right">
+                    <img id="logoUrlImg" :src="getImgUrl(shopInfo.logoUrl)" @click="showImg($event)" alt="" style="width:2rem;"/>
+                    <span style="position: relative;display: inline-block;width: 2rem;height: 0.4rem;margin-top:0.1rem;">
+                        <span style="width:1.3rem;height:0.4rem;line-height: 0.4rem;font-size:12px;text-align:center;position: absolute;left: 0;border: 1px solid #ccc;border-radius: 5px">选择文件</span>
+                        <input type="file" name="file" id="fileInputyy" onchange="startUpload('fileInputyy','logoUrlImg','logoUrl')" style="width:1.3rem;font-size:12px;position: absolute;opacity:0;"/>
+                        <input name="logoUrl" id="logoUrl" type="hidden" :value="shopInfo.logoUrl" />
+                    </span>
+            </span>
+        </p>
+        <p class="clearfix">
+            <span class="left">关键字：</span>
+            <span class="right">
+                <textarea class="ccc_border gray_word" maxlength="500" v-model="shopInfo.keyword"></textarea>
+            </span>
+        </p>
+        <p class="clearfix">
+            <span class="left">店铺简介：</span>
+            <span class="right">
+                <textarea class="ccc_border gray_word" maxlength="500" v-model="shopInfo.introduce"></textarea>
+            </span>
+        </p>
+    </div>
+    <div class="lianxiren">
+        <p class="clearfix">
+            <span class="left">店铺主营：</span>
+            <span class="right">
+                <input type="text" class="ccc_border gray_word" placeholder="输入店铺主营..." maxlength="16" v-model="shopInfo.mainSell"/>
+            </span>
+        </p>
+        <p class="clearfix">
+            <span class="left"><label>＊</label>店铺类型：</span>
+            <span class="right"><select  name="shopType"  v-model="shopInfo.shopType" v-cloak>
+                <option :value="shopType.code"  v-for="shopType in  shopTypeList">{{shopType.label}}</option>
+            </select></span>
+        </p>
+        <div class="warm none">请选择店铺类型！</div>
+        <p class="clearfix">
+            <span class="left"><label>＊</label>品牌类型：</span>
+            <span class="right"><select  name="brandType"  v-model="shopInfo.brandType" v-cloak>
+                <option :value="brandType.code"  v-for="brandType in  brandTypeList">{{brandType.label}}</option>
+            </select></span>
+        </p>
+        <div class="warm none">请选择品牌类型！</div>
+        <p class="clearfix">
+            <span class="left"><label>＊</label>经营类型：</span>
+            <span class="right"><select  name="businessType"  v-model="shopInfo.businessType" v-cloak>
+                <option :value="businessType.code"  v-for="businessType in  businessTypeList">{{businessType.label}}</option>
+            </select></span>
+        </p>
+        <div class="warm none">请选择经营类型！</div>
+        <p class="zhengJian clearfix">
+            <span class="left" style="padding-right:0.1rem;"><label>＊</label>免责声明扫描件：</span>
+            <span class="right">
+                    <img id="disclaimerImg" :src="getImgUrl(shopInfo.disclaimer)" @click="showImg($event)" alt="" style="width:2rem;height:1.5rem;"/>
+                    <span style="position: relative;display: inline-block;width: 2rem;height: 0.4rem;margin-top:0.1rem;">
+                        <span style="width:1.3rem;height:0.4rem;line-height: 0.4rem;font-size:12px;text-align:center;position: absolute;left: 50%;margin-left: -0.65rem;border: 1px solid #ccc;border-radius: 5px">选择文件</span>
+                        <input type="file" name="file" id="fileInputdisclaimer" onchange="startUpload('fileInputdisclaimer','disclaimerImg','disclaimer')" style="width:1.3rem;font-size:12px;position: absolute;opacity:0;"/>
+                        <input name="disclaimer" id="disclaimer" type="hidden" :value="shopInfo.disclaimer"/>
+                    </span>
+            </span>
+        </p>
+        <p class="zhengJian clearfix">
+            <span  class="left" style="padding-right:0.1rem;">商品注册申请书扫描件：</span>
+            <span class="right">
+                    <img id="trademarkRegistCertImg" :src="shopInfo.trademarkRegistCert?getImgUrl(shopInfo.trademarkRegistCert):''" @click="showImg($event)" alt="" style="width:2rem;height:1.5rem;"/>
+                    <span style="position: relative;display: inline-block;width: 2rem;height: 0.4rem;margin-top:0.1rem;">
+                        <span style="width:1.3rem;height:0.4rem;line-height: 0.4rem;font-size:12px;text-align:center;position: absolute;left: 50%;margin-left: -0.65rem;border: 1px solid #ccc;border-radius: 5px">选择文件</span>
+                        <input type="file" name="file" id="fileInputtrademarkRegistCert" onchange="startUpload('fileInputtrademarkRegistCert','trademarkRegistCertImg','trademarkRegistCert')" style="width:1.3rem;font-size:12px;position: absolute;opacity:0;"/>
+                        <input name="trademarkRegistCert" id="trademarkRegistCert" type="hidden" :value="shopInfo.trademarkRegistCert"/>
+                    </span>
+            </span>
+        </p>
+        <p class="zhengJian clearfix">
+            <span  class="left" style="padding-right:0.1rem;">报关单类扫描件：</span>
+            <span class="right">
+                    <img id="inspectionReportImg" :src="shopInfo.inspectionReport?getImgUrl(shopInfo.inspectionReport):''" @click="showImg($event)" alt="" style="width:2rem;height:1.5rem;"/>
+                    <span style="position: relative;display: inline-block;width: 2rem;height: 0.4rem;margin-top:0.1rem;">
+                        <span style="width:1.3rem;height:0.4rem;line-height: 0.4rem;font-size:12px;text-align:center;position: absolute;left: 50%;margin-left: -0.65rem;border: 1px solid #ccc;border-radius: 5px">选择文件</span>
+                        <input type="file" name="file" id="fileInputinspectionReport" onchange="startUpload('fileInputinspectionReport','inspectionReportImg','inspectionReport')" style="width:1.3rem;font-size:12px;position: absolute;opacity:0;"/>
+                        <input name="inspectionReport" id="inspectionReport" type="hidden" :value="shopInfo.inspectionReport"/>
+                    </span>
+            </span>
+        </p>
+        <p class="zhengJian clearfix">
+            <span  class="left" style="padding-right:0.1rem;">卫生生产许可证扫描件：</span>
+            <span class="right">
+                    <img id="productionLicenseImg" :src="shopInfo.productionLicense?getImgUrl(shopInfo.productionLicense):''" @click="showImg($event)" alt="" style="width:2rem;height:1.5rem;"/>
+                    <span style="position: relative;display: inline-block;width: 2rem;height: 0.4rem;margin-top:0.1rem;">
+                        <span style="width:1.3rem;height:0.4rem;line-height: 0.4rem;font-size:12px;text-align:center;position: absolute;left: 50%;margin-left: -0.65rem;border: 1px solid #ccc;border-radius: 5px">选择文件</span>
+                        <input type="file" name="file" id="fileInputproductionLicense" onchange="startUpload('fileInputproductionLicense','productionLicenseImg','productionLicense')" style="width:1.3rem;font-size:12px;position: absolute;opacity:0;"/>
+                        <input name="productionLicense" id="productionLicense" type="hidden" :value="shopInfo.productionLicense"/>
+                    </span>
+            </span>
+        </p>
+    </div>
+    <div class="lianxiren">
+        <h2 class="title"><label>＊</label>购买设置</h2>
+        <div class="qiPiSheZhi clearfix">
+            <span class="left">起批设置：</span>
+            <div class="right">
+                <div>数量要求 <input type="text" class="ccc_border gray_word w280 shuLiang" maxlength="16" v-model="shopInfo.initialMount" @keyup="numInputForLengthForVue($event,9,0,shopInfo,'initialMount');" @input="numInputForLengthForVue($event,9,0,shopInfo,'initialMount');" /> 件 </div>
+                <div class="huoQie">
+                    <template v-if="shopInfo.initialCondition == '1'">
+                        <img src="../../img/yes-select.png" alt="" class="yes"/>或
+                        <img src="../../img/no-select.png" alt="" @click="shopInfo.initialCondition=2" class="no"/>且
+                    </template>
+                    <template v-else>
+                        <img src="../../img/no-select.png" alt="" @click="shopInfo.initialCondition=1" class="no"/>或
+                        <img src="../../img/yes-select.png" alt=""  class="yes"/>且
+                    </template>
+                </div>
+                <div>金额要求<input type="text" class="ccc_border gray_word  w280 jinE" v-model="shopInfo.initialPrice" maxlength="16" @keyup="numInputForLengthForVue($event,9,2,shopInfo,'initialPrice');" @input="numInputForLengthForVue($event,9,2,shopInfo,'initialPrice');"/> 元</div>
+            </div>
+        </div>
+        <h2 class="title"> 其他设置</h2>
+        <div class="qiPiSheZhi clearfix">
+            <div class="hunPi"><input type="checkbox" :checked="shopInfo.mutilPrice=='1'?'true':''"  class="ccc_border"/> 混批</div>
+            <div class="right">
+                <div class="tiShi">（混批指不限商品种类，只要买家总采购数量或金额达到要求，则可进行批发。设置成功后对全店商品生效）</div>
+                <div>数量要求 <input type="text" class="ccc_border gray_word w280" maxlength="16" v-model="shopInfo.mountMin" @keyup="numInputForLengthForVue($event,9,0,shopInfo,'mountMin');" @input="numInputForLengthForVue($event,9,0,shopInfo,'mountMin');"/> 件 </div>
+                <div class="huoQie">
+                    <template v-if="shopInfo.mutilCondition == '1'">
+                        <img src="../../img/yes-select.png" alt="" class="yes"/>或
+                        <img src="../../img/no-select.png" alt="" @click="shopInfo.mutilCondition=2" class="no"/>且
+                    </template>
+                    <template v-else>
+                        <img src="../../img/no-select.png" alt="" @click="shopInfo.mutilCondition=1" class="no"/>或
+                        <img src="../../img/yes-select.png" alt=""  class="yes"/>且
+                    </template>
+                </div>
+                <div>金额要求 <input type="text" class="ccc_border gray_word w280" v-model="shopInfo.priceMin" maxlength="16" @keyup="numInputForLengthForVue($event,9,2,shopInfo,'priceMin');" @input="numInputForLengthForVue($event,9,2,shopInfo,'priceMin');"/> 元</div>
+            </div>
+        </div>
+    </div>
+    <div class="lianxiren">
+        <p class="address"><label>＊</label>发货（退货）地址：</p>
+        <p class="address_select clearfix">
+            <select id="sel_Province" name="sel_Province" v-model="shopInfo.provinceCode" @change="changeProvince" class="w110 ccc_border gray_word">
+                <option value="" > 请选择 </option>
+                <option v-for="province in provinceList" :value="province.code" v-text="province.name"></option>
+            </select>
+            <select id="sel_City" name="sel_City" v-model="shopInfo.cityCode" @change="changeCity" class="w160 ccc_border gray_word">
+                <option value="" > 请选择 </option>
+                <option v-for="city in cityList" :value="city.code" v-text="city.name"></option>
+            </select>
+            <select id="sel_County" name="sel_County" v-model="shopInfo.districtCode" class="w250 ccc_border gray_word">
+                <option value="" > 请选择 </option>
+                <option v-for="area in areaList" :value="area.code" v-text="area.name"></option>
+            </select>
+        </p>
+        <div class="warm none">请选择发货（退货）地址！</div>
+        <div  class="zhuShi">注：填写后，认证后卖家可通过地区筛选找到您的店铺</div>
+        <p class="clearfix">
+            <span class="left">邮政编码：</span>
+            <span class="right">
+                <input type="text" class="ccc_border gray_word  w300" v-model="shopInfo.zcode" maxlength="6" @keyup="numInputForLengthForVue($event,6,0,shopInfo,'zcode');" @input="numInputForLengthForVue($event,6,0,shopInfo,'zcode');" oninput="if (! /^\d+$/ig.test(this.value)){this.value='';}"/>
+            </span>
+        </p>
+        <p class="clearfix">
+            <span class="left"><label>＊</label>街道地址：</span>
+            <span class="right">
+                <input type="text" class="ccc_border gray_word jieDaoDiZhi" v-model="shopInfo.streetName" maxlength="25"/>
+                <span class="zhuShi">注：不需要重新填写省/市/区</span>
+            </span>
+        </p>
+        <div class="warm none">请输入街道地址！</div>
+        <p class="clearfix">
+            <span class="left">手机号码：</span>
+            <span class="right">
+                <input type="tel" class="ccc_border gray_word w300" v-model="shopInfo.mobile" maxlength="11"  onkeyup="this.value=this.value.replace(/\D/g,'')"  onchange="this.value=this.value.replace(/\D/g,'')" />
+            </span>
+        </p>
+        <p class="clearfix">
+            <span class="left">座机号码：</span>
+            <span class="right">
+                <input type="tel"v-model="shopInfo.areaCode" maxlength="4"class="ccc_border gray_word "style="width:1rem;"/>-
+                <input type="tel" v-model="shopInfo.landline" maxlength="8"class="ccc_border gray_word " style="width:1.85rem;"/>-
+                <input type="tel" v-model="shopInfo.extensionNumber" maxlength="4"class="ccc_border gray_word " style="width:1.2rem;"/>
+            </span>
+        </p>
+        <p class="clearfix">
+            <span class="left">销售负责人：</span>
+            <span class="right">
+                <input type="text" class="ccc_border gray_word  w300" v-model="shopInfo.linkMan1" maxlength="25"/>
+            </span>
+        </p>
+        <p class="clearfix">
+            <span class="left w192">销售负责人电话：</span>
+            <span class="right w400">
+                <input type="number" class="ccc_border gray_word  w300" v-model="shopInfo.linkPhoneNum1" maxlength="12"/>
+            </span>
+        </p>
+        <p class="clearfix">
+            <span class="left">其他联系人：</span>
+            <span class="right">
+                <input type="text" class="ccc_border gray_word  w300" v-model="shopInfo.linkMan2" maxlength="25"/>
+            </span>
+        </p>
+        <p class="clearfix">
+            <span class="left w192">其他联系人电话：</span>
+            <span class="right w400">
+                <input type="number" class="ccc_border gray_word  w300" v-model="shopInfo.linkPhoneNum2" maxlength="12"/>
+            </span>
+        </p>
+        <p class="clearfix">
+            <span class="left">备注：</span>
+            <span class="right">
+                <textarea class="ccc_border gray_word h200" v-model="shopInfo.remark" maxlength="200"></textarea>
+            </span>
+        </p>
+    </div>
+</section>
+<div style="height: 1.04rem;"></div>
+<footer>
+    <div class="footer">
+        <a href="#" @click="goBack()" class="quxiao">返回</a>
+        <a href="#" @click="submit()" class="faBu">确定</a>
+    </div>
+</footer>
+    <!--回到顶部-->
+    <section>
+        <div id="top">
+        </div>
+    </section>
+<!--点击放大图片-->
+<section>
+    <div class="showBigImgProp">
+        <div class="bg" @click="hideImg()"></div>
+        <div class="showBigImg">
+            <img  id="imgDiv" alt=""/>
+            <img  src="../../img/cha.png" alt="" @click="hideImg()" class="close"/>
+        </div>
+    </div>
+</section>
+    </div>
+<script type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+<script type="text/javascript" src="../../bower_components/attachment/jquery.form.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../js/popup.js"></script>
+<script type="text/javascript" src="../../js/mathUtil.js"></script>
+<!--<script charset="UTF-8" type="text/javascript" src="../../bower_components/selectAdd.js"></script>-->
+<script type="text/javascript" src="../../bower_components/attachment/ajaxformfileupload.js"></script>
+<!--<script type="text/javascript" src="../../js/18_maiJiaZhongXin/13_dianPuXinXiXiuGai_dianPuJiBenXinXiXiuGai.js"></script>-->
+<script charset="utf-8" type="text/javascript" src="script/13_shopInfoEdit.js"></script>
+</body>
+</html>

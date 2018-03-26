@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>店铺经营品牌修改</title>
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/18_maiJiaZhongXin/13_dianPuXinXiXiuGai_dianPuJingYingPinPaiXiuGai.css"/>
+</head>
+<body>
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="../../html/18_maiJiaZhongXin/13_dianPuXinXiXiuGai_dianPuXinXiXiuGai.html?label=pinPai" class="fanHui"></a>
+        店铺经营品牌修改
+    </div>
+    <div class="zhanwei"></div>
+</header>
+<div id="shopInfoPPEdit" v-cloak>
+<section>
+    <div class="pinPai">
+        <h3>店铺经营品牌</h3>
+        <div>
+            <template v-for="(entity,key) in shopBrandList">
+                <div><div class="items">{{key}}</div></div>
+                <p class="clearfix brand">
+                    <template v-for="shopBrand in entity">
+                        <template v-if="shopBrand.status=='2'">
+                             <span class="dianPu">
+                                  <img :src="getImgUrl(shopBrand.itemBrandDTO.brandLogoUrl)" @click="showPinPai($event,shopBrand.itemBrandDTO.brandName)" alt="" class="logo"/>
+                             </span>
+                            <span class="shanChu" @click="shanchu(shopBrand.itemBrandDTO.brandId)"></span>
+                        </template>
+                    </template>
+                    <template v-for="(newPinPaiList,label) in newPinPaiMap">
+                        <template v-if="label==key">
+                            <template v-for="newPinPai in newPinPaiList">
+                                <span class="dianPu">
+                                    <img :src="getImgUrl(newPinPai.brandLogoUrl)" @click="showPinPai($event,newPinPai.brandName)" alt="" class="logo"/>
+                                    <img src="../../img/new@3x.png" alt="" class="newAdd">
+                                </span>
+                                <span class="shanChu" @click="shanchuNew(label,newPinPai)"></span>
+                            </template>
+                        </template>
+                    </template>
+            </template>
+            <template v-for="(newPinPaiList,label) in newPinPaiMap">
+                <template v-if="newLabelNotInPass(label)">
+                    <div><div class="items">{{label}}</div></div>
+                    <p class="clearfix brand">
+                    <template v-for="newPinPai in newPinPaiList">
+                        <span class="dianPu">
+                            <img :src="getImgUrl(newPinPai.brandLogoUrl)" @click="showPinPai($event,newPinPai.brandName)" alt="" class="logo"/>
+                            <img src="../../img/new@3x.png" alt="" class="newAdd">
+                        </span>
+                        <span class="shanChu" @click="shanchuNew(label,newPinPai)"></span>
+                    </template>
+                    </p>
+                </template>
+            </template>
+    </div>
+</section>
+<section>
+    <input type="button" value="+新增品牌" class="xinZengLeiMu"/>
+</section>
+<!--占位-->
+<section>
+    <div  class="footer_zhanWei"></div>
+</section>
+<footer>
+    <div class="tiJiao">
+        <input type="button" @click="submit()" value="提交"/>
+    </div>
+</footer>
+<!--回到顶部-->
+<section>
+    <div id="top">
+    </div>
+</section>
+<!--删除类目弹窗-->
+<section>
+    <div class="shanChuTanChuang">
+        <div class="bg"></div>
+        <div class="faBuTanChuang">
+            <h5>删除</h5>
+            <p>确定要删除该品牌吗？</p>
+            <div></div>
+            <p><a href="javascript:;">取消</a><a href="javascript:;">确定</a></p>
+        </div>
+    </div>
+</section>
+<!--新增类目弹窗-->
+<section>
+    <div class="xinZengLeiMuTanChuang">
+        <div class="bg"></div>
+        <div class="boHuiYuanYin">
+            <h3>新增品牌</h3>
+            <div class="leiMuPinPai">
+                <template v-for="category1 in categoryList">
+                    <template v-for="category2 in category1.childCats">
+                        <template v-for="category3 in category2.childCats">
+                            <p @click="getPinPai(category3.cid)" class="colorf4">{{category1.cname}} > {{category2.cname}} > {{category3.cname}}</p>
+                            <div :id="'newPPDiv_'+category3.cid">
+                                <template v-for="pinPai in showPinPaiList">
+                                    <span class="dianPu" @click="select(category1.cname+'>'+category2.cname+'>'+category3.cname,pinPai)">
+                                        <img :src="getImgUrl(pinPai.brandLogoUrl)" alt="" class="logo">
+                                        {{pinPai.brandName}}
+                                        <template v-if="isSelected(pinPai)">
+                                            <img src="../../img/yes-select.png" alt="" class="yes_select"/>
+                                        </template>
+                                    </span>
+                                </template>
+                            </div>
+                        </template>
+                    </template>
+                </template>
+            </div>
+            <div class="btn"><button class="cancel">取消</button><button @click="submitSel()" class="sure">确定</button></div>
+            <i class="close"></i>
+        </div>
+    </div>
+</section>
+<!--经营品牌点击放大图片-->
+<section>
+    <div class="pinPai_bg">
+        <div class="bg" @click="hidePinPai()"></div>
+        <div class="pinPai_logo">
+            <img id="pinPaiImg" src="../../img/shangjia.png" alt="">
+            <p id="pinPaiText">品牌名字</p>
+            <img src="../../img/cha.png" class="close" @click="hidePinPai()"/>
+        </div>
+    </div>
+</section>
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/18_maiJiaZhongXin/13_dianPuXinXiXiuGai_dianPuJingYingPinPaiXiuGai.js"></script>
+<script charset="utf-8" type="text/javascript" src="script/13_shopInfoPPEdit.js"></script>
+</body>
+</html>

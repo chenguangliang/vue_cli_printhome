@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>印刷家</title>
+    <link rel="stylesheet" href="../../css/common.css"/>
+    <link rel="stylesheet" href="../../css/12_maiJiaZhongXin/1_geRenXinXi_geRenXinXi.css"/>
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+</head>
+<body>
+<!--头部开始-->
+<div id="userInfo" v-cloak>
+<header>
+    <div class="header">
+        <a href="javascript:;" onclick="javascript:history.back(-1);" class="return"></a>
+        个人信息
+        <a href="javascript:location.reload();" style="right:0.8rem;" class="baoCun">取消</a>
+        <a href="javascript:;" id="baocun" class="baoCun" @click="baocun()">保存</a>
+        <a href="javascript:;" class="bianJi">编辑</a>
+    </div>
+    <div class="zhanwei"></div>
+</header>
+<!--个人信息开始-->
+<section>
+    <div class="chaKan">
+        <div class="clearfloat">
+            <span class="left"><label>＊</label>昵称：</span>
+            <span class="right" v-text="userPersonalInfoDTO.nikeName" style="width: 4.52rem;margin-top: -2px;"></span>
+            
+        </div>
+        <div class="clearfloat">
+            <span class="left"><label>＊</label>性别：</span>
+            <span class="right" v-text="getSexText()" style="margin-top: -2px;"></span>
+            
+        </div>
+        <div class="clearfloat">
+            <span class="left">生日：</span>
+            <span class="right" v-text="userPersonalInfoDTO.birthday" style="margin-top: -2px;"></span>
+            
+        </div>
+        <div class="clearfloat">
+            <span class="left">血型：</span>
+            <span class="right" v-text="getBloodText()" style="margin-top: -2px;"></span>
+            
+        </div>
+        <div class="clearfloat">
+            <span class="left">籍贯：</span>
+            <span class="right" v-text="finalOrigin" style="width: 4.52rem; margin-top: -2px;"></span>
+            
+        </div>
+        <div class="clearfloat">
+            <span class="left">月收入水平：</span>
+            <span class="right" style="margin-top: -2px;"><span v-text="userPersonalInfoDTO.income"></span>元</span>
+            
+        </div>
+        <div id="aiHao" class="clearfloat">
+            <span class="left">兴趣爱好：</span>
+            <span class="right" v-text="userPersonalInfoDTO.hobby"></span>
+            
+        </div>
+        <div id="pingJia" class="clearfloat">
+            <span class="left">自我评价：</span>
+            <span class="right" v-text="userPersonalInfoDTO.evaluate"></span>
+            
+        </div>
+        <div style="height: 0.2rem;"></div>
+    </div>
+</section>
+<section>
+    <div class="xiuGai">
+        <div class="clearfloat">
+            <span class="left" style="line-height: 0.58rem;"><label>＊</label>昵称：</span>
+            <span class="right"><input type="text" maxlength="20" id="niCheng" v-model="userPersonalInfoDTO.nikeName"></span>
+            
+        </div>
+        <p class="warm none">请输入2-20个字符，可以中文和英文组成。</p>
+        <div class="clearfloat">
+            <span class="left"><label>＊</label>性别：</span>
+            <span class="right">
+                <template v-for="sex in sexData">
+                    <template v-if="sex.code == userPersonalInfoDTO.sex">
+                        <input name="xingBie" type="radio" checked :value="sex.code" />{{sex.label}}
+                    </template>
+                    <template v-else>
+                        <input name="xingBie" type="radio" :value="sex.code" />{{sex.label}}
+                    </template>
+                </template>
+            </span>
+            
+        </div>
+        <p class="warm none">请选择性别</p>
+        <div class="shengRi clearfloat">
+            <span class="left" style="line-height: 0.58rem;">生日：</span>
+            <span class="left"><input id="selDate" type="date" maxlength="20" v-model="userPersonalInfoDTO.birthday"/></span>
+            
+        </div>
+        <div class="clearfloat">
+            <span class="left" style="line-height: 0.58rem;">血型：</span>
+            <span class="right">
+                <select v-model="userPersonalInfoDTO.blood" id="xueXing" name="xueXing"  title="请选择血型">
+                    <option v-for="blood in bloodData" :value="blood.code" v-text="blood.label" ></option>
+                </select>
+            </span>
+            
+        </div>
+        <div class="clearfloat">
+            <span class="left" style="line-height: 0.58rem;">籍贯：</span>
+            <span class="right">
+                <select id="sel_Province" v-model="originProvince" name="originProvince" @change="changeProvince"
+                        title="请选择省份">
+                    <option value="" > 请选择 </option>
+                    <option v-for="province in provinceList" :value="province.code" v-text="province.name"></option>
+                </select>
+                <select id="sel_City" v-model="originCity" name="originCity" @change="changeCity" title="请选择城市">
+                    <option value="" > 请选择 </option>
+                    <option v-for="city in cityList" :value="city.code" v-text="city.name"></option>
+                </select>
+                <select id="sel_County" v-model="originArea" name="originArea" title="请选择区县">
+                    <option value="" > 请选择 </option>
+                    <option v-for="area in areaList" :value="area.code" v-text="area.name"></option>
+                </select>
+            </span>
+            
+        </div>
+        <div class="clearfloat">
+            <span class="left" style="line-height: 0.58rem;">月收入水平：</span>
+            <span class="right"><input type="number" id="money" v-model="userPersonalInfoDTO.income"> 元</span>
+            
+        </div>
+        <p class="warm none">请输入数字！</p>
+        <div class="clearfloat">
+            <span class="left" style="line-height: 0.58rem;">兴趣爱好：</span>
+            <span class="right"><textarea id="erBai" maxlength="200"  v-model="userPersonalInfoDTO.hobby"></textarea></span>
+            
+        </div>
+        <p class="warm none">输入字数超出要求！</p>
+        <p class="tiShi">注：不同关键字用英文逗号“,”分开，只能输入200个字</p>
+        <div class="clearfloat">
+            <span class="left" style="line-height: 0.58rem;">自我评价：</span>
+            <span class="right"><textarea id="yiBai" maxlength="100"  v-model="userPersonalInfoDTO.evaluate"></textarea></span>
+            
+        </div>
+        <p class="warm none">输入字数超出要求！</p>
+        <p class="tiShi">注：只能输入100个字</p>
+        <div style="height: 0.2rem;"></div>
+    </div>
+</section>
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/selectAdd.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/12_maiJiaZhongXin/1_geRenXinXi_geRenXinXi.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="script/1_geRenXinXi.js"></script>
+</body>
+</html>

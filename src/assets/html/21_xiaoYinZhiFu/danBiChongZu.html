@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>小印支付</title>
+    <link type="text/css" rel="stylesheet" href="../../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/animate.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/15_xiaoYinZhiFu/weiSheZhiMiMa.css"/>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+</head>
+<body>
+<div id="citicPay">
+    <!--头部开始-->
+    <div v-show="!payResultSuccess" v-cloak>
+        <header>
+            <div class="header">
+                <a href="javascript:;" onclick="javascript:history.back(-1);" class="return" @click="gotoGoPay"></a>小印支付
+            </div>
+            <div class="zhanwei"></div>
+        </header>
+        <!--头部结束-->
+        <section>
+            <div class="logo">
+                <a href="javascript:;"><img src="../../img/zhiFu.png" alt="" class="zhiFuLoGo"/></a>
+                <span class="line"></span>
+                <span class="shouYinTai">收银台－付款</span>
+            </div>
+            <div class="money">
+                <p class="huaFei">¥<span v-cloak >{{orderInfo.totalPrice}}</span></p>
+                <p class="keYong" v-cloak>可用余额：¥<span >{{orderInfo.balance}}</span></p>
+            </div>
+            <div class="tiShi">订单已成功提交，请您尽快付款！</div>
+        </section>
+        <section>
+            <template v-if="orderInfo.orderInfo.itemDetails.length > 1">
+                <div class="dingDan">合并｜<span>{{orderInfo.allOrderInfo.length}}</span>件订单 <span class="jianTou zhiFuDown" @click="multipleOrderShow = !multipleOrderShow"></span></div>
+            </template>
+            <template v-else>
+                <div class="dingDan">订单详情
+                </div>
+            </template>
+            <div class="content">
+                <!--<template v-for="order in orderInfo.allOrderInfo">-->
+                    <div class="dingDanHao" v-show="multipleOrderShow">
+                        <h2 class="clearfix"><span class="left">订单号：</span><span class="right">{{orderInfo.orderInfo.orderId}}</span></h2>
+                        <p class="clearfix"><span class="left">卖家公司：</span><span class="right">{{orderInfo.orderInfo.sellerName}}</span></p>
+                        <p class="clearfix"><span class="left">商品明细：</span><span class="right">
+                       <!-- <template v-if="order.childrenOrderSize >= 2">
+                            {{order.itemName + "等多件"}}
+                        </template>
+                        <template v-else>-->
+                            {{orderInfo.orderInfo.itemDetails[0].itemInfo.itemName}}
+                        <!--</template>-->
+                    </span></p>
+                        <p class="clearfix"><span class="left">金&emsp;&emsp;额：</span><span class="right">{{orderInfo.totalPrice}}</span></p>
+                    </div>
+                <!--</template>-->
+            </div>
+            <div class="xiangQing">
+                <!--<p class="clearfix"><span class="left">收货地址：</span><span class="right" v-cloak>{{orderInfo.orderInfo.fullAddress}}</span></p>-->
+                <p class="clearfix" style="line-height: 0.3rem;margin-top: 0.1rem;"><span class="left">付款工具：</span><span class="right" v-cloak>小印支付</span></p>
+            </div>
+            <div :class="userInfo.isHavePayPassword != 1 || !orderInfo.enoughFlag ? 'zhiFu' : 'zhiFu2'">
+                <!--先判断充足-->
+                <template v-if="orderInfo.enoughFlag">
+                    <template v-if="userInfo.isHavePayPassword == 1">
+                        <div class="top"><span></span>您在安全的环境中，请放心使用！</div>
+                        <div class="middle">请输入支付密码: <input :type="pwdCanSee ? 'text' : 'password'" id="paypassword"/><i :class="pwdCanSee ? 'see img02' :'see img01'" @click="pwdCanSee = !pwdCanSee"></i></div>
+                        <a href="javascript:;" class="forget">忘记密码？</a>
+                    </template>
+                    <template v-else>
+                        <span></span>很抱歉您还未设置支付密码，请设置后再完成订单支付
+                    </template>
+                </template>
+                <template v-else>
+                    <div style="width: 80%;text-align: center;margin: 0 auto">
+                        <img class="tipImg" src="../../img/jingGao.png" alt=""/>
+                        <span>很抱歉您的账户余额不足，无法完成支付请您充值后付款。</span>
+                    </div>
+                </template>
+            </div>
+        </section>
+        <section>
+            <div class="twoBtn">
+                <template v-if="orderInfo.enoughFlag">
+                    <template v-if="userInfo.isHavePayPassword == 1">
+                        <input type="button" class="cancel" @click="gotoMyOrder" value="取消" /><input type="button" class="sheZhi" @click="pay" value="确认付款"/>
+                        <!--<a href="javascript:;" class="cancel" @click="gotoMyOrder">取消</a><a href="javascript:;" class="sheZhi" @click="pay">确认付款</a>-->
+                    </template>
+                    <template v-else>
+                        <input type="button" class="cancel" value="取消" /><input type="button" class="sheZhi" @click="setPwdDialog = !setPwdDialog" value="去设置"/>
+                        <!--<a href="javascript:void(0)" class="cancel">取消</a><a href="javascript:;" class="sheZhi" @click="setPwdDialog = !setPwdDialog">去设置</a>-->
+                    </template>
+                </template>
+                <template v-else>
+                    <input type="button" class="chongZhi" @click="gotoCharge" value="去充值" /><input type="button" class="shengCheng" @click="printRechargeCertificates(params.orderId)" value="生成充值付款凭证"/>
+                    <!--<a href="javascript:void(0)" @click="gotoCharge" class="chongZhi" >去充值</a><a href="javascript:;" class="shengCheng" v-on:click="printRechargeCertificates(params.orderNo)">生成充值付款凭证</a>-->
+                </template>
+            </div>
+        </section>
+        <section>
+            <div class="zhezhao">
+                <div class="con">
+                    <h5>支付密码错误</h5>
+                    <p>支付密码输入错误<br>请重新输入！</p>
+                    <div></div>
+                    <button>确 定</button>
+                </div>
+            </div>
+        </section>
+
+        <!--设置密码弹出框-->
+        <section>
+            <div class="sheZhiMiMa" v-show="setPwdDialog" v-cloak>
+                <div class="neiRong">
+                    <h3>设置支付密码</h3>
+                    <div class="xiuGaiContent">
+                        <div class="xinMiMa">&emsp;<label>＊</label>设置密码：<input type="password" v-model="setPwdDTO.paypwd" id="xinMiMa" maxlength="12"></div>
+                        <div class="warm none">6-20位字符，建议由字母数字和符号组合</div>
+                        <div class="queRenMiMa">&emsp;<label>＊</label>确认密码：<input type="password" maxlength="12" id="queRenMiMa"></div>
+                        <div class="warm none">请输入密码和新密码保持一致</div>
+                        <div class="bangDing">&emsp;&emsp;验证手机：<span id="telphone">{{userInfo.umobile}}</span></div>
+                        <div class="yanZhengMa">&emsp;&emsp;<label>＊</label>验证码：<input type="tel" v-model="setPwdDTO.phoneCaptcha"  id="yanZhengMa" maxlength="4"><button id="btn" @click="sendPhoneCaptcha()">获取验证码</button></div>
+                        <div class="warm none">验证码输入错误，请重新输入</div>
+                    </div>
+                    <button class="sure" @click="setPwd">完成</button>
+                    <i class="close" @click="setPwdDialog = !setPwdDialog"></i>
+                </div>
+            </div>
+        </section>
+        <div style="height:1.35rem;"></div>
+        <div v-html="orderInfo.formHtml"></div>
+        <main-foot :user-info="userInfo" :current-position="0"></main-foot>
+    </div>
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/jsonUtil.js"></script>
+<script type="text/javascript" src="../../js/vueFoot.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../js/15_xiaoYinZhiFu/danBiChongZu.js"></script>
+<script charset="utf-8" type="text/javascript" src="script/citicPay.js"></script>
+</body>
+</html>

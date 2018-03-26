@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html style="font-size: 50px;">
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title>搜索</title>
+    <link rel="stylesheet" href="../../css/common.css" />
+    <link type="text/css" rel="stylesheet" href="../../css/pullToRefresh.css" />
+    <link rel="stylesheet" href="../../css/12_maiJiaZhongXin/14_duiZhangDanGuanLi_duiZhangDanGuanLi.css" />
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+</head>
+<body style="background:#fff;">
+<!--搜索-->
+<div id="invoiceSearchVm">
+    <header>
+        <div class="header">
+            <a href="javascript:history.back(-1);"  class="fanHui"></a>搜索
+        </div>
+        <div style="height: 0.88rem;"></div>
+    </header>
+    <form id="searchForm">
+        <div class="invoice_search">
+            <p class="clearfix">
+                <span style="width: 1.3rem">订单号：</span>
+                <input id="translationNo" name="translationNo" maxlength="20" type="text" v-model="orderId"/>
+            </p>
+            <p class="clearfix">
+                <span style="width: 1.3rem">下单时间：</span>
+                <input id="selTime1" type="date" name="input_date1" placeholder="时间选择" style="width: 2.4rem;" v-model="orderTimeStart">
+                <i style="float:left;line-height:0.58rem;margin: 0 0.05rem;">-</i>
+                <input id="selTime2" type="date" name="input_date2" placeholder="时间选择" style="width: 2.4rem;" v-model="orderTimeEnd">
+            </p>
+            <p class="clearfix">
+                <span style="width: 1.3rem">发票状态：</span>
+                <select  id="itemCategoryLevelOne" name="itemCategoryLevelOne" title="发票状态" v-model="invState" style="width: 1.8rem">
+                    <option value="" selected="selected" >请选择</option>
+                    <option value="-1">未开票</option>
+                    <option value="2">待卖家确认</option>
+                    <option value="3">待买家接收</option>
+                    <option value="1">已完成</option>
+                </select>
+            </p>
+            <p class="clearfix">
+                <template v-if="userType=='seller'">
+                    <span>买家公司名称：</span>
+                </template>
+                <template v-else>
+                    <span>卖家公司名称：</span>
+                </template>
+                <input id="matCd" name="matCd" maxlength="20" type="text"  v-model="companyName"/>
+            </p>
+            <p style="text-align: center;height: 1rem">
+                <button type="button" class="operation_btn" @click="resetForm()">重置</button>
+                <button type="button" class="operation_btn active" @click="invoiceSearchBtn()">查询</button>
+            </p>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="script/invoiceSearch.js"></script>
+
+</body>
+</html>

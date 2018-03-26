@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>订单管理</title>
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/pullToRefresh.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/21_quickOrder/0_quickOrderCommon.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/21_quickOrder/1_quickOrderList_buyer.css"/>
+</head>
+<body>
+<div id="app">
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="11_quickOrderIndex.html?identity=1" class="fanHui"></a>
+        订单管理
+        <a href="javascript:;" class="searchBtn"></a>
+    </div>
+    <div style="height: 1.58rem;"></div>
+</header>
+<!--选项卡-->
+    <section>
+        <div class="scroll" >
+            <li class="on" @click="changePanle()">全部</li>
+            <div class="box">
+                <div class="scroll_list">
+                    <ul>
+                        <li @click="changePanle(99)">待确认</li>
+                        <li @click="changePanle(1)">待付款</li>
+                        <li @click="changePanle(2)">待配送</li>
+                        <li @click="changePanle(3)">待收货</li>
+                        <li @click="changePanle(5)">已完成</li>
+                        <li @click="changePanle(6)">已取消</li>
+                    </ul>
+                </div>
+            </div>
+            <span class="arrow-right"></span>
+        </div>
+    </section>
+    <section>
+        <!--有订单-->
+        <!--<template v-if="orderList.length && orderList.length >0">-->
+            <div class="tab_box" id="wrapper">
+                <div class="quanBu wrapScrool">
+                    <div style="height: 1.68rem"></div>
+                    <template v-if="orderList.length && orderList.length >0">
+                        <template v-for="order in orderList">
+                            <div class="dingDan">
+                                <div class="dianPu"  @click="toggleChildOrder($event)">
+                                    <a href="javascript:void(0);" class="name" v-cloak>订单号 : {{order.orderId}}</a>
+                                    <!--下拉图标显示-->
+                                    <template v-if="order.payDelay==1 && order.periodDetails && order.periodDetails.length> 1">
+                                        <img src="../../img/xiangshang.png" class="xiala" alt="">
+                                    </template>
+                                    <a href="javascript:void(0);" class="zhuangTai">
+                                        <!--判断订单状态-->
+                                        <template v-if="order.orderStatus==1">待付款</template>
+                                        <template v-else-if="order.orderStatus==2">待配送</template>
+                                        <template v-else-if="order.orderStatus==3">待确认收货</template>
+                                        <template v-else-if="order.orderStatus==4">待评价</template>
+                                        <template v-else-if="order.orderStatus==5">已完成</template>
+                                        <template v-else-if="order.orderStatus==6">已取消</template>
+                                        <template v-else-if="order.orderStatus==7">已关闭</template>
+                                        <template v-else-if="order.orderStatus==-1">
+                                            <template v-if="order.isAudit==1"><!--需要审核-->
+                                                <template v-if="order.auditStatus==0">待审核</template>
+                                                <template v-else-if="order.auditStatus==-1">审核未通过</template>
+                                                <template v-else>
+                                                    <template v-if="order.isConfirm==0">待确认</template>
+                                                    <template v-else>
+                                                        <!--<template v-if="order.confirmResult==-1">卖家拒绝</template>-->
+                                                        <template v-if="order.confirmResult==-1">
+                                                            <template v-if="order.orderInitType==0">卖家拒绝</template>
+                                                            <template v-else>买家拒绝</template>
+                                                        </template><!--cgl写的，上边引的是原来的-->
+                                                    </template>
+                                                </template>
+                                            </template>
+                                            <template v-else>
+                                                <template v-if="order.isConfirm==0">待确认</template>
+                                                <template v-else>
+                                                    <template v-if="order.confirmResult==-1">
+                                                        <template v-if="order.orderInitType==0">卖家已拒绝</template>
+                                                        <template v-else>买家已拒绝</template>
+                                                    </template>
+                                                </template>
+                                            </template>
+                                        </template>
+                                        <template v-else>未知</template>
+                                    </a>
+                                </div>
+                                <!--这里是子订单-->
+                                <template v-if="order.payDelay==1 && order.periodDetails && order.periodDetails.length> 1">
+                                    <div class="childOrders" >
+                                        <div class="childOrder" v-for="periodDetail in order.periodDetails">
+                                            <p class="orderTit">
+                                                <span class="orderName">第<span>{{periodDetail.periodCounts}}</span>期：</span>
+                                                <span class="orderNum">{{periodDetail.orderId}}</span>
+                                                <span style="float: right;">
+                                            <template v-if="order.orderStatus < 6">
+                                                <!--<template v-if="periodDetail.isPay == 0">
+                                                    <template v-if="order.orderStatus > 0 && userDto.userstatus != 9">
+                                                        <span class="redWord" @click="toPay(periodDetail.orderId)">立即付款</span>
+                                                    </template>
+                                                    <template v-else>
+                                                        <span >暂无操作</span>
+                                                    </template>
+                                                </template>
+                                                <template v-else>
+                                                        <span>已付清</span>
+                                                </template>-->
+                                                <template v-if="order.isSellerReceipt==0">
+                                                    <template v-if="periodDetail.isPay == 0">
+                                                    <template v-if="order.orderStatus > 0 && userDto.userstatus != 9">
+                                                    	<template v-if="order.isPrepay == 0">
+                                                        	<span class="redWord" @click="toPay(periodDetail.orderId)">立即付款</span>
+                                                        	   								</template>
+                                                        <template v-else>
+                                                        	<template v-if="periodDetail.periodCounts == 1 && periodDetail.isPay == 0">
+                                                        		<span class="redWord" @click="toPay(periodDetail.orderId)">立即付款</span>
+                                                        	</template>
+                                                        	 <template v-else>
+                                                        	 	  <template v-if="order.advance == 1">
+                                                        	 	  		<span class="redWord" @click="toPay(periodDetail.orderId)">立即付款</span>
+                                                        	 	  </template>
+                                                        	 	  <template v-else>
+                                                        	 	  		<span >未支付</span>
+                                                        	 	  </template>
+                                                        	 </template>
+                                                        </template>
+                                                    </template>
+                                                    <template v-else>
+                                                        <span >暂无操作</span>
+                                                    </template>
+                                                    </template>
+                                                    <template v-else>
+                                                        <span>已付清</span>
+                                                    </template>
+                                                </template>
+                                                <template v-else>
+                                                    <span>已付清</span>
+                                                </template>
+
+                                            </template>
+                                            <template v-else>
+                                                <span>已关闭</span>
+                                            </template>
+                                        </span>
+                                            </p>
+                                            <p class="orderMoney">￥{{periodDetail.orderAmount}}</p>
+                                        </div>
+                                    </div>
+
+                                </template>
+                                <a href="javascript:void(0);" class="xiangQing">
+                                    <!--循环一个订单里多个商品-->
+                                    <template v-for="detail in order.itemDetails">
+                                        <div class="top clearfix">
+                                            <div class="contentLeft">
+                                                <div style="overflow: hidden">
+                                                    <p class="contentKey">公司名称：</p>
+                                                    <p class="contentValue twoLine">{{order.sellerName}}</p>
+                                                </div>
+                                                <div style="overflow: hidden">
+                                                    <p class="contentKey" v-cloak>{{personalityDTO.itemNameLity}}：</p>
+                                                    <p class="contentValue twoLine">{{detail.itemInfo.itemName}}</p>
+                                                </div>
+                                                <div style="overflow: hidden">
+                                                    <p class="contentKey">价格(元)：</p>
+                                                    <p class="contentValue">￥{{detail.itemInfo.unitPrice}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="contentRight">X{{detail.itemQuantity}}</div>
+                                        </div>
+                                    </template>
+                                    <div class="bottom">
+                                        <p>合计：<span>￥{{order.itemTotalityPrice}}</span></p>
+
+                                        <p class="creatTime">下单时间：{{order.createTime | longToDate(order.createTime)}}</p>
+                                    </div>
+                                </a>
+                                <!--按钮状态-->
+                                <div class="caoZuo">
+                                    <template v-if="order.isCancel == 1">
+                                        <span class="orderGrayBtn" @click="deleteOrder(order.orderId)">删除</span>
+                                    </template>
+                                    <template v-else>
+                                        <template v-if=" order.isConfirm == 0">
+                                            <template v-if="order.orderInitType == 0">
+                                                <span class="orderRedBtn" @click="editOrder(order.orderId)">订单修改</span>
+                                                <span class="orderGrayBtn" @click="cancleOrder(order.orderId)">取消订单</span>
+                                            </template>
+                                        </template>
+                                        <template v-else>
+                                            <template v-if="order.confirmResult == -1">
+                                                <!--<template v-if="order.orderInitType == 0">
+                                                    <span class="orderRedBtn">订单修改</span>
+                                                </template>-->
+                                                <span class="orderRedBtn" @click="editOrder(order.orderId)">订单修改</span>
+                                            </template>
+                                            <template v-else>
+                                                <template v-if="order.orderStatus == 1">
+                                                    <template v-if="order.payDelay == 0">
+                                                        <span class="orderRedBtn" @click="toPay(order.orderId+'01')">立即付款</span>
+                                                        <span class="orderGrayBtn" @click="cancleOrder(order.orderId)">取消订单</span>
+                                                        <span class="orderGrayBtn" @click="buyAgain(order.orderId)">再次购买</span>
+                                                    </template>
+                                                    <template v-else-if="order.payDelay == 1">
+                                                        <template v-if="order.isBuyerReceipt == 0">
+                                                            <span class="orderGrayBtn" @click="toBuyerReceive(order.orderId)">确认收货</span>
+                                                        </template>
+                                                        <template v-else>
+                                                            <!--<span class="orderGrayBtn">已收货</span>-->
+                                                        </template>
+                                                    </template>
+                                                </template>
+                                                <!--待配送-->
+                                                <template v-else-if="order.orderStatus == 2">
+                                                    <template v-if="order.payDelay == 1">
+                                                        <template v-if="order.partialPayment==0">
+                                                            <span class="orderRedBtn" @click="toPay(order.orderId+'01')">立即付款</span>
+                                                            <span class="orderGrayBtn" @click="cancleOrder(order.orderId)">取消订单</span>
+                                                        </template>
+                                                    </template>
+                                                    <span class="orderGrayBtn" @click="buyAgain(order.orderId)">再次购买</span>
+                                                </template>
+                                                <template v-else-if="order.orderStatus == 3">
+                                                    <template v-if="order.isBuyerReceipt == 0">
+                                                        <span class="orderRedBtn" @click="toBuyerReceive(order.orderId)">确认收货</span>
+                                                    </template>
+                                                    <!--<template v-if="order.payDelay == 1">
+                                                        <template v-if="order.paid == 1">-->
+                                                            <span class="orderGrayBtn" @click="buyAgain(order.orderId)">再次购买</span>
+                                                        <!--</template>
+                                                    </template>-->
+                                                    <template v-if="order.invoiced == 1">
+                                                        <span class="orderGrayBtn" @click="buyerReceivedInvoice(order.orderId)">收到发票</span>
+                                                    </template>
+                                                </template>
+                                                <template v-else-if="order.orderStatus == 5">
+                                                    <template v-if="order.paid == 1">
+                                                        <!--<span class="orderGrayBtn">马上付款</span>-->
+                                                    </template>
+                                                    <span class="orderRedBtn" @click="buyAgain(order.orderId)">再次购买</span>
+                                                </template>
+                                                <!--<span class="orderGrayBtn">再次购买</span>-->
+                                            </template>
+                                        </template>
+                                    </template>
+                                    <template>
+                                        <span class="orderGrayBtn" @click="orderDetile(order.orderId)">订单详情</span>
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+                    </template>
+                    <template v-else>
+                        <div class="wuDingDan" style="background: #fff;height: 10rem;margin-top: -1rem;padding-top: 2rem;">
+                            <div class="zhiFuChengGong">
+                                <img src="../../img/chenggongbg@3x.png" alt=""/>
+                            </div>
+                            <h2>您还没有相关信息哦！</h2>
+                        </div>
+                    </template>
+                    <p class="printHome" style="margin-bottom: 0.2rem;">printhome.com</p>
+                </div>
+            </div>
+        <!--</template>-->
+        <!--无订单-->
+        <!--<template v-else>
+            <div class="wuDingDan" style="background: #fff;height: 10rem;margin-top: -1rem;padding-top: 2rem;">
+                <div class="zhiFuChengGong">
+                    <img src="../../img/chenggongbg@3x.png" alt=""/>
+                </div>
+                <h2>您还没有相关信息哦！</h2>
+                <p  class="printHome" style="padding-top: 3rem;">printhome.com</p>
+            </div>
+        </template>-->
+
+    </section>
+    <!--新增订单-->
+    <section>
+        <div class="newOrder" onclick="javascript:window.location='13_addQuickOrder_buyer.html'">
+            +新增快速订单
+        </div>
+    </section>
+    <!--订单搜索-->
+    <div class="orderSearch">
+        <div class="headerquickOrder">
+            <a href="javascript:;" class="fanHui"></a>
+            搜索
+        </div>
+        <div style="height:0.88rem;"></div>
+        <div class="suoSou">
+            <p>
+                <span>公司名称：</span>
+                <input type="text" placeholder="请输入公司名称" maxlength="20" v-model="submitInfo.sellerName"/>
+            </p>
+
+            <p>
+                <span>订单编号：</span>
+                <input style="width: 3rem" placeholder="请输入订单编号" type="text" maxlength="20" v-model="submitInfo.orderId"/>
+            </p>
+
+            <p>
+                <span>手机号码：</span>
+                <input style="width: 3rem" placeholder="请输入手机号码" type="text" maxlength="20" v-model="submitInfo.sellerPhone"/>
+            </p>
+            <p>
+                <span>支付前提：</span>
+                <select class="graySelect" style="width: 3rem;" v-model="submitInfo.premise">
+                    <option value="">请选择</option>
+                    <option value="6">接受订单后</option>
+                    <option value="7">发货前</option>
+                    <option value="1">发货后</option>
+                    <option value="2">收货后</option>
+                    <option value="3">验货后</option>
+                    <option value="4">收到发票后</option>
+                    <option value="5">统一对账后</option>
+                </select>
+            </p>
+            <p>
+                <span style="vertical-align: top">订单状态：</span>
+                <span class="selBtnWrap">
+                <span class="rowBtnWrap">
+                   <img class="allSel" src="../../img/quickOrder/fang_defaultBtn.png" alt=""> 全选  <br>
+                </span>
+               <span class="rowBtnWrap mart20">
+                   <img class="checkBtn is_confirm" src="../../img/quickOrder/fang_defaultBtn.png" alt=""> 待确认
+                   <img class="checkBtn order_status marL30" src="../../img/quickOrder/fang_defaultBtn.png" alt=""> 待付款
+                   <img class="checkBtn order_status marL30" src="../../img/quickOrder/fang_defaultBtn.png" alt=""> 待配送
+              </span>
+               <span class="rowBtnWrap mart20">
+                  <img class="checkBtn order_status" src="../../img/quickOrder/fang_defaultBtn.png" alt=""> 待收货
+                  <img class="checkBtn order_status marL30" src="../../img/quickOrder/fang_defaultBtn.png" alt=""> 已完成
+                  <img class="checkBtn order_status marL30" src="../../img/quickOrder/fang_defaultBtn.png" alt=""> 已取消
+              </span>
+            </span>
+            </p>
+
+
+            <p class="dateWrap">
+                <span>下单时间：</span>
+                <input type="date"  placeholder="时间选择" id="startCreateTime" style="width: 2.2rem" />
+                -
+                <input type="date" placeholder="时间选择" id="endCreateTime" style="width: 2.2rem" />
+            </p>
+            <p>
+                <a href="javascript:;" class="btn resetSearch" @click="resetForm()">重置</a>
+                <a href="javascript:;" class="btn searchNow" @click="searchOrder()">搜索</a>
+
+            </p>
+        </div>
+    </div>
+    <!--回到顶部-->
+    <section>
+        <div id="top" @click="goToTop()">
+        </div>
+    </section>
+
+    <!--弹窗-->
+    <section>
+        <!--删除订单弹窗-->
+        <div class="commonWin deleteOrder">
+            <div class="commonWinCon">
+                <h5>删除订单</h5>
+                <p class="commonWinMsg">确定删除订单？</p>
+                <div class="commonWinLine"></div>
+                <div class="commonWinBtnWrap">
+                    <span class="commonWinBtn cancle" @click="deleteOrderNo()">取消</span>
+                    <span class="commonWinBtn sure" @click="deleteOrderYes()">确定</span>
+                </div>
+            </div>
+        </div>
+        <!--取消订单弹窗-->
+        <div class="commonWin cancleOrder">
+            <div class="commonWinCon">
+                <h5>取消订单</h5>
+                <p class="commonWinMsg">确定取消订单？</p>
+                <div class="commonWinLine"></div>
+                <div class="commonWinBtnWrap">
+                    <span class="commonWinBtn cancle" @click="cancleOrderNo()">取消</span>
+                    <span class="commonWinBtn sure" @click="cancleOrderYes()">确定</span>
+                </div>
+            </div>
+        </div>
+        <div class="zhezhao">
+            <div class="con">
+                <h5>是否取消订单</h5>
+                <p>您确定要取消此订单吗？</p>
+                <div class="dashLine"></div>
+                <span class="queDing">确定</span><span class="liuZhe">先留着</span>
+            </div>
+        </div>
+        <div id="confirm_receipt_notice" class="zhezhao">
+            <div class="con">
+                <h5>确认收货</h5>
+                <p>请再次确认是否已收到货品！</p>
+                <div>
+                    <input type="password" placeholder="请输入支付密码完成确认" maxlength="20" class="miMa" v-model="payPwd">
+                    <i class="see img01"></i>
+                </div>
+                <a href="../../html/12_maiJiaZhongXin/6_anQuanXinXiSheZhi_zhaoHuiZhiFuMiMa.html">忘记密码？</a>
+                <div style="height: 1px; border: 1px dashed rgb(204, 204, 204); clear: both; width: 4.1rem; margin: 0px auto 0.2rem;"></div>
+                <div>
+                    <input type="button" value="还没有收货" class="cancel receiveCanle">
+                    <input type="button" value="确认已收货" class="sure" @click="buyerReceive()">
+                </div>
+            </div>
+        </div>
+        <div class="zhezhao2 delOrder">
+            <div class="con">
+                <h5>是否删除订单</h5>
+                <p>您确定要删除此订单吗？</p>
+                <div class="dashLine"></div>
+                <span class="queDing">先留着</span><span class="liuZhe" >确定</span>
+            </div>
+        </div>
+        <div class="yanQiTiShi">订单收货以延期，最长14天</div>
+    </section>
+
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/21_quickOrder/1_quickOrderList_buyer.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/iscroll.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/pullToRefresh_fixHead.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/jsonUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/vueFilter.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="script/1_quickOrderList_buyer.js"></script>
+</body>
+</html>

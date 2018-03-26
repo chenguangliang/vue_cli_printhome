@@ -1749,13 +1749,3 @@ a.chaKanXiangQing{
 
 
 
-/*分开配送物流信息弹窗*/
-.portion_logistics_information{
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 99;
-    position: fixed;
-    top: 0;
-    left: 0;
-}

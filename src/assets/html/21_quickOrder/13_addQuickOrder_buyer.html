@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>新增订单</title>
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/pullToRefresh.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/21_quickOrder/0_quickOrderCommon.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/21_quickOrder/3_quickOrderDetile.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/21_quickOrder/4_addQuickOrder.css"/>
+</head>
+<body style="background-color: #f4f4f4;">
+<div id="app">
+    <!--头部开始-->
+    <header>
+        <div class="headerquickOrder">
+            <a href="javascript:;" class="fanHui addBackArrow"></a>新增订单
+        </div>
+        <div style="height:0.88rem;"></div>
+    </header>
+    <!--第一步-->
+    <div class="stepOne" >
+        <div class="contact" style="padding: 0.2rem;margin-top: 0;" >
+            <p class="font30">联系方式</p>
+            <div class="lock">
+                <p class="mart10">
+                    <span class="infoKey">买方:</span>
+                    <input type="text" class="grayInput" :value="userInfo.companyName">
+                </p>
+                <p class="mart10">
+                    <span class="infoKey">联系人:</span>
+                    <input type="text" class="grayInput" :value="userInfo.linkMan">
+                </p>
+                <p class="mart10">
+                    <span class="infoKey">邮箱:</span>
+                    <input type="text" class="grayInput" :value="userInfo.userEmail">
+                </p>
+                <p class="mart10">
+                    <span class="infoKey">联系电话:</span>
+                    <input type="text" class="grayInput" :value="userInfo.umobile">
+                </p>
+                <p style="background-color: #F4F4F4;width: 100%;height: 2px;margin-top: 0.1rem;"></p>
+            </div>
+            <div>
+                <p class="mart10">
+                    <span class="infoKey"><span class="redWord">* </span>卖方:</span>
+                    <input placeholder="请填写公司名称全称" type="text" class="grayInput selSeller" @focus="showSellerList()" v-model="getUserInput">
+                </p>
+                <p class="mart10">
+                    <span class="infoKey">联系人:</span>
+                    <input type="text" class="grayInput" v-model="selectedSeller.linkMan">
+                </p>
+                <p class="mart10">
+                    <span class="infoKey">邮箱:</span>
+                    <input type="text" class="grayInput" v-model="selectedSeller.userEmail">
+                </p>
+                <p class="mart10">
+                    <span class="infoKey"><span class="redWord">* </span>联系电话:</span>
+                    <input type="tel" class="grayInput sellerPhone" maxlength="20" v-model="selectedSeller.umobile" @change="sellerPhoneCheck()">
+                </p>
+            </div>
+
+        </div>
+        <div class="fixFootOne">
+            <p class="cancleQuickOrder" style="border-right: 1px solid #F4F4F4;">取消</p>
+            <p class="redWord stepOneNext" @click="stepOneNext()">下一步</p>
+        </div>
+    </div>
+    <!--选取买方/卖方-->
+    <div class="selectPartner" >
+        <div class="addInvoiceHead">
+            <div class="headerquickOrder">
+                <a href="javascript:;" class="fanHui selectPartnerBack"></a>选取卖家
+            </div>
+            <div style="height: 0.88rem"></div>
+        </div>
+        <p class="mart10 padB10 bb">
+             <span class="infoKey"><span class="redWord">* </span>卖方：</span><input placeholder="请填写公司名称全称" id="userSel" autofocus="autofocus" maxlength="25" type="text" class="grayInput"  v-model="userInput" @keyup="searchPartner($event)">
+        </p>
+        <ul class="selPartnerList">
+            <template v-if="partnerList.length>0">
+                <template v-for="(sellerCompany,$index) in partnerList">
+                    <li class="bb" @click="liToUserInput($event,$index)">{{sellerCompany.companyName}}</li>
+                </template>
+            </template>
+            <template v-else>
+                <p style="padding: 0 0.1rem;line-height: 0.56rem;">无搜索结果</p>
+            </template>
+
+        </ul>
+        <div class="fixFootThree">
+            <p class="cancle" style="border-right: 1px solid #F4F4F4;">取消</p>
+            <p class="redWord sure" @click="tempToSelected()">确定</p>
+        </div>
+    </div>
+    <!--第二步-->
+    <div class="stepTwo"style="display: none">
+        <div class="fixHeadTwo">
+            <p class="font28">商品信息
+                <span class="redBtn addGoodsBtn">+新增商品</span>
+                <span class="grayBtn listSelBtn" style="margin-right: 0.2rem;" @click="searchGoodsList()">列表选取</span>
+            </p>
+        </div>
+        <div style="height: 0.8rem"></div>
+        <template v-for="(selectedGoods,index) in selectedGoodsList">
+            <div class="addOneGoods">
+                <p class="mart10 gotoDetTit" @click="showGoodsDetile(selectedGoods.itemId)">
+                    <span class="infoKey w160" v-cloak>{{personalityDTO.itemNameLity}}：</span>
+                    <span class="infoValue oneLine">{{selectedGoods.itemName}}</span>
+                    <img src="../../img/right_arrow.png" class="gotoDetBtn" alt="">
+                </p>
+                <p class="mart10">
+                    <span class="infoKey w160">单价(元)：</span>
+                    <span class="infoValue oneLine">{{selectedGoods.unitPrice}}</span>
+                </p>
+                <p class="mart10">
+                    <span class="infoKey w160">数量：</span><input type="text" class="grayInput" v-model="selectedGoods.itemQuantity"  @keyup="computeItemTotal(index)" maxlength="10" >
+                </p>
+                <p class="mart10">
+                    <span class="infoKey w160">运费(元)：</span><input type="text" class="grayInput" v-model="selectedGoods.itemFreight" @keyup="computeItemTotal(index)" maxlength="10" >
+                </p>
+                <p class="mart10">
+                    <span class="infoKey w160">总价(元)：</span><input type="text" class="grayInput unable" v-cloak v-bind:value="selectedGoods.itemTotalPrice">
+                    <img src="../../img/shanchuhong@3x.png" class="delGoodsBtn" @click="deleteSelWin(index)" alt="">
+                </p>
+            </div>
+        </template>
+        <div style="height:3rem"></div>
+        <div class="fixFootTotal">合计(元)：{{submitInfo.totalAmount}}</div>
+        <div class="fixFootTwo">
+            <p class="cancleQuickOrder">取消</p>
+            <p class="stepTwoBack" style="border-right: 1px solid #F4F4F4;border-left: 1px solid #F4F4F4;">上一步</p>
+            <p class="redWord stepTwoNext" @click="stepTwoNext()">下一步</p>
+        </div>
+    </div>
+    <!--删除商品确认弹窗-->
+    <div class="zhezhao" id="delSelGoods">
+        <div class="con">
+            <h5>是否删除商品</h5>
+            <p class="mainTip">您确定要删除此商品吗？</p>
+            <div class="dashLine"></div>
+            <span class="queDing" id="delSure" @click="deleteSelectedGoods()">确定</span><span @click="liuZhe()" class="liuZhe">先留着</span>
+        </div>
+    </div>
+    <!--列表选取弹窗-->
+    <div class="listSelWin">
+        <div class="delayPayHead">
+            <div class="headerquickOrder">
+                <a href="javascript:;" class="fanHui listSelArrow"></a>
+                列表选取
+            </div>
+            <div style="height: 0.88rem"></div>
+        </div>
+        <div id="wrapper">
+            <div class="wrapScrool">
+                <div style="height: 0.88rem"></div>
+                <template v-for="goods in goodsList">
+                    <div class="listOneGoods">
+                    	<template v-if="goodsList.length==1">
+                    		<img id="selectImgId" src="../../img/yes-select.png" :itemId="goods.itemInfo.itemId" :itemName="goods.itemInfo.itemName" :unitPrice="goods.itemInfo.unitPrice" class="selBtn" alt="" @click="changeImg($event)">
+                    	</template>
+            			<template v-else>
+               				<img id="selectImgId" src="../../img/no-select.png" :itemId="goods.itemInfo.itemId" :itemName="goods.itemInfo.itemName" :unitPrice="goods.itemInfo.unitPrice" class="selBtn" alt="" @click="changeImg($event)">
+            			</template>
+
+                        <p v-cloak>{{personalityDTO.itemNameLity}}</p>
+                        <p>单价(元)</p>
+                        <p v-cloak>{{personalityDTO.itemCnameLity}}</p>
+                        <p class="oneLine mart10">{{goods.itemInfo.itemName}}</p>
+                        <p class="oneLine mart10">{{goods.itemInfo.unitPrice}}</p>
+                        <p class="oneLine mart10">{{goods.itemInfo.cname}}</p>
+                        <div class="grayBtn goodsDet" @click="showGoodsDetile(goods.itemInfo.itemId)">商品详情</div>
+                    </div>
+                </template>
+            </div>
+        </div>
+        <div style="height: 3rem "></div>
+        <div class="fixFootOne" style="z-index: 100">
+            <p class="cancel" style="border-right: 1px solid #F4F4F4;">取消</p>
+            <p class="sure redWord" @click="selectGoodsSure()">确定</p>
+        </div>
+    </div>
+    <!--新增商品弹窗-->
+    <div class="addGoodsWin">
+        <div class="delayPayHead">
+            <div class="headerquickOrder">
+                <a href="javascript:;" class="fanHui addGoodsArrow" @click="cancleAddGoods()"></a>
+                新增商品
+            </div>
+            <div style="height: 0.88rem"></div>
+        </div>
+        <form action="addGoods" id="addGoods">
+            <div class="addGoodsCon">
+                <div>
+                    <span class="infoKey w160"><span class="redWord">*</span><span v-cloak>{{personalityDTO.itemNameLity}}：</span></span>
+                    <input type="text" maxlength="30" class="grayInput" :placeholder="please+personalityDTO.itemNameLity" v-model="material.itemName">
+                </div>
+                <div class="mart10">
+                    <span class="infoKey w160"><span class="redWord">*</span><span v-cloak>{{personalityDTO.itemCnameLity}}：</span></span>
+                    <select class="graySelect w140 oneLineNoPoint" name="pinlei" id="pinlei" @change="changeLevOne()">
+                        <option value="0">一级类目</option>
+                        <template v-for="levItem in categoryLevOne">
+                            <option :value="levItem.categoryCid">{{levItem.categoryCName}}</option>
+                        </template>
+                        <option value="other">其他</option>
+                    </select>
+                    <select class="graySelect w140 oneLineNoPoint" name="pinlei1" id="pinlei1" @change="changeLevTwo()">
+                        <option value="0">二级类目</option>
+                        <template v-for="levItem in categoryLevTwo">
+                            <option :value="levItem.categoryCid">{{levItem.categoryCName}}</option>
+                        </template>
+                    </select>
+                    <select class="graySelect w140 oneLineNoPoint" name="pinlei2" id="pinlei2" @change="queryBrand()">
+                        <option value="0" selected>三级类目</option>
+                        <template v-for="levItem in categoryLevThree">
+                            <option :value="levItem.categoryCid">{{levItem.categoryCName}}</option>
+                        </template>
+                    </select>
+                    <p class="otherClass">
+                        <span class="infoKey w160"></span>
+                        <input type="text" maxlength="20" class="grayInput mart10 otherCategory" :placeholder="please+personalityDTO.itemCnameLity">
+                    </p>
+                </div>
+                <div class="mart10">
+                    <span class="infoKey w160"><span class="redWord">*</span><span v-cloak>{{personalityDTO.itemBrandLity}}：</span></span>
+                    <select class="graySelect" name="pinpai" id="pinpai">
+                        <option value="0">请选择</option>
+                        <template v-for="brand in brandList">
+                            <option :value="brand.brandId">{{brand.brandName}}</option>
+                        </template>
+                        <option value="other">其他</option>
+                    </select>
+                    <p class="otherBrand">
+                        <span class="infoKey w160"></span> <input type="text" maxlength="20" class="grayInput mart10 otherBrandInput" :placeholder="please+personalityDTO.itemBrandLity">
+                    </p>
+                </div>
+                <div class="mart10">
+                    <span class="infoKey w160"><span class="redWord">*</span>单价：</span>
+                    <input type="text" class="grayInput mart10" maxlength="10" @keyup="limitUnitPrice()" placeholder="请输入单价" v-model="material.unitPrice">元
+                </div>
+                <div class="mart10">
+                    <span class="infoKey w160"><span class="redWord">*</span>单位：</span>
+                    <select class="graySelect" name="danwei" id="danwei">
+                        <option value="0">请选择</option>
+                        <option value="吨">吨</option>
+                        <option value="令">令</option>
+                        <option value="公斤">公斤</option>
+                        <option value="卷">卷</option>
+                        <option value="平方米">平方米</option>
+                        <option value="米">米</option>
+                        <option value="平方厘米">平方厘米</option>
+                        <option value="包">包</option>
+                        <option value="罐">罐</option>
+                        <option value="桶">桶</option>
+                        <option value="台">台</option>
+                        <option value="套">套</option>
+                        <option value="个">个</option>
+                        <option value="条">条</option>
+                        <option value="张">张</option>
+                        <option value="本">本</option>
+                        <option value="other">其他</option>
+                    </select>
+
+                    <p class="otherUnit">
+                        <span class="infoKey w160"></span> <input type="text" maxlength="5" class="grayInput mart10 otherUnitInput" placeholder="请输入其他单位">
+                    </p>
+                </div>
+
+                <div class="mart10">
+                    <span class="infoKey w160"><span v-cloak>{{personalityDTO.itemStandardLity}}：</span></span>
+                    <select class="graySelect" name="guige" id="guige">
+                        <option value="0">请选择</option>
+                        <optgroup label="1.平张纸">1.平张纸</optgroup>
+                        <option value="787mm X 1,092mm">787mm X 1,092mm</option>
+                        <option value="889mm X 1,194mm">889mm X 1,194mm</option>
+                        <option value="635mm X 940mm">635mm X 940mm</option>
+                        <option value="635mm X 965mm">635mm X 965mm</option>
+                        <option value="31’’x43’’(787mmx1,092mm)">31”x43”(787mmx1,092mm)</option>
+                        <option value="35’’x47’’(889mmx1,194mm)">35”x47”(889mmx1,194mm)</option>
+                        <option value="25’’x37’’(635mmx940mm)">25”x37”(635mmx940mm)</option>
+                        <option value="25’’x38’’(635mmx965mm)">25”x38”(635mmx965mm)</option>
+                        <optgroup label="2.卷筒纸">2.卷筒纸</optgroup>
+                        <option value="31’’(787mm)">31”(787mm)</option>
+                        <option value="35’’(889mm)">35”(889mm)</option>
+                        <option value="56.58” (1,437mm)">56.58”(1,437mm)</option>
+                        <option value="62’’(1,574mm)">62”(1,574mm)</option>
+                        <option value="70’’(1,778mm)">70”(1,778mm)</option>
+                        <optgroup label="3.自定义规格">3.自定义规格</optgroup>
+                        <template v-for="spec in Specifications">
+                            <option :value="spec.standardName">{{spec.standardName}}</option>
+                        </template>
+                        <option value="other">其他</option>
+                    </select>
+                    <p class="otherSpeci">
+                        <span class="infoKey w160"></span>
+                        <input type="text" maxlength="15" class="grayInput mart10 otherSpeciInput" :placeholder="please+personalityDTO.itemStandardLity">
+                    </p>
+                </div>
+                <div class="mart20">
+                    <span class="infoKey w160">审核信息：</span>
+                    <img class="redRoundBtn noNeedCheck" src="../../img/yes-select.png" alt="">无需审核
+                    <img class="redRoundBtn needCheck marL20" src="../../img/no-select.png" alt="" @click="showAuditors()">需要审核
+                    <p class="otherchecker mart10">
+                        <span class="infoKey w160">审核人：</span>
+                        <select name="" id="checker1" class="graySelect" v-model="material.auditer">
+                            <option value="0">请选择</option>
+                            <template v-for="auditor in auditors">
+                                <option :value="auditor.userId">{{auditor.username}}</option>
+                            </template>
+                        </select>
+                    </p>
+                </div>
+                <div class="mart20">
+                    <span class="infoKey w160">加入物资：</span>
+                    <img class="redRoundBtn noAddToMaterial" src="../../img/yes-select.png" alt="">否
+                    <img class="redRoundBtn marL20" src="../../img/no-select.png" alt="">是
+                </div>
+                <div class="mart20">
+                    <span class="infoKey w160">备注：</span>
+                    <textarea placeholder="请输入备注" maxlength="100" name="" id="" cols="30" rows="5" class="grayArea remark"
+                              style="vertical-align: top"></textarea>
+                </div>
+            </div>
+        </form>
+        <div style="height: 2rem ;background-color: #fff;"></div>
+        <div class="fixFootOne addGoodsFixBtn">
+            <p class="cancel addGoodsCancle" style="border-right: 1px solid #F4F4F4;" @click="cancleAddGoods()">取消</p>
+            <p class="sure redWord" @click="addGoods()">确定</p>
+        </div>
+    </div>
+    <!--商品详情弹窗-->
+    <div class="goodsDetileWin">
+        <div class="delayPayHead">
+            <div class="headerquickOrder">
+                <a href="javascript:;" class="fanHui" @click="hideGoodsDetile()"></a>
+                商品明细
+            </div>
+            <div style="height: 0.88rem"></div>
+        </div>
+        <div class="mainConWrap" >
+            <template v-if="goodsInfo">
+                <div class="contact">
+                    <p class="font30">商品明细</p>
+                    <p class="mart10">
+                        <span class="infoKey w160"><span class="redWord">*</span><span v-cloak>{{personalityDTO.itemIdLity}}：</span></span>
+                        <input type="text" class="grayInput" :value="goodsInfo.itemId">
+                    </p>
+                    <p class="mart10">
+                        <span class="infoKey w160"><span class="redWord">*</span><span v-cloak>{{personalityDTO.itemNameLity}}：</span></span>
+                        <input type="text" class="grayInput" :value="goodsInfo.itemName">
+                    </p>
+                    <p class="mart10">
+                        <span class="infoKey w160"><span class="redWord">*</span>单价(元)：</span>
+                        <input type="text" class="grayInput" :value="goodsInfo.unitPrice">
+                    </p>
+                    <p class="mart10">
+                        <span class="infoKey w160"><span class="redWord">*</span>单位：</span>
+                        <input type="text" class="grayInput" :value="goodsInfo.itemUnitName">
+                    </p>
+                    <p class="mart10">
+                        <span class="infoKey w160"><span v-cloak>{{personalityDTO.itemStandardLity}}：</span></span>
+                        <input type="text" class="grayInput" :value="goodsInfo.standard">
+                    </p>
+                    <p class="mart10">
+                        <span class="infoKey w160"><span class="redWord">*</span><span v-cloak>{{personalityDTO.itemBrandLity}}：</span></span>
+                        <input type="text" class="grayInput" :value="goodsInfo.brandName">
+                    </p>
+                    <p class="mart10">
+                        <span class="infoKey w160"><span class="redWord">*</span><span v-cloak>{{personalityDTO.itemCnameLity}}：</span></span>
+                        <input type="text" class="grayInput" :value="goodsInfo.cname">
+                    </p>
+                    <p class="mart10">
+                        <span class="infoKey w160">备注：</span>
+                        <span class="grayArea" style="display:inline-block;width:4rem;vertical-align: top;min-height:2rem;height:auto" v-cloak>{{goodsInfo.remark}}</span>
+                        <!--<textarea name="" maxlength="100" class="grayArea" style="vertical-align: top;pointer-events: none;display: inline-block;width: 4rem;min-height: 2rem;height: auto;" v-cloak>{{goodsInfo.remark}}</textarea>-->
+                    </p>
+                </div>
+
+            </template>
+        </div>
+
+    </div>
+    <!--第三步-->
+    <div class="stepThree" style="background-color: #fff">
+        <div class="orderInfoAll">
+            <div class=" font30">
+                订单信息
+            </div>
+            <div class="mart20">
+                <span class="infoKey">订单总价：</span>
+                <span class="infoValue redWord" style="width: auto">￥<span v-cloak>{{submitInfo.totalAmount}}</span></span>
+            </div>
+           <!--  <div class="mart20">
+                <span class="infoKey">支付方式：</span>
+                <select name="payStyle" class="graySelect" id="payStyle" v-model="submitInfo.payMethod">
+                    <option value="2">企业支付</option>
+                    <option value="1">个人支付</option>
+                </select>
+            </div> -->
+            <div class="mart20">
+                <span class="infoKey">支付信息：</span>
+                <select name="payInfo" class="graySelect" id="payInfo" v-model="submitInfo.payDelay">
+                    <option value="0">立即支付</option>
+                    <option value="1">延期支付</option>
+                </select>
+                <span class="editPayInfo">
+                     <img src="../../img/quickOrder/bianji.png" alt="" style="width: 0.3rem;height: 0.28rem;margin: 0 auto 0.1rem">
+                     <span style="color: #333">修改支付详情</span>
+                </span>
+                <!--<img src="../../img/editPay.png" class="editPayInfo" alt="">-->
+
+            </div>
+            <div class="mart20">
+                <span class="infoKey">发票：</span>
+                <select name="invoiceSel" class="graySelect" id="invoiceSel"  v-model="submitInfo.invoiceType">
+                    <option value="0">不开发票</option>
+                    <option value="1">增值税普通发票</option>
+                    <option value="2">增值税专用发票</option>
+                </select>
+                <span class="editInvoice">
+                     <img src="../../img/quickOrder/bianjihui.png" alt="" style="width: 0.3rem;height: 0.28rem;margin: 0 auto 0.1rem">
+                     <span style="color: #999">修改发票信息</span>
+                </span>
+                <!--<img src="../../img/editInvoice.png" class="editInvoice" alt="">-->
+            </div>
+            <div class="mart20">
+                <span class="infoKey">审核信息：</span>
+                <img class="redRoundBtn orderNoNeedCheck" src="../../img/yes-select.png" alt="">无需审核
+                <img class="redRoundBtn orderNeedCheck marL20" src="../../img/no-select.png" alt="" @click="showAuditors()">需要审核
+                <p class="orderOtherChecker mart10">
+                    <span class="infoKey">审核人：</span>
+                    <select name="" id="checker2" class="graySelect" v-model="submitInfo.auditerUserId">
+                        <option value="0">请选择</option>
+                        <template v-for="auditor in auditors">
+                            <option :value="auditor.userId">{{auditor.username}}</option>
+                        </template>
+                    </select>
+                </p>
+            </div>
+
+        </div>
+        <div style="height:6rem"></div>
+        <div class="fixFootTwo">
+            <p class="cancelAdd cancleQuickOrder">取消</p>
+            <p class="stepThreeBack" style="border-right: 1px solid #F4F4F4;border-left: 1px solid #F4F4F4;">上一步</p>
+            <p class="redWord submitAdd" @click="submitOrder()">提交</p>
+        </div>
+    </div>
+    <!--普通发票详情弹窗-->
+    <div class="zhezhao2 commonInvoice"  >
+        <div class="winCon">
+            <h3>增值税普通发票</h3>
+            <h4><span class="redWord">*</span>发票抬头：</h4>
+            <input type="text" maxlength="30" class="grayInput" style="width:5rem;margin-left: 0.15rem;" v-model="commonInvoicePara.invoiceTitle">
+            <h4><span class="redWord">*</span>纳税人识别码：</h4>
+            <input type="text" maxlength="20" class="grayInput" style="width:5rem;margin-left: 0.15rem;" v-model="commonInvoicePara.taxpayerCode">
+            <p class="boottomBtn">
+                <button class="cancel" @click="cancelCommonInvoiceInfo()">取消</button>
+                <button class="sure" @click="getInvoiceId(1)">确定</button>
+            </p>
+
+            <i class="close commonInvoiceClose"></i>
+        </div>
+    </div>
+    <!--增值税专用发票详情弹窗-->
+    <div class="addInvoiceWrap">
+        <div class="addInvoiceHead">
+            <div class="headerquickOrder">
+                <a href="javascript:;" class="fanHui addInvoiceArrow"></a>增值税专用发票信息
+            </div>
+            <div style="height: 0.88rem"></div>
+        </div>
+        <div class="addInvoiceTop specialInvoiceOne">
+            <p class="mart10">
+                <span class="infoKey"><span class="redWord">＊</span>单位名称：</span><input type="text" class="grayInput" maxlength="100" v-model="invoiceInfo.companyName">
+            </p>
+            <p class="mart10">
+                <span class="infoKey"><span class="redWord">＊</span>纳税人识别号：</span><input type="text" class="grayInput" maxlength="20" v-model="invoiceInfo.taxpayerCode">
+            </p>
+            <p class="mart10">
+                <span class="infoKey"><span class="redWord">＊</span>注册地址：</span><input type="text" class="grayInput" maxlength="250" v-model="invoiceInfo.registeredAddress">
+            </p>
+            <p class="mart10">
+                <span class="infoKey"><span class="redWord">＊</span>注册电话：</span><input type="tel" class="grayInput" maxlength="15" v-tel v-model="invoiceInfo.registeredPhone">
+            </p>
+            <p class="mart10">
+                <span class="infoKey"><span class="redWord">＊</span>开户银行：</span><input type="text" class="grayInput" maxlength="100" v-model="invoiceInfo.bankName">
+            </p>
+            <p class="mart10">
+                <span class="infoKey"><span class="redWord">＊</span>银行账户：</span><input type="text" class="grayInput" maxlength="30" v-model="invoiceInfo.bankAccount">
+            </p>
+            <div class="mart10">
+                <span class="infoKey">营业执照：</span>
+                <div class="defaultImgWrap licenseDefault">
+                    <img src="../../img/xiangJi.png" alt="">
+                    <form id="licenceForm" style="overflow: hidden;height: 50px;width: 50px">
+                        <input type="file" id="licenseInput" name="file" @change="licenseChange()">
+                    </form>
+                </div>
+                <img style="vertical-align: middle" class="licenseImg" id="yingYe" src="" alt="">
+            </div>
+            <div class="mart10">
+                <span class="infoKey">税务登记证：</span>
+                <div class="defaultImgWrap registerDefault">
+                    <img src="../../img/xiangJi.png" alt="">
+                    <input type="file" id="registerInput" name="file" @change="registerChange()">
+                </div>
+                <img style="vertical-align: middle;height: 0.7rem" class="registerBtn" src="../../img/shangjia.png" id="shuiWu"
+                     alt="">
+            </div>
+            <div class="mart10">
+                <span class="infoKey">一般纳税人证明：</span>
+                <div class="defaultImgWrap proveDefault">
+                    <img src="../../img/xiangJi.png" alt="">
+                    <input type="file" id="proveInput" name="file" @change="proveChange()">
+                </div>
+                <img style="vertical-align: middle;height: 0.7rem" class="proveBtn" src="../../img/shangjia.png" alt="" id="naShui">
+            </div>
+            <div class="fixFootOne">
+                <p style="border-right: 1px solid #F4F4F4;" class="specialInvoiceCancle" >取消</p>
+                <p class="redWord specialInvoiceNext" @click="specialInvoiceOneStep()">下一步</p>
+            </div>
+        </div>
+        <div class="addInvoiceTop specialInvoiceTwo">
+            <p class="mart10 font30">发票内容明细</p>
+            <p class="mart10">
+                <span class="infoKey"><span class="redWord">＊</span>收票人姓名：</span>
+                <input type="text" class="grayInput" maxlength="30" v-model="invoiceInfo.consigneeName">
+            </p>
+            <p class="mart10">
+                <span class="infoKey"><span class="redWord">＊</span>收票人手机：</span>
+                <input type="text" class="grayInput" maxlength="15" v-model="invoiceInfo.consigneeMobile">
+            </p>
+            <p class="mart10">
+                <span class="infoKey"><span class="redWord">＊</span>收票人省份：</span>
+                <select name="provinceId" id="provinceId" class="w250 graySelect" v-model="invoiceInfo.provinceId">
+                    <option value=0>请选择</option>
+                    <option :value="addr.code"  v-for="addr in  oneAddressList">{{addr.name}}</option>
+                </select>
+            </p>
+            <p class="mart10">
+                <span class="infoKey"><span class="redWord">＊</span>市：</span>
+                <select name="cityId" id="cityId" class="w250 graySelect" v-model="invoiceInfo.cityId">
+                    <option value=0>请选择</option>
+                    <option :value="addr.code"  v-for="addr in  twoAddressList">{{addr.name}}</option>
+                </select>
+            </p>
+            <p class="mart10">
+                <span class="infoKey"><span class="redWord">＊</span>区：</span>
+                <select name="countyId" id="countyId" class="w250 graySelect" v-model="invoiceInfo.countyId">
+                    <option value=0>请选择</option>
+                    <option :value="addr.code"  v-for="addr in  threeAddressList">{{addr.name}}</option>
+                </select>
+            </p>
+            <p class="mart10">
+                <span class="infoKey"><span class="redWord">＊</span>详细地址：</span>
+                <textarea style="vertical-align: top;resize: none;width: 3.6rem" name="" id="area" class="grayArea" maxlength="200" cols="30" rows="6" v-model="invoiceInfo.detailAddress"></textarea>
+            </p>
+            <div class="fixFootTwo">
+                <p class="specialInvoiceCancle" >取消</p>
+                <p class="specialInvoiceBack" style="border-right: 1px solid #F4F4F4;border-left: 1px solid #F4F4F4;">
+                    上一步</p>
+                <p class="redWord specialInvoiceCommit" @click="getInvoiceId(2)">提交</p>
+            </div>
+        </div>
+        <!--查看营业执照图片放大-->
+        <div class="zhezhao licenceWin" >
+            <div class="con">
+                <img alt="" class="bigLicense" src="">
+                <i class="close"></i>
+                <div class="reupload redWord">重新上传
+                       <input type="file" name="file"  class="hiddenBtn" id="licenseHideInput" @change="licenseHideChange()">
+                </div>
+            </div>
+        </div>
+        <!--查看税务登记图片放大-->
+        <div class="zhezhao registerWin">
+            <div class="con" style="margin-top: -2.2rem;">
+                <img alt=""  class="bigRegister" style="height: 3.48rem" src="">
+                <i class="close"></i>
+                <div class="reupload redWord">重新上传
+                    <input type="file" class="hiddenBtn" name="file"  id="registerHideInput" @change="registerHideChange()">
+                </div>
+            </div>
+        </div>
+        <!--查看纳税证明图片放大-->
+        <div class="zhezhao proveWin">
+            <div class="con" style="margin-top: -2.2rem;">
+                <img alt="" style="height: 3.48rem" class="bigProve" src="">
+                <i class="close"></i>
+                <div class="reupload redWord">重新上传
+                    <input type="file" class="hiddenBtn" name="file"  id="proveHideInput" @change="proveHideChange()">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--延期支付详情弹窗-->
+    <div class="delayPayWrap">
+        <div class="delayPayHead">
+            <div class="headerquickOrder">
+                <a href="javascript:;" class="fanHui delayPayArrow"></a>
+                延期支付详情
+            </div>
+            <div style="height: 0.88rem"></div>
+        </div>
+        <div class="delayPayCon">
+            <div class="delayPayTop">
+                <div class="mart10">
+                    <span class="infoKey w160">1.预付款：</span>
+                    <img src="../../img/yes-select.png" style="vertical-align: bottom" alt=""
+                         class="redRoundBtn noAdvancePayBtn" @click="noAdvancePayBtn()">无预付款
+                    <img src="../../img/no-select.png" style="vertical-align: bottom" alt=""
+                         class="redRoundBtn marL20 advancePayBtn" @click="advancePayBtn()">有预付款
+                </div>
+                <div style="height: 0.8rem;line-height: 0.8rem;">
+                    <span class="infoKey w160">2.分期付款：</span>
+                    <img src="../../img/yes-select.png" alt="" class="redRoundBtn noSeparateBtn" @click="noSeparateBtn">无分期
+                    <img src="../../img/no-select.png" alt="" class="redRoundBtn marL20 separateBtn" @click="separateBtn">
+                    <span>有分期
+                        <template v-if="periodFlag==1">
+                            <span class="separateInput"><input type="text" maxlength="2" class="grayInput marLR10 w100" v-model="submitInfo.period" @keyup="computePeriod($event)">期</span>
+                         </template>
+                    </span>
+                </div>
+
+            </div>
+            <template v-if="prePayFlag==1 || periodFlag==1">
+                <div class="selDelayPay">
+                <div class="calculationStyle ">
+                    <span class="percentBtn" :class="computeFlag==0?'redBtn':'grayBtn'" @click="percentBtn()">按比例计算</span>
+                    <span class="moneyBtn"  :class="computeFlag==1?'redBtn':'grayBtn'" @click="moneyBtn()">按金额计算</span>
+                    <span class="grayBtn" style="width: 0.8rem;float: right;" @click="resetData()">重置</span>
+                </div>
+                <div class="zhanwei"></div>
+                    <template v-for="(period,$index) in periodDetail">
+                        <div class="delayPayPart bt">
+                            <p class="font30">第{{$index+1}}期
+                                <template v-if="prePayFlag==1 && $index==0">
+                                    <span class="advancePay"> / 预付款</span>：
+                                </template>
+                            </p>
+                            <!--<template v-if="prePayFlag==0 || $index!=0">
+                                <p class="mart10 firstPay">
+                                    <span class="infoKey">支付前提：</span>
+                                    <select name="" id="payCondition" class="graySelect w200" v-model="period.periodPremise">
+                                        <option value="6">接受订单后</option>
+                                        <option value="7">发货前</option>
+                                        <option value="1">发货后</option>
+                                        <option value="2">收货后</option>
+                                        <option value="3">验货后</option>
+                                        <option value="4">收到发票后</option>
+                                        <option value="5">统一对账后</option>
+                                    </select>
+                                    <input type="text" class="grayInput marLR10 w100" v-model="period.periodPremiseDays" maxlength="3" @keyup="limitDay($event)">天
+                                </p>
+                            </template>-->
+
+                            <p class="mart10">
+                                <template v-if="prePayFlag==1 && $index==0">
+                                    <span class="infoKey advancePercent" >预付比例：</span>
+                                </template>
+                                <template v-else>
+                                    <span class="infoKey payPercent" v-if="">支付比例：</span>
+                                </template>
+                                <template v-if="computeFlag==0">
+                                    <input type="text" class="grayInput marR10 w200" v-model="period.orderScale"  @keyup="changePercent($event,$index)" @change="fixTwoPercent($event,$index)">
+                                    %=<span v-text="period.orderAmount"></span>元
+                                </template>
+                                <template v-if="computeFlag==1">
+                                    <input type="text" class="grayInput marR10 w200" v-model="period.orderAmount" @keyup="changeMoney($event,$index)" @change="fixTwoMoney($event,$index)">
+                                    元=<span v-text="period.orderScale"></span>%
+                                </template>
+
+                            </p>
+                        </div>
+                    </template>
+                <!--<div class="delayPayPart bt">
+                    <p class="font30">第2期：</p>
+                    <p class="mart10">
+                        <span class="infoKey">支付前提：</span>
+                        <select name="" id="payCondition1" class="graySelect w200">
+                            <option value="1">发货后</option>
+                            <option value="2">收货后</option>
+                            <option value="3">验货后</option>
+                            <option value="4">收到发票后</option>
+                            <option value="5">统一对账后</option>
+                            <option value="6">接受订单后</option>
+                            <option value="7">发货前</option>
+                        </select>
+                        <input type="text" class="grayInput marLR10 w100" value="0" >天
+                    </p>
+                    <p class="mart10">
+                        <span class="infoKey">支付比例：</span>
+                        <input type="text" class="grayInput marR10 w200" value="50">
+                        <template v-if="computeFlag==0">%</template>
+                        <template v-if="computeFlag==1">元</template> = {{submitInfo.totalAmount}}
+                        <template v-if="computeFlag==1">%</template>
+                        <template v-if="computeFlag==0">元</template>
+                    </p>
+                </div>-->
+            </div>
+            </template>
+            <!--<template v-if="prePayFlag==0 && periodFlag==0">-->
+            <div class="delayPayCondition">
+                <span class="infoKey w160 marb10" style="width: auto">3.（第一期 / 预付款）支付前提：</span><br>
+                <select name="" id="payPromise" class="graySelect w250 marL40" v-model="submitInfo.premise">
+                    <option value="6">接受订单后</option>
+                    <option value="7">发货前</option>
+                    <option value="1">发货后</option>
+                    <option value="2">收货后</option>
+                    <option value="3">验货后</option>
+                    <option value="4">收到发票后</option>
+                    <option value="5">统一对账后</option>
+                </select>
+                <input type="number" class="grayInput marLR10 "  style="width: 1rem;" v-model="submitInfo.premiseDays" maxlength="3" @keyup="limitDay($event)">天
+            </div>
+            <!--</template>-->
+        </div>
+        <div style="height: 3rem"></div>
+        <div class="fixFootOne delayPayFixFoot">
+            <p class="delayPayCancle">取消</p>
+            <p class="redWord delayPaySure" style="border-left: 1px solid #F4F4F4;" @click="periodSubmit()">确定</p>
+        </div>
+        <!--<div class="fixFootTotal" >
+            <template v-if="computeFlag==0">
+                <span class="totalPercent">合计比例：{{redTipPercent}}%</span>
+            </template>
+            <template v-if="computeFlag==1">
+                <span class="totalMoney" >合计金额(元)：{{redTipMoney}}</span>
+            </template>
+        </div>-->
+    </div>
+
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/StorageUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/21_quickOrder/13_addQuickOrder_buyer.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/iscroll.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/pullToRefresh_fixHead.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/attachment/jquery.form.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/attachment/ajaxformfileupload.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/jsonUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/vueFilter.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../html/commonScript/address/address.js"></script>
+<script charset="utf-8" type="text/javascript" src="script/13_addQuickOrder_buyer.js"></script>
+</body>
+</html>

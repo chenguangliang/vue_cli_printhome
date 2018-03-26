@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>找回密码4：成功</title>
+    <link rel="stylesheet" href="../../css/common.css"/>
+    <link rel="stylesheet" href="../../css/2_login_sign/zhaoHuiMiMa.css"/>
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+</head>
+<body style="font-size: 0.3rem;">
+<div>
+    <img style="width: 2rem;margin: 2rem auto 0" src="../../img/green_duigou.png" alt=""/>
+    <p style="color: #333333;font-size: 0.34rem;margin-top: 0.3rem;text-align: center">密码找回成功</p>
+    <p style="color: #666666;font-size: 0.22rem;margin-top: 0.3rem;text-align: center"><span class="change">3</span>秒后自动返回登陆页面...</p>
+    <a style="display: block" href="login_common.html"><input type="button" value="立即登陆" style="-webkit-border-radius: 0.1rem;-moz-border-radius: 0.1rem;border-radius: 0.1rem;display:block;width: 4rem;height: 0.68rem;line-height: 0.68rem;margin: 1rem  auto 0;color:#e60012;font-size: 0.28rem;background-color: white;    box-shadow: #ccc 1px 1px 4px; "/></a>
+</div>
+
+
+<script charset="UTF-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../js/common.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../js/2_login_sign/zhaoHuiMiMa.js"></script>
+<script>
+    var begin = 4;
+    if (begin != 0) {
+        var time=window.setInterval(function() {
+            begin--;
+            $(".change").html(begin);
+            if(begin==0){
+                window.clearInterval(time);
+                window.location.href="../../html/2_login_sign/login_common.html";
+            }
+        },1000);
+    }
+</script>
+</body>
+</html>

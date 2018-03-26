@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>协议创建</title>
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../css/common.css"/>
+    <link rel="stylesheet" href="../../css/pullToRefresh.css">
+    <link type="text/css" rel="stylesheet" href="../../css/12_maiJiaZhongXin/10_xieYiGuanLi_xieYiChuangJian.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/12_maiJiaZhongXin/10_xieYiGuanLi_xinZengShangPin.css"/>
+</head>
+<style>
+    .xieYi p input[type=date], .xieYi p input[type=month] {
+        width: 2rem;
+        height: 0.58rem;
+        border-radius: 0.05rem;
+        font-size: 0.24rem;
+    }
+    [v-cloak] {
+        display: none;
+    }
+
+
+
+
+</style>
+<body>
+<div id="createContract">
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="javascript:;" onclick="printConfirm('确认要放弃编辑的数据吗？',function () {javascript:history.back(-1);})" class="fanHui"></a>
+        协议创建
+    </div>
+    <div style="height:0.88rem;"></div>
+</header>
+
+<!--第一步-->
+<div id="div1" v-show="oneStepDiv" style="margin-bottom: 2rem;">
+<!--协议编号-->
+<section>
+    <div class="bianHao">
+        <p>
+            <span><label>＊</label>协议编号：</span>
+            <input type="text" maxlength="20" class="bianhao ccc_border" v-model="contract.contractInfo.contractOrderNo"/>
+        </p>
+        <p>
+            <span><label>＊</label>协议名称：</span>
+            <input type="text" maxlength="20" class="mingcheng ccc_border" v-model="contract.contractInfo.contractName"/>
+        </p>
+    </div>
+</section>
+<!--联系方式-->
+<section>
+    <template v-if="contract.sourcePage == 'buyer'">
+        <div class="lianXi">
+            <h2>联系方式</h2>
+            <p>
+                <span>买方：</span>
+                <i v-cloak>{{buyer.companyName}}</i>
+            </p>
+            <p>
+                <span>联系人：</span>
+                <i v-cloak>{{buyer.linkMan}}</i>
+            </p>
+            <p>
+                <span>联系电话：</span>
+                <i v-cloak>{{buyer.umobile}}</i>
+            </p>
+            <p>
+                <span>传真：</span>
+                <i v-cloak></i>
+            </p>
+            <p>
+                <span>电子邮箱：</span>
+                <i v-cloak>{{buyer.userEmail}}</i>
+            </p>
+            <div >
+                <p class="gongSi" @click="companyDialog = !companyDialog;oneStepDiv = !oneStepDiv;queryShopOrUserPage = 1;">
+                    <span><label>＊</label>卖方：</span>
+                    <input type="text" maxlength="20" class="ccc_border" v-model="seller.companyName" readonly="readonly"/>
+                </p>
+                <p  class="lianXiRen">
+                    <span>联系人：</span>
+                    <input type="text" maxlength="20" class="ccc_border" v-model="seller.linkMan" readonly="readonly"/>
+                </p>
+                <p class="lianXiFangShi">
+                    <span>联系电话：</span>
+                    <input type="tel" maxlength="20" class="ccc_border" v-model="seller.umobile" readonly="readonly"/>
+                </p>
+                <p>
+                    <span>传真：</span>
+                    <input type="tel" maxlength="20" class="ccc_border"  readonly="readonly"/>
+                </p>
+                <p>
+                    <span>电子邮箱：</span>
+                    <input type="email" maxlength="20" class="ccc_border" v-model="seller.userEmail" readonly="readonly"/>
+                </p>
+            </div>
+        </div>
+    </template>
+   <template v-if="contract.sourcePage == 'seller'">
+       <div class="lianXi">
+           <h2>联系方式</h2>
+           <div >
+               <p class="gongSi" @click="companyDialog = !companyDialog;oneStepDiv = !oneStepDiv;queryShopOrUserPage = 1;">
+                   <span><label>＊</label>买方：</span>
+                   <input type="text" maxlength="20" class="ccc_border" v-model="buyer.companyName" readonly="readonly"/>
+               </p>
+               <p  class="lianXiRen">
+                   <span>联系人：</span>
+                   <input type="text" maxlength="20" class="ccc_border" v-model="buyer.linkMan" readonly="readonly"/>
+               </p>
+               <p class="lianXiFangShi">
+                   <span>联系电话：</span>
+                   <input type="tel" maxlength="20" class="ccc_border" v-model="buyer.umobile" readonly="readonly"/>
+               </p>
+               <p>
+                   <span>传真：</span>
+                   <input type="tel" maxlength="20" class="ccc_border"  readonly="readonly"/>
+               </p>
+               <p>
+                   <span>电子邮箱：</span>
+                   <input type="email" maxlength="20" class="ccc_border" v-model="buyer.userEmail" readonly="readonly"/>
+               </p>
+           </div>
+           <p>
+               <span>卖方：</span>
+               <i v-cloak>{{seller.companyName}}</i>
+           </p>
+           <p>
+               <span>联系人：</span>
+               <i v-cloak>{{seller.linkMan}}</i>
+           </p>
+           <p>
+               <span>联系电话：</span>
+               <i v-cloak>{{seller.umobile}}</i>
+           </p>
+           <p>
+               <span>传真：</span>
+               <i v-cloak></i>
+           </p>
+           <p>
+               <span>电子邮箱：</span>
+               <i v-cloak>{{seller.userEmail}}</i>
+           </p>
+
+       </div>
+   </template>
+</section>
+<footer>
+    <div class="foot">
+        <a  href="javascript:;" class="cancle" @click="cancelContract()">取消</a><a href="javascript:void(0);" class="next on" @click="oneToTwo()">下一步</a>
+    </div>
+</footer>
+<!--取消协议弹窗-->
+<section>
+    <div class="zhezhao">
+        <div class="con">
+            <h5>取消创建协议</h5>
+            <p>您确定放弃要放弃本次操作吗？</p>
+            <div></div>
+            <a class="quXiao" href="javascript:;">取消</a><a class="queDing" href="10_xieYiGuanLi_xieYiGuanLi.html">确定</a>
+        </div>
+    </div>
+</section>
+</div>
+<!--第二步-->
+<div id="div2" v-show="twoStepDiv">
+    <!--协议条件-->
+    <section>
+        <div class="xieYi">
+            <h2>协议条件</h2>
+            <p>
+                <span><label>＊</label>协议有效期：</span>
+                <input type="date" :min="serverTime" :max="contract.contractInfo.endDate" class="xieYiYouXiaoQi ccc_border gray_word" v-model="contract.contractInfo.beginDate" />
+                -
+                <input type="date" :min="contract.contractInfo.beginDate" class="xieYiYouXiaoQi2 ccc_border gray_word" v-model="contract.contractInfo.endDate" />
+            </p>
+            <p>
+                <span><label>＊</label>协议账期：</span>
+                <input type="radio" name="paymentType" class="days" value="0" v-model="contract.contractPaymentTerm.paymentType"/>
+                <input type="tel" class="xieYiYouZhangQi ccc_border gray_word" v-model="contract.contractPaymentTerm.paymentDays1"    :disabled="contract.contractPaymentTerm.paymentType == 1"  maxlength="3"   min="1" max="365" />
+                天
+            </p>
+            <p>
+                <span></span>
+                <input type="radio" name="paymentType" class="months" value="1" v-model="contract.contractPaymentTerm.paymentType" />
+                <select class="month ccc_border gray_word" v-model="contract.contractPaymentTerm.paymentDays2" :disabled="contract.contractPaymentTerm.paymentType == 0" >
+                    <option value="">请选择</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+                月
+            </p>
+            <p>
+                <span>审核信息：</span>
+                <input type="radio" name="2" value="0" v-model="needApprove"/>
+                无需审核
+                <input type="radio" name="2" value="1" v-model="needApprove"/>
+                需要审核
+            </p>
+            <p class="shenHeRen"  v-if="needApprove == 1">
+                <span>审核人：</span>
+                <select class="shenHe ccc_border gray_word" v-model="contract.contractInfo.approveBy">
+                    <option value="">请选择</option>
+                    <template v-for="user in contract.showApproveList">
+                        <template v-if="user.userId != userInfo.uid">
+                            <option  v-bind:value="user.userId">{{user.username}}</option>
+                        </template>
+                    </template>
+
+                </select>
+            </p>
+            <p>
+                <span><label>＊</label>协议类型：</span>
+                <select class="xieyi ccc_border gray_word" v-model="contract.contractInfo.protocolType" :disabled="contract.contractInfo.id" @change="clearQueryItemShopInfo()">
+                    <option value="">请选择</option>
+                    <option value="1">单价</option>
+                    <option value="2">数量</option>
+                    <option value="3">总价值</option>
+                </select>
+            </p>
+            <p style="position: relative;">
+                <span>附件：</span>
+                <label for="annex"style="color: #333;" class="selFileBtn">选择文件</label>
+                <input style="width: 2rem;display: none"  type="file" name="file" id="annex" onchange="startUpload('annex')"/>
+                <i style="display:inline-block;width:auto;max-width: 2.5rem;vertical-align: top;margin-top: 0.05rem;">{{contract.uploadAnnex.annexName}}</i>
+                <input type="hidden" v-model="contract.uploadAnnex.annex"/>
+                <a href="javascript:void(0)" style="color:#e60012;display: inline-block" v-if="contract.uploadAnnex.annex" @click="contract.uploadAnnex.annex = '';contract.uploadAnnex.annexName = '';contract.uploadAnnex.updateFlag =false">删除</a>
+                <!--<i class="shangChuan"><img src="../../img/xiangJi.png" alt=""/></i>-->
+            </p>
+            <p>
+                <span>备注：</span>
+                <textarea placeholder="请输入备注，最多300个字哦" maxlength="300" class="ccc_border gray_word"  v-model="contract.contractInfo.remark"></textarea>
+            </p>
+        </div>
+    </section>
+    <footer>
+        <div class="foot2">
+            <a  href="javascript:;" class="cancle" @click="cancelContract()">取消</a><a href="javascript:;" @click="twoStepDiv = false;oneStepDiv = true;" class="last" >上一步</a><a href="javascript:;" class="next on" @click="twoToThree()" >下一步</a>
+        </div>
+    </footer>
+    <!--弹窗-->
+    <section>
+        <div class="zhezhao">
+            <div class="con">
+                <h5>取消</h5>
+                <p>您确定放弃要放弃本次操作吗？</p>
+                <div></div>
+                <a class="quXiao" href="#">取消</a><a class="queDing" href="10_xieYiGuanLi_xieYiGuanLi.html">确定</a>
+            </div>
+        </div>
+    </section>
+</div>
+<!--第三步-->
+<div id="div3" v-show="threeStepDiv">
+    <!--协议物品-->
+    <h2 class="xieYiWuPin">协议物品</h2>
+    <template v-for="contractItem in contract.contractMatDTOs">
+        <div class="wuPin">
+            <p><span>商品名称：</span><i>{{contractItem.itemName}}</i></p>
+            <p><span>商品属性：</span><i class="shangPinShuXing">{{contractItem.salerAttr}}</i></p>
+            <p><span>单价：</span><input type="text" required="required" name="matPrice" class="ccc_border" value="" v-model="contractItem.matPrice"   @keyup.self="numInputForLengthForVue($event,9,2,contractItem,'matPrice');checkCount($event,contractItem);"></p>
+            <template v-if="contract.contractInfo.protocolType == 2">
+                <p><span>数量：</span><input type="text" required="required" name="number" class="ccc_border"    @keyup.self="numInputForLengthForVue($event,7,getItemUnitByWS(contractItem.matCd),contractItem,'number');checkSkuInventory($event,contractItem);" v-model="contractItem.number" ></p>
+            </template>
+            <template v-if="contract.contractInfo.protocolType == 3">
+                <p><span>总价值：</span><input type="text" required="required" name="cost" class="ccc_border" v-model="contractItem.cost"
+                                           @keyup="numInputForLengthForVue($event,9,2,contractItem,'cost');checkCount($event,contractItem);"></p>
+            </template>
+            <a href="javascript:void(0);" class="delete " @click="deleteItems(contractItem)"></a>
+        </div>
+    </template>
+
+    <!--新增商品-->
+    <section>
+        <a href="javascript:;" class="xinZeng" @click="addItems()">+新增商品</a>
+    </section>
+    <!--占位-->
+    <section>
+        <div style="height: 1.04rem;"></div>
+    </section>
+    <footer>
+        <div class="foot3">
+            <a  href="javascript:void(0)" @click="cancelContract()" class="cancle">取消</a>
+            <a href="javascript:;" class="last" @click="twoStepDiv = !twoStepDiv;threeStepDiv = !threeStepDiv;">上一步</a>
+            <template v-if="!contract.contractInfo.id || contract.contractInfo.status == 0">
+            <a href="javascript:void(0);" class="faBu" @click="contractSubmit(3)" >立即发布</a>
+            </template>
+            <a href="#" class="baoCun on" @click="contractSubmit()" :style="(!contract.contractInfo.id || contract.contractInfo.status == 0)?'':'width: 3.2rem;'">保存</a>
+        </div>
+    </footer>
+    <!--弹窗-->
+    <section>
+        <div class="zhezhao">
+            <div class="con">
+                <h5>取消创建协议</h5>
+                <p>您确定要放弃本次操作吗？</p>
+                <div></div>
+                <a class="quXiao" href="javascript:;">取消</a><a class="queDing" href="10_xieYiGuanLi_xieYiGuanLi.html">确定</a>
+            </div>
+        </div>
+    </section>
+</div>
+<!--选择公司弹框-->
+<div id="div4" v-show="companyDialog" v-cloak>
+    <!--选项卡-->
+    <div style="margin-bottom: 1.8rem;overflow: hidden">
+        <div class="souSuo" style="position: absolute;z-index: 2">
+            <input type="text" placeholder="请输入要查询的公司名称"  v-model="queryShopOrUserName"/>
+            <select id="pingtaileixing" v-model="queryCompanyPlatformId">
+                <option value="">请选择平台类型</option>
+                <option value="0">印刷家</option>
+                <option value="2">绿印</option>
+            </select>
+            <span class="createShopSearchBtn" @click="queryshopList(1);">搜索</span>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <!--公司列表-->
+
+    <section id="wrapper" >
+        <div class="wrapScrool">
+        <div style="height: 1.8rem"></div>
+            <div  style="width: 100%;padding-top: 1.5rem;" v-cloak v-show="!queryShopList || queryShopList.length == 0">
+                <img style=" margin: 0 auto 0.96rem;width: 3.05rem;height: 2.5rem;" src="../../img/search_bg.png" alt="" />
+                <h2 style="text-align: center;font-size: 0.28rem;color: #333333;font-weight: normal;">十分抱歉，没有找到您想要的相关内容</h2>
+                <p style="text-align: center;font-size: 0.26rem;color: #666666;margin-top: 0.4rem;">亲，我们换个词试试吧~</p>
+            </div>
+        <template v-for="shop in queryShopList">
+            <template v-if="shop.uid != userInfo.uid">
+            <a class="shangPinLieBiao " href="javascript:;">
+                <div class="gouXuan gouXuan2">
+                    <img class="no-select" :src="shop.checked ? '../../img/yes-select.png' : '../../img/no-select.png'" alt="" @click="checkedShop(queryShopList,shop)">
+                </div>
+                <div class="maiFang">
+                    <p style="display: none"><span class="left">id：</span><span class="right">{{shop.shopId}}</span></p>
+                    <p style="display: none"><span class="left">id：</span><span class="right">{{shop.uid}}</span></p>
+                    <p><span class="left">公司名称：</span><span class="right">{{shop.companyName}}</span></p>
+                    <p><span class="left">联系人：</span><span class="right">{{shop.linkMan}}</span></p>
+                    <p><span class="left">联系方式：</span><span class="right">{{shop.umobile}}</span></p>
+                    <p style="display: none"><span class="left">传真：</span><span class="right"></span></p>
+                    <p style="display: none"><span class="left">电子邮箱：</span><span class="right">{{shop.userEmail}}</span></p>
+                    <p><span class="left">平台类型：</span>
+                        <span class="right">
+                            <template v-if="shop.platformId == null">印刷家</template>
+                            <template v-if="shop.platformId == 0">印刷家</template>
+                            <template v-if="shop.platformId == 1">印刷家</template>
+                            <template v-if="shop.platformId == 2">绿印</template>
+                            <template v-if="shop.platformId == 3">小管家</template>
+                        </span>
+                    </p>
+                </div>
+            </a>
+            </template>
+        </template>
+        </div>
+    </section>
+    <div style="height: 0.94rem;"></div>
+    <footer>
+        <div class="maiFang-footer">
+            <a @click="companyDialog = !companyDialog;oneStepDiv = !oneStepDiv;">取消</a>
+            <a @click="addSellerOrBuyerCompany(queryShopList)">确定</a>
+        </div>
+    </footer>
+</div>
+<!--选择商品弹框-->
+<div id="div5" v-show="goodsDialog" v-cloak>
+    <!--选项卡-->
+    <section>
+        <div class="souSuo">
+            <input type="text" placeholder="请输入要查询的物品" v-model="queryGoodKeywords"/><input type="text" placeholder="请输入要销售属性值" v-model="queryGoodAttrs"/><input type="button" value="搜索" @click="queryItemList(1)"/>
+        </div>
+    </section>
+    <!--占位-->
+    <div style="height: 0.88rem;"></div>
+    <!--商品列表-->
+    <section>
+        <div style="height: 0"></div>
+        <template v-for="item in itemList">
+            <template v-if="!item.existMatFlag">
+            <a class="shangPinLieBiao" href="javascript:;">
+                <div class="gouXuan">
+                    <img class="no-select" :src="item.checked ? '../../img/yes-select.png' : '../../img/no-select.png' " alt="" @click="setItemChecked(item)">
+                </div><div class="shangPinTuPian">
+                <img :src="imgUrl + item.picUrl" alt="">
+            </div><div class="shangPinXiangQing">
+                <p class="mingZi" style="display: none">商品id：<span>{{item.id}}</span></p>
+                <p class="mingZi">商品编号：<span>{{item.skuId}}</span></p>
+                <p class="mingZi">商品名称：<span>{{item.itemName}}</span></p>
+                <p class="mingZi">商品属性：<span>{{item.skuAttributeStr}}</span></p>
+                <!--<template v-if="item.skuPrice == null || item.hasPrice==2">
+                    <p class="jiaGe" style="text-indent: 0">原有原价：¥
+                        <i>
+                            <template v-if="item.skuPrice == null">暂无报价</template>
+                            <template v-if="item.skuPrice != null">{{item.skuPrice}}</template>
+                        </i></p>
+                </template>
+                <template v-else>
+                    <p class="jiaGe">原价：¥
+                        <i>
+                            <template v-if="item.skuPrice == null">暂无报价</template>
+                            <template v-if="item.skuPrice != null">{{item.skuPrice}}</template>
+                        </i></p>
+                </template>-->
+                <p class="jiaGe">原价：¥<i>
+                    <template v-if="item.hasPrice==2"> 暂无报价</template>
+                    <template v-if="item.hasPrice==1">{{item.skuPrice}}</template>
+                </i></p>
+
+            </div>
+            </a>
+            </template>
+        </template>
+    </section>
+    <div style="height: 0.94rem;"></div>
+    <footer>
+        <div class="maiFang-footer">
+            <a href="javascript:void(0);" @click="goodsDialog = !goodsDialog;threeStepDiv = !threeStepDiv;">取消</a>
+            <a href="javascript:void(0);" @click="goodsDialog = !goodsDialog;threeStepDiv = !threeStepDiv;getCheckedItems()">确定</a>
+        </div>
+    </footer>
+</div>
+
+<!--回到顶部-->
+<section>
+    <div id="top" @click="goToTop()">
+    </div>
+</section>
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../bower_components/attachment/jquery.form.js"></script>
+<script type="text/javascript" src="../../bower_components/attachment/ajaxformfileupload.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../bower_components/iscroll.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../bower_components/pullToRefresh_fixHead.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../bower_components/web-storage-cache-master/dist/web-storage-cache.min.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/common_http.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/jsonUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/StorageUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/mathUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../html/commonScript/itemUnit/itemUnit.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/vueFilter.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/moment.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../html/12_maiJiaZhongXin/script/10_contractCreate.js"></script>
+
+</body>
+</html>

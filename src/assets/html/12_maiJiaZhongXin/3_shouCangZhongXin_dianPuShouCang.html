@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>印刷家</title>
+    <link rel="stylesheet" href="../../css/common.css"/>
+    <link rel="stylesheet" href="../../css/animate.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/pullToRefresh.css"/>
+    <link rel="stylesheet" href="../../css/12_maiJiaZhongXin/3_shouCangZhongXin_dianPuShouCang.css"/>
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+</head>
+<body>
+<!--头部开始-->
+<div id="shoucang_dianpu">
+<header>
+    <div class="header">
+        <a href="javascript:;" onclick="javascript:history.back(-1);" class="return"></a>
+        店铺收藏
+        <a href="javascript:;" class="bianJi">编辑</a>
+        <div class="twoButton">
+            <a href="javascript:;" class="shanChu">删除</a>
+            <a href="javascript:;" class="baoCun">完成</a>
+        </div>
+    </div>
+    <div class="zhanwei"></div>
+</header>
+<!--头部结束-->
+<!--店铺列表开始-->
+    <template v-if="shoplist.length!=0">
+        <section>
+            <div class="tab_box" id="wrapper">
+                <div class="quanBU wrapScrool" id="f">
+                    <div style="height: 0.8rem"></div>
+                    <template v-for="shop in shoplist">
+                        <div class="dianPuLieBiao">
+                            <div class="title">
+                                <div class="gouXuan" :style="bianji?'display: inline-block':'display: none'" >
+                                    <template v-if="ids.indexOf(shop.id)>-1">
+                                        <img class="no-select" src="../../img/yes-select.png" @click="select(shop.id)" alt="" />
+                                    </template>
+                                    <template v-else>
+                                        <img class="no-select" src="../../img/no-select.png" @click="select(shop.id)" alt="" />
+                                    </template>
+                                </div>
+                                <a href="javascript:;" class="shangPinTuPian"><img :src="shop.logoUrl == null ||shop.logoUrl == '' ? '../../img/default_shop_logo.png' :getImgUrl(shop.logoUrl)" @click="gotoShop(shop)" alt=""/></a><a href="javascript:;" v-text="subText(shop.shopName)" @click="gotoShop(shop)" class="dianPU"></a><a href="javascript:;" @click="gotoShop(shop)" class="jianTou"></a>
+                            </div>
+                            <ul class="shangPinLieBiao">
+                                <template v-for="(product,index) in shop.items">
+                                    <template v-if="index<3">
+                                        <li>
+                                            <a href="javascript:;" @click="gotoGoods(product)">
+                                            <img :src="getImgUrl(product.pictureUrl)" alt=""/>
+                                            <p v-text="product.hasPrice == 1 && product.marketPriceForShow?'￥'+product.marketPriceForShow:'暂无报价'"></p>
+                                        </a>
+                                        </li>
+                                    </template>
+                                </template>
+                            </ul>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </section>
+    </template>
+    <template v-else>
+        <div class="haveNoShop" >
+            <div>
+                <img src="../../img/chenggongbg@3x.png" alt=""/>
+            </div>
+            <h2>您还没有收藏店铺哦！</h2>
+            <!--<a href="../../html/1_index/index.html" class="tiaoZhuan">立即选购</a>-->
+            <p  class="printHome">printhome.com</p>
+        </div>
+    </template>
+
+<!--店铺列表结束-->
+<!--未选中弹出提示-->
+<div class="zhezhao">
+    <div>
+        请选择要删除的店铺！
+        <span class="close"></span>
+    </div>
+</div>
+<!--选中弹出提示-->
+<div class="zhezhao2">
+    <div>
+        <p>确定删除么？</p>
+        <span class="quXiao">取消</span>
+        <span class="queDing" @click="quedingShanchu()">确定</span>
+    </div>
+</div>
+    <main-foot :user-info="userInfo" :current-position="4"></main-foot>
+</div>
+<!--回到顶部-->
+<section>
+    <div id="top"></div>
+</section>
+<!--底部占位-->
+<section>
+    <div class="zhanwei2"></div>
+</section>
+<!--<script charset="utf-8" type="text/javascript" src="../../js/footer.js"></script>-->
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/iscroll.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/pullToRefresh_fixHead.js"></script>
+<script type="text/javascript" src="../../js/vueFoot.js"></script>
+<!--<script charset="utf-8" type="text/javascript" src="../../js/12_maiJiaZhongXin/3_shouCangZhongXin_shangPinShouCang.js"></script>-->
+<script type="text/javascript" src="script/3_shoucang_dianpu.js"></script>
+</body>
+</html>

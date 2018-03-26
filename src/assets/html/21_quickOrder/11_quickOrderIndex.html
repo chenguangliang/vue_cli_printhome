@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>快速订单</title>
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/21_quickOrder/0_quickOrderCommon.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/21_quickOrder/11_quickOrderIndex.css"/>
+</head>
+<body style="background-color: #f4f4f4;">
+<!--头部开始-->
+<div id="app">
+<header>
+    <div class="headerquickOrder">
+        <template v-if="urlObj.identity==1">
+            <a href="../12_maiJiaZhongXin/2_maiJiaZhongXin_maiJiaZhongXin.html" class="fanHui"></a>快速订单
+        </template>
+        <template v-else>
+            <a href="../18_maiJiaZhongXin/8_maiJiaZhongXin_maiJiaZhongXin.html" class="fanHui"></a>快速订单
+        </template>
+    </div>
+    <div style="height:0.88rem;"></div>
+</header>
+<!--主体-->
+<div class="mainCon">
+    <div class="top">
+        <img class="indexImg" src="../../img/kuaisuxiadan@3x.png" alt="">
+        我的订单<!--（<span v-cloak>{{result.allOrdersCount.result}}</span>）-->
+        <span class="rightWrap" @click="goToAllOrders()">查看全部订单
+            <img class="rightArrow" src="../../img/right_arrow.png" alt="">
+        </span>
+    </div>
+    <div class="cellWrap">
+        <div class="oneCell"  @click="goToConfirmOrder()">
+            <img src="../../img/quickOrder/daiqueren@3x.png" alt="">
+            <template v-if="result.confirmOrder > 0">
+                <div class="countTit">{{result.confirmOrder | cutTwo}}</div>
+            </template>
+            <p>待确认</p>
+        </div>
+        <div class="oneCell bl br"  @click="goToStayPayment()">
+            <img src="../../img/quickOrder/daifukuan@3x.png" alt="">
+            <template v-if="result.stayPayment > 0">
+                <div class="countTit">{{result.stayPayment | cutTwo}}</div>
+            </template>
+            <p>待付款</p>
+        </div>
+        <div class="oneCell"  @click="goToStayDelivery()">
+            <img src="../../img/quickOrder/daipeisong@3x.png" alt="">
+            <template v-if="result.stayDelivery > 0">
+                <div class="countTit">{{result.stayDelivery | cutTwo}}</div>
+            </template>
+            <p>待配送</p>
+        </div>
+        <div class="oneCell bt"  @click="goToStayReceipt()">
+            <img src="../../img/quickOrder/daishouhuo@3x.png" alt="">
+            <template v-if="result.stayReceipt > 0">
+                <div class="countTit">{{result.stayReceipt | cutTwo}}</div>
+            </template>
+            <p>待收货</p>
+        </div>
+        <div class="oneCell bt bl br"  @click="goToSuccessOrder()">
+            <img src="../../img/quickOrder/yiwancheng@3x.png" alt="">
+            <template v-if="result.successOrder > 0">
+                <div class="countTit">{{result.successOrder | cutTwo}}</div>
+            </template>
+            <p>已完成</p>
+        </div>
+        <div class="oneCell bt"  @click="goToCancleOrder()">
+            <img src="../../img/quickOrder/yiquxiao-@3x.png" alt="">
+            <template v-if="result.cancleOrder > 0">
+                <div class="countTit">{{result.cancleOrder | cutTwo}}</div>
+            </template>
+            <p>已取消</p>
+        </div>
+    </div>
+
+</div>
+<div class="navWrap">
+    <template v-if="urlObj.identity==1">
+        <p class="oneNav bb" onclick="javascript:window.location='5_orderReview.html?identity=1'"><span>订单审核</span> <img src="../../img/right_arrow.png" alt=""></p>
+    </template>
+    <template v-else>
+        <p class="oneNav bb" onclick="javascript:window.location='5_orderReview.html?identity=2'"><span>订单审核</span> <img src="../../img/right_arrow.png" alt=""></p>
+    </template>
+    <template v-if="urlObj.identity==1">
+        <p class="oneNav bb" onclick="javascript:window.location='./7_statementlist.html'"><span>对账单管理</span> <img src="../../img/right_arrow.png" alt=""></p>
+    </template>
+    <p class="oneNav" onclick="javascript:window.location='./8_materialList.html'"><span>物资管理</span> <img src="../../img/right_arrow.png" alt=""></p>
+</div>
+    <template v-if="urlObj.identity==1">
+        <div class="newOrder" onclick="javascript:window.location='13_addQuickOrder_buyer.html'">
+            +新增快速订单
+        </div>
+    </template>
+    <template v-else>
+        <div class="newOrder" onclick="javascript:window.location='14_addQuickOrder_seller.html'">
+            +新增快速订单
+        </div>
+    </template>
+
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/21_quickOrder/9_addMaterial.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/vueFilter.js"></script>
+<script charset="utf-8" type="text/javascript" src="script/11_quickOrderIndex.js"></script>
+</body>
+</html>

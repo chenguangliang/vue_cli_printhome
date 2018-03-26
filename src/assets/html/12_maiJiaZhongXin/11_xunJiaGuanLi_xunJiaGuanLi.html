@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>询价管理</title>
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/pullToRefresh.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/12_maiJiaZhongXin/10_xieYiGuanLi_xieYiGuanLi.css"/>
+</head>
+<body>
+<!--搜索-->
+<div id="xunjia_sousuo" hidden="hidden">
+    <header>
+        <div class="header">
+            <a href="#" class="fanHui" onclick="showList();"></a>
+            搜索
+        </div>
+        <div style="height:0.88rem;"></div>
+    </header>
+    <!--协议编号-->
+    <section>
+        <div class="suoSou">
+            <p>
+                <span id="souSuoLabel">询价名称：</span>
+                <input type="text" id="searchName" name="searchName" maxlength="20"/>
+            </p>
+            <p style="text-align: center; padding-top: 0.4rem;"><a href="#" onclick="reset()" class="reset">重置</a><a href="#" onclick="dosearch()" class="search">搜索</a></p>
+        </div>
+    </section>
+</div>
+<!--头部开始-->
+<div id="xunjia">
+<header>
+    <div class="header">
+        <a href="../../html/12_maiJiaZhongXin/2_maiJiaZhongXin_maiJiaZhongXin.html" class="fanHui"></a>
+        询价管理
+        <a href="javascript:;" class="suoSou" onclick="showSouSuo();"></a>
+        <!--<a href="../4_souSuoJieGuo/search.html" class="suoSou"></a>-->
+    </div>
+    <div class="zhanwei"></div>
+</header>
+<!--选项卡-->
+<section>
+    <div class="xuanXiangKa xunJia">
+        <ul>
+            <li onclick="getDanyixunjiaList();reset();" id="danyiLi">单一询价</li>
+            <li onclick="getPiliangxunjiaList();reset();" id="piliangLi">批量询价</li>
+        </ul>
+    </div>
+</section>
+<section>
+    <div class="tab_box">
+        <div class="quanBU" id="danyiDIV">
+            <div class="tab_box" id="wrapper">
+                <div class="quanBU wrapScrool" id="f">
+                    <div style="height: 1.4rem"></div>
+                    <template v-if="lable=='single'">
+                        <template v-if="danyixunjia.length>0">
+                            <template v-for="xunjia in danyixunjia">
+                                <div class="biaoGe">
+                                    <p class="top">
+                                        <span>商品信息</span>
+                                        <span>购买数量</span>
+                                        <span>有效期</span>
+                                    </p>
+                                    <div class="middle">
+                                        <p class="shangPinShuXing">
+                                            <a class="shangPin" href="javascript:;" @click="gotoGoods(xunjia)" style="text-align: center;" v-text="getSubText(xunjia.itemName,8)"></a>
+                                            <a class="shuXing" href="javascript:;" style="text-align: center;" v-text="xunjia.itemAttr"></a>
+                                        </p>
+                                        <template v-if="xunjia.inquiryQty.replace(/./,'').length>8">
+                                            <span v-text="xunjia.inquiryQty">20</span>
+                                        </template>
+                                        <template v-else>
+                                            <span v-text="xunjia.inquiryQty"  style="margin-top: 0.2rem;">20</span>
+                                        </template>
+                                        <span v-text="subTime(xunjia.startTime)+'-'+subTime(xunjia.endTime)" style="margin-top: 0.2rem;" ></span>
+                                    </div>
+                                    <p class="line"></p>
+                                    <p class="bottom baoJia">
+                                        <template v-if="xunjia.inquiryPrice">
+                                            报价：
+                                        </template>
+                                        <template v-else>
+                                            等待卖家报价
+                                        </template>
+                                        <span  v-text="xunjia.inquiryPrice"></span>
+                                    </p>
+                                    <p class="baoJia" style="text-align: left;padding:0 0.15rem 0;">
+                                        <template v-if="xunjia.inquiryRemark">
+                                            备注：
+                                        </template>
+                                        <span  v-text="xunjia.inquiryRemark" style="display: inline-block;width: 5rem;vertical-align: top;"></span>
+                                    </p>
+                                </div>
+                            </template>
+                        </template>
+                        <template v-else>
+                            <section>
+                                <div class="tiShi">
+                                    <img src="../../img/search_bg.png" alt=""/>
+                                    <h2>没有发现相关内容~~</h2>
+                                    <!--<p>亲，我们换个词试试吧~</p>-->
+                                </div>
+                            </section>
+                        </template>
+
+                    </template>
+                    <template v-else-if="lable=='multiple'">
+                        <template v-if="piliangxunjia.length>0">
+                            <template v-for="xunjia in piliangxunjia">
+                                <div class="biaoGe">
+                                    <p class="top">
+                                        <span>询价名称</span>
+                                        <span>状态</span>
+                                        <span>询价日期</span>
+                                    </p>
+                                    <p class="middle">
+                                        <a href="#" style="text-align: center;" v-text="getSubText(xunjia.inquiryName,8)"></a>
+                                    <span>
+                                        <template v-if="xunjia.status == 1">待发布</template>
+                                        <template v-if="xunjia.status == 2">报价中</template>
+                                        <template v-if="xunjia.status == 3">已接受</template>
+                                    </span>
+                                        <span v-text="time(xunjia.createDate)"></span>
+                                    </p>
+                                    <p class="bottom clearfix">
+                                        <template v-if="xunjia.status == 1">
+                                            <a href="javascript:;" class="on" @click="showDiv(xunjia.inquiryNo,'commit','发布询价')">发布询价</a>
+                                            <a href="javascript:;" @click="showDiv(xunjia.inquiryNo,'shanchu','删除')">删除</a>
+                                            <a :href="'11_xunJiaGuanLi_updateXunJia.html?inquiryNo='+xunjia.inquiryNo" class="xiuGai">修改</a>
+                                            <a :href="'../18_maiJiaZhongXin/2_baoJiaGuanLi_xunJiaMingXi.html?inquiryNo='+xunjia.inquiryNo+'&flag=request'" class="chaKan">查看</a>
+                                        </template>
+                                        <template v-else-if="xunjia.status == 2">
+                                            <a class="on" :href="'../12_maiJiaZhongXin/11_xunJiaGuanLi_jieShouBaoJia.html?inquiryNo='+xunjia.inquiryNo+'&flag=request'">接受报价</a>
+                                            <!--<a href="javascript:;" @click="showDiv(xunjia.inquiryNo,'accept','接受报价')">接受报价</a>-->
+                                            <a href="javascript:;" @click="showDiv(xunjia.inquiryNo,'recommit','重新询价')">重新询价</a>
+                                            <a :href="'../18_maiJiaZhongXin/2_baoJiaGuanLi_xunJiaMingXi.html?inquiryNo='+xunjia.inquiryNo+'&flag=request'" class="chaKan">查看</a>
+                                        </template>
+                                        <template v-else-if="xunjia.status == 3">
+                                            <a class="on" href="javascript:;" @click="xiadan(xunjia.inquiryNo)" class="xiuGai">下单</a>
+                                            <a :href="'../18_maiJiaZhongXin/2_baoJiaGuanLi_xunJiaMingXi.html?inquiryNo='+xunjia.inquiryNo+'&flag=request'" class="chaKan">查看</a>
+                                        </template>
+                                        <template v-else>
+                                            <a class="on" :href="'../18_maiJiaZhongXin/2_baoJiaGuanLi_xunJiaMingXi.html?inquiryNo='+xunjia.inquiryNo+'&flag=request'" class="chaKan">查看</a>
+                                        </template>
+                                    </p>
+                                </div>
+                            </template>
+                        </template>
+                        <template v-else>
+                            <section>
+                                <div class="tiShi">
+                                    <img src="../../img/search_bg.png" alt=""/>
+                                    <h2>没有发现相关内容~~</h2>
+                                    <!--<p>亲，我们换个词试试吧~</p>-->
+                                </div>
+                            </section>
+                        </template>
+                    </template>
+                    <p class="printHome">printhome.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--占位-->
+<section>
+    <div style="height: 0.95rem;width: 100%;"></div>
+</section>
+<!--回到顶部-->
+<section>
+    <div id="top">
+    </div>
+</section>
+<footer class="yincang" id="chuangJian">
+    <a style="z-index:999" href="11_xunJiaGuanLi_chuangJianXunJia.html" class="chuangJian">+创建询价</a>
+</footer>
+<!--弹窗-->
+<section>
+    <div class="zhezhao" id="popWin">
+        <div class="con">
+            <h5 v-text="operText"></h5>
+            <p>确定执行此请求吗？</p>
+            <div></div>
+            <span class="quXiao" @click="quxiao()">取消</span><span class="queDing" @click="queding()">确定</span>
+        </div>
+    </div>
+</section>
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<!--<script charset="utf-8" type="text/javascript" src="../../js/12_maiJiaZhongXin/10_xieYiGuanLi_xieYiGuanLi.js"></script>-->
+<script charset="utf-8" type="text/javascript" src="../../bower_components/iscroll.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/pullToRefresh_fixHead.js"></script>
+<script charset="utf-8" type="text/javascript"  src="script/xunjiaguanli.js"></script>
+</body>
+</html>

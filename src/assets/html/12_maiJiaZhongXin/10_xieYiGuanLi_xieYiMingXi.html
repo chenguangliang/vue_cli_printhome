@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>协议明细</title>
+    <link type="text/css" rel="stylesheet" href="../../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/12_maiJiaZhongXin/10_xieYiGuanLi_xieYiMingXi.css"/>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+</head>
+<body>
+<div id="contractInfo">
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="javascript:;" onclick="javascript:history.back(-1);" class="fanHui"></a>
+        协议明细
+        <a href="javascript:;" class="suoSou"></a>
+    </div>
+</header>
+<!--选项卡-->
+<section>
+    <div class="xuanXiangKa">
+        <ul>
+            <li :class="showtype == baseInfoType ? 'on' : ''" @click="showtype = baseInfoType">协议明细</li>
+            <li :class="showtype == orderInfoType ? 'on' : ''" @click="showtype = orderInfoType">协议订单</li>
+        </ul>
+    </div>
+</section>
+<div style="height: 1.58rem;"></div>
+<section v-cloak>
+    <div class="tab_box">
+        <div class="xieYiMingXi" v-show="showtype == baseInfoType">
+            <div class="jiBenXinXi">
+                <h2>基本信息</h2>
+                <p>
+                    <span class="left">协议状态：</span><span class="right">
+                        <template v-for="(key,value) in contractInfo.statusMap">
+                            <template v-if="value == contractInfo.contract.status">{{key}}</template>
+                        </template>
+                    </span>
+                </p>
+                <p v-if="contractInfo.contract.status == 4 || contractInfo.contract.status == 2">
+                    <span class="left" v-cloak>驳回原因：</span><span class="right" >{{contractInfo.contract.refusalReason}}</span>
+                </p>
+                <p>
+                    <span class="left" v-cloak>发布方：</span><span class="right" >{{contractInfo.publishedBy.companyName}}</span>
+                </p>
+                <p>
+                    <span class="left" v-cloak>发布人：</span><span class="right" >{{contractInfo.publishedBy.uname}} </span>
+                </p>
+                <p> <span class="left" v-cloak>协议编号：</span><span  class="right" >{{contractInfo.contract.contractOrderNo}}</span></p>
+                <p>
+                    <span class="left" v-cloak>协议名称：</span><span class="right" >{{contractInfo.contract.contractName}}</span>
+                </p>
+                <p>
+                    <span class="left" v-cloak>审核人：</span><span class="right" >{{contractInfo.approveBy.uname}}</span>
+                </p>
+            </div>
+            <div class="jiBenXinXi" >
+                <h2>联系方式</h2>
+                <p>
+                    <span class="left">买方：</span><span class="right" v-cloak>{{contractInfo.buyer.companyName}}</span>
+                </p>
+                <p>
+                    <span class="left">联系人：</span><span class="right" v-cloak>{{contractInfo.buyer.uname}}</span>
+                </p>
+                <p>
+                    <span class="left">联系电话：</span><span class="right">{{contractInfo.buyer.umobile}}</span>
+                </p>
+                <p>
+                    <span class="left">电子邮箱：</span><span class="right" v-cloak>{{contractInfo.buyer.userEmail}}</span>
+                </p>
+                <p class="line"></p>
+                <p>
+                    <span class="left">卖方：</span><span class="right" v-cloak>{{contractInfo.seller.companyName}}</span>
+                </p>
+                <p>
+                    <span class="left">联系人：</span><span class="right" v-cloak>{{contractInfo.seller.uname}}</span>
+                </p>
+                <p>
+                    <span class="left">联系电话：</span><span class="right">{{contractInfo.seller.umobile}}</span>
+                </p>
+                <p>
+                    <span class="left">电子邮箱：</span><span class="right" v-cloak>{{contractInfo.seller.userEmail}}</span>
+                </p>
+            </div>
+            <div class="jiBenXinXi">
+                <h2>合同条件</h2>
+                <p>
+                    <span class="left">协议类型：</span><span class="right" v-cloak>
+                    <template v-if="contractInfo.contract.protocolType == 1">
+                        单价
+                    </template>
+                    <template v-else-if="contractInfo.contract.protocolType == 2">
+                        数量
+                    </template>
+                    <template v-else>
+                        总价值
+                    </template>
+                    </span>
+                </p>
+                <p>
+                    <span class="left youXiaoQi">协议有效期：</span><span class="right riQi" v-cloak>{{contractInfo.contract.beginDate |timestampFormat('YY-MM-DD') }}   至 {{contractInfo.contract.endDate | timestampFormat('YY-MM-DD')}}</span>
+                </p>
+                <p>
+                    <span class="left">协议账期：</span><span class="right" v-cloak>
+                   {{ contractInfo.contractPayment.paymentDays}}
+                    <template v-if="contractInfo.contractPayment.paymentType == 1">
+                    月
+                    </template>
+                    <template v-else>
+                    天
+                    </template>
+                    </span>
+                </p>
+                <p>
+                    <template v-if="contractInfo.contractUrlShowList &&  contractInfo.contractUrlShowList.length > 0 &&　contractInfo.contractUrlShowList[0].imgUrl != ''">
+                    <span class="left">附件：</span><span class="right" v-cloak>
+                    <img :src="  imgUrl + contractInfo.contractUrlShowList[0].imgUrl" alt=""/></span>
+                    </template>
+                </p>
+                <p>
+                    <span class="left">备注：</span><span class="right"><textarea v-model="contractInfo.contract.remark" v-cloak readonly></textarea></span>
+                </p>
+            </div>
+            <template v-for="contractMat in contractInfo.contract.contractMatDTOs">
+                <div class="jiBenXinXi">
+                    <h2>合同物品</h2>
+                    <p>
+                        <span class="left">商品名称：</span><span class="right"  @click="gotoGoods(contractMat)">{{contractMat.itemName}}</span>
+                    </p>
+                    <p>
+                        <span class="left">商品属性：</span><span class="right dian">{{contractMat.salerAttr}}</span>
+                    </p>
+                    <p>
+                        <span class="left">单价：</span><span class="right">{{contractMat.matPrice}}</span>
+                    </p>
+                    <template v-if="contractInfo.contract.protocolType == 2">
+                        <p>
+                            <span class="left">数量：</span><span class="right">{{contractMat.number}}</span>
+                        </p>
+                    </template>
+                    <template v-if="contractInfo.contract.protocolType == 3">
+                        <p>
+                            <span class="left">总价值：</span><span class="right">{{contractMat.cost}}</span>
+                        </p>
+                    </template>
+                </div>
+            </template>
+
+        </div>
+        <div class="xieYiDingDan" v-show="showtype == orderInfoType">
+
+            <template v-for="contractOrder in contractOrders">
+                <div class="bianHao">
+                    <p>
+                        协议编号：
+                        <span>{{contractInfo.contract.contractNo}}</span>
+                        <a href="javascript:void(0);" class="xiangQing" @click="gotoOrderDetail(contractOrder)">订单详情</a>
+                    </p>
+                    <p>
+                        订单编号：
+                        <span>{{contractOrder.orderId}}</span>
+                    </p>
+                    <p>
+                        订单状态：
+                        <i>
+                            <template v-if="contractOrder.state == 1">
+                                待付款
+                            </template>
+                            <template v-else-if="contractOrder.state == 2">
+                                待配送
+                            </template>
+                            <template v-else-if="contractOrder.state == 3">
+                                待收货
+                            </template>
+                            <template v-else-if="contractOrder.state == 4">
+                                待评价
+                            </template>
+                            <template v-else-if="contractOrder.state == 5">
+                                已完成
+                            </template>
+                            <template v-else-if="contractOrder.state == 6">
+                                已取消
+                            </template>
+                            <template v-else-if="contractOrder.state == 7">
+                                已关闭
+                            </template>
+                        </i>
+                        总金额：<span>{{ contractOrder.totalPrice  + contractOrder.freight }}</span>
+                    </p>
+                </div>
+            </template>
+        </div>
+    </div>
+</section>
+<footer>
+    <div class="foot yinCang">
+        <a href="javascript:window.history.back(-1)">返回</a>
+        <a href="javascript:window.history.back(-1)" class="queding">确定</a>
+    </div>
+</footer>
+<!--占位-->
+<section>
+    <div style="height: 0.84rem;"></div>
+</section>
+<!--回到顶部-->
+<section>
+    <div id="top">
+    </div>
+</section>
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../bower_components/iscroll.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../bower_components/pullToRefresh_fixHead.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/common3.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/moment.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/common_http.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/jsonUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/vueFilter.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../html/12_maiJiaZhongXin/script/10_contractInfo.js"></script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>店铺搜索</title>
+    <link rel="stylesheet" href="../../css/common.css"/>
+    <link rel="stylesheet" href="../../css/pullToRefresh.css"/>
+    <link rel="stylesheet" href="../../css/4_souSuoJieGuo/search.css"/>
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+</head>
+<body style="font-size: 0.26rem;color: #333333">
+<div id="searchResult">
+<div class="top_wrapper">
+    <a href="../1_index/index.html" class="back_wrapper"><img class="back" src="../../img/back.png" alt=""/></a>
+
+    <div class="search_wrapper">
+        <select name="search" id="search">
+            <option value="shop">店铺</option>
+            <option value="goods">商品</option>
+        </select>
+        <input type="text" class="search_box" id="key" v-model="keyword" @click="goToSearch"/>
+
+        <div style="display: inline-block; float: right; margin: 3px 10px 0 0;">
+            <!--<img class="chahao" src="../../img/chahao.png" alt=""/>-->
+            <img class="fangda" src="../../img/fangdajing.png" alt="" onclick="searchList()"/>
+        </div>
+
+    </div>
+</div>
+<div style="height: 1.08rem"></div>
+
+    <div id="wrapper">
+        <div id="scroller">
+            <ul class="shop_list_wrap wrapScrool">
+                <div style="height: 1.1rem"></div>
+                <template v-for="item in goodsData.pager.records">
+                    <li class="shop_list">
+                        <p class="shop_title" @click="gotoShop(item.shopId)">{{item.shopName}}</p>
+                        <div class="shop_msg" @click="gotoShop(item.shopId)">
+                            <img class="shop_img"  v-bind:src="item.shopLogoUrl == null ||item.shopLogoUrl == '' ? '../../img/default_shop_logo.png' : imgUrl + item.shopLogoUrl"  alt=""/>
+
+                            <div class="score">
+                                <p><span>全部商品：</span>{{shopTotalMap["shop"+item.shopId]}}件</p>
+
+                                <p><span>评分：</span>{{item.serviceScore}}分</p>
+                            </div>
+                            <div class="goShop" @click="gotoShop(item.shopId)">
+                                进店
+                            </div>
+                        </div>
+                    <div class="sample_wrap">
+                        <template  v-for="(key,value) in item.recommendItems">
+                            <template v-if="value < 3">
+                                <img class="sample" v-bind:src="imgUrl + key.picUrl" alt="" @click="gotoProductDetail(key)"/>
+                            </template>
+                        </template>
+                    </div>
+                    </li>
+                </template>
+                <div style="text-align: center;font-size: 0.26rem;color: #999999;line-height: 0.6rem;">printhome.com</div>
+
+            </ul>
+        </div>
+    </div>
+
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/jsonUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/iscroll.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../bower_components/pullToRefresh_fixHead.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/common.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../js/4_souSuoJieGuo/search_http.js"></script>
+<script charset="UTF-8" type="text/javascript" src="script/search_shop.js"></script>
+</body>
+</html>

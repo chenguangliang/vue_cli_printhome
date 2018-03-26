@@ -1,0 +1,13 @@
+<!--产品推荐-->
+<section>
+    <div class="chanPinTuiJian">
+        <div class="title">
+            <div><img src="../../img/chanPinTuiJian.png" alt="">产品推荐</div>
+        </div>
+        <div class="neiRong">
+            <a :href="key.adURL" v-for="(key,value) in index_advertises_list">
+                <img v-if="index_advertises_list.length > 0" :src="imgUrl + key.adSrc" alt="">
+            </a>
+        </div>
+    </div>
+</section>

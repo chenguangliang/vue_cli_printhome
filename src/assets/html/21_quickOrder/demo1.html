@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body id="app">
+    <input type="text" v-model="username">
+</body>
+<script charset="utf-8" type="text/javascript" src="vue.js"></script>
+<script>
+    var myVue=new Vue({
+        el:'#app',
+        data:{
+            username:''
+        },
+        methods:{
+            submitInfo: function () {
+                //下边这个$.jsonAjax是自己封装的，用来ajax请求
+                var temp=this;
+                var param= {'username':temp.username};
+                $.jsonAjax(getUrl("/quickor/item/submitCreateItemOrMaterials"),param, function (data, status, xhr) {
+                    if (data.success) {
+
+                    } else {
+
+                    }
+                }, false);
+            }
+        }
+    })
+</script>
+</html>

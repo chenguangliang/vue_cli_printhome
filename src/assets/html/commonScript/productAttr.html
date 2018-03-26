@@ -1,0 +1,54 @@
+<div class="win_prop" v-show="itemDialog" v-cloak>
+    <div class="prop_bg"></div>
+    <div class="prop_wrap">
+        <div class="prop_con">
+            <img class="prop_img" :src=" imgUrl +  (skuInfo.skuPictureUrl == ''? product.item.picUrls[0]: skuInfo.skuPictureUrl)" alt=""/>
+            <p class="win_priceWrap">
+                <template v-if="skuId">
+
+                    <template v-if="skuInfo.hasPrice">
+                        <template v-if="skuInfo.barginPrice != ''">
+                            <span class="win_price">￥{{ skuInfo.barginPrice}}</span>
+                        </template>
+                        <template v-else>
+                            <span class="win_price">￥{{ skuInfo.skuPrice}}</span>
+                        </template>
+                        <br/>&nbsp;
+                        <span class="win_count">库存：{{skuInfo.qty == 0 || skuInfo.qty == "" ? '无货' : skuInfo.qty}} {{skuInfo.qty == 0 || skuInfo.qty == "" ? '': skuInfo.unit}}</span>
+                    </template>
+                    <template v-else>
+                        <span class="win_count">欢迎询价</span>
+                    </template>
+                </template>
+                <template v-else>
+                    <span class="win_price">￥{{ product.item.hasPrice == 1 ? product.item.guidePriceForShow : ''}}</span>
+                    <br/>&nbsp;
+                    请选择
+                    <template v-for="attr in uncheckAttr">
+                        <span class="win_count">{{attr.name}} &nbsp;</span>
+                    </template>
+                </template>
+            </p>
+
+            <div class="prop_chahaoWrap">
+                <img class="prop_chahao" src="../../img/win_chahao.png" alt="" @click="itemDialog = !itemDialog"/>
+            </div>
+            <div class="win_select">
+                <template v-for="attrSale in product.item.attrSale">
+                    <div class="wrap_wrapper">
+                        <span class="wrap_tit">{{attrSale.name}}：</span>
+                        <p class="wrap_con">
+                            <template v-for="value in attrSale.values">
+                                <span :class="'beginSpan ' + value.checkedStatus" @click="value.checkedStatus == 'normal'||value.checkedStatus == 'checked' ?changeCheckStatus(attrSale,value) : ''">{{value.name}}</span>
+                            </template>
+                        </p>
+                    </div>
+                </template>
+
+            </div>
+
+        </div>
+        <input class="win_jiaRu" type="button" value="确定" @click="changeProductAttr()"/>
+    </div>
+
+</div>

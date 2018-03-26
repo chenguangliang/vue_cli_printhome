@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>欢迎买家认证</title>
+    <link type="text/css" rel="stylesheet" href="../../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/3_maiJiaRenZheng/maiJiaRenZheng.css"/>
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+</head>
+<body>
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="javascript:;" onclick="javascript:history.back(-1);" ></a>欢迎认证买家
+    </div>
+    <div class="zhanwei"></div>
+</header>
+<!--联系人开始-->
+<section>
+    <div class="xinXin">
+        <h2 class="title">联系人信息</h2>
+        <p class="userName">
+            &emsp;&emsp;&emsp;用户名：<strong>印刷家</strong>
+        </p>
+        <p class="lianxirenName">
+            <label for="name">＊</label>联系人姓名：<input id="name" placeholder="请输入联系人的姓名" type="text"  maxlength="20"/>
+        </p>
+        <div class="warm none">输入2-20个字符，可以中文和英文组成。</div>
+        <p class="bumen">
+            &emsp;<label for="bumen">＊</label>所在部门：<select name="bumen" id="bumen"><option value="">请选择</option><option value="zongHe">综合部</option></select></p>
+        <div class="warm none">请选择部门</div>
+        <p class="dianhua">
+            &emsp;<label for="dianhua">＊</label>固定电话：<input id="dianhua" placeholder="请输入固定电话" type="tel" maxlength="12"/>
+        </p>
+        <div class="warm none">请填写联系人常用电话，以便于我们联系，如：0527-88001100</div>
+        <p>
+            &emsp;&emsp;&emsp;<label for="shouji">＊</label>手机：<input id="shouji" placeholder="请输入手机号" type="tel"  maxlength="11"/>
+        </p>
+        <div class="warm none">手机号格式输入错误，请输入正确11位手机号码。</div>
+        <p>
+            &emsp;&emsp;&emsp;<label for="email">＊</label>邮箱：<input id="email" placeholder="请输入邮箱" type="email"  maxlength="18"/>
+        </p>
+        <div class="warm none">请输入正确的邮箱!</div>
+    </div>
+</section>
+<!--公司开始-->
+<section>
+    <div class="xinXin">
+        <h2 class="title">公司信息</h2>
+        <p>
+            <label for="companyName">＊</label>公司名称名：<input id="companyName" placeholder="请输入公司名称" type="text" />
+        </p>
+        <div class="warm none">请填写工商局注册的全称。4-40位字符，可由中英文、数字及”_”、”-”、()、（）组成。</div>
+        <p>
+            <label for="sel_Province">＊</label>公司所在地：<select id="sel_Province" >北京</select>
+            <select id="sel_City" name="sel_City" ></select>
+            <select id="sel_County" name="sel_County" ></select>
+        </p>
+        <div class="warm none">请选择公司所在地</div>
+        <p>
+            &emsp;<label>*</label>公司地址：<input id="companyAddress" placeholder="请填写详细公司经营地址" type="text"  maxlength="100"/>
+        </p>
+        <div class="warm none">请填写详细公司经营地址，如：苏州街20号汇丰大厦A座11层。</div>
+        <p class="check">
+            &emsp;<label>＊</label><span>经营范围：</span><input type="checkbox" name="jingying" value="" />&ensp;书刊印刷&ensp;<input type="checkbox" name="jingying" value="" />&ensp;书刊印刷&ensp;<input type="checkbox" name="jingying" value="" />&ensp;书刊印刷
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<input type="checkbox" name="jingying" value="" />&ensp;书刊印刷&ensp;<input type="checkbox" name="jingying" value="" />&ensp;书刊印刷&ensp;<input type="checkbox" name="jingying" value="" />&ensp;书刊印刷
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<input type="checkbox" name="jingying" value="" />&ensp;书刊印刷&ensp;<input type="checkbox" name="jingying" value="" />&ensp;书刊印刷&ensp;<input type="checkbox" name="jingying" value="" />&ensp;书刊印刷
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<input type="checkbox" name="jingying" value="" />&ensp;书刊印刷&ensp;<input type="checkbox" name="jingying" value="" />&ensp;书刊印刷
+        </p>
+        <div class="warm none">请至少选择一种经营范围</div>
+        <p class="renshu">&emsp;&emsp;企业人数：<select name="renshu" id="renshu"><option value="">请选择</option></select></p>
+        <p class="guimo">&emsp;&emsp;经营规模：<select name="guimo" id="guimo"><option value="">请选择</option></select></p>
+        <p class="xingzhi">&emsp;&emsp;公司性质：<select name="xingzhi" id="xingzhi"><option value="">请选择</option></select></p>
+        <p class="rongzi">公司是否有融资需求：<img src="../../img/no-select.png" alt="" class="yes"/>是&emsp;<img src="../../img/no-select.png" alt="" class="no"/>否</p>
+        <p class="money">期望融资额度：<input type="number" id="money" onchange="checkMoney()" maxlength="9"/><span>万元</span></p>
+        <div class="warm none">融资额度为最多不超过9位的正整数。</div>
+        <p class="picYZ">&emsp;图片验证码：<input type="number" maxlength="4"/><img id="changeTP" src="../../img/yanzhengma.png" alt=""/></p>
+    </div>
+</section>
+<!--提交按钮-->
+<section>
+    <a class="tijiao" href="maiJiaRenZhengChengGong.html">提交买家认证</a>
+</section>
+<!--回到顶部-->
+<div id="top">
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/3_maiJiaRenZheng/maiJiaRenZheng.js"></script>
+<script src="../../bower_components/selectAdd.js"></script>
+</body>
+</html>

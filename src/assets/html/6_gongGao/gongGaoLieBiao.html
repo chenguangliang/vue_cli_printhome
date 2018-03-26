@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>公告</title>
+    <link rel="stylesheet" href="../../css/common.css"/>
+    <link rel="stylesheet" href="../../css/6_gongGao/gongGaoLieBiao.css"/>
+    <link rel="stylesheet" href="../../css/pullToRefresh.css"/>
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+</head>
+<body>
+<header>
+    <div class="header">
+        <!--<a href="../../html/1_index/index.html" class="return"></a>-->
+        <a href="javascript:;" onclick="javascript:history.back(-1);" class="return"></a><!--和二级公告列表公用-->
+        <div class="search">
+            <input type="text" placeholder="搜索公告" class="text" v-model="noticeTitle"/>
+            <button class="btn" @click="searchNoticeTitle"></button>
+        </div>
+    </div>
+    <div class="zhanwei"></div>
+</header>
+<section id="wrapper">
+        <div class="wrapScrool">
+            <div style="height: 0.88rem;"></div>
+            <template v-for="lieBiao in lieBiaoList">
+                <div class="list" >
+                    <div  >
+                        <template v-if="lieBiao.noticeType == 2 && null != lieBiao.url && ''!=lieBiao.url">
+                            <a  class="oneLine" style="width:100%;" href="javascript:;" @click="goToUrl(lieBiao.url)" v-html="lieBiao.noticeTitle">
+                            </a>
+                        </template>
+                        <template v-else>
+                            <a class="oneLine" href="javascript:;" @click="showNeiRong(lieBiao.noticeId)" v-html="lieBiao.noticeTitle"></a>
+                        </template>
+                        <p>{{lieBiao.modified | longToDate(lieBiao.modified)}}</p>
+                    </div>
+
+                </div>
+            </template>
+        </div>
+</section>
+<script charset="utf-8" type="text/javascript"  src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript"  src="../../js/common.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../bower_components/iscroll.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../bower_components/pullToRefresh_fixHead.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/vueFilter.js"></script>
+<script type="text/javascript" src="../../js/request.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../js/6_gongGao/gongGaoLieBiao.js"></script>
+<script charset="UTF-8" type="text/javascript" src="script/lieBiao.js"></script>
+</body>
+</html>

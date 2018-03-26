@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>安全信息设置</title>
+    <link type="text/css" rel="stylesheet" href="../../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/12_maiJiaZhongXin/1_geRenXinXi_gengDuoSheZhi.css"/>
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+</head>
+<body>
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="javascript:;" onclick="goBack();" class="return"></a>安全信息设置
+    </div>
+    <div class="zhanwei"></div>
+</header>
+<!--头部结束-->
+<!--列表开始-->
+<div id="userInfo">
+<div class="shezhi-con">
+    <ul>
+        <!--登录密码-->
+        <li>
+            <a :href="isSeller=='true'?'6_anQuanXinXiSheZhi_xiuGaiDengLuMiMa.html?isSeller=true':'6_anQuanXinXiSheZhi_xiuGaiDengLuMiMa.html'">修改登录密码
+                <img src="../../img/right_arrow.png" alt=""/>
+            </a>
+        </li>
+        <!--绑定手机-->
+        <li>
+            <template v-if="userInfo.umobile">
+                <a :href="isSeller=='true'?'6_anQuanXinXiSheZhi_xiuGaiShouJi.html?isSeller=true':'6_anQuanXinXiSheZhi_xiuGaiShouJi.html'">修改绑定手机
+                    <img src="../../img/right_arrow.png" alt=""/>
+                </a>
+            </template>
+            <template v-else>
+                <a :href="isSeller=='true'?'6_anQuanXinXiSheZhi_bangDingShouJi.html?isSeller=true':'6_anQuanXinXiSheZhi_bangDingShouJi.html'">设置绑定手机
+                    <img src="../../img/right_arrow.png" alt=""/>
+                </a>
+            </template>
+        </li>
+        <!--绑定邮箱-->
+        <li>
+            <template v-if="userInfo.userEmail">
+                <a :href="isSeller=='true'?'6_anQuanXinXiSheZhi_xiuGaiYouXiang.html?isSeller=true':'6_anQuanXinXiSheZhi_xiuGaiYouXiang.html'">修改绑定邮箱
+                    <img src="../../img/right_arrow.png" alt=""/>
+                </a>
+            </template>
+            <template v-else>
+                <a :href="isSeller=='true'?'6_anQuanXinXiSheZhi_bangDingYouXiang.html?isSeller=true':'6_anQuanXinXiSheZhi_bangDingYouXiang.html'">设置绑定邮箱
+                    <img src="../../img/right_arrow.png" alt=""/>
+                </a>
+            </template>
+
+        </li>
+        <!--支付密码-->
+        <template v-if="userInfo.isHavePayPassword == '1'">
+            <li>
+                <a :href="isSeller=='true'?'6_anQuanXinXiSheZhi_xiuGaiZhiFuMiMa.html?isSeller=true':'6_anQuanXinXiSheZhi_xiuGaiZhiFuMiMa.html'">修改支付密码
+                    <img src="../../img/right_arrow.png" alt=""/>
+                </a>
+            </li>
+            <li>
+                <a :href="isSeller=='true'?'6_anQuanXinXiSheZhi_zhaoHuiZhiFuMiMa.html?isSeller=true':'6_anQuanXinXiSheZhi_zhaoHuiZhiFuMiMa.html'" class="border-none">找回支付密码
+                    <img src="../../img/right_arrow.png" alt=""/>
+                </a>
+            </li>
+        </template>
+        <template v-else>
+            <li>
+                <a :href="isSeller=='true'?'6_anQuanXinXiSheZhi_sheZhiZhiFuMiMa.html?isSeller=true':'6_anQuanXinXiSheZhi_sheZhiZhiFuMiMa.html'" class="border-none">设置支付密码
+                    <img src="../../img/right_arrow.png" alt=""/>
+                </a>
+            </li>
+        </template>
+
+    </ul>
+</div>
+</div>
+
+<script type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../js/12_maiJiaZhongXin/1_geRenXinXi_gengDuoSheZhi.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../js/StorageUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="script/6_anQuanSheZhi.js"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns: xmlns:>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>搜索页</title>
+    <link rel="stylesheet" href="../../css/common.css"/>
+    <link rel="stylesheet" href="../../css/4_souSuoJieGuo/search.css"/>
+    <script type="text/javascript" src="../../js/adjust.js"></script>
+    <script  charset="UTF-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+    <script charset="utf-8" type="text/javascript" src="../../js/request.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="../../js/common.js"></script>
+    <script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+    <script charset="utf-8" type="text/javascript" src="../../js/common_http.js"></script>
+</head>
+<body style="background: white;font-size: 0.3rem;" >
+<div id="searchApp">
+<div class="top_wrapper">
+    <a href="../../html/1_index/index.html" class="back_wrapper"><img class="back" src="../../img/back.png" alt=""/></a>
+
+    <div class="search_wrapper">
+        <select name="search" id="search" >
+            <option value="goods" >商品</option>
+            <option value="shop">店铺</option>
+        </select>
+        <input type="text" class="search_box" @keyup="enterSearch($event)" v-model="queryData.keyword" />
+        <div class="relationWrap">
+            <ul>
+                <template v-for="item in relationWords">
+                    <li class="oneLine" @click="searchItem($event,2)">{{item.title}}</li>
+                </template>
+            </ul>
+        </div>
+        <div style="display: inline-block;float: right;margin: 3px 10px 0 0">
+            <!--<img class="chahao" src="../../img/chahao.png" alt=""/>-->
+            <img class="fangda" src="../../img/fangdajing.png" alt="" @click="searchList"/>
+        </div>
+
+    </div>
+</div>
+<div class="hot_list">
+    <p class="hot_title">热门搜索</p>
+    <template v-for="item in mallWords">
+        <p class="hot_word" @click="searchItem($event,1)">{{item.word}}</p>
+    </template>
+</div>
+<input type="hidden" value="1" id="typejs"/>
+
+</div>
+</body>
+<script type="text/javascript" src="../../js/request.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/jsonUtil.js"></script>
+<script charset="UTF-8" type="text/javascript" src="script/search.js"></script>
+</html>

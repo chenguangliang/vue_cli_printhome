@@ -1,7 +1,6 @@
-import $ from "jquery"
 $(function() {
 //截取字数
-//     testAuto('#list li a', 8);
+    testAuto('#list li a', 8);
 //搜索框改变背景
     $(window).scroll(function () { //scroll--浏览器滚动条滚动式触发
         var wHeight = $('.nav').height(); //获取浏览器可视窗口高度
