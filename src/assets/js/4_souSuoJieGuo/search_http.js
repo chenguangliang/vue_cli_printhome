@@ -4,6 +4,17 @@ function searchList(type){
         return;
     }
     var queryType=getval("#search");
+    var ctype=0;
+    if(queryType=="shop"){
+        //店铺搜索
+        ctype=2;
+    }else{
+        //商品搜索
+        ctype=1;
+    }
+
+    $.jsonAjax(getUrl("searchController/accessRecord"),{'keyword':$(".search_box").val(),'ctype':ctype },function(data, status, xhr){
+    },false);
     if(queryType == "shop"){
         window.location.href="search_shop.html?keyword="+keyword+"&queryType="+queryType;
     }else{

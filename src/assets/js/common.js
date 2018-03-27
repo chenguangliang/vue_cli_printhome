@@ -225,5 +225,9 @@ function clearObj() {
 };
 */
 
+import $ from "jquery"
+export default {
+  goToTop
+}
 
 

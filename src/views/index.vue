@@ -288,7 +288,7 @@
   </div>
 
 </template>
-<style scoped>
+<style>
   @import "../assets/css/1_index/index.css";
   @import "../assets/css/animate.css";
 </style>
@@ -296,7 +296,7 @@
 <script type="text/ecmascript-6">
   import request from "../assets/js/request";
   import common from "../assets/js/common";
-//  import TouchSlide from "swiper";
+  import swiper from "swiper";
   import index from "../assets/js/1_index/index";
   import mainFooter from "./index/mainFooter.vue";
   import $ from "jquery";
@@ -399,7 +399,6 @@
         var temp = this;
         $.jsonAjax(request.getUrl("mallwxIcon"), {}, function (data, status, xhr) {
           if (data) {
-            console.log(data)
             temp.mallwxIconList = data;
           }
         }, false);
@@ -476,8 +475,8 @@
     },
     mounted: function () {
       //头部焦点图
-      /*if($("#slideBox ul li").length!=0){
-        TouchSlide({
+      if($("#slideBox ul li").length!=0){
+        var swiperObj =new swiper({
           slideCell: "#slideBox",
           titCell: ".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
           mainCell: ".bd ul",
@@ -485,7 +484,7 @@
           autoPage: true,//自动分页
           autoPlay: true //自动播放
         });
-      }*/
+      }
       //公告列表向上滚动
 //      $("#scrollDiv").cxScroll({direction:"bottom",speed:600,time:3000,plus:false,minus:false,step:1});
       //对联图片向上滚动
