@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
     <img  id="bbsImg" style="display: none" src="" alt=""/>
     <!--头部开始-->
     <header>
