@@ -7,12 +7,13 @@ import search from '@/views/search/search'
 Vue.use(Router)
 
 export default new Router({
-  mode:'history',//这句话可以
+  mode:'history',//这句话可以让url没有#
   routes: [
     {
       path: '/',
       name: 'index',
-      component: index
+      component: index,
+      meta: {keepAlive: true}
     },{
       path: '/search',
       name: 'search',

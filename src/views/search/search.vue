@@ -5,7 +5,7 @@
         <img src="../../assets/img/back.png" alt="" class="back">
       </router-link>
       <div class="search_wrapper">
-        <select name="search" id="search" style="color: rgb(51, 51, 51);position: absolute;top:0.2rem">
+        <select name="search" id="search" style="color: rgb(51, 51, 51);position: absolute;top:0.2rem" v-model="queryType">
           <option value="goods" style="color: rgb(51, 51, 51);">商品</option>
           <option value="shop" style="color: rgb(51, 51, 51);">店铺</option>
         </select>
@@ -14,7 +14,7 @@
         <div class="relationWrap" style="display: none;">
           <ul></ul>
         </div>
-          <img src="../../assets/img/fangdajing.png" alt="" class="fangda" style="position: absolute;right: 0.2rem;top:0.1rem" @click="">
+          <img src="../../assets/img/fangdajing.png" alt="" class="fangda" style="position: absolute;right: 0.2rem;top:0.1rem" @click="goSearch()">
       </div>
     </div>
     <div class="hot_list">
@@ -35,7 +35,17 @@
 
 <script type="text/ecmascript-6">
   export default {
-    name: 'search'
+    name: 'search',
+    data () {
+      return{
+        queryType:this.$route.query.queryType
+      }
+    },
+    methods:{
+      goSearch(){
+          this.$router.push("")
+      }
+    }
   }
 </script>
 
