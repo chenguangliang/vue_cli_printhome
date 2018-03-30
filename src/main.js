@@ -5,12 +5,24 @@ import App from './App'
 import router from './router'
 import adjust from './assets/js/adjust'
 import "./assets/css/common.css" //引入公共css
+import install from "./lib/install" //引入全局方法并use
+Vue.use(install);
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  data: function () {
+    return {
+
+    }
+  },
   router,
   components: { App },
-  template: '<App/>'
-})
+  template: '<App/>',
+  methods:{
+    add: function () {
+
+    }
+  }
+});

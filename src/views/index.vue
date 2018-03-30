@@ -315,7 +315,7 @@
         guessLoveMap: {},
         floors: [],
         queryType: "goods",
-        mallwxIconList:[]
+        mallwxIconList:[],
       }
     },
     methods:{
@@ -324,7 +324,7 @@
       },
       goToSearch(){
         var queryType = $("#typeTitle").html()=="商品"?"goods":"shop";
-        this.$router.push({path:"search",query:{queryType:queryType}})
+        this.$router.push({name:"search",query:{queryType:queryType}})
       },
       /* 查询二级频道列表*/
       queryErJiPinDao () {

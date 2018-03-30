@@ -1,18 +1,41 @@
 <template>
   <div id="app">
-    <keep-alive>  <!--这里是为了缓存首页等-->
-      <router-view v-if="$route.meta.keepAlive"></router-view>
-    </keep-alive>
-    <router-view v-if="!$route.meta.keepAlive"></router-view>
+        <div>
+            <transition name="fade"><!--这是为了进来和离开的动画-->
+              <keep-alive>  <!--这里是为了缓存,首页等,需要在router中加一个参数-->
+                  <router-view v-if="$route.meta.keepAlive"></router-view>
+              </keep-alive>
+            </transition>
+            <transition name="fade">
+                <router-view v-if="!$route.meta.keepAlive"></router-view>
+            </transition>
+        </div>
+    <!--TODO:页面前进从从左边滑动进来，页面后退从右边滑进来-->
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  data: function () {
+      return{
+      }
+  },
+  methods:{
+
+  },
+  watch:{
+
+  }
 }
+
 </script>
 
-<style >
-
+<style>
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s ease;
+  }
+  .fade-enter, .fade-leave-active {
+    opacity: 0
+  }
 </style>

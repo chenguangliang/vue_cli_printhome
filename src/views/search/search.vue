@@ -1,9 +1,9 @@
 <template>
   <div id="searchApp">
     <div class="top_wrapper">
-      <router-link to="/" class="back_wrapper">
+      <span class="back_wrapper" @click="goBack()">
         <img src="../../assets/img/back.png" alt="" class="back">
-      </router-link>
+      </span>
       <div class="search_wrapper">
         <select name="search" id="search" style="color: rgb(51, 51, 51);position: absolute;top:0.2rem" v-model="queryType">
           <option value="goods" style="color: rgb(51, 51, 51);">商品</option>
@@ -45,6 +45,9 @@
       goSearch(){
           this.$router.push("")
       }
+    },
+    mounted: function () {
+
     }
   }
 </script>
