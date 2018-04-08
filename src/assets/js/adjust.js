@@ -24,7 +24,7 @@ var _hmt = _hmt || [];
  *@disc:此js重写了系统自带的confirm
  * depend on jquery.js
  */
-document.write('<div class="confirmWrap"><div class="confirmCon"><h5>提示</h5><p class="confirmMsg"></p><div class="confirmLine"></div><div class="btnWrap"><span class="confirmBtn cancle">取消</span><span class="confirmBtn sure">确定</span></div></div></div>');
+/*document.write('<div class="confirmWrap"><div class="confirmCon"><h5>提示</h5><p class="confirmMsg"></p><div class="confirmLine"></div><div class="btnWrap"><span class="confirmBtn cancle">取消</span><span class="confirmBtn sure">确定</span></div></div></div>');
 
 function printConfirm(msg, sureCallback,cancleCallback) {
     $(".confirmMsg").html(msg);
@@ -43,7 +43,8 @@ function printConfirm(msg, sureCallback,cancleCallback) {
             return;
         }
     });
-}
+}*/
+//TODO:弹窗写成组件
 
 /**
  *@fileName:printhomeConfirm.js
@@ -53,6 +54,7 @@ function printConfirm(msg, sureCallback,cancleCallback) {
  *@disc:此js重写了系统自带的alert
  * depend on jquery.js
  */
+/*
 document.write('<div class="alertWrap"><div class="alertCon"><h5>提示</h5><p class="alertMsg"></p><div class="alertLine"></div><div class="btnWrap"><span class="alertBtn sure">确定</span></div></div></div>');
 
 function printAlert(msg, sureCallback) {
@@ -66,7 +68,8 @@ function printAlert(msg, sureCallback) {
         }
     });
 }
-
+*/
+//TODO:弹窗写成组件
 
 //滑动结束后，计算距离顶部的值
 function scrollerTranY() {

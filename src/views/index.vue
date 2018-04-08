@@ -34,20 +34,19 @@
     <div class="main">
       <!--焦点图开始-->
       <section>
-        <div id="slideBox" class="slideBox">
-          <div class="bd">
-            <ul>
-              <template v-for="item in mallBanner">
-                <li>
-                  <a class="pic" v-bind:href="item.bannerLink"><img v-bind:src="imgUrl + item.bannerUrl"/></a>
-                </li>
-              </template>
-            </ul>
+        <div class="swiper-container">
+          <swiper :options="swiperOption" class="swiper-wrapper">
+            <swiper-slide v-for="(item, index) in mallBanner" :key="index">
+              <img :src="imgUrl + item.bannerUrl" class="slideImg">
+            </swiper-slide>
+
+          </swiper>
+          <div class="pad_wrap">
+            <span class="swiper-pagination"></span>
           </div>
-          <div class="hd">
-            <ul></ul>
-          </div>
+
         </div>
+
       </section>
       <!--快速导航开始-->
       <section>
@@ -251,7 +250,7 @@
       </section>
       <!--楼层-->
       <template v-for="(key,value) in floors">
-        <section v-bind:id="'floor'+ value" style="overflow: hidden;"></section>
+        <section :id="'floor'+ value" style="overflow: hidden;"></section>
       </template>
       <!--底部logo-->
       <div class="logo">
@@ -289,6 +288,7 @@
 
 </template>
 <style>
+  @import "../../node_modules/vue-awesome-swiper/node_modules/swiper/dist/css/swiper.css";
   @import "../assets/css/1_index/index.css";
   @import "../assets/css/animate.css";
 </style>
@@ -296,7 +296,7 @@
 <script type="text/ecmascript-6">
   import request from "../assets/js/request";
   import common from "../assets/js/common";
-  import swiper from "swiper";
+  import {swiper,swiperSlide} from "vue-awesome-swiper";
   import index from "../assets/js/1_index/index";
   import mainFooter from "./index/mainFooter.vue";
   import $ from "jquery";
@@ -316,6 +316,18 @@
         floors: [],
         queryType: "goods",
         mallwxIconList:[],
+        swiperOption: {//轮播config
+          autoplay:{
+            delay: 3000,
+            stopOnLastSlide: false,
+            disableOnInteraction: false,
+          },
+          loop:true,
+          effect:"flip",
+          pagination: {
+            el: '.swiper-pagination',
+          },
+        }
       }
     },
     methods:{
@@ -408,31 +420,23 @@
       },
     },
     components:{
-      'mainFooter':mainFooter
+      'mainFooter':mainFooter,
+      swiper,
+      swiperSlide
     },
     beforeMount: function () {
       var temp = this;
       this.getUserInfo();
       this.queryErJiPinDao();
-      /**
-       * 首页轮播图
-       */
-      $.jsonAjax(request.getUrl("mallBanner"), {}, function (data, status, xhr) {
-        if (data) {
-          temp.mallBanner = data;
-        }
-      }, false);
+      //首页轮播图
+      temp.axios.get("/mallBanner").then(function (response) {
+        response.data ? temp.mallBanner = response.data:'';
+      }).catch(function (err) {
+        console.log(err);
+      })
       //获取首页图标
       this.getMallwxIndexIcon();
-      /**
-       * 楼层
-       */
-      $.jsonAjax(request.getUrl("floors"), {}, function (data, status, xhr) {
-        if (data) {
-          temp.floors = data;
-          //console.log(data);
-        }
-      }, false);
+
 
       /**
        * 首页公告
@@ -474,28 +478,27 @@
 
     },
     mounted: function () {
-      //头部焦点图
-      if($("#slideBox ul li").length!=0){
-        var swiperObj =new swiper({
-          slideCell: "#slideBox",
-          titCell: ".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
-          mainCell: ".bd ul",
-          effect: "leftLoop",
-          autoPage: true,//自动分页
-          autoPlay: true //自动播放
-        });
-      }
       //公告列表向上滚动
 //      $("#scrollDiv").cxScroll({direction:"bottom",speed:600,time:3000,plus:false,minus:false,step:1});
       //对联图片向上滚动
 //      $("#left").cxScroll({direction:"bottom",speed:500,time:2000,plus:false,minus:false,step:1});
 //      $("#right").cxScroll({direction:"bottom",speed:500,time:2000,plus:false,minus:false,step:1});
-      var tempdata = this;
-      $.each(this.$data.floors, function (index, ele) {
-        $("#floor" + index).load(request.getUrl('floor') + "?userId="+tempdata.$data.userInfo.uid+"&fid=" + ele.idDTO + "&num=" + index + "&commonPlatformId" + "=" + request.commonPlatformId, function (data, status, xhr) {
-//          $('#img-scroll'+index).cxScroll({direction:"right",speed:500,time:2000,plus:false,minus:false,step:2});
+      var temp = this;
+      //请求楼层
+      temp.axios.get("/floors").then(function (res) {
+        res.data ? temp.floors = res.data:"";
+      }).then(function () {
+        //TODO:下面的循环改了！也把load方法改了，不用load！
+        $.each(temp.$data.floors, function (index, ele) {
+          console.log(ele);
+          $("#floor" + index).load(request.getUrl('floor') + "?userId="+temp.userInfo.uid+"&fid=" + ele.idDTO + "&num=" + index + "&commonPlatformId" + "=" + request.commonPlatformId, function (data, status, xhr) {
+            //$('#img-scroll'+index).cxScroll({direction:"right",speed:500,time:2000,plus:false,minus:false,step:2});
+          });
         });
-      });
+      }).catch(function (err) {
+        console.log(err);
+      })
+
       this.loadForum();
       var invitationFlag=$.getUrlJson().invitation;
       if(this.userInfo.userstatus==9 && invitationFlag==1){ //快速卖家未认证

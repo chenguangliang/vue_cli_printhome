@@ -4,8 +4,12 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import adjust from './assets/js/adjust'
+import axios from 'axios'
+axios.defaults.baseURL = 'http://wx.printhome.com/mall-web';
+Vue.prototype.axios=axios;  //只能使用这种方法全局挂载，因为axios没有install方法
+
 import "./assets/css/common.css" //引入公共css
-import install from "./lib/install" //引入全局方法并use
+import install from "./lib/install" //引入自定义的全局方法并use
 Vue.use(install);
 
 Vue.config.productionTip = false;
