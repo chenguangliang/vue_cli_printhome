@@ -288,7 +288,7 @@
 
 </template>
 <style>
-  @import "../../node_modules/vue-awesome-swiper/node_modules/swiper/dist/css/swiper.css";
+  @import "../../node_modules/swiper/dist/css/swiper.css";
   @import "../assets/css/1_index/index.css";
   @import "../assets/css/animate.css";
 </style>
@@ -340,10 +340,12 @@
       },
       /* 查询二级频道列表*/
       queryErJiPinDao () {
-          var temp=this;
-        $.jsonAjax(request.getUrl("erJiChannels"), {}, function (data, status, xhr) {
-          temp.erJiPinDaoList = data;
-        }, false);
+        let temp=this;
+        temp.axios.get("/erJiChannels").then( (res) => {
+          res.data?temp.erJiPinDaoList=res.data:"";
+        }).catch( (err) => {
+            console.log(err);
+        })
       },
       toMoreNotice() {
         window.location ="../../html/6_gongGao/gongGaoLieBiao.html";
@@ -353,14 +355,12 @@
        * 加载用户信息
        */
       getUserInfo(){
-        var temp = this;
-        $.jsonAjax(request.getUrl("user/getUserInfo"), {}, function (data, status, xhr) {
-          if (data.success) {
-            temp.userInfo = data.result;
-            // console.log(data.result);
-            // console.log(vm.$data.userInfo);
-          }
-        }, false);
+        let temp = this;
+        temp.axios.get("/user/getUserInfo").then((res) => {
+          res.data.success?temp.userInfo=res.data.result:"";
+        }).catch( (err)=> {
+          console.log(err);
+        })
       },
       /**
        * 跳转到对应的二级频道页
@@ -396,24 +396,21 @@
       },
       //加载论坛
       loadForum (){
-        $.jsonAjax(request.getUrl("user/loadForum"),{},function(data, status, xhr){
-          if(data.success){
-            $("#bbsImg").attr("src",data.result);
-            //访问bbs
-            // $.jsonAjaxNop(data.result,{},function(data, status, xhr){
-            //      $("#bbsImg").attr("src",data.result);
-            // });
-          }
-        });
+        let temp=this;
+        temp.axios.get("/user/loadForum").then((res)=> {
+          res.data.success?$("#bbsImg").attr("src",data.result):"";
+        }).catch( (err)=> {
+          console.log(err);
+        })
       },
       //获取首页图标
       getMallwxIndexIcon (){
-        var temp = this;
-        $.jsonAjax(request.getUrl("mallwxIcon"), {}, function (data, status, xhr) {
-          if (data) {
-            temp.mallwxIconList = data;
-          }
-        }, false);
+        let temp=this;
+        temp.axios.get("/mallwxIcon").then( (res) => {
+          res.data?temp.mallwxIconList=res.data:"";
+        }).catch( (err) => {
+          console.log(err);
+        })
       },
       closeInvitation () {
         $(".quickInvitation").hide();
@@ -425,13 +422,13 @@
       swiperSlide
     },
     beforeMount: function () {
-      var temp = this;
+      let temp = this;
       this.getUserInfo();
       this.queryErJiPinDao();
       //首页轮播图
-      temp.axios.get("/mallBanner").then(function (response) {
+      temp.axios.get("/mallBanner").then( (response) => {
         response.data ? temp.mallBanner = response.data:'';
-      }).catch(function (err) {
+      }).catch( (err) => {
         console.log(err);
       })
       //获取首页图标
@@ -441,11 +438,11 @@
       /**
        * 首页公告
        */
-      $.jsonAjax(request.getUrl("noticeFragement"), {}, function (data, status, xhr) {
-        if (data) {
-          temp.noticeFragement = data;
-        }
-      },false);
+      temp.axios.get("/noticeFragement").then( (res) => {
+        res.data?temp.noticeFragement=res.data:"";
+      }).catch( (err) => {
+        console.log(err);
+      })
 
 
 
@@ -453,27 +450,25 @@
       /**
        * 轮播图下的广告位:本周推荐 + 广告位
        */
-      $.jsonAjax(request.getUrl("weekadvertises"), {}, function (data, status, xhr) {
-        if (data) {
-          temp.weekAdvertises = data;
-        }
-      },false);
-      $.jsonAjax(request.getUrl("advertises"), {}, function (data, status, xhr) {
-        if (data) {
-          temp.advertises = data;
-        }
-      },false);
-
+      temp.axios.get("/weekadvertises").then( (res) => {
+        res.data?temp.weekAdvertises=res.data:"";
+      }).catch( (err) => {
+        console.log(err);
+      })
+      temp.axios.get("/advertises").then( (res) => {
+        res.data?temp.advertises=res.data:"";
+      }).catch( (err) => {
+        console.log(err);
+      })
 
       /**
        * 猜你喜欢
        */
-      $.jsonAjax(request.getUrl("guessLoveMap"), {}, function (data, status, xhr) {
-        if (data.isSuccess) {
-          temp.guessLoveMap = data.resultData;
-        }
-      },false);
-
+      temp.axios.get("/guessLoveMap").then( (res) => {
+        res.data.isSuccess?temp.guessLoveMap=res.data.resultData:"";
+      }).catch( (err) => {
+        console.log(err);
+      })
 
 
     },
@@ -485,7 +480,7 @@
 //      $("#right").cxScroll({direction:"bottom",speed:500,time:2000,plus:false,minus:false,step:1});
       var temp = this;
       //请求楼层
-      temp.axios.get("/floors").then(function (res) {
+      temp.axios.get("/floors").then((res) => {
         res.data ? temp.floors = res.data:"";
       }).then(function () {
         //TODO:下面的循环改了！也把load方法改了，不用load！
@@ -495,7 +490,7 @@
             //$('#img-scroll'+index).cxScroll({direction:"right",speed:500,time:2000,plus:false,minus:false,step:2});
           });
         });
-      }).catch(function (err) {
+      }).catch( (err) => {
         console.log(err);
       })
 

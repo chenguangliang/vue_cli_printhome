@@ -33,9 +33,9 @@ export default {
 
 <style>
   .fade-enter-active, .fade-leave-active {
-    transition: opacity .5s ease;
+    transition: opacity 0.5s ease;
   }
-  .fade-enter, .fade-leave-active {
+  .fade-enter, .fade-leave-to {
     opacity: 0
   }
 </style>

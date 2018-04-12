@@ -434,7 +434,7 @@ input[type="number"] {
 
 /*自动关闭的弹出框*/
 #send_msg_false,#send_msg {
-    opacity: 0;
+    /*opacity: 0;*/
     position: fixed;
     font-size: 0.24rem;
     color: white;
@@ -479,12 +479,12 @@ input[type="number"] {
     overflow: hidden;
     top: 0;
     z-index: 99999;
-    display: none;
+    /*display: none;*/
 }
 
 /*一直转的小圆圈*/
 #spinner_wrapper {
-    opacity: 0;
+    /*opacity: 0;*/
     /*top: 4rem;*/
     width: 2rem;
     height: 2rem;

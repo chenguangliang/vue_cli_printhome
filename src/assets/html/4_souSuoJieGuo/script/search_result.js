@@ -8,8 +8,6 @@
 *@disc:搜索结果页
 */
 
-
-
 var generatedCount = 0;
 function Refresh() {
     setTimeout(function () {	// <-- Simulate network congestion, remove setTimeout from production!
@@ -248,7 +246,7 @@ var searchResult = new Vue({
             },false);
         },
         /*点击搜索框*/
-        goToSearch: function () {
+        goToSearch: function ($event) {
             var queryType = $("#search").val();
             var keyword=$(".search_box").val();
             var urlTemp=$.assemblyRequestString({queryType:queryType,keyword:keyword});

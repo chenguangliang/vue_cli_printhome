@@ -1,7 +1,10 @@
 //author wallace 华dee
-//2015 7 3 
+//2015 7 3
 //qq447363121陈国华
-var refresher = {
+import $ from "jquery"
+import {iScroll} from "./iscroll"
+let myScroll
+let refresher = {
 	info:{
 	"pullDownLable":"下拉刷新...",
 	"pullingDownLable":"松开刷新...",
@@ -62,11 +65,12 @@ var refresher = {
 	var pullUpEl = document.getElementById('pullUp');
 	var pullUpOffset =pullUpEl.offsetHeight||30;
 		//parameter
-	this.scrollIt(parameter,pullDownEl,pullDownOffset,pullUpEl,pullUpOffset);
+	let myScroll=this.scrollIt(parameter,pullDownEl,pullDownOffset,pullUpEl,pullUpOffset);
+	return myScroll
 	},
 
 	scrollIt:function(parameter,pullDownEl,pullDownOffset,pullUpEl, pullUpOffset){
-		myScroll = new iScroll(parameter.id, {
+    let myScroll = new iScroll(parameter.id, {
 		useTransition: true,
 		vScrollbar: false, //hide the iscroll v bar
 		topOffset: pullDownOffset,
@@ -124,6 +128,7 @@ var refresher = {
 	});
 	 setTimeout(function(){pullDownEl.querySelector('.pullDownLabel').innerHTML = refresher.info.pullDownLable},300);
 	 // document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+    return myScroll;
 	},
 
 	//things loader css on scrolling,you can wirte it yourself
@@ -152,7 +157,7 @@ var refresher = {
 		},
 
 	//things loader css on release,you can wirte it yourself
-onRelease:function (pullDownEl,pullUpEl){
+  onRelease:function (pullDownEl,pullUpEl){
 	if (pullDownEl.className.match('loading')) {
 		pullDownEl.className = '';
 		pullDownEl.querySelector('.pullDownLabel').innerHTML = refresher.info.pullDownLable;
@@ -187,3 +192,5 @@ onRelease:function (pullDownEl,pullUpEl){
 			}
 			}
 	};
+export {refresher}
+

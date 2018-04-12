@@ -4,6 +4,8 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import adjust from './assets/js/adjust'
+import $ from "jquery"
+
 import axios from 'axios'
 axios.defaults.baseURL = 'http://wx.printhome.com/mall-web';
 Vue.prototype.axios=axios;  //只能使用这种方法全局挂载，因为axios没有install方法

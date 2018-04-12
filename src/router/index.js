@@ -7,7 +7,7 @@ import searchGoodsResults from '@/views/search/searchGoods_results';
 Vue.use(Router);
 
 export default new Router({
-  mode:'history',//这句话可以让url没有#
+  mode:'history',//这可以让url没有#
   routes: [
     {
       path: '/',
@@ -18,10 +18,11 @@ export default new Router({
       path: '/search',
       name: 'search',
       component: search
-    },{
-      path: '/search',
-      name: 'search',
-      component: search
+    },
+    {
+      path: '/searchGoodsResults',
+      name: 'searchGoodsResults',
+      component: searchGoodsResults
     }
   ]
 })
