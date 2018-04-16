@@ -7,7 +7,7 @@
 *@time:2017/3/14 0014
 *@disc:设置cookie.js  depend on jquery.cookie.js
 */
-
+import vueCookies from "vue-cookies"
 /**
 *@fileName:cookieUtil.js
 *@author:fdc
@@ -15,8 +15,8 @@
 *@disc:设置区域cookie
 */
 function setRegionCookie(code,name){
-    $.cookie('region',name,{expires: 7, path:"/"});
-    $.cookie('regionCode',code,{expires: 7, path:"/"});
+    vueCookies.set('region',name,{expires: 7, path:"/"});
+    vueCookies.set('regionCode',code,{expires: 7, path:"/"});
 }
 
 /**
@@ -25,7 +25,7 @@ function setRegionCookie(code,name){
  * @returns {*}
  */
 function getRegionCookieCode(){
-    var regionCode = $.cookie('regionCode');
+    var regionCode = vueCookies.get('regionCode');
     if(!isNotBlank(regionCode)){
         return '11';
     }else{
@@ -39,7 +39,7 @@ function getRegionCookieCode(){
  * @returns {*}
  */
 function getRegionCookieName(){
-    var region = $.cookie('region');
+    var region = vueCookies.get('region');
     if(!isNotBlank(region)){
         return '北京';
     }else{
@@ -69,6 +69,14 @@ function isNotBlank(source){
     }else{
         return true;
     }
+}
+export default {
+  setRegionCookie,
+  getRegionCookieCode,
+  getRegionCookieName,
+  setLoginSuccessRegion,
+  isNotBlank
+
 }
 
 

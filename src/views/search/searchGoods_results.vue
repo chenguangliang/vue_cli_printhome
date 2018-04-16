@@ -173,7 +173,7 @@
               </li>
             </template>
           </ul>
-          <template v-if="goodsData.length==0">
+          <template v-if="goodsData.length==0 && getDataErr">
             <div style="width:100%;height: 100%;">
               <div style="position: relative;top:1.6rem">
                 <div class="search_bg">
@@ -189,6 +189,7 @@
         </div>
       </div>
     </div>
+    <popup ref="popup"></popup>
   </div>
 </template>
 <script type="text/ecmascript-6">
@@ -258,6 +259,7 @@
             myScroll:'',//初始化iscrool获得的滑动对象
             ThumbnailImg:require('../../assets/img/suoluetu-@3x.png'),
             listImg:require('../../assets/img/liebiao@3x.png'),
+            getDataErr:false
           }
       },
       computed:{
@@ -387,7 +389,8 @@
           //window.location=goToPath;
         },
         gotoGood:function(item,event){
-          window.location = "../../html/13_shangPinXiangQing/shangPinYe.html?itemId="+item.itemId+"&skuId="+item.skuId;
+//          window.location = "../../html/13_shangPinXiangQing/shangPinYe.html?itemId="+item.itemId+"&skuId="+item.skuId;
+          this.$router.push({path:'/productDetail',query:{itemId:item.itemId,skuId:item.skuId}})
         },
         //跳转店铺首页
         toShop:function(shopId) {
@@ -491,6 +494,7 @@
             temp.scrollInit();
           }else{
             temp.goodsData.length=0;
+            temp.getDataErr=true;
             refresher.info.pullUpLable = "已经到底了";
 //            temp.myScroll.refresh();
           }

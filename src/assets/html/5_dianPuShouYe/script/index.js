@@ -42,6 +42,7 @@ function Load() {
     }, 1000);
 }
 
+
 var shopId = $.getUrlParam("shopId");
 var showShopInfoOut = $.getUrlParam("showShopInfo");
 var shopCidOut = $.getUrlParam("cid");

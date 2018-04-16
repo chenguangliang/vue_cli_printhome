@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import index from '@/views/index';
 import search from '@/views/search/search';
 import searchGoodsResults from '@/views/search/searchGoods_results';
+import productDetail from '@/views/productDetail/productDetail.vue';
 
 Vue.use(Router);
 
@@ -23,6 +24,11 @@ export default new Router({
       path: '/searchGoodsResults',
       name: 'searchGoodsResults',
       component: searchGoodsResults
+    },
+    {
+      path:'/productDetail',
+      name:'productDetail',
+      component:productDetail
     }
   ]
 })
