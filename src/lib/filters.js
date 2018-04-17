@@ -7,8 +7,6 @@
 *@time:2017/3/10 0010
 *@disc:vue常用过滤器
 */
-
-
 /**
 *@fileName:vueFilter.js
 *@author:fdc
@@ -108,7 +106,6 @@ let longToDate=(long)=>{
     }
     return year + "-" + month + "-" + date+" "+hour+":"+minute+":"+second;
 };
-
 /**
  * long转date
  * 返回格式：yyyy-MM-dd
@@ -127,8 +124,6 @@ let longToDateNoTime=(long)=>{
     }
     return year + "-" + month + "-" + date;
 };
-
-
 /**
  * 楼层名称截取前2后2中间加一点
  * 返回格式：yyyy-MM-dd
@@ -201,7 +196,6 @@ let tel=($event)=> {
         $event.value=$event.value.replace(/\D/g,'');
     };
 
-
 /**小數點保留
 *@fileName:vueFilter.js
 *@author:fdc
@@ -212,5 +206,18 @@ let toFixed=(valve,num)=> {
     value =Number(value).toFixed(num);
     return value;
 };
-
-export * from "./filters"
+export {
+  replaceSrcUrl,
+  toDecimal2,
+  timestampFormat,
+  substringFilter,
+  subEndFilter,
+  longToDate,
+  longToDateNoTime,
+  floorTitleFilter,
+  formatCard,
+  deleteSpace,
+  cutTwo,
+  twoNum,
+  tel
+  }

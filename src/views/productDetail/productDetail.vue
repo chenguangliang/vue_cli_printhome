@@ -1,4 +1,4 @@
-
+<style src="../../assets/css/13_shangPinXiangQing/shangPinYe.css" scoped></style>
 <template>
   <div id="productDetail">
     <header>
@@ -10,8 +10,18 @@
     <!--sku轮播开始-->
     <div class="sku-popup" @click="skuSwiperFlag = !skuSwiperFlag" :style="skuSwiperFlag ? 'opacity: 1;z-index:999' : 'opacity: 0;z-index:-10'">
       <div class="swiper-container">
-        <div class="swiper-wrapper">
-          <template v-if="skuInfo.skuPics && skuInfo.skuPics.length>0"><!--假如有sku图片-->
+        <swiper :options="swiperOption" class="swiper-wrapper">
+          <swiper-slide v-for="(pic,index) in  skuInfo.skuPics" :key="index">
+            <img :src="imgUrl + pic.picUrl" class="slideImg">
+          </swiper-slide>
+
+        </swiper>
+        <div class="pad_wrap">
+          <span class="swiper-pagination"></span>
+        </div>
+
+        <!--<div class="swiper-wrapper">
+          <template v-if="skuInfo.skuPics && skuInfo.skuPics.length>0">&lt;!&ndash;假如有sku图片&ndash;&gt;
             <template v-for="(pic,index) in  skuInfo.skuPics">
               <div class="swiper-slide">
                 <a class="pic" href="#">
@@ -30,7 +40,7 @@
               </div>
             </template>
           </template>
-          <template v-else><!--没有sku图片，显示spu图片 product.item.picUrls[0]-->
+          <template v-else>&lt;!&ndash;没有sku图片，显示spu图片 product.item.picUrls[0]&ndash;&gt;
             <template v-for="(picUrl,index) in  product.item.picUrls">
               <div class="swiper-slide">
                 <a class="pic" href="#">
@@ -42,15 +52,15 @@
                   </template>
                 </a>
                 <p>
-                  <!--<span v-for="skuAttr in skuInfo.priceObject.result.attrSales">
+                  &lt;!&ndash;<span v-for="skuAttr in skuInfo.priceObject.result.attrSales">
                       {{skuAttr.name}}:{{skuAttr.values[0].name}};
-                  </span>-->
+                  </span>&ndash;&gt;
                 </p>
               </div>
             </template>
           </template>
 
-        </div>
+        </div>-->
         <!--<div class="swiper-pagination"></div>-->
       </div>
     </div>
@@ -1129,9 +1139,10 @@
 </script>
 
 
-<style>
+<!--<style scoped>
   @import "../../assets/css/13_shangPinXiangQing/shangPinYe.css";
-</style>
+</style>-->
+
 <style>
   body{
     background: #fff;

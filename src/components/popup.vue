@@ -19,7 +19,7 @@
         </section>
   </transition>
 </template>
-<script>
+<script type="text/ecmascript-6">
   /*  1.父组件引入组件 components:{popup}
       2.父组件引用 <popup ref="popup">
    *  3.this.$refs.popup.popUp_auto(1500,111,666);

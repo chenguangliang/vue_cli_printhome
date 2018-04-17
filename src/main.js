@@ -11,11 +11,7 @@ import * as filters from "./lib/filters"
 console.dir(filters);
 console.log(666);*/
 Object.keys(filters).forEach(key=>{
-    Vue.filter(key,filters[key])
-  import * as filters from "./lib/filters"
-  console.log(666);
-  console.log(key);
-  console.log(666);
+    Vue.filter(key,filters[key]);
 });
 
 import axios from 'axios'

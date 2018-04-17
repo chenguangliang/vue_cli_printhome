@@ -8,6 +8,7 @@
 *@disc:店铺优惠卷
 */
 import popup from "../../components/popup.vue"
+import $ from "jquery"
 
 function getUrl(name) {
   return "http://wx.printhome.com/mall-web" + "/" + name;
@@ -57,8 +58,7 @@ export default {
         //获取店铺优惠卷信息
         getShopCoupons:function(shopId,asyncFlag){
             var temp = this;
-            debugger
-            this.$ref.popup.popUp_open();
+            //this.$ref.popup.popUp_open();
             if(shopId!=null && typeof(shopId)!="undefined"){
                 $.jsonAjax(getUrl("/shopItemListIndexController/shopCoupons"),
                     {shopId: shopId},

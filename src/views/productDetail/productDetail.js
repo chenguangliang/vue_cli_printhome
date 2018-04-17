@@ -10,6 +10,7 @@ import shop_coupon from "./shopCoupon"
 import cookieUtil from "../../lib/cookieUtil"
 import jsonUtil from "../../lib/jsonUtil"
 import Vue from "vue"
+import {swiper,swiperSlide} from "vue-awesome-swiper";
 
 function getUrl(name) {
   return "http://wx.printhome.com/mall-web" + "/" + name;
@@ -151,6 +152,18 @@ export default {
               inputHeight:'',//板材橡皮布用户输入的值-用于计算显示价格
               isBuyAluminumClip:false,//是否购买铝夹true或者false
               aluminumClipPrice:0,//铝夹的价钱
+              swiperOption: {//轮播config
+                autoplay:{
+                  delay: 3000,
+                  stopOnLastSlide: false,
+                  disableOnInteraction: false,
+                },
+                loop:true,
+                effect:"flip",
+                pagination: {
+                  el: '.swiper-pagination',
+                },
+              }
      }
     },
     methods:{
@@ -724,7 +737,7 @@ export default {
         spaceBetween: 30,
         loop: true
     });
-},
+        },
         //板材、橡皮布商品填写检验,询价板材有报价要显示出来
         checkBoardInput: function (e,type) {
             var temp=this;
@@ -802,7 +815,7 @@ export default {
         //套餐商品轮播
         goodsPackageScrool:function () {
             setTimeout(function () {
-                jQuery(".showGoodsWrap").slide({mainCell:".showGoodsList",autoPage:true,effect:"left",autoPlay:true,vis:3,trigger:"click"});
+                //$(".showGoodsWrap").slide({mainCell:".showGoodsList",autoPage:true,effect:"left",autoPlay:true,vis:3,trigger:"click"});
                 $(".showGoodsList span").css('width','0.2rem');
                 $(".showGoodsWrap .tempWrap").css('width','5.1rem');
             },0)
@@ -864,7 +877,7 @@ export default {
     },
     beforeMount:function(){
         //在挂载之前获取商品信息
-        this.getDetails(itemId,skuId);
+        this.getDetails(this.$route.query.itemId,this.$route.query.skuId);
         //获取配送至地址 为了请求skuPrice做准备
         this.regionCode = cookieUtil.getRegionCookieCode();
         //spu价格显示处理
@@ -910,13 +923,12 @@ export default {
             $(".goods_num").addClass("goods_num_two");
         }
         console.log(this.product.item);
-       // console.log(this.product.shopInfo);
         //sku轮播
-        this.goodsDetileScrool();
+        //this.goodsDetileScrool();
         //轮播图"
-        ShufflingFigure();
+        //ShufflingFigure();
         //点击事件
-        productClick();
+        //productClick();
        //将所有的图片自适应
         limitAllImg();
        //套餐商品
@@ -925,8 +937,8 @@ export default {
       this.getShopCoupons(this.product.item.shopId);
     },
     updated:function(){
-        this.swiper.destroy();
-        this.goodsDetileScrool();
+        //this.swiper.destroy();
+        //this.goodsDetileScrool();
     },
     watch:{
         queryPage:function(newValue,oldValue){
@@ -958,6 +970,10 @@ export default {
             }
         }
     },
+  components:{
+    swiper,
+    swiperSlide
+  }
 
 };
 
@@ -985,4 +1001,17 @@ function gotoLogin() {
     }else{
         window.location="../../html/2_login_sign/login_common.html";
     }
+}
+function limitAllImg() {
+  var limitImg = $(".jieshao-wrap,.pingce-wrap");
+  limitImg.find("img,input,table,form,strong,i,iframe").css({"display": "block", "max-width": "100%"});
+  limitImg.find("img").each(function (index, item) {
+    if (parseInt($(item).attr("height"))) {
+      $(item).css({"height": "100%", "margin": "0 auto"});
+    }
+  });
+  limitImg.find("td").removeAttr("width").css({"font-size": "0.12rem"});
+  /*设置outer的高度，为了弹出框以后，禁止下边的滑动*/
+  $(".outer").css("height", $(window).height() / 80 + "rem");
+  $("embed").css('width',"100%")
 }
