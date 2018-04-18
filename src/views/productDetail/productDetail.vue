@@ -1,4 +1,4 @@
-<style src="../../assets/css/13_shangPinXiangQing/shangPinYe.css" scoped></style>
+
 <template>
   <div id="productDetail">
     <header>
@@ -1139,12 +1139,13 @@
 </script>
 
 
-<!--<style scoped>
+<style scoped>
   @import "../../assets/css/13_shangPinXiangQing/shangPinYe.css";
-</style>-->
+</style>
 
 <style>
   body{
     background: #fff;
+    font-size: 0.24rem;
   }
 </style>

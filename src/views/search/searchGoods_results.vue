@@ -40,7 +40,7 @@
             <template v-for="item in goodsData">
 
               <li class="suolue_goods" style="float: left;overflow: hidden" v-show="showMode">
-                <a href="#" style="" @click="gotoGood(item)">
+                <a href="javascript:;" style="" @click="gotoGood(item)">
                   <img class="suoluegoods_img" :src="imgUrl + item.itemPicture" alt=""/>
                   <template v-if="item.itemNameHighlight">
                     <p class="suoluegoods_name oneLine" style="width: 2.8rem" v-html="item.itemNameHighlight"></p>
@@ -104,11 +104,11 @@
             <template v-for="item in goodsData">
 
               <li class="list_goods" v-show="!showMode">
-                <a href="#" style="" @click="gotoGood(item)">
+                <a href="javascript:;" style="" @click="gotoGood(item)">
                   <img class="listgoods_img" v-bind:src="imgUrl + item.itemPicture" alt=""/></a>
 
                 <div class="title_wrapper">
-                  <a href="#" class="listgoods_name" @click="gotoGood(item)">{{item.itemName}}</a>
+                  <a href="javascript:;" class="listgoods_name" @click="gotoGood(item)">{{item.itemName}}</a>
 
                   <p class="listgoods_price red_word" @click="getUserItemInfo(item)">
                     <template v-if="item.hasPrice != 2">
@@ -550,7 +550,9 @@
     clear: both;
   }
 </style>
-<style>
+<style scoped>
   @import "../../assets/css/4_souSuoJieGuo/search.css";
+</style>
+<style>
   @import "../../assets/css/pullToRefresh.css";
 </style>

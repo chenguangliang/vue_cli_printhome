@@ -62,7 +62,7 @@
 </script>
 
 
-<style>
+<style scoped>
   @import "../../assets/css/4_souSuoJieGuo/search.css";
 </style>
 <style>

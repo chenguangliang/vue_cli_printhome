@@ -7,9 +7,6 @@ import adjust from './assets/js/adjust'
 import $ from "jquery"
 
 import * as filters from "./lib/filters"
-/*console.log(666);
-console.dir(filters);
-console.log(666);*/
 Object.keys(filters).forEach(key=>{
     Vue.filter(key,filters[key]);
 });
