@@ -1117,7 +1117,6 @@
 
 
 <script type="text/ecmascript-6">
-  import popup from "../../components/popup.vue"
   import productDetail from "./productDetail"
 
   export default {
@@ -1134,7 +1133,6 @@
     mounted: function () {
 
     },
-    components:{popup}
   }
 </script>
 

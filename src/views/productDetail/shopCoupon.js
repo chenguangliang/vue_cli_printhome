@@ -63,7 +63,7 @@ export default {
                 $.jsonAjax(getUrl("/shopItemListIndexController/shopCoupons"),
                     {shopId: shopId},
                     function(data,status, xhr){
-                        temp.$ref.popup.popUp_close();
+                        // temp.$ref.popup.popUp_close();
                         // console.log(data);
                         if(data.success){
                             temp.couponsDTOs = data.result;

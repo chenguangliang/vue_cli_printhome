@@ -23,6 +23,9 @@
   /*  1.父组件引入组件 components:{popup}
       2.父组件引用 <popup ref="popup">
    *  3.this.$refs.popup.popUp_auto(1500,111,666);
+   *
+   *  -------已经挂在到全局了 看install.js----------
+   *
    */
 export default {
   name: 'popup',

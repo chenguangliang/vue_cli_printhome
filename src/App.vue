@@ -1,12 +1,13 @@
 <template>
   <div id="app">
         <div>
+            <popup ref="popup"></popup>
             <transition name="fade"><!--这是为了进来和离开的动画-->
               <keep-alive>  <!--这里是为了缓存,首页等,需要在router中加一个参数-->
                   <router-view v-if="$route.meta.keepAlive"></router-view>
               </keep-alive>
             </transition>
-            <transition name="fade">
+            <transition name="fade"><!--其他页不缓存-->
                 <router-view v-if="!$route.meta.keepAlive"></router-view>
             </transition>
         </div>
@@ -16,6 +17,7 @@
 
 <script>
 export default {
+
   name: 'App',
   data: function () {
       return{
@@ -25,7 +27,17 @@ export default {
 
   },
   watch:{
+    isLoading: function (newValue,oldValue) {
 
+      if(newValue){
+          this.$refs.popUp_open();
+      }else{
+        this.$refs.popUp_close();
+
+      }
+    }
+  },
+  beforeMount: function () {
   }
 }
 

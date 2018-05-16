@@ -973,6 +973,10 @@ export default {
   components:{
     swiper,
     swiperSlide
+  },
+  beforeRouteEnter(to, from, next) {//切换进入当前路由之前的钩子函数
+    console.log(666);
+    next();
   }
 
 };

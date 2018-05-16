@@ -98,7 +98,7 @@ export default {
                     $('title').html(data.result.item.itemName);
 
                     //请求该sku对应的促销广告展示出来   /getItemSaleAd?shopId=&itemId=&skuId=
-                    temp.getAdData(data.result.item.shopId,temp.itemId,temp.skuId);
+                    // temp.getAdData(data.result.item.shopId,temp.itemId,temp.skuId);
                     if(data.result.item.attrTempalte==2 || data.result.item.attrTempalte==3){//板材、橡皮布商品
                         temp.skuInfo.qty=9999999;//板材无库存限制
                         if(data.result.item.attrTempalte==2){//板材

@@ -4,10 +4,11 @@ import index from '@/views/index';
 import search from '@/views/search/search';
 import searchGoodsResults from '@/views/search/searchGoods_results';
 import productDetail from '@/views/productDetail/productDetail.vue';
+import store from '../store/store';
 
 Vue.use(Router);
 
-export default new Router({
+let router= new Router({
   mode:'history',//这可以让url没有#
   routes: [
     {
@@ -32,3 +33,13 @@ export default new Router({
     }
   ]
 })
+router.beforeEach((to,from,next)=>{
+  store.commit('turnOnLoading');
+  next();
+});
+router.beforeEach((to,from,next)=>{
+  store.commit('turnOffLoading');
+  next();
+});
+
+export default router;
