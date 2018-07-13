@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>创建优惠活动</title>
+    <script type="text/javascript" src="../../../lib/adjust.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/18_maiJiaZhongXin/12_cuXiaoGuanLi_chuangJianYouHui.css"/>
+</head>
+<body>
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="javascript:;"  class="return"></a>
+        创建优惠活动
+    </div>
+    <div style="height: 0.88rem;"></div>
+</header>
+<!--联系人开始-->
+<section>
+    <div class="triker">
+        <div class="lianxiren">
+            <p>
+                <span class="left"><label>＊</label>申请人：</span>
+                <span class="right">buyer909</span>
+            </p>
+            <p>
+                <span class="left"><label>＊</label>申请店铺：</span>
+                <span class="right">大家智合（北京）网络科技股份有限公司</span>
+            </p>
+            <p>
+                <span class="left"><label>＊</label>优惠券名称：</span>
+                <span class="right"><input type="text" class="ccc_border gray_word youHuiQuanMingCheng" maxlength="25"/></span>
+            </p>
+            <div class="warm none">最多输入25个字符</div>
+            <p>
+                <span class="left"><label>＊</label>优惠券编号：</span>
+                <span class="right">20161201143137193</span>
+            </p>
+        </div>
+        <div class="lianxiren">
+            <p>
+                <span class="left"><label>＊</label>优惠券类型：</span>
+                <span class="right">
+                    <select class="ccc_border gray_word">
+                        <option value="1">满减券</option>
+                        <option value="2">折扣券</option>
+                        <option value="3">现金券</option>
+                    </select>
+                </span>
+            </p>
+            <p class="manJian">
+                <span class="left"><label>＊</label>满减：</span>
+                <span class="right">
+                    满（元）<input type="number" class="ccc_border gray_word w300 mar20 man" maxlength="11"/>
+                    <br/>
+                    减（元）<input type="number" class="ccc_border gray_word w300 jian" maxlength="7"/>
+                </span>
+            </p>
+            <div class="warm none">最多输入7个字符</div>
+            <p class="zheKou">
+                <span class="left"><label>＊</label>折扣：</span>
+                <span class="right">
+                    折扣（0~10）<input type="text" class="ccc_border gray_word w250 mar20 zheKou" maxlength="7"/>
+                    <br/>
+                    限额（元）<input type="text" class="ccc_border gray_word w300 xianE" maxlength="7"/>
+                </span>
+            </p>
+            <div class="warm none">最多输入7个字符</div>
+            <p class="xianJin">
+                <span class="left"><label>＊</label>现金：</span>
+                <span class="right">
+                    直降（元）<input type="text" class="ccc_border gray_word w300 mar20 zhiJiang" maxlength="7"/>
+                    <br/>
+                </span>
+            </p>
+            <div class="warm none">最多输入7个字符</div>
+            <p>
+                <span class="left"><label>＊</label>每个用户发放优惠券数量：</span>
+                <span class="right"><input type="number" class="ccc_border gray_word w300 youHuiQuanShuLiang" maxlength="6"/></span>
+            </p>
+            <div class="warm none">最多输入9个字符</div>
+            <p>
+                <span class="left"><label>＊</label>有效期：</span>
+                <span class="right">
+                    <input type="date" class="ccc_border gray_word w300 cuXiaoShiJian"/>
+                    <span class="fenJie">至</span>
+                    <input type="date" class="ccc_border gray_word w300 cuXiaoShiJian"/>
+                </span>
+            </p>
+            <div class="warm none">请选择有效期</div>
+        </div>
+        <div class="lianxiren">
+            <p class="tanChuKuang faFangFangShi">
+                <span class="left"><label>＊</label>发放方式：</span><span class="right"><a href="javascript:;">待用户领取</a><a href="javascript:;">直接发放用户</a></span>
+            </p>
+            <div class="xuanZeYongHu">+选择用户</div>
+            <p class="yongHuLeiXing">
+                <span class="left"><label>＊</label>用户类型：</span><span class="right"><a href="javascript:;">全部</a><a href="javascript:;">个人用户</a><a href="javascript:;">企业用户</a></span>
+            </p>
+            <p class="huiYuanDengJi">
+                <span class="left"><label>＊</label>会员等级：</span><span class="right right2"><a href="javascript:;">全部</a><a href="javascript:;">红象</a><a href="javascript:;">铜像</a><a href="javascript:;">银象</a><a href="javascript:;">金象</a><a href="javascript:;">钻石像</a></span>
+            </p>
+            <p class="tanChuKuang shiYongFanWei">
+                <span class="left"><label>＊</label>使用范围：</span><span class="right right4"><a href="javascript:;">店铺内通用</a><a href="javascript:;">限sku</a></span>
+            </p>
+            <div class="xuanZeSku">+选择商品属性</div>
+            <p>
+                <span class="left">优惠券说明：</span><span class="right"><textarea maxlength="50"></textarea></span>
+            </p>
+        </div>
+    </div>
+</section>
+<!--滑动至商品属性固定-->
+<section>
+    <div class="huaDongGuDing">
+        <div class="shangPinShuXingLieBiao LieBiao">
+            <div class="top">
+                <p class="biaoTi">商品属性</p>
+                <div class="width4">
+                    <span>产品编号</span>
+                    <span>商品名称</span>
+                    <span>销售属性</span>
+                    <span></span>
+                </div>
+            </div>
+            <div class="width4 sku_LieBiao">
+                <span>1000003240</span>
+                <span>恒科仪器微电脑纸板厚度测量仪恒科仪器微电</span>
+                <span>在售</span>
+                <span class="shanChu"><img src="../../img/shanchu-@3x.png" alt=""/></span>
+            </div>
+            <div class="width4 sku_LieBiao">
+                <span>1000003240</span>
+                <span>恒科仪器微电脑纸板厚度测量仪恒科仪器微电</span>
+                <span>在售</span>
+                <span class="shanChu"><img src="../../img/shanchu-@3x.png" alt=""/></span>
+            </div>
+            <div class="width4 sku_LieBiao">
+                <span>1000003240</span>
+                <span>恒科仪器微电脑纸板厚度测量仪恒科仪器微电</span>
+                <span>在售</span>
+                <span class="shanChu"><img src="../../img/shanchu-@3x.png" alt=""/></span>
+            </div>
+            <div class="width4 sku_LieBiao">
+                <span>1000003240</span>
+                <span>恒科仪器微电脑纸板厚度测量仪恒科仪器微电</span>
+                <span>在售</span>
+                <span class="shanChu"><img src="../../img/shanchu-@3x.png" alt=""/></span>
+            </div>
+            <div class="width4 sku_LieBiao">
+                <span>1000003240</span>
+                <span>恒科仪器微电脑纸板厚度测量仪恒科仪器微电</span>
+                <span>在售</span>
+                <span class="shanChu"><img src="../../img/shanchu-@3x.png" alt=""/></span>
+            </div>
+            <div class="width4 sku_LieBiao">
+                <span>1000003240</span>
+                <span>恒科仪器微电脑纸板厚度测量仪恒科仪器微电</span>
+                <span>在售</span>
+                <span class="shanChu"><img src="../../img/shanchu-@3x.png" alt=""/></span>
+            </div>
+            <div class="width4 sku_LieBiao">
+                <span>1000003240</span>
+                <span>恒科仪器微电脑纸板厚度测量仪恒科仪器微电</span>
+                <span>在售</span>
+                <span class="shanChu"><img src="../../img/shanchu-@3x.png" alt=""/></span>
+            </div>
+        </div>
+        <div class="yongHuLieBiao LieBiao">
+            <div class="top">
+                <p class="biaoTi">用户</p>
+                <div class="width4">
+                    <span>用户名称</span>
+                    <span>公司名称</span>
+                    <span>会员等级</span>
+                    <span></span>
+                </div>
+            </div>
+            <div  class="width4 sku_LieBiao">
+                <span>seller005</span>
+                <span>大家智合（北京）网络科技股份有限公司</span>
+                <span>红象</span>
+                <span class="shanChu"><img src="../../img/shanchu-@3x.png" alt=""/></span>
+            </div>
+            <div  class="width4 sku_LieBiao">
+                <span>seller005</span>
+                <span>大家智合（北京）网络科技股份有限公司</span>
+                <span>红象</span>
+                <span class="shanChu"><img src="../../img/shanchu-@3x.png" alt=""/></span>
+            </div>
+            <div  class="width4 sku_LieBiao">
+                <span>seller005</span>
+                <span>大家智合（北京）网络科技股份有限公司</span>
+                <span>红象</span>
+                <span class="shanChu"><img src="../../img/shanchu-@3x.png" alt=""/></span>
+            </div>
+            <div  class="width4 sku_LieBiao">
+                <span>seller005</span>
+                <span>大家智合（北京）网络科技股份有限公司</span>
+                <span>红象</span>
+                <span class="shanChu"><img src="../../img/shanchu-@3x.png" alt=""/></span>
+            </div>
+            <div  class="width4 sku_LieBiao">
+                <span>seller005</span>
+                <span>大家智合（北京）网络科技股份有限公司</span>
+                <span>红象</span>
+                <span class="shanChu"><img src="../../img/shanchu-@3x.png" alt=""/></span>
+            </div>
+            <div  class="width4 sku_LieBiao">
+                <span>seller005</span>
+                <span>大家智合（北京）网络科技股份有限公司</span>
+                <span>红象</span>
+                <span class="shanChu"><img src="../../img/shanchu-@3x.png" alt=""/></span>
+            </div>
+            <div  class="width4 sku_LieBiao">
+                <span>seller005</span>
+                <span>大家智合（北京）网络科技股份有限公司</span>
+                <span>红象</span>
+                <span class="shanChu"><img src="../../img/shanchu-@3x.png" alt=""/></span>
+            </div>
+        </div>
+    </div>
+</section>
+<div style="height: 1.04rem;"></div>
+<footer>
+    <div class="footer">
+        <a href="12_cuXiaoGuanLi_cuXiaoGuanLi.html" class="quxiao">取消</a>
+        <a href="12_cuXiaoGuanLi_cuXiaoGuanLi.html" class="faBu">发布</a>
+    </div>
+</footer>
+<!--发布弹窗-->
+<section>
+    <div class="bg">
+        <div class="faBuTanChuang">
+            <h5>发布</h5>
+            <p>您的活动信息将在指定时间<br>自动发布 <br>发布后将不可修改！</p>
+            <div></div>
+            <p><a href="javascript:;">取消</a><a href="javascript:;">确定</a></p>
+        </div>
+    </div>
+</section>
+<!--选择用户弹窗-->
+<section>
+    <div class="userTanChaung">
+        <div class="prop_bg"></div>
+        <div class="promotionCon_wrap">
+            <div class="promotion_con">
+                <p class="pro_tit">选择用户</p>
+                <div class="pro_chahaoWrap">
+                    <img class="pro_chahao" src="../../img/win_chahao.png" alt="">
+                </div>
+                <div class="quan_wrap">
+                    <div class="shangPinLieBiao">
+                        <div class="top clearfix">
+                            <span></span>
+                            <span>用户名称</span>
+                            <span>公司名称</span>
+                            <span>会员等级</span>
+                        </div>
+                        <div class="middle clearfix">
+                            <span><img src="../../img/no-select.png" alt=""/></span>
+                            <span>seller005</span>
+                            <span>大家智合（北京）网络科技股份有限公司</span>
+                            <span>红象</span>
+                        </div>
+                    </div>
+                    <div class="shangPinLieBiao">
+                        <div class="top clearfix">
+                            <span></span>
+                            <span>商品编码</span>
+                            <span>商品名称</span>
+                            <span>商品状态</span>
+                        </div>
+                        <div class="middle clearfix">
+                            <span><img src="../../img/no-select.png" alt=""/></span>
+                            <span>seller005</span>
+                            <span>大家智合（北京）网络科技股份有限公司</span>
+                            <span>红象</span>
+                        </div>
+                    </div>
+                    <div class="shangPinLieBiao">
+                        <div class="top clearfix">
+                            <span></span>
+                            <span>商品编码</span>
+                            <span>商品名称</span>
+                            <span>商品状态</span>
+                        </div>
+                        <div class="middle clearfix">
+                            <span><img src="../../img/no-select.png" alt=""/></span>
+                            <span>seller005</span>
+                            <span>大家智合（北京）网络科技股份有限公司</span>
+                            <span>红象</span>
+                        </div>
+                    </div>
+                    <div class="shangPinLieBiao">
+                        <div class="top clearfix">
+                            <span></span>
+                            <span>商品编码</span>
+                            <span>商品名称</span>
+                            <span>商品状态</span>
+                        </div>
+                        <div class="middle clearfix">
+                            <span><img src="../../img/no-select.png" alt=""/></span>
+                            <span>seller005</span>
+                            <span>大家智合（北京）网络科技股份有限公司</span>
+                            <span>红象</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input class="win_wancheng" type="button" value="添加">
+        </div>
+    </div>
+</section>
+<!--选择商品属性弹窗-->
+<section>
+    <div class="skuTanChuang">
+        <div class="prop_bg"></div>
+        <div class="promotionCon_wrap">
+            <div class="promotion_con">
+                <p class="pro_tit">选择商品属性</p>
+                <div class="pro_chahaoWrap">
+                    <img class="pro_chahao" src="../../img/win_chahao.png" alt="">
+                </div>
+                <div class="quan_wrap">
+                    <div class="shangPinShuXing">
+                        <div class="gouXuan">
+                            <img class="no-select" src="../../img/no-select.png" alt="">
+                        </div>
+                        <div class="shangPinTuPian">
+                            <img src="../../img/1.png" alt="">
+                        </div>
+                        <div class="shangPinXiangQing">
+                            <p class="mingZi"><span>店铺自营商品</span></p>
+                            <p class="mingZi">商品编号：<span>1000003150</span></p>
+                            <p class="mingZi">商品属性：颜色：<span>白色</span> 克重：<span>230</span> 克重：<span>230</span></p>
+                            <p class="jiaGe">原价：<i>¥11900000000.00</i></p>
+                        </div>
+                    </div>
+                    <div class="shangPinShuXing">
+                        <div class="gouXuan">
+                            <img class="no-select" src="../../img/no-select.png" alt="">
+                        </div>
+                        <div class="shangPinTuPian">
+                            <img src="../../img/1.png" alt="">
+                        </div>
+                        <div class="shangPinXiangQing">
+                            <p class="mingZi"><span>店铺自营商品</span></p>
+                            <p class="mingZi">商品编号：<span>1000003150</span></p>
+                            <p class="mingZi">商品属性：颜色：<span>白色</span> 克重：<span>230</span> 克重：<span>230</span></p>
+                            <p class="jiaGe">原价：<i>¥11900000000.00</i></p>
+                        </div>
+                    </div>
+                    <div class="shangPinShuXing">
+                        <div class="gouXuan">
+                            <img class="no-select" src="../../img/no-select.png" alt="">
+                        </div>
+                        <div class="shangPinTuPian">
+                            <img src="../../img/1.png" alt="">
+                        </div>
+                        <div class="shangPinXiangQing">
+                            <p class="mingZi"><span>店铺自营商品</span></p>
+                            <p class="mingZi">商品编号：<span>1000003150</span></p>
+                            <p class="mingZi">商品属性：颜色：<span>白色</span> 克重：<span>230</span> 克重：<span>230</span></p>
+                            <p class="jiaGe">原价：<i>¥11900000000.00</i></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input class="win_wancheng" type="button" value="添加">
+        </div>
+    </div>
+</section>
+<!--满减金额提示-->
+<div class="manJianTiShi">必须是数字且最多保留两位小数！</div>
+<script type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../../lib/common.js"></script>
+<script type="text/javascript" src="../../js/popup.js"></script>
+<script type="text/javascript" src="../../js/18_maiJiaZhongXin/12_cuXiaoGuanLi_chuangJianYouHui.js"></script>
+</body>
+</html>

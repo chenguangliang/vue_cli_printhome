@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>设置发票信息</title>
+    <link rel="stylesheet" href="../../../css/common.css">
+    <link rel="stylesheet" href="../../css/16_dingDanHeDui/faPiaoXinXi.css">
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+    <script type="text/javascript" src="../../../lib/adjust.js"></script>
+</head>
+<body>
+<div id="invoice">
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="javascript:void(0)"  class="return" onclick="javascript:history.back(-1);"></a>设置发票信息
+    </div>
+    <div class="xuanXiangKa">
+        <ul style="border: none">
+            <li :class="invoiceDTO.invoice==2?'on':''" @click="invoiceDTO.invoice = 2" style="border: 1px solid #ccc;width: 3rem">增值税普通发票</li>
+            <li :class="invoiceDTO.invoice==3?'on':''" @click="invoiceDTO.invoice = 3" style="border: 1px solid #ccc;width: 3rem">增值税专用发票</li>
+        </ul>
+    </div>
+    <div class="zhanwei"></div>
+</header>
+<section>
+    <div class="tab_box" v-cloak>
+        <div class="div2 commonInvoice_add" v-show="invoiceDTO.invoice==2">
+            <h2 style="margin-bottom: 0;"><label style="color: #e60012;">＊</label>发票抬头</h2>
+            <input type="text" maxlength="20" id="invoice_title" v-model="invoiceDTO.invoiceTitle"/>
+            <div id="invoice_title_errorMsg_normal" class="wrong_tit"></div>
+
+            <div style="margin-top: 0.2rem;"><label style="color: #e60012;">＊</label>纳税人识别码</div>
+            <input type="text" maxlength="20" id="taxpayerCode_normal" v-model="invoiceDTO.taxpayerCode"/>
+            <div id="taxpayerCode_errorMsg_normal" class="wrong_tit"></div>
+            <!--<div>
+                <div style="margin-top: 0.2rem;"><label>＊</label>收票人姓名</div>
+                <input type="text" id="name1" v-model="invoiceDTO.consigneeName"/>
+                <div id="consigneeName_errorMsg1" class="wrong_tit"></div>
+
+                <div style="margin-top: 0.2rem;"><label>＊</label>收票人手机</div>
+                <input type="tel" id="phone1" v-model="invoiceDTO.consigneeMobile" maxlength="11" onkeypress="keyPress()"/>
+                <div id="consigneeMobile_errorMsg1" class="wrong_tit"></div>
+
+                <div style="margin-top: 0.2rem;"><label>＊</label>收票人地址</div>
+                <select id="sel_Province1" v-model="invoiceDTO.provinceId"  v-cloak style="margin-left: 0;">
+                    <option value="">请选择</option>
+                    <option :value="addr.code"  v-for="addr in  oneAddressList">{{addr.name}}</option>
+                </select>
+                <select id="sel_City1" name="sel_City" v-model="invoiceDTO.cityId"  v-cloak>
+                    <option value="">请选择</option>
+                    <option :value="addr.code"  v-for="addr in  twoAddressList">{{addr.name}}</option>
+                </select>
+                <select id="sel_County1" name="sel_County" v-model="invoiceDTO.countyId"  v-cloak>
+                    <option value="">请选择</option>
+                    <option :value="addr.code"  v-for="addr in  threeAddressList">{{addr.name}}</option>
+                </select>
+                <div id="invoice_province_errorMsg1" class="wrong_tit"></div>
+
+                <textarea placeholder="请填写详细街道地址" v-model="invoiceDTO.detailAddress" id="detailAddress1" style="margin-top: 0.2rem;"></textarea>
+                <div id="detailAddress_errorMsg1" class="wrong_tit"></div>
+            </div>-->
+
+
+        </div>
+        <div class="div3" v-show="invoiceDTO.invoice==3">
+            <div class="kaiPiao">
+                <h2>开票信息填写</h2>
+                <p><label>＊</label>单位名称</p>
+                <input type="text" maxlength="30" id="danWei" v-model="invoiceDTO.companyName"/>
+                <div id="companyName_errorMsg" class="wrong_tit"></div>
+                <p><label>＊</label>纳税人识别码</p>
+                <input type="text" maxlength="20" id="naShuiMa" v-model="invoiceDTO.taxpayerCode"/>
+                <div id="taxpayerCode_errorMsg" class="wrong_tit"></div>
+                <p><label>＊</label>注册地址</p>
+                <input type="text" maxlength="50" id="diZhi" v-model="invoiceDTO.registeredAddress"/>
+                <div id="registeredAddress_errorMsg" class="wrong_tit"></div>
+                <p><label>＊</label>注册电话</p>
+                <input type="text" maxlength="20" id="DianHua" v-model="invoiceDTO.registeredPhone"/>
+                <div id="registeredPhone_errorMsg" class="wrong_tit"></div>
+                <p><label>＊</label>开户银行</p>
+                <input type="text" maxlength="50" id="yinHang" v-model="invoiceDTO.bankName"/>
+                <div id="bankName_errorMsg" class="wrong_tit"></div>
+                <p><label>＊</label>银行账户</p>
+                <input type="text" maxlength="50" id="zhangHu" v-model="invoiceDTO.bankAccount"/>
+                <div id="bankAccount_errorMsg" class="wrong_tit"></div>
+                <p>&emsp;营业执照</p>
+                <p>
+                    <template v-if="invoiceDTO.businessLicensePicUrl">
+                        <img :src="imgUrl + invoiceDTO.businessLicensePicUrl" alt="" class="zhaoPian"  @click="showIMG('businessLicensePicUrl',invoiceDTO.businessLicensePicUrl)">
+                    </template>
+                    <span class="xiangJi">
+                        <img src="../../img/xiangJi.png" alt=""/>
+                        <input id="businessLicensePicUrl" type="file" name="file" class="fuJian" onchange="startUpload('businessLicensePicUrl')">
+                    </span>
+                </p>
+                <p>&emsp;税务登记证</p>
+                <p>
+                    <template v-if="invoiceDTO.taxRegistrationCertificatePicUrl">
+                        <img :src="imgUrl + invoiceDTO.taxRegistrationCertificatePicUrl" alt="" class="zhaoPian2" @click="showIMG('taxRegistration',invoiceDTO.taxRegistrationCertificatePicUrl)">
+                    </template>
+                    <span class="xiangJi">
+                        <img src="../../img/xiangJi.png" alt=""/>
+                        <input id="taxRegistrationCertificatePicUrl" type="file"  name="file" class="fuJian"  onchange="startUpload('taxRegistrationCertificatePicUrl')">
+                    </span>
+                </p>
+                <p>&emsp;一般纳税人证明</p>
+                <p>
+                    <template v-if="invoiceDTO.generalTaxpayerPicUrl">
+                        <img :src="imgUrl + invoiceDTO.generalTaxpayerPicUrl" alt="" class="zhaoPian2" @click="showIMG('generalTax',invoiceDTO.generalTaxpayerPicUrl)">
+                    </template>
+                    <span class="xiangJi">
+                        <img src="../../img/xiangJi.png" alt=""/>
+                        <input id="generalTaxpayerPicUrl" type="file" name="file" class="fuJian"  onchange="startUpload('generalTaxpayerPicUrl')">
+                    </span>
+                </p>
+            </div>
+            <div class="shouPiao">
+                <h2>收票人信息填写</h2>
+                <p><label>＊</label>收票人姓名</p>
+                <input type="text" id="name" v-model="invoiceDTO.consigneeName"/>
+                <div id="consigneeName_errorMsg" class="wrong_tit"></div>
+                <p><label>＊</label>收票人手机</p>
+                <input type="tel" id="phone" v-model="invoiceDTO.consigneeMobile" maxlength="11" onkeypress="keyPress()"/>
+                <div id="consigneeMobile_errorMsg" class="wrong_tit"></div>
+                <p><label>＊</label>收票人地址</p>
+                <select id="sel_Province" v-model="invoiceDTO.provinceId"  v-cloak>
+                    <option value="">请选择</option>
+                    <option :value="addr.code"  v-for="addr in  oneAddressList">{{addr.name}}</option>
+                    </select>
+                <select id="sel_City" name="sel_City" v-model="invoiceDTO.cityId"  v-cloak>
+                    <option value="">请选择</option>
+                    <option :value="addr.code"  v-for="addr in  twoAddressList">{{addr.name}}</option>
+                </select>
+                <select id="sel_County" name="sel_County" v-model="invoiceDTO.countyId"  v-cloak>
+                    <option value="">请选择</option>
+                    <option :value="addr.code"  v-for="addr in  threeAddressList">{{addr.name}}</option>
+                </select>
+                <div id="invoice_province_errorMsg" class="wrong_tit"></div>
+                <textarea placeholder="请填写详细街道地址" v-model="invoiceDTO.detailAddress" id="detailAddress_"></textarea>
+                <div id="detailAddress_errorMsg" class="wrong_tit"></div>
+            </div>
+        </div>
+    </div>
+</section>
+<div style="height:1.18rem;"></div>
+<!--回到顶部-->
+<div id="top">
+</div>
+<footer>
+    <div class="btn"><input id="submitMsg" type="button" value="确   定" @click="saveInvoice()"/></div>
+</footer>
+<!--点击放大图片-->
+<section>
+    <div class="zhezhao" @click="closeIMG()">
+        <div class="con">
+            <img alt="" :src="imgUrl + showPicUrl" >
+            <!--<input type="button" value="重新上传">-->
+            <i class="close"></i>
+        </div>
+    </div>
+</section>
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../bower_components/attachment/jquery.form.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script type="text/javascript" src="../../bower_components/attachment/ajaxformfileupload.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/cookieUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/moment.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/jsonUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/16_dingDanHeDui/faPiaoXinXi.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../html/commonScript/address/address.js"></script>
+<script charset="UTF-8" type="text/javascript" src="script/invoice_add.js"></script>
+</body>
+</html>

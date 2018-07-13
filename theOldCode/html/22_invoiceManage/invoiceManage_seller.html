@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html style="font-size: 50px;" lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title>发票管理</title>
+    <link rel="stylesheet" href="../../../css/common.css" />
+    <link type="text/css" rel="stylesheet" href="../../../css/pullToRefresh.css" />
+    <link rel="stylesheet" href="../../css/12_maiJiaZhongXin/14_duiZhangDanGuanLi_duiZhangDanGuanLi.css" />
+    <link type="text/css" rel="stylesheet" href="../../css/12_maiJiaZhongXin/12_dingDan_dingDanXiangQing.css"/>
+    <script type="text/javascript" src="../../../lib/adjust.js"></script>
+    <style>
+        .duiZhangDan .dingDan .left{
+            margin-right:0;
+        }
+    </style>
+</head>
+<body>
+<div class="confirmWrap">
+    <div class="confirmCon">
+        <h5>提示</h5>
+        <p class="confirmMsg"></p>
+        <div class="confirmLine"></div>
+        <div class="btnWrap">
+            <span class="confirmBtn cancle">取消</span>
+            <span class="confirmBtn sure">确定</span>
+        </div>
+    </div>
+</div>
+<div class="alertWrap">
+    <div class="alertCon">
+        <h5>提示</h5>
+        <p class="alertMsg"></p>
+        <div class="alertLine"></div>
+        <div class="btnWrap">
+            <span class="alertBtn sure">确定</span>
+        </div>
+    </div>
+</div>
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="../../html/18_maiJiaZhongXin/8_maiJiaZhongXin_maiJiaZhongXin.html" class="fanHui"></a>发票管理
+        <a href="invoiceSearch.html?userType=seller" class="suoSou"></a>
+    </div>
+</header>
+<section id="invoiceManageVM">
+    <div id="wrapper" class="lieBiao" style="overflow: hidden;">
+        <div id="scroller" style="transition-property: transform; transform-origin: 0px 0px 0px; transition-timing-function: cubic-bezier(0.33, 0.66, 0.66, 1); transform: translate(0px, -30px) scale(1) translateZ(0px); transition-duration: 400ms;">
+            <template v-if="invoiceList.length !=0">
+                <div class="duiZhangDan wrapScrool">
+                <div style="height: 0.78rem;"></div>
+
+                <div style="width: 100%; height: 0.1rem; background-color: rgb(244, 244, 244);"></div>
+                <template v-for="oneInvoice in invoiceList">
+                    <div class="danHao" @click="orderDetile(oneInvoice.orderId,oneInvoice.orderType,oneInvoice.passkey)">
+                    订单号：{{oneInvoice.orderId}}
+                        <span class="riQi red">
+                                <template v-if="oneInvoice.invState == 1">已完成</template>
+                                <template v-else-if="oneInvoice.invState == 2 || oneInvoice.invState==0">待卖家确认</template>
+                                <template v-else-if="oneInvoice.invState == 3">待买家接收</template>
+                                <template v-else>未开票</template>
+                        </span>
+                    </div>
+                    <div class="dingDan border_none">
+                        <div class="mar_b10" style="overflow: hidden">
+                            <p style="float: left;min-width: 50%;">
+                                <span class="left">订单金额：</span> <span class="right mar_t-1">￥{{oneInvoice.price}}</span>
+                            </p>
+                            <p style="float: left;min-width: 50%;">
+                                <span class="left">订单状态：</span> <span class="right mar_t-1 red">
+                                    <template v-if="oneInvoice.state==1">待付款</template>
+                                    <template v-else-if="oneInvoice.state==2">待配送</template>
+                                    <template v-else-if="oneInvoice.state==3">待确认送货</template>
+                                    <template v-else-if="oneInvoice.state==4">待评价</template>
+                                    <template v-else-if="oneInvoice.state==5">已完成</template>
+                                    <template v-else-if="oneInvoice.state==6">已取消</template>
+                                    <template v-else-if="oneInvoice.state==7">已关闭</template>
+                                </span>
+                            </p>
+                        </div>
+                        <!--除了没开票的，下面这个都要显示-->
+                        <template v-if="oneInvoice.invState == 0 || oneInvoice.invState == 1 || oneInvoice.invState == 2 || oneInvoice.invState == 3">
+                            <div class="mar_b10" style="overflow: hidden">
+                                <p style="float: left;min-width: 50%;">
+                                    <span class="left">发票类型：</span>
+                                    <span class="right mar_t-1">
+                                            <template v-if="oneInvoice.invoice==1">不开发票</template>
+                                            <template v-if="oneInvoice.invoice==2">增值税普通发票</template>
+                                            <template v-if="oneInvoice.invoice==3">增值税专用发票</template>
+                                        </span>
+                                </p>
+                                <p style="float: left;min-width: 40%;">
+                                    <span class="left">是否补开：</span>
+                                    <span class="right mar_t-1">
+                                            <template v-if="oneInvoice.isApply">是</template>
+                                            <template v-else>否</template>
+                                        </span>
+                                </p>
+                            </div>
+                        </template>
+                        <p class="mar_b10"><span class="left">下单时间：</span> <span class="right mar_t-1">{{oneInvoice.orderTime | longToDate}}</span></p>
+                        <p class="mar_b10"><span class="left" style="width: 1.6rem">买家公司名称：</span> <span class="right mar_t-1">{{oneInvoice.companyName}}</span></p>
+                    </div>
+                    <div class="caoZuo clearfix">
+                        <template v-if="oneInvoice.invState == 1">
+                            <span class="common_button orderGrayBtn" @click="queryInvoiceInfo(oneInvoice.orderId)">查看发票</span>
+                        </template>
+                        <template v-else-if="oneInvoice.invState == 2 || oneInvoice.invState==0">
+                            <span class="common_button orderRedBtn" @click="confirmInvoiceWin(oneInvoice.orderId,oneInvoice.buyerId,oneInvoice.invoiceId)">确认开票</span>
+                            <span class="common_button orderGrayBtn" @click="queryInvoiceInfo(oneInvoice.orderId)">查看发票</span>
+                        </template>
+                        <template v-else-if="oneInvoice.invState == 3">
+                            <span class="common_button orderGrayBtn" @click="queryInvoiceInfo(oneInvoice.orderId)">查看发票</span>
+                        </template>
+                        <template v-else>
+                           <p style="height: 0.5rem"></p>
+                        </template>
+
+                    </div>
+                </template>
+
+
+                <p class="printHome" style="line-height: 0.5rem; background-color: rgb(244, 244, 244);">printhome.com</p>
+            </div>
+            </template>
+            <template v-else>
+                <div class="tiShi" style="margin-top: 1rem;">
+                    <img src="../../img/search_bg.png" alt=""/>
+                    <h2>没有发现相关内容~~</h2>
+                    <p class="printHome" style="margin-bottom: 0.2rem;">printhome.com</p>
+                    <!--<p>亲，我们换个词试试吧~</p>-->
+                </div>
+            </template>
+        </div>
+    </div>
+    <div id="top" style="display: none;" @click="goToTop()"></div>
+    <!--确认收到发票弹窗-->
+    <template v-if="confirmInvoiceWinFlag">
+        <div  class="commonWin receivedInvoice" style="display: block">
+            <div class="commonWinCon"><h5>提示</h5>
+                <p class="commonWinMsg">您确认补开发票？</p>
+                <div class="commonWinLine"></div>
+                <div class="commonWinBtnWrap">
+                    <span class="commonWinBtn cancle" @click="confirmInvoiceWinFlag=false">取消</span>
+                    <span class="commonWinBtn sure" @click="confirmInvoice()">确定</span>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!--点击放大图片-->
+    <section>
+        <div class="zhezhao" @click="closeIMG()" id="enlargeImg" style="z-index:101">
+            <div class="enlargeImg_content">
+                <img alt="" :src="img_url + picUrl" >
+                <i class="close_enlargeImg"></i>
+            </div>
+        </div>
+    </section>
+
+    <!--普通发票弹窗-->
+    <template v-if="invoiceInfo.invoice==2">
+        <div class="zheZhaoCommonInvoice" style="display: block">
+            <div class="zengZhiShuiXinXi1" style="display: block">
+                <p class="biaoTi">发票信息<span @click="invoiceInfo.invoice=0"></span></p>
+                <div class="xinXi">
+                    <div class="kaiPiao">
+                        <p>开票信息</p>
+                        <div class="box">
+                            <span class="left"><label>＊</label>发票抬头：</span>
+                            <span class="right">{{invoiceInfo.invoiceTitle}}</span>
+                        </div>
+                        <div class="box">
+                            <span class="left"><label>＊</label>纳税人识别码：</span>
+                            <span class="right">{{invoiceInfo.taxpayerCode}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!--专用发票弹窗-->
+    <template v-if="invoiceInfo.invoice==3">
+        <div class="zheZhao" style="display: block">
+            <div class="zengZhiShuiXinXi" style="display: block">
+                <p class="biaoTi">发票信息<span @click="invoiceInfo.invoice=0"></span></p>
+                <div class="xinXi">
+                    <div class="kaiPiao">
+                        <p>开票信息</p>
+                        <div class="box">
+                            <span class="left"><label>＊</label>单位名称：</span>
+                            <span class="right">{{invoiceInfo.companyName}}</span>
+                        </div>
+                        <div class="box">
+                            <span class="left"><label>＊</label>纳税人识别码：</span>
+                            <span class="right">{{invoiceInfo.taxpayerCode}}</span>
+                        </div>
+                        <div class="box">
+                            <span class="left"><label>＊</label>注册地址：</span>
+                            <span class="right">{{invoiceInfo.registeredAddress}}</span>
+                        </div>
+                        <div class="box">
+                            <span class="left"><label>＊</label>注册电话：</span>
+                            <span class="right">{{invoiceInfo.registeredPhone}}</span>
+                        </div>
+                        <div class="box">
+                            <span class="left"><label>＊</label>开户银行：</span>
+                            <span class="right">{{invoiceInfo.bankName}}</span>
+                        </div>
+                        <div class="box">
+                            <span class="left"><label>＊</label>银行账户：</span>
+                            <span class="right">{{invoiceInfo.bankAccount}}</span>
+                        </div>
+                    </div>
+                    <div class="zhaoPian">
+                        <span>营业执照</span>
+                        <div class="img-block" style="width: 1rem;height: 1.4rem;margin-right:0.34rem;float: left;">
+                            <template v-for="picUrl in invoiceInfo.businessLicensePicUrl" >
+                                <img v-bind:src="img_url + picUrl" alt="" style="width: 1rem;height: 1.4rem;" @click="showIMG('businessLicensePicUrl',picUrl)"/>
+                            </template>
+                        </div>
+                        <span>税务登记证</span>
+                        <div class="img-block"  style="width: 1rem;height: 0.7rem;margin-right:0.34rem;float: left;">
+                            <template v-for="picUrl in invoiceInfo.taxRegistrationCertificatePicUrl">
+                                <img v-bind:src="img_url + picUrl" alt="" style="width: 1rem;height: 0.7rem;"  @click="showIMG('taxRegistrationCertificatePicUrl',picUrl)"/>
+                            </template>
+                        </div>
+                        <span>一般纳税人证明</span>
+                        <div class="img-block" style="width: 1rem;height: 0.7rem;margin-right:0.34rem;float: left;">
+                            <template v-for="picUrl in invoiceInfo.generalTaxpayerPicUrl">
+                                <img v-bind:src="img_url + picUrl" alt="" style="width: 1rem;height: 0.7rem;" @click="showIMG('generalTaxpayerPicUrl',picUrl)"/>
+                            </template>
+                        </div>
+                    </div>
+                    <div style="border: 1px dashed #ccc;width: 5.8rem;margin: 0.2rem auto;"></div>
+                    <div class="kaiPiao">
+                        <p>开票信息</p>
+                        <div class="box">
+                            <span class="left"><label>＊</label>收票人姓名：</span>
+                            <span class="right">{{invoiceInfo.consigneeName}}</span>
+                        </div>
+                        <div class="box">
+                            <span class="left"><label>＊</label>收票人手机：</span>
+                            <span class="right">{{invoiceInfo.consigneeMobile}}</span>
+                        </div>
+                        <div class="box">
+                            <span class="left"><label>＊</label>收票人地址：</span>
+                            <span class="right">{{invoiceInfo.fullAddress}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+</section>
+<script type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../../lib/iscroll.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../../lib/pullToRefresh_fixHead.js"></script>
+<script type="text/javascript" src="../../../lib/common.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/vueFilter.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="script/invoiceManage_seller.js"></script>
+</body>
+</html>

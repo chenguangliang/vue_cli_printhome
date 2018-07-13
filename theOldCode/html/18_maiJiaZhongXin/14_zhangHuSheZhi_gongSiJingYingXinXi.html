@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>公司经营信息</title>
+    <link type="text/css" rel="stylesheet" href="../../../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/18_maiJiaZhongXin/14_zhangHuSheZhi_gongSiJingYingXinXi.css"/>
+    <script type="text/javascript" src="../../../lib/adjust.js"></script>
+</head>
+<body>
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="../../html/18_maiJiaZhongXin/14_zhangHuSheZhi_jiBenXinXiSheZhi.html" class="return"></a>
+        <span class="xiala">公司经营信息</span>
+        <ul class="list">
+            <li><a href="14_zhangHuSheZhi_lianXiRenXinXi.html">联系人信息</a></li>
+            <li><a href="14_zhangHuSheZhi_yingYeZhiZhaoXinXi.html">营业执照信息</a></li>
+            <li><a href="14_zhangHuSheZhi_tiXianZhangHuXinXi.html">提现账户信息</a></li>
+            <li><a href="14_zhangHuSheZhi_gongSiJingYingXinXi.html">公司经营信息</a></li>
+        </ul>
+    </div>
+    <div style="height: 0.88rem;"></div>
+</header>
+<!--公司经营信息开始-->
+<div id="seller">
+<section>
+    <div class="lianxiren xinXi">
+        <h2 class="title">公司经营信息</h2>
+        <p  class="clearfix">
+            <span class="left"><label>＊</label>公司类型：</span><span class="right" v-text="dealerTypeLab"></span>
+        </p>
+        <p  class="clearfix">
+            <span class="left">公司官网地址：</span><span class="right" v-text="userInfoDTO.userManageDTO.homePage"></span>
+        </p>
+        <p  class="clearfix">
+            <span class="left">最近一年销售额：</span><span class="right" v-text="userInfoDTO.userManageDTO.saleNum+'万元'"></span>
+        </p>
+        <p  class="clearfix">
+            <span class="left"><label>＊</label>网站运营人数：</span><span class="right" v-text="userInfoDTO.userManageDTO.webOperaPeo+'人'"></span>
+        </p>
+        <p  class="clearfix">
+            <span class="left">ERP类型：</span><span class="right" v-text="erpTypeLab"></span>
+        </p>
+        <p  class="clearfix">
+            <span class="left"><label>＊</label>同类电商网店经验：</span><span class="right" v-text="userInfoDTO.userManageDTO.isHaveEbusiness==1?'有':'无'"></span>
+        </p>
+        <template v-if="userInfoDTO.userManageDTO.userManageStatus=='1'">
+            <div class="daishenhe"></div>
+        </template>
+        <template v-if="userInfoDTO.userManageDTO.userManageStatus=='0'">
+            <div class="boHui" @click="showRemark(userInfoDTO.userManageDTO.auditRemark)">
+                <div class="yibohui"></div>
+                <div class="chakanyuanyin"></div>
+            </div>
+        </template>
+        <template v-if="userInfoDTO.userManageDTO.userManageStatus=='2'">
+            <div class="yishenhe" ></div>
+        </template>
+        <template v-else>
+            <div class=""></div>
+        </template>
+    </div>
+</section>
+<section>
+    <div class="lianxiren xinXi">
+        <h2 class="title">中信账户信息</h2>
+        <p class="clearfix">
+            <span class="left" style="width: 1.2rem;">收款账户：</span><span class="right" style="width: 4.8rem;" v-text="userInfoDTO.userCiticDTO.sellerWithdrawsCashAccount+'('+userInfoDTO.userCiticDTO.accountStateLabel+')'"></span>
+        </p>
+        <p  class="clearfix">
+            <span class="left" style="width: 1.2rem;">冻结账户：</span><span class="right" style="width: 4.8rem;" v-text="userInfoDTO.userCiticDTO.sellerFrozenAccount+'('+userInfoDTO.userCiticDTO.accountStateLabel+')'"></span>
+        </p>
+    </div>
+</section>
+    <template v-if="userInfoDTO.userDTO.auditStatus == '2' && userInfoDTO.userManageDTO.userManageStatus != '1'">
+        <footer>
+            <div class="footer">
+                <a href="14_zhangHuSheZhi_gongSiJingYingXinXiXiuGai.html" class="xiuGaiYongHu">修改</a>
+            </div>
+        </footer>
+    </template>
+<section>
+    <div class="zhezhao">
+        <div class="con">
+            <h3>查看驳回原因</h3>
+            <h4>驳回原因：</h4>
+            <textarea class="text" readonly="readonly" v-text="remark"></textarea>
+            <p><button class="cancel">取消</button><button class="sure">确定</button></p>
+            <i class="close"></i>
+        </div>
+    </div>
+</section>
+</div>
+<script type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script type="text/javascript" src="../../../lib/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="script/14_sellerInfo.js"></script>
+<script type="text/javascript" src="../../js/18_maiJiaZhongXin/14_zhangHuSheZhi_lianXiRenXinXi.js"></script>
+</body>
+</html>

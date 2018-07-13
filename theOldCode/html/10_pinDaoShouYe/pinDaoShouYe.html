@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>印刷家</title>
+    <link rel="stylesheet" href="../../../css/common.css"/>
+    <link rel="stylesheet" href="../../../css/index.css"/>
+    <link rel="stylesheet" href="../../css/10_pinDaoShouYe/pinDaoShouYe.css"/>
+    <link rel="stylesheet" href="../../../css/animate.css"/>
+    <script type="text/javascript" src="../../../lib/adjust.js"></script>
+    <script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+    <script charset="utf-8" type="text/javascript" src="../../../lib/common.js"></script>
+    <script charset="utf-8" type="text/javascript" src="../../js/common_http.js"></script>
+    <script charset="utf-8" type="text/javascript" src="../../../lib/request.js"></script>
+    <script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+    <script charset="utf-8" type="text/javascript" src="../../bower_components/jq_scroll.js"></script>
+    <script charset="utf-8" type="text/javascript" src="../../bower_components/TouchSlide.1.1.js"></script>
+    <script charset="utf-8" type="text/javascript" src="../../js/jquery.cxscroll.js"></script>
+</head>
+<body>
+<div id="pinDaoShouYe">
+<!--头部开始-->
+<header>
+    <div class="header clearfix">
+        <div class="pinDao" @click="toggleMenu();">
+            <span></span>
+        </div>
+        <div class="souSuo">
+            <span class="select" id="typeTitle" @click="changeType(0)">商品</span>
+            <span class="arrow"></span>
+            <ul id="typePanel" class="typePanel block_bg none">
+                <li @click="typeClick(0);">商品</li>
+                <li @click="typeClick(1);">店铺</li>
+            </ul>
+            <span class="line"></span>
+            <input type="text" placeholder="输入要搜索的商品" class="text" @click='goToSearch'/>
+            <span class="btn"></span>
+        </div>
+    </div>
+    <div id="navigation">
+        <span class="sanjiao"></span>
+        <ul id="list">
+            <template v-for="channel in erJiPinDaoList">
+                <li>
+                    <a href="javascript:;" @click="toPinDaoIndex(channel.cId)">{{channel.cName}}</a>
+                </li>
+            </template>
+        </ul>
+    </div>
+</header>
+<!--头部结束-->
+<!--焦点图开始-->
+<section>
+    <div id="slideBox" class="slideBox">
+        <div class="bd">
+            <ul>
+                <template v-for="banner in banners">
+                    <li>
+                        <a class="pic" :href="banner.bannerLink"><img :src="imgUrl + banner.bannerUrl" /></a>
+                    </li>
+                </template>
+            </ul>
+        </div>
+        <div class="hd">
+            <ul></ul>
+        </div>
+    </div>
+</section>
+<!--快速导航开始-->
+<section>
+    <div class="nav clearfix">
+        <ul>
+            <!--<li>-->
+                <!--<a href="../../html/10_pinDaoShouYe/pinDaoShouYe.html?cid=309">-->
+                <!--</a>-->
+                <!--特纸专区-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<a href="javascript:;">-->
+                <!--</a>-->
+                <!--集采专区-->
+            <!--</li>-->
+            <li v-for="item in mallwxIconList" v-cloak>
+                <a :href="item.iconLink" >
+                    <img v-bind:src="imgUrl + item.iconUrl"/>
+                </a>
+                {{item.title}}
+            </li>
+           <!-- <li>
+                <a href="../../html/8_chanPinDaQuan/chanPinDaQuan.html">
+                </a>
+                产品大全
+            </li>
+            <li>
+                <a href="../../html/9_pinPaiDaQuan/pinPaiDaQuan.html">
+                </a>
+                品牌大全
+            </li>-->
+            <!--<li>-->
+                <!--<a href="javascript:;">-->
+                <!--</a>-->
+                <!--膜频道-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<a href="javascript:;">-->
+                <!--</a>-->
+                <!--积分商城-->
+            <!--</li>-->
+           <!-- <li>
+                <a href="../../html/7_lingQuanZhongXin/lingQuanZhongXin.html">
+                </a>
+                优惠券
+            </li>-->
+            <li @click="showSecondCategory" v-cloak>
+                <a href="javascript:;">
+                    <img v-bind:src="fenleiImgUrl"/>
+                </a>
+                分类专区
+            </li>
+        </ul>
+    </div>
+</section>
+<div class="main">
+    <!--滚动公告-->
+    <section>
+        <div class="adv">
+            <span class="logo"></span>
+            <span class="line"></span>
+            <div class="scrollbox">
+                <div id="scrollDiv">
+                    <div class="box">
+                        <ul class="list">
+                            <template v-for="notice in noticeList">
+                                <li>
+                                    <a href="javascript:;" @click="showNeiRongPage(notice)" class="twoLine">{{notice.noticeTitle}}</a>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <a href="javascript:;" class="more" @click="toMoreNotice">更多</a>
+        </div>
+    </section>
+    <!--精品推荐开始-->
+    <section>
+        <div class="jingPinTuiJian">
+            <template v-if="guessLoveList.length > 0">
+                <div class="title">精品<span>·</span>推荐</div>
+                <div class="jingPinNeiRong clearfix">
+                    <template v-for="ad in guessLoveList">
+                        <a href="javascript:;" @click="adToVisit(ad,'guessLove')">
+                            <img :src="imgUrl + ad.adSrc" alt=""/>
+                            <h3>{{ad.title |subEndFilter(12)}}</h3>
+                            <p>
+                                <template v-if="ad.hasPrice == 1">
+                                    ￥{{ad.guidePriceForShow}}
+                                </template>
+                                <template v-else-if="ad.hasPrice == 2">
+                                    暂无报价
+                                </template>
+                            </p>
+                        </a>
+                    </template>
+                </div>
+            </template>
+        </div>
+    </section>
+    <!--楼层开始-->
+    <template v-for="floor in floorsData">
+        <section>
+            <div class="teSeChanPin">
+                <div class="title">{{floor.floorTitle |floorTitleFilter}}</div>
+                <div class="teSeNeiRong clearfix">
+                    <template v-for="product in floor.floorProducts">
+                        <a href="javascript:;" @click="adToVisit(product,'product')">
+                            <img :src="imgUrl + product.picSrc" alt=""/>
+                            <h3>{{product.title |subEndFilter(12)}}</h3>
+                            <p>
+                                <template v-if="typeof(product.hasPrice)=='undefined' || product.hasPrice == 1">
+                                    <template v-if="typeof(product.disPrice)=='undefined' || product.disPrice == 0">
+                                        <template v-if="typeof(product.skuPrice)=='undefined'|| product.skuPrice == 0">
+                                            ￥{{product.guidePrice}}
+                                        </template>
+                                        <template v-else>
+                                            ￥{{product.skuPrice}}
+                                        </template>
+                                    </template>
+                                    <template v-else>
+                                        促销价：￥{{product.disPrice}}
+                                    </template>
+                                </template>
+                                <template v-else>
+                                    <template v-if="userInfo==''">
+                                        登录后可询价
+                                    </template>
+                                    <template v-else>
+                                        欢迎询价
+                                    </template>
+                                </template>
+                            </p>
+                        </a>
+                    </template>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <!--旗舰店开始-->
+    <section>
+        <div class="qiJianDian">
+            <template v-if="shipStores!=[] && shipStores.length >0">
+                <div class="title"><span>·</span>旗舰店<span>·</span></div>
+                <div class="qiJianNeiRong clearfix">
+                    <template v-for="shipStore in shipStores">
+                        <a href="javascript:;" @click="adShopVisit(shipStore,'shop')">
+                            <img :src="imgUrl + shipStore.adSrc" alt=""/>
+                            <div class="bg">
+                                <button @click="adToVisit(shipStore,'shop')">点击查看</button>
+                                <p>{{shipStore.shopName |subEndFilter(11)}}</p>
+                            </div>
+                        </a>
+                    </template>
+                </div>
+            </template>
+        </div>
+    </section>
+    <!--小广告-->
+    <section>
+        <div class="img-scroll" id="img-scroll" style="margin: 0.15rem auto;">
+            <div class="box" id="img_list">
+                <ul class="list">
+                    <template v-for="bottomAdv in bottomAdvs">
+                        <li>
+                            <a href="javascript:;" @click="adToVisit(bottomAdv,'bottem')">
+                                <img :src="imgUrl + bottomAdv.adSrc" alt="" />
+                            </a>
+                        </li>
+                    </template>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!--论坛开始-->
+    <section>
+        <div class="lunTan">
+            <div class="title">论<span>·</span>坛</div>
+            <div class="lunTanNeiRong">
+                <!--<div class="jingYan clearfix">-->
+                    <!--<script type="text/javascript" src="http://123.56.245.51/api.php?mod=js&bid=4"></script>-->
+                <!--</div>-->
+                <!--<div class="tuJi">-->
+                    <!--<script type="text/javascript" src="http://123.56.245.51/api.php?mod=js&bid=19"></script>-->
+                <!--</div>-->
+                <div class="zhiDing">
+                    <h1>置顶<span></span>精华帖</h1>
+                    <script type="text/javascript" src="http://123.56.245.51/api.php?mod=js&bid=16"></script>
+                </div>
+                <!--<div class="faTie" >-->
+                    <!--<script type="text/javascript" src="http://123.56.245.51/api.php?mod=js&bid=15"></script>-->
+                <!--</div>-->
+                <!--<div class="zhuanJia" >-->
+                    <!--<script type="text/javascript" src="http://123.56.245.51/api.php?mod=js&bid=17"></script>-->
+                    <!--<script type="text/javascript" src="http://123.56.245.51/api.php?mod=js&bid=18"></script>-->
+                <!--</div>-->
+                <div class="gongSiLiuYan" >
+                    <script type="text/javascript" src="http://123.56.245.51/api.php?mod=js&bid=20"></script>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+</div>
+    <!--底部广告-->
+    <img :src="imgUrl + bottomAd.adSrc" alt="" class="footerAdv" @click="adToVisit(bottomAd,'bottomAd')">
+    <!--底部logo-->
+    <div class="logo logo2"></div>
+    <!--占位-->
+    <div class="zhanwei"></div>
+    <!--回到顶部-->
+    <div id="top" @click="goToTop"></div>
+    <main-foot :user-info="userInfo" :current-position="1"></main-foot>
+</div>
+
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script type="text/javascript" src="../../js/vueFoot.js"></script>
+<script type="text/javascript" src="../../js/vueFilter.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/1_index.js"></script>
+<script type="text/javascript" src="script/index.js"></script>
+
+
+</body>
+</html>

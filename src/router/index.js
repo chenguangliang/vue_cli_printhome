@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import index from '@/views/index';
-import search from '@/views/search/search';
-import searchGoodsResults from '@/views/search/searchGoods_results';
-import productDetail from '@/views/productDetail/productDetail.vue';
+import index from '@/components/views/index';
+import search from '@/components/views/search/search';
+import searchGoodsResults from '@/components/views/search/searchGoods_results';
+import productDetail from '@/components/views/productDetail/productDetail.vue';
 import store from '../store/store';
 
 Vue.use(Router);
@@ -34,12 +34,14 @@ let router= new Router({
   ]
 })
 router.beforeEach((to,from,next)=>{
-  store.commit('turnOnLoading');
+  // alert(111)
+  console.log(10010);
   next();
 });
-router.beforeEach((to,from,next)=>{
-  store.commit('turnOffLoading');
-  next();
+router.afterEach((to,from)=>{
+  // alert(222)
+  console.log(10011);
+
 });
 
 export default router;

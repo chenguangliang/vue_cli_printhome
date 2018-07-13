@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>店铺首页</title>
+    <link rel="stylesheet" href="../../../css/common.css"/>
+    <link rel="stylesheet" href="../../css/5_dianPuShouYe/dianPu_index.css"/>
+    <link rel="stylesheet" href="../../../css/pullToRefresh.css"/>
+    <script type="text/javascript" src="../../../lib/adjust.js"></script>
+    <style type="text/css">
+
+        #pullDown {
+            height: 0.6rem;
+        }
+        #pullUp {
+            margin-bottom: 1.4rem;
+        }
+        /*#pullDown {
+            height: 0;
+            overflow: hidden;
+        }
+        #pullUp {
+            margin-top: 0.1rem;
+            margin-bottom: 1.4rem;
+        }*/
+    </style>
+</head>
+<body style="background: #f4f4f4;font-size: 0.3rem;height: 100%">
+
+<div class="top_wrapper">
+    <a class="back_wrapper" href="javascript:;" onclick="javascript:history.back(-1);">
+        <img class="back" src="../../img/back.png" alt=""/>
+    </a>
+    <div class="search_wrapper">
+        <input type="text" class="search_box" placeholder="搜索全部商品" v-model="queryData.keyword"/>
+        <div style="display: inline-block;">
+            <img class="chahao" src="../../img/chahao.png" alt=""/>
+            <img class="fangda" src="../../img/fangdajing.png" alt="" @click="searchList"/>
+        </div>
+    </div>
+    <select name="shop" id="shop" v-model="queryData.queryType">
+        <option value="shop">本店铺</option>
+        <option value="platform">全平台</option>
+    </select>
+
+</div>
+<div id="allWapper" v-cloak>
+    <div class="fixed_btn shopFlag" style="position: fixed;top: 0.88rem;width: 100%;z-index: 100">
+        <div class="btn_word_wrapper">
+            <div class="btn_word">
+            <p @click="changeDivHeight()">全部商品</p>
+
+            <p @click="toGoodsInfo()">宝贝分类</p>
+
+            <p @click="toShopInfo()">商家信息</p>
+
+            <p @click="toPopupInfo()">优惠券</p>
+
+            <div class="sort_btn">
+                <div class="sort sort_count" @click="clickAllSort('sale')">
+                    <span :style="sortDivStyle.sortSaleFont">销量</span>
+                    <img :src="sortDivStyle.sortSaleSrc" alt=""/>
+                </div>
+                <div class="sort sort_price" @click="clickAllSort('price')">
+                    <span :style="sortDivStyle.sortPriceFont">价格</span>
+                    <img :src="sortDivStyle.sortPriceSrc" alt=""/>
+                </div>
+                <div class="sort sort_new" style="color: rgb(230, 0, 18)" @click="clickAllSort('time')">
+                    <span :style="sortDivStyle.sortTimeFont">新品</span>
+                    <img :src="sortDivStyle.sortTimeSrc" alt=""/>
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </div>
+
+    <div id="wrapper">
+        <ul class="suolue_result wrapScrool">
+            <template v-if="!showShopInfo">
+                <div class="changeHeight" style="height: 1.5rem;" ></div>
+            </template>
+            <div class="shop_begin"  v-show="showShopInfo">
+                <div class="head_imgBg">
+                    <img class="shop_headImg"  src="../../img/maiJIaTouXiang.png" alt=""/>
+                    <img class="shoucang" :src="shoucangSrc" alt="" @click="addShopFavourite()"/>
+
+                    <p>{{ shopInfo.shopName}}</p>
+                </div>
+                <div class="btn_imgWrapper">
+                    <div class="btn_img" @click="showAllGoods()">
+                        <img src="../../img/all_goods.png" alt=""/>
+
+                    </div>
+                    <div class="btn_img">
+                        <img src="../../img/fenlei.png" alt="" @click="toGoodsInfo()"/>
+
+                    </div>
+                    <div class="btn_img">
+                        <img src="../../img/shangjia.png" alt="" @click="toShopInfo()"/>
+
+                    </div>
+                    <div class="btn_img">
+                        <img src="../../img/youhuiquan_btn.png" alt="" @click="toPopupInfo()"/>
+
+                    </div>
+                    <div></div>
+                </div>
+                <div class="btn_word_wrapper">
+                    <div class="btn_word">
+                        <p @click="showAllGoods()">全部商品</p>
+
+                        <p @click="toGoodsInfo()">宝贝分类</p>
+
+                        <p @click="toShopInfo()">商家信息</p>
+
+                        <p @click="toPopupInfo()">优惠券</p>
+
+                        <div class="sort_btn">
+                            <div class="sort sort_count" @click="clickAllSort('sale')">
+                                <span :style="sortDivStyle.sortSaleFont">销量</span>
+                                <img :src="sortDivStyle.sortSaleSrc" alt=""/>
+                            </div>
+                            <div class="sort sort_price" @click="clickAllSort('price')">
+                                <span :style="sortDivStyle.sortPriceFont">价格</span>
+                                <img :src="sortDivStyle.sortPriceSrc" alt="" />
+                            </div>
+                            <div class="sort sort_new" style="color: rgb(230, 0, 18)" @click="clickAllSort('time')">
+                                <span :style="sortDivStyle.sortTimeFont">新品</span>
+                                <img :src="sortDivStyle.sortTimeSrc" alt="" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+<!--推荐商品-->
+            <template v-for="proItem in shopProItemList">
+                <li class="suolue_goods">
+                    <a href="javascript:void(0)" style="display: inline-block" @click="toGoodsDetails(proItem)">
+
+                        <img class="suoluegoods_img"  :src="imgUrl + proItem.pictureUrl" alt=""/>
+
+                        <p class="suoluegoods_name">{{proItem.moduleName |subEndFilter(24) }}</p>
+                    </a>
+
+                    <template v-if="proItem.hasPrice == '2'">
+                        <p class="suoluegoods_price">欢迎询价</p>
+                    </template>
+                    <template v-else>
+                        <p class="suoluegoods_price">￥{{proItem.price}}</p>
+                    </template>
+                </li>
+            </template>
+<!--店内商品-->
+            <template  v-for="item in itemList">
+                <li class="suolue_goods">
+                    <a href="javascript:void(0)" style="display: inline-block" @click="gotoGood(item)">
+                        <template  v-if="item.picUrl==null || item.picUrl==''">
+                            <img class="suoluegoods_img"  :src="imgUrl + item.itemPicUrl" alt=""/>
+                        </template>
+                        <template v-else>
+                            <img class="suoluegoods_img" :src="imgUrl + item.picUrl" alt=""/>
+                        </template>
+
+                        <!--<p class="suoluegoods_name" v-substring1="[0,20]">{{item.itemName}}</p>-->
+                        <p class="suoluegoods_name">{{item.itemName |subEndFilter(24) }}</p>
+                    </a>
+
+                    <!--<template  v-if="item.skuInquiryPirce">
+                        <p class="suoluegoods_price">询价价格: ￥{{item.skuInquiryPirceFormatToString}}</p>
+                    </template>-->
+                    <template v-if="item.hasPrice == '1'">
+                        <!--<p class="suoluegoods_price">￥{{item.skuPriceFormatToString}}</p>-->
+                        <p class="suoluegoods_price">￥{{item.skuInquiryPirceFormatToString}}</p>
+                    </template>
+                    <template v-else>
+                        <p class="suoluegoods_price">欢迎询价</p>
+                    </template>
+                </li>
+            </template>
+            <!--店铺内部搜索商品没有时-->
+            <template v-if="!itemList">
+                <div style="margin-top:1rem">
+                    <div class="search_bg">
+                        <img src="../../img/search_bg.png" alt=""/>
+                    </div>
+                    <p style="text-align: center;font-size: 0.28rem;color:#333333">十分抱歉，没有找到您想要的相关商品</p>
+
+                    <p style="text-align: center;font-size: 0.26rem;color:#666666;margin-top: 0.4rem;">亲，我们换个词试试吧~</p>
+                </div>
+            </template>
+        </ul>
+    </div>
+</div>
+<div class="footer_fixed" id="footVm">
+    <div class="footer_wrapper" onclick="window.location.href='../../html/1_index/index.html'">
+        <img class="footer_img" src="../../img/pingtai.png" alt=""/>
+        <span>商城首页</span>
+    </div>
+    <div class="footer_wrapper" style="border-left: 1px solid #cccccc;border-right: 1px solid #cccccc;" onclick="reloadShopIndex()">
+        <!--<div class="footer_wrapper" style="border-left: 1px solid #cccccc;border-right: 1px solid #cccccc;" onclick="window.location.reload()">-->
+        <img class="footer_img" src="../../img/shouye_red.png" alt=""/>
+        <span class="red_word">店铺首页</span>
+    </div>
+    <div class="footer_wrapper">
+        <img class="footer_img" style="width: 0.36rem" src="../../img/shop_xiaoxiang.png" alt=""/>
+        <span @click="gotoClient">联系卖家</span>
+    </div>
+
+</div>
+<div class="concat" style="height: 100%;width: 100%;background-color: #fff;position: fixed;z-index: 1000;display: none">
+    <div class="" style="height: 42px;line-height: 42px;text-align: center;color:white;background:url('../../img/contractBg1.jpg');background-size: 100% 100%;position: fixed;width: 100%">
+        <div style="position:absolute;padding-top: 10px;height: 42px;width: 0.5rem;left: 0.2rem">
+            <img style="width: 0.2rem;left: 0.2rem;" src="../../img/backWhite.png" onclick="hideConcat()" alt=""/>
+        </div>
+        <span>印刷家客服</span>
+    </div>
+    <iframe id="kefu" src="" style=""  width="100%" height="100%" frameborder="0"></iframe>
+</div>
+<script charset="UTF-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../js/vueDirective.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/vueFilter.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../../lib/common.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/request.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../../lib/iscroll.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../../lib/pullToRefresh_fixHead.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../js/5_dianPuShouYe/dianPu_index.js"></script>
+<script charset="utf-8" type="text/javascript" src="script/index.js"></script>
+</body>
+</html>

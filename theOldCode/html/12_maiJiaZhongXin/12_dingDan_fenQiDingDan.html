@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>分期订单</title>
+    <link type="text/css" rel="stylesheet" href="../../../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/common1.css"/>
+    <link type="text/css" rel="stylesheet" href="../../../css/pullToRefresh.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/12_maiJiaZhongXin/12_dingDan_woDedingDan.css"/>
+    <script type="text/javascript" src="../../../lib/adjust.js"></script>
+</head>
+<body>
+<div id="buyerOrders" v-cloak>
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="../../html/12_maiJiaZhongXin/2_maiJiaZhongXin_maiJiaZhongXin.html" class="fanHui"></a>
+        分期订单
+        <a href="javascript:void(0);" class="suoSou" v-on:click="toSearch()"></a>
+    </div>
+    <div style="height: 1.58rem;"></div>
+</header>
+<!--选项卡-->
+<section>
+    <div class="scroll font_28">
+       <span class="topBtn " :class="submitInfo.isAllPay==0 || submitInfo.isAllPay==1 ?'':'red_word'" @click="changeOrderPanel(2)">全部</span>
+       <span class="topBtn borderL_E8 borderR_E8" :class="submitInfo.isAllPay==0?'red_word':''" @click="changeOrderPanel(0)">未付清</span>
+       <span class="topBtn" :class="submitInfo.isAllPay==1?'red_word':''" @click="changeOrderPanel(1)">已付清</span>
+    </div>
+</section>
+<!--主体-->
+<section>
+        <div id="wrapper">
+            <div class="tab_box" id="scroller">
+                <div class="quanBU wrapScrool" >
+                    <div style="height: 1.6rem"></div>
+                    <template v-if="orderList != null && orderList.length > 0">
+                        <template v-for="order in orderList">
+                            <div class="dingDan">
+                                <div class="dianPu">
+                                    <template v-if="order.platformId == 2">
+                                        <span class="greenPHLogo"></span>
+                                    </template>
+                                    <template v-else-if="order.platformId == null || order.platformId == 1">
+                                        <span class="phLogo"></span>
+                                    </template>
+                                    <template v-for="shop in jsonArray">
+                                        <template v-if="order.orderId == shop.orderId">
+                                            <a href="javascript:void(0);" class="name" v-on:click="toShop(shop.shopId)">{{shop.shopName}}</a>
+                                        </template>
+                                    </template>
+                                    <!--右上角状态-->
+                                    <a href="javascript:void(0);" class="zhuangTai">
+                                        <template v-if="order.orderApInfo[0] && order.orderApInfo[0].isAllPay==0">未付清</template>
+                                        <template v-else>已付清</template>
+
+                                    </a>
+                                </div>
+                                <a class="xiangQing" href="javascript:void(0);">
+                                    <template v-for="entityItem in order.items">
+                                        <template v-for="json in jsonArray">
+                                            <template v-if="order.orderId == json.orderId">
+                                                <template v-for="jsonItem in json.items">
+                                                    <template v-if="entityItem.skuId == jsonItem.skuId">
+                                                        <div class="top clearfix">
+                                                            <img v-bind:src="img_url + jsonItem.skuPicUrl" alt="" class="dianPuLogo" v-on:click="toOrderDetail(order.orderId,order.passKey)"/>
+                                                            <p class="shangPin" v-on:click="toOrderDetail(order.orderId,order.passKey)">{{jsonItem.itemName}}</p>
+                                                            <p class="leiXing" v-on:click="toOrderDetail(order.orderId,order.passKey)">
+                                                                <template v-for="itemAttrName in jsonItem.itemAttr">
+                                                                    <span style="margin-right:5px">{{itemAttrName.name}} :<template v-for="itemAttrValue in itemAttrName.values">{{itemAttrValue.name}}</template>
+                                                                    </span>
+                                                                </template>
+                                                            </p>
+                                                            <p class="money">
+                                                                <template v-if="order.paymentMethod == 3">{{jsonItem.payPrice}}积分</template>
+                                                                <template v-else>¥{{jsonItem.payPrice}}</template>
+                                                            </p>
+                                                            <p class="num">X {{jsonItem.num}}</p>
+                                                        </div>
+                                                    </template>
+                                                </template>
+                                            </template>
+                                        </template>
+                                    </template>
+                                    <div class="bottom">
+                                        <!--<p>共计<span>12345678901234567890.12</span>件商品</p>-->
+                                        <p>合计：
+                                        <template v-if="order.orderApInfo[0]">
+                                            <span>¥{{order.orderApInfo[0].allPayPirce}}
+
+                                        <!--<template v-if="order.paymentMethod == 3">{{order.integral}}积分</template>
+                                        <template v-else>¥{{order.paymentPrice}}</template>-->
+                                            </span>
+                                        </template>
+                                        </p>
+                                        <!--<p>（含运费￥123456789.12）</p>-->
+                                    </div>
+                                </a>
+                                <div class="caoZuo">
+                                    <template v-if="order.orderApInfo[0] && order.orderApInfo[0].isAllPay==0">
+                                        <template v-if="order.currentPeriodPayInfo">
+                                            <span class="orderRedBtn" :paytotal=" order.currentPeriodPayInfo.apPayTotal" :overdueday="order.currentPeriodPayInfo.apOverdueDay" :overduefee="order.currentPeriodPayInfo.apOverdueFee" v-on:click="toPayForAp($event,order.orderId,order.currentPeriodPayInfo.orderAccountPeriodId,order.currentPeriodPayInfo.id)">本期支付</span>
+                                        </template>
+                                        <!--<span class="orderGrayBtn crossPayBtn" @click="crossPay(order.orderId)">跨期支付</span>-->
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+                        <!--<p  class="printHome">printhome.com</p>-->
+                    </template>
+                    <template v-else>
+                        <div class="wuDingDan" style="background: #fff;height: 12rem;margin-top: -1rem;padding-top: 1rem;">
+                            <div class="zhiFuChengGong">
+                                <img src="../../img/chenggongbg@3x.png" alt=""/>
+                            </div>
+                            <h2>您还没有订单信息哦！</h2>
+                            <a href="../../html/1_index/index.html" class="tiaoZhuan">立即选购</a>
+                            <!--<p  class="printHome">printhome.com</p>-->
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+</section>
+<!--搜索弹窗-->
+    <div class="searchWin" style="overflow: hidden;width: 100%;">
+        <div class="header">
+            <a href="javascript:;" class="fanHui" @click="cancelSearch()"></a>
+            搜索订单
+        </div>
+        <div style="height: 0.88rem"></div>
+        <div class="suoSou">
+            <p>
+                <span>订单编号：</span>
+                <input style="width: 3rem" placeholder="请输入订单编号" type="text" maxlength="20" id="orderId" v-model="submitInfo.orderId"/>
+            </p>
+
+            <p class="dateWrap">
+                <span>下单时间：</span>
+                <input type="date"  placeholder="时间选择" id="startCreateTime" style="width: 2.2rem" />
+                -
+                <input type="date" placeholder="时间选择" id="endCreateTime" style="width: 2.2rem" />
+            </p>
+            <p>
+                <span>订单状态：</span>
+                <select class="graySelect" style="width: 3rem;" id="yq_state" v-model="submitInfo.yq_state">
+                    <option value="">请选择</option>
+                    <option value="1">待付款</option>
+                    <option value="2">待配送</option>
+                    <option value="3">待收货</option>
+                    <option value="4">待评价</option>
+                    <option value="5">已完成</option>
+                    <option value="6">已取消</option>
+                    <option value="7">已关闭</option>
+                </select>
+            </p>
+            <p class="dateWrap">
+                <span>本期付款时间：</span>
+                <input type="date"  placeholder="时间选择" id="currentPeriodStartTime" style="width: 2.2rem" />
+                -
+                <input type="date" placeholder="时间选择" id="currentPeriodEndTime" style="width: 2.2rem" />
+            </p>
+            <p>
+                <a href="javascript:;" class="btn resetSearch" @click="resetForm()">重置</a>
+                <a href="javascript:;" class="btn searchNow" @click="searchOrder()">搜索</a>
+
+            </p>
+        </div>
+    </div>
+<!--跨期支付弹窗-->
+    <section>
+        <div class="crossPay" id="crossPay" style="display: none">
+            <div class="dianpu" id="dian">
+                <img src="../../img/cha.png" class="chahao" alt="" @click="closeWin()">
+                <h3>跨期支付</h3>
+                <div class="liebiao">
+                    <p class="firstTit" style="">
+                        <span class="tit1" style="text-align: center">期数</span>
+                        <span  class="tit2">分期编号</span>
+                        <span  class="tit3">金额</span>
+                    </p>
+                    <!--第一期要单独拿出来，后边的可以循环-->
+                    <!--<p style="border: none">
+                        <span class="tit1"><img src="../../img/quickOrder/fang_defaultBtn.png" alt="" class="selStageBtn">首期</span>
+                        <span class="tit2">NO1</span>
+                        <span class="tit3">￥12346.00</span>
+                    </p>-->
+
+                    <template >
+                        <p v-for="(periodItem,index) in periodItemList">
+                            <span class="tit1">
+                               <template v-if="periodItem.isPay==0">
+                                        <img :src="selBtnIndex==index?'../../img/quickOrder/fang_selBtn.png':'../../img/quickOrder/fang_defaultBtn.png'" alt="" class="selStageBtn" @click="selPeriod(index)">
+                                </template>
+                                <template v-else>
+                                    <span style="display: inline-block;width: 0.4rem"></span>
+                                </template>{{periodItemList.length==(index+1)?'尾':periodName[index]}}期
+                            </span>
+                            <span class="tit2">N{{index < 9 ? '0'+(index+1):(index+1)}}</span>
+                            <span class="tit3">￥{{periodItem.payPrice}}</span>
+                        </p>
+                    </template>
+
+                </div>
+                <a href="javascript:;" class="guanbi" @click="hideDiv('dianputanchuang')">去支付</a>
+            </div>
+        </div>
+    </section>
+<!--回到顶部-->
+<section>
+    <div id="top"></div>
+</section>
+    <div class="zhezhao" id="payForPeriod">
+        <div class="con"  style="height: 3rem;margin-top: -2rem;">
+            <h5>逾期提示</h5>
+            <p style="height: 1.5rem;text-align: left;padding: 0 0.2rem">您的订单已逾期<i id="overDueDay" style="color: #e60012"></i>天，逾期手续费为:<i id="apOverdueFee"  style="color: #e60012"></i>元。本金加手续费合计为：<i id="paytotal"  style="color: #e60012"></i>。</p>
+            <div class="dashed-line"></div>
+            <span class="queDing">取消</span><span class="liuZhe" v-on:click="toPayForApForOverDue()" style="padding: 0 0.1rem;width: auto">立即支付</span>
+        </div>
+    </div>
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/iscroll.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/pullToRefresh_fixHead.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/12_maiJiaZhongXin/12_dingDan_woDedingDan.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/jsonUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/vueFilter.js"></script>
+<!--<script charset="utf-8" type="text/javascript" src="script/buyer-order-list.js"></script>-->
+<script charset="utf-8" type="text/javascript" src="script/12_dingDan_fenQiDingDan.js"></script>
+</body>
+</html>

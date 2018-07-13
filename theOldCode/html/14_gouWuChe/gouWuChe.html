@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>印刷家</title>
+    <link rel="stylesheet" href="../../../css/common.css"/>
+    <link rel="stylesheet" href="../../css/common1.css"/>
+    <link rel="stylesheet" href="../../css/swiper.min.css"/>
+    <link rel="stylesheet" href="../../../css/animate.css"/>
+    <link rel="stylesheet" href="../../css/14_gouWuChe/gouWuChe.css"/>
+    <link rel="stylesheet" href="../../css/7_lingQuanZhongXin/lingQuanZhongXin.css"/>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+
+        .fade-enter-active, .fade-leave-active {
+            transition: opacity .1s
+        }
+        .fade-enter, .fade-leave-active {
+            opacity: 0
+        }
+
+        .coupon-enter-active {
+            transition: all .3s ease;
+        }
+        .coupon-leave-active {
+            transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+        }
+        .coupon-enter, .coupon-leave-active {
+            transform: translateY(10px);
+            opacity: 0;
+        }
+
+
+    </style>
+    <script type="text/javascript" src="../../../lib/adjust.js"></script>
+</head>
+<body>
+<div id="cart">
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="javascript:;" class="return" @click="gotoIndex"></a>
+        <span style="position: absolute;left: 43%;">购物车 <template v-if="myCart.allQuantity && myCart.allQuantity !='0' "><span style="font-size: 0.24rem">({{myCart.allQuantity>999.9999?'999+':myCart.allQuantity }})</span></template></span>
+        <a href="javascript:;" class="bianJi"  @click="editMode=!editMode;couponDialog=false" ><template v-if="editMode">完成</template><template v-else>编辑</template></a>
+    </div>
+    <div style="height: 0.92rem;"></div>
+</header>
+<!--店铺订单-->
+<section id="orderLists">
+    <template v-if="myCart.shops.length == 0">
+        <div class="tiShi">
+            <img src="../../img/gouWuCheBg.png" alt=""/>
+            <p>您还没有选购商品哦~</p>
+            <a href="javascript:void(0);" @click="gotoIndex" class="hongSe">赶紧挑选吧  ></a>
+        </div>
+    </template>
+    <template v-else>
+        <template v-if="editMode">
+            <template v-for="shop of myCart.shops">
+                <div class="ziying">
+                    <div class="ziyingtitle">
+                        <img :src="shop.editChecked ? '../../img/yes-select.png' :'../../img/no-select.png' " alt="" class="select" @click="checkedEditShop(shop) "/>
+                        <img src="../../img/shouye.png" alt="" class="dianPuLogo"/>
+                        <a href="javascript:;" class="dianPuMing">{{shop.shopTitle}}</a>
+                    </div>
+                    <!--data.result.myCart.shops[0].products[0].promotions-->
+                    <template v-for="(product,index) in shop.products">
+                        <template v-if="product.itemBuyType==4"><!--'商品购买类型：1=普通商品、2=板材类商品、3=橡皮布商品、4=套餐商品',-->
+                            <div class="ziyingtitle po_re" style="background:transparent;">
+                                <template v-if="product.status != 4 || product.qty <= 0 || !product.hasPrice">
+                                    <img class="select dange" src="../../img/UnSelect.png">
+                                    <span class="color_e60012 font_22 ver_top">【已失效】</span>
+                                </template>
+                                <template v-else>
+                                    <img class="select dange" :src="product.editChecked ? '../../img/yes-select.png' :'../../img/no-select.png'" alt="" @click="checkedEditProduct(shop,product)">
+                                </template>
+                                <span class="font_22 color_999 ver_top">{{product.title}}</span>
+                                <!--<span class="color_e60012 font_26 ver_top">￥{{product.payPrice}}</span>-->
+                                <span class="jiajian clearfix" style="top:0.1rem;">
+                                    <span class="jian" @click="product.quantity > 1 ? subProduct(shop,product): popUp_auto_false(1500,'不能再减了！')">-</span>
+                                    <input type="text" class="num bg_tran" v-model="product.quantity"  @keydown="tempQuantity = product.quantity;" @keyup.self="numInputForLengthForVue($event,5,getItemUnitByWS(product.skuId),product,'quantity');" @blur="updateProduct($event,shop,product)">
+                                    <span class="jia" @click="addProduct(shop,product)">+</span>
+                                </span>
+                            </div>
+                            <template v-for="item in product.itemMealDTO.itemMealDetails">
+                                <div class="ziyingshangpin">
+                                    <div class="xuanKuang">
+                                        <!--<img class="select dange" :src="disUrl + product.checkPicSrc" alt="" @click="product.disabed ?'':checkedProduct(shop,product)">-->
+                                    </div>
+                                    <div class="shangpintu-wrapper">
+                                        <template v-if="item.skuInfo.skuPics && item.skuInfo.skuPics.length > 0"><!--没有sku图片就显示spu图片-->
+                                            <img class="shangpintu" :src="imgUrl + item.skuInfo.skuPics[0].picUrl" alt="" @click="gotoProductDetail(item)">
+                                        </template>
+                                        <template v-else>
+                                            <img class="shangpintu" :src="imgUrl" alt="" @click="gotoProductDetail(item)">
+                                        </template>
+                                    </div>
+                                    <div class="shangpinming" @click="gotoProductDetail(item)">
+                                        <p class="dianming" style="color: #999">{{item.skuInfo.itemName}}</p>
+                                        <p class="leixing" style="color: #999">
+                                            {{item.skuInfo.attributeNames}}
+                                        </p>
+                                        <!--<p class="jiage hongSe">￥{{item.skuInfo.sellPrices[0].sellPrice}}</p>-->
+                                    </div>
+                                </div>
+                            </template>
+                        </template>
+                        <template v-else>
+                            <div class="ziyingshangpin">
+                                <div class="xuanKuang">
+                                    <img class="select dange" :src="product.editChecked ? '../../img/yes-select.png' :'../../img/no-select.png' " alt="" @click="checkedEditProduct(shop,product)">
+                                </div>
+                                <div class="shangpintu-wrapper">
+                                    <img class="shangpintu" :src="imgUrl + product.src" alt="" >
+                                </div>
+                                <div class="gaiBian">
+                                <span class="jiaJian clearfix">
+                                    <span class="minus" @click="product.quantity > 1 ? subProduct(shop,product): popUp_auto_false(1500,'不能再减了！')">-</span>
+                                    <input type="text" class="shuRu" v-model="product.quantity"  @keydown="tempQuantity = product.quantity;" @keyup.self="numInputForLengthForVue($event,5,getItemUnitByWS(product.skuId),product,'quantity');" @blur="updateProduct($event,shop,product)">
+                                    <span class="plus" @click="addProduct(shop,product)">+</span>
+                                </span>
+                                    <!--标识图片-->
+                                    <template v-if="product.accountPeriodTemplateDTO">
+                                    <span class="periodImg_editMode">
+                                        <!--分期标识图片-->
+                                        <template v-if="product.accountPeriodTemplateDTO.temType==1">
+                                            <img src="../../img/fenqi.png" alt="" style="height: 0.3rem; width: 0.9rem; float: right;">
+                                        </template>
+                                        <!--延期标识图片-->
+                                        <template v-if="product.accountPeriodTemplateDTO.temType==2">
+                                            <img src="../../img/yanqi.png" alt="" style="height: 0.3rem; width: 0.9rem; float: right;">
+                                        </template>
+                                        <!--定金标识图片-->
+                                        <template v-if="product.accountPeriodTemplateDTO.temType==3">
+                                            <img src="../../img/dingjin1.png" alt="" style="height: 0.3rem; width: 0.9rem; float: right;">
+                                        </template>
+                                    </span>
+                                    </template>
+                                    <p class="sub_4rem_point_p">
+                                        <template v-for="attr in product.attrs" >{{ attr.name + ':' +  attr.value }};</template>
+                                        <!--temType 1、分期 2、延期 3、定金-->
+                                        <template v-if="product.apTemplateId && product.accountPeriodTemplateDTO.temType">
+                                            <template v-if="product.accountPeriodTemplateDTO.temType==1">
+                                                分期: {{product.accountPeriodTemplateDTO.apNum}}期 <template v-if="!product.accountPeriodTemplateDTO.needFirstPay">(延)</template>
+                                            </template>
+                                            <template v-if="product.accountPeriodTemplateDTO.temType==2">支付类型: 延期支付</template>
+                                            <template v-if="product.accountPeriodTemplateDTO.temType==3">支付类型: 定金支付</template>
+                                        </template>
+                                        <template v-else>
+                                            全款
+                                        </template>
+
+                                    </p>
+                                </div>
+                                <i v-show="product.itemBuyType==1" class="xiaLa" @click="initUpdateProduct(product);"></i>
+                            </div>
+                        </template>
+
+                        <template v-if="index<shop.products.length-1">
+                            <div style="width: 6.3rem;margin:0 auto;height: 1px;background-color: #e8e8e8;"></div>
+                        </template>
+                    </template>
+
+                </div>
+
+            </template>
+        </template>
+        <template  v-else>
+            <template v-for="shop of myCart.shops">
+                <div class="ziying">
+                    <div class="ziyingtitle">
+                        <img :src="disUrl + shop.checkPicSrc" alt="" class="select" @click="shop.disabled ? '' :checkedShop(shop) "/>
+                        <img src="../../img/shouye.png" alt="" class="dianPuLogo"/>
+                        <a href="javascript:;" class="dianPuMing" @click="gotoShop(shop)">{{shop.shopTitle}}</a>
+                        <span class="ling">| <i class="hongSe" @click="initCouponDialog(shop)">领券</i></span>
+                    </div>
+                    <!--data.result.myCart.shops[0].products[0].promotions-->
+                    <template v-for="(product,index) in shop.products">
+                        <template v-if="product.itemBuyType==4"><!--'商品购买类型：1=普通商品、2=板材类商品、3=橡皮布商品、4=套餐商品',-->
+                            <div class="ziyingtitle po_re" style="background:transparent;">
+                                <template v-if="product.status != 4 || product.qty <= 0 || !product.hasPrice">
+                                    <img class="select dange" src="../../img/UnSelect.png">
+                                    <span class="color_e60012 font_22 ver_top">【套餐已失效】</span>
+                                </template>
+                                <template v-else>
+                                    <img class="select dange" :src="disUrl + product.checkPicSrc" alt="" @click="product.disabed ?'':checkedProduct(shop,product)">
+                                </template>
+
+                                <span class="font_22 color_333 ver_top">{{product.title}}</span>
+                                <span class="color_e60012 font_26 ver_top">￥{{product.payPrice}}</span>
+                                <span class="jiajian clearfix" style="top:0.1rem">
+                                    <span class="jian" @click="product.quantity > 1 ? subProduct(shop,product): popUp_auto_false(1500,'不能再减了！')">-</span>
+                                    <input type="text" class="num bg_tran" v-model="product.quantity"  @keydown="tempQuantity = product.quantity;" @keyup.self="numInputForLengthForVue($event,5,getItemUnitByWS(product.skuId),product,'quantity');" @blur="updateProduct($event,shop,product)">
+                                    <span class="jia" @click="addProduct(shop,product)">+</span>
+                                </span>
+                            </div>
+                            <template v-for="item in product.itemMealDTO.itemMealDetails">
+                                <div  class="ziyingshangpin">
+                                    <div class="xuanKuang">
+                                        <!--<img class="select dange" :src="disUrl + product.checkPicSrc" alt="" @click="product.disabed ?'':checkedProduct(shop,product)">-->
+                                    </div>
+                                    <div class="shangpintu-wrapper">
+                                        <template v-if="item.skuInfo.skuPics && item.skuInfo.skuPics.length > 0"><!--没有sku图片就显示spu图片-->
+                                            <img class="shangpintu" :src="imgUrl + item.skuInfo.skuPics[0].picUrl" alt="" @click="gotoProductDetail(item)">
+                                        </template>
+                                        <template v-else>
+                                            <img class="shangpintu" :src="imgUrl" alt="" @click="gotoProductDetail(item)">
+                                        </template>
+                                    </div>
+                                    <div class="shangpinming" @click="gotoProductDetail(item)">
+                                        <p class="dianming">{{item.skuInfo.itemName}}</p>
+                                        <p class="leixing">
+                                            {{item.skuInfo.attributeNames}}
+                                        </p>
+                                        <p class="jiage hongSe">￥{{item.skuInfo.sellPrices[0].sellPrice}}</p>
+                                    </div>
+                                </div>
+                            </template>
+                        </template>
+                        <template v-else>
+                            <div  class="ziyingshangpin">
+                                <div class="xuanKuang">
+                                    <img class="select dange" :src="disUrl + product.checkPicSrc" alt="" @click="product.disabed ?'':checkedProduct(shop,product)">
+                                </div>
+                                <div class="shangpintu-wrapper">
+                                    <img class="shangpintu" :src="imgUrl + product.src" alt="" @click="gotoProductDetail(product)">
+                                </div>
+                                <div class="shangpinming" @click="gotoProductDetail(product)">
+                                    <p class="dianming">{{product.title}}</p>
+                                    <p class="leixing">
+                                        <template v-if="product.itemBuyType==2 || product.itemBuyType==3">
+                                            <!--板材类商品-->
+                                            {{product.boardItemSkuStr}}
+                                        </template>
+                                        <template v-else>
+                                            <template v-for="attr in product.attrs">
+                                                {{attr.name}}:{{attr.value}};
+                                            </template>
+                                        </template>
+
+                                        <!--temType 1、分期 2、延期 3、定金-->
+                                        <template v-if="product.apTemplateId && product.accountPeriodTemplateDTO.temType">
+                                            <template v-if="product.accountPeriodTemplateDTO.temType==1">
+                                                分期: {{product.accountPeriodTemplateDTO.apNum}}期 <template v-if="!product.accountPeriodTemplateDTO.needFirstPay">(延)</template>
+                                            </template>
+                                            <template v-if="product.accountPeriodTemplateDTO.temType==2">支付类型: 延期支付</template>
+                                            <template v-if="product.accountPeriodTemplateDTO.temType==3">支付类型: 定金支付</template>
+                                        </template>
+                                        <template v-else>
+                                            全款
+                                        </template>
+                                    </p>
+                                    <p class="jiage" :class="product.accountPeriodTemplateDTO && product.accountPeriodTemplateDTO.temType==3?'leixing':'hongSe'">
+                                        <template v-if="product.status != 4">
+                                            商品已下架！
+                                        </template>
+                                        <template v-else>
+                                            <template v-if="product.hasPrice || product.skuPrice"><!--有报价的商品要把价格显示出来-->
+                                                <template v-if="product.skuPrice != product.payPrice">
+                                                    <template v-if="product.fareLockFlag">
+                                                        锁定价¥{{product.payPrice}}
+                                                    </template>
+                                                    <template v-else>
+                                                        促销价¥{{product.payPrice}}
+                                                    </template>
+                                                </template>
+                                                <template v-else>￥{{product.skuPrice}}</template>
+                                            </template>
+                                            <template v-else>
+                                                暂无报价
+                                            </template>
+                                        </template>
+                                    </p>
+                                    <template v-if="product.accountPeriodTemplateDTO && product.accountPeriodTemplateDTO.temType==3">
+                                        <p class="jiage hongSe">
+                                            定金:￥{{product.accountPeriodTemplateDTO.apPrice}}
+                                        </p>
+                                    </template>
+
+                                </div>
+                                <span class="jiajian clearfix">
+                                    <span class="jian" @click="product.quantity > 1 ? subProduct(shop,product): popUp_auto_false(1500,'不能再减了！')">-</span>
+                                    <input type="text" class="num" v-model="product.quantity"  @keydown="tempQuantity = product.quantity;" @keyup.self="numInputForLengthForVue($event,5,getItemUnitByWS(product.skuId),product,'quantity');" @blur="updateProduct($event,shop,product)">
+                                    <span class="jia" @click="addProduct(shop,product)">+</span>
+                            </span>
+                                <!--标识图片-->
+                                <template v-if="product.accountPeriodTemplateDTO">
+                                    <span class="periodImg">
+                                        <!--分期标识图片-->
+                                        <template v-if="product.accountPeriodTemplateDTO.temType==1">
+                                            <img src="../../img/fenqi.png" alt="" style="height: 0.3rem; width: 0.9rem; float: right;">
+                                        </template>
+                                        <!--延期标识图片-->
+                                        <template v-if="product.accountPeriodTemplateDTO.temType==2">
+                                            <img src="../../img/yanqi.png" alt="" style="height: 0.3rem; width: 0.9rem; float: right;">
+                                        </template>
+                                        <!--定金标识图片-->
+                                        <template v-if="product.accountPeriodTemplateDTO.temType==3">
+                                            <img src="../../img/dingjin1.png" alt="" style="height: 0.3rem; width: 0.9rem; float: right;">
+                                        </template>
+                                    </span>
+                                </template>
+                                <template v-if="product.promotions.length > 0 ">
+                                    <br>
+                                    <div class="manjianscroll">
+                                        <span class="manjian-hong hongSe">满减</span>
+                                        <div class="swContainer" :class="product.promotions.length>1?'swiper-container':''">
+                                            <div class="swiper-wrapper">
+                                                <template v-for="promotion in  product.promotions">
+                                                    <template v-if="promotion.type == '2'">
+                                                        <div class="swSlide swiper-slide">
+                                                            <a href="javascript:;" title="">满<span v-text="promotion.meetPrice"></span>元,减<span v-text="promotion.discountPrice"></span>元</a>
+                                                        </div>
+                                                    </template>
+                                                </template>
+                                            </div>
+                                        </div>
+                                        <a href="javascript:;" class="detail" @click="initactivityDetailsProp(product.promotions)">详情<img src="../../img/jiantouhong@3x.png" alt="详情"></a>
+                                    </div>
+                                </template>
+                            </div>
+                        </template>
+
+                        <template v-if="index<shop.products.length-1">
+                            <div style="width: 6.3rem;margin:0 auto;height: 1px;background-color: #e8e8e8;"></div>
+                        </template>
+                    </template>
+
+                </div>
+
+            </template>
+        </template>
+    </template>
+</section>
+<!--产品推荐-->
+<section>
+    <div class="chanPinTuiJian">
+        <div class="title">
+            <div><img src="../../img/chanPinTuiJian.png" alt="">产品推荐</div>
+        </div>
+        <div class="neiRong">
+            <a :href="key.adURL" v-for="(key,value) in index_advertises_list">
+                <img v-if="index_advertises_list.length > 0" :src="imgUrl + key.adSrc" alt="">
+            </a>
+        </div>
+    </div>
+</section>
+<!--印刷家-->
+<section>
+    <p class="printHome">printhome.com</p>
+</section>
+<!--底部占位-->
+<section>
+    <div style="height: 0.84rem;"></div>
+</section>
+<!--底部-->
+    <template v-if="editMode">
+        <footer>
+            <div class="footer">
+                <div class="quanXuan">
+                    <img class="select quanxuan"  :src="myCart.editChecked ? '../../img/yes-select.png' :'../../img/no-select.png' " alt="" @click="eidtCheckedAll">
+                    <span >全选</span>
+                </div>
+                <div class="bianjizhong">
+                    <div class="del shanChu" @click="delList.length > 0 ? delDialog = true  : popUp_auto_false(1500,'请先选择商品!')">删除</div>
+                    <div class="shoucang" @click="shoucang()">收藏商品</div>
+                </div>
+            </div>
+        </footer>
+    </template>
+    <template v-else>
+        <footer>
+            <div class="footer">
+                <div class="quanXuan">
+                    <img class="select quanxuan"  :src="myCart.checked ? '../../img/yes-select.png' :'../../img/no-select.png' " alt="" @click="checkAll">
+                    <span>全选</span>
+                </div>
+                <div class="weibianji">
+                    <div class="del quJieSuan" @click="goOrderview()">去结算</div>
+                    <p>
+                        <span class="heJi"><span class="totalTit" >合计(不含运费):</span><label class="hongSe">￥{{myCart.payTotal}}</label></span> <br>
+                        <!--  <span>运费:<label class="hongSe">￥255588808.00</label></span>-->
+                    </p>
+                </div>
+                <div class="bianjizhong">
+                    <div class="del shanChu">删除</div>
+                    <div class="shoucang">收藏商品</div>
+                </div>
+            </div>
+        </footer>
+    </template>
+
+    <!--优惠券弹窗-->
+ <transition name="coupon">
+<div class="zheZhao" id="zheZhao" v-show="couponDialog" v-cloak>
+        <div class="lingQuan">
+            <p class="biaoTi">优惠券<span @click="closeCouponDialog()"></span></p>
+            <div class="quan">
+                <template v-if="couponsDTOs == ''">
+                    <p class="biaoTi">暂无可以领取的优惠券</p>
+                </template>
+                <template v-else>
+                    <template v-for="coupon  in couponsDTOs">
+                        <div :class="getCouponType(coupon)">
+                            <div class="content" @click="coupon.isGet == 'true'?'' : getCoupons(coupon)">
+                                <div :class=" coupon.JJGuoqi == 'true' ? 'zhuangtai':''"></div>
+                                <p class="jine">
+                                    <template v-if="coupon.couponType == '1'">
+                                        ¥<span>{{coupon.couponAmount}}</span>
+                                    </template>
+                                    <template v-if="coupon.couponType == '2'">
+                                        <span>{{coupon.couponAmount}}</span>折
+                                    </template>
+                                    <template v-if="coupon.couponType == '3'">
+                                        ¥<span>{{coupon.couponAmount}}</span>
+                                    </template>
+                                </p>
+
+                                <p class="mingcheng">{{coupon.couponName}}</p>
+
+                                <p class="riqi">至<span>{{coupon.couponEndTime | timestampFormat('YYYY.MM.DD')}}</span>截止</p>
+
+                                <p class="shuliang">限领<span>{{coupon.allowGetNum}}</span>张</p>
+
+
+                                <p class="qian">
+                                    <template v-if="coupon.couponType == '1'">
+                                        满{{coupon.meetPrice}}元可用
+                                    </template>
+                                    <template v-if="coupon.couponType == '2'">
+                                        最高抵扣{{coupon.couponMax}}元
+                                    </template>
+                                    <template v-if="coupon.couponType == '3'">
+                                        无门槛
+                                    </template>
+                                </p>
+                                <!--是否过期、领取、领完-->
+                                <template v-if="coupon.state == '2' || coupon.state == '3'">
+                                    <img src="../../img/yiguoqi@3x.png" alt="" id="yiguoqi"/>
+                                </template>
+                                <template v-else-if="coupon.isGet=='true'">
+                                    <img src="../../img/yilingqu@3x.png" alt="" style="display: block;" class="yilingqu"/>
+                                </template>
+                                <template v-else-if="coupon.state=='7'">
+                                    <img src="../../img/yilingwan@3x.png" alt="" id="yilingwan"/>
+                                </template>
+                            </div>
+                            <div class="leibie">
+                                <div  @click="getCouponDetail(coupon.couponId)">
+                                    <template v-if="coupon.couponUsingRange == '1'">
+                                        平台通用类
+                                    </template>
+                                    <template v-if="coupon.couponUsingRange == '2'">
+                                        店铺通用类
+                                    </template>
+                                    <template v-if="coupon.couponUsingRange == '3'">
+                                        品类通用类
+                                    </template>
+                                    <template v-if="coupon.couponUsingRange == '4'">
+                                        指定商品类
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </template>
+            </div>
+        </div>
+    </div>
+    </transition>
+
+<!--优惠卷详情弹框-->
+    <transition name="fade">
+    <section v-show="couponDetailDialog" >
+    <div :class="getCouponDetailClass(couponDetail.couponInfo.couponUsingRange) ">
+            <template v-if="couponDetail.couponInfo.couponUsingRange == 1">
+                <div class="pingtai">
+                    <h3>平台通用类优惠券</h3>
+                    <p>此优惠券全平台所有商品均可使用</p>
+                    <span id="close"></span>
+                </div>
+            </template>
+        </div>
+        <template v-if="couponDetail.couponInfo.couponUsingRange != 1" >
+            <div class="dianpu"  v-cloak>
+                <h3>
+                    <template v-if="couponDetail.couponInfo.couponUsingRange == '2'">
+                        适用店铺
+                    </template>
+                    <template v-if="couponDetail.couponInfo.couponUsingRange == '3'">
+                        适用分类
+                    </template>
+                    <template v-if="couponDetail.couponInfo.couponUsingRange == '4'">
+                        适用商品
+                    </template>
+                </h3>
+
+                <div class="liebiao">
+                    <template v-if="couponDetail.couponInfo.couponUsingRange == '2'">
+                        <ul>
+                            <template v-for="(key,value) in couponDetail.pager.records">
+                                <li><a @click="gotoShopIndex(key)">{{key.itemName}}</a></li>
+                            </template>
+                        </ul>
+                        <p>printhome.com</p>
+                    </template>
+                    <template v-if="couponDetail.couponInfo.couponUsingRange == '3'">
+                        <div id="dianjiyu">
+                            <template v-for="oneLevel in couponDetail.categoryes">
+                                <template v-if="oneLevel.canShow">
+                                    <div class="pinLeiLieBiao">
+                                        <div class="kezi">
+                                            <p class="yiji yijibg">{{oneLevel.categoryCName}}</p>
+                                        </div>
+                                        <template v-for="twoLevel in oneLevel.children">
+                                            <template v-if="twoLevel.canShow">
+                                                <div class="erji">
+                                                    <div class="sanji">
+                                                        <li class="sanji_top sanji_top_color">{{twoLevel.categoryCName}}（{{twoLevel.children.length}}）</li>
+                                                        <div class="sanji_bottom">
+                                                            <template v-for="threeLevel in twoLevel.children">
+                                                                <a href="javascript:;">{{threeLevel.categoryCName}}</a>
+                                                            </template>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                        </template>
+                                    </div>
+                                </template>
+                            </template>
+                        </div>
+                        <p>printhome.com</p>
+                    </template>
+                    <template v-if="couponDetail.couponInfo.couponUsingRange == '4'">
+                        <h3 class="title">商品列表</h3>
+                        <ul>
+                            <template v-for="(key,value) in couponDetail.pager.records">
+                                <li><a href="javascript:;" @click="gotoProductDetail(key)">{{key.itemName}}</a></li>
+                            </template>
+
+                        </ul>
+                        <p>printhome.com</p>
+                    </template>
+                </div>
+                <a href="javascript:void(0);" @click="couponDetailDialog=!couponDetailDialog" class="guanbi">关闭</a>
+            </div>
+        </template>
+    </section>
+    </transition>
+
+
+
+<!--商品属性弹窗-->
+    <div class="win_prop" v-show="itemDialog" v-cloak>
+        <div class="prop_bg"></div>
+        <div class="prop_wrap">
+            <div class="prop_con">
+                <span class="prop_imgWrap">
+                    <img class="prop_img" @click="skuId ? skuSwiperFlag = !skuSwiperFlag : '' "  :src=" imgUrl +  (!skuId ? product.item.picUrls[0]: skuInfo.skuPictureUrl)" alt=""/>
+                    <template v-if="adData && adData.bottomAd && adData.bottomAd[0]">
+                        <a :href="adData.bottomAd[0].goUrl">
+                            <img :src="imgUrl + adData.bottomAd[0].pictureUrl" alt="" class="adLittleImg">
+                        </a>
+                    </template>
+                </span>
+                <p class="win_priceWrap">
+                    <template v-if="skuId">
+                        <template v-if="skuInfo.hasPrice">
+                            <template v-if="skuInfo.barginPrice != ''">
+                                <span class="win_price">￥{{ skuInfo.barginPrice}}</span>
+                            </template>
+                            <template v-else>
+                                <span class="win_price">{{'￥'+skuInfo.skuPrice}}</span>
+                            </template>
+                            <br/>&nbsp;
+                            <span class="win_count">库存：{{skuInfo.qty == 0 || skuInfo.qty == "" ? '无货' : skuInfo.qty}} {{skuInfo.qty == 0 || skuInfo.qty == "" ? '': skuInfo.unit}}</span>
+                        </template>
+                        <template v-else>
+                            <span class="win_count">欢迎询价</span>
+                        </template>
+                    </template>
+                    <template v-else>
+                        <span class="win_price">{{'￥'+ product.item.hasPrice == 1 ? product.item.guidePriceForShow : ''}}</span>
+                        <br/>&nbsp;
+                        请选择
+                        <template v-for="attr in uncheckAttr">
+                            <span class="win_count">{{attr.name}} &nbsp;</span>
+                        </template>
+                    </template>
+                </p>
+
+                <div class="prop_chahaoWrap">
+                    <img class="prop_chahao" src="../../img/win_chahao.png" alt="" @click="itemDialog = !itemDialog"/>
+                </div>
+                <div class="win_select">
+                    <template v-for="attrSale in product.item.attrSale">
+                        <div class="wrap_wrapper">
+                            <span class="wrap_tit">{{attrSale.name}}：</span>
+                            <span>
+                            <p class="wrap_con">
+                                <template v-for="value in attrSale.values">
+                                    <span :class="'beginSpan ' + value.checkedStatus" @click="value.checkedStatus == 'normal'||value.checkedStatus == 'checked' ?changeCheckStatus(attrSale,value) : ''">{{value.name}}</span>
+                                </template>
+                            </p>
+                        </span>
+
+                        </div>
+                    </template>
+                    <div class="wrap_wrapper">
+                        <span class="wrap_tit">支付类型：</span>
+                        <span>
+                            <p class="wrap_con">
+                                <span class="beginSpan" :class="payType==0 ? 'checked':'' " @click="getTemplate(0)">全款支付</span>
+                                <template v-if="paymentData.periodMark">
+                                    <span class="beginSpan" :class="payType==1 ? 'checked':'' " @click="getTemplate(1)">分期支付</span>
+                                </template>
+                                <template v-if="paymentData.delayMark">
+                                    <span class="beginSpan" :class="payType==2 ? 'checked':'' " @click="getTemplate(2)">延期支付</span>
+                                </template>
+                                <template v-if="paymentData.depositMark">
+                                    <span class="beginSpan" :class="payType==3 ? 'checked':'' " @click="getTemplate(3)">定金支付</span>
+                                </template>
+                            </p>
+                        </span>
+
+                    </div>
+                    <!--分期详情展示start-->
+                    <template  v-if="payType==1 && skuId &&　paymentData.periodMark　&&　paymentData.periodMarkLisr.length>0">
+                        <div class="wrap_wrapper">
+                            <!--<span class="wrap_tit">分期：</span>-->
+                            <span class="wrap_tit" style="height: 0.2rem"></span>
+                            <span>
+                                <div class="wrap_con"  style="background-color: rgb(246,246,246);padding: 0.1rem 0 0 0.1rem">
+                                    <!--<span :class="periodId == ''? 'beginSpan checked' : 'beginSpan normal'" @click="changeStatement($event,-1)">全款</span>-->
+                                    <template v-for="(periodInfo,index) in paymentData.periodMarkLisr">
+                                           <span :class="periodId == periodInfo.id  ? 'beginSpan checked' : 'beginSpan normal'" @click="changeStatement($event,periodInfo.id)">{{periodInfo.apNum}}期<template v-if="!periodInfo.needFirstPay">(延)</template></span>
+                                    </template>
+                                    <template v-for="(periodInfo,index) in paymentData.periodMarkLisr">
+                                        <template v-if="periodId==periodInfo.id">
+                                                <p style="color: #666;margin-top: 0.1rem;">{{periodInfo.apNum}}期分期说明：</p>
+                                                <template v-for="(onePeriod,index) in periodInfo.apTempItemList">
+                                                       <p class="stageDet">{{periodInfo.apTempItemList.length==(index+1)?'尾':periodName[index]}}期:￥{{onePeriod.currentAllPay}}<template v-if="onePeriod.apFee!=null">(<template v-if="index==0&&!periodInfo.needFirstPay"><span style="color: #666">延期支付,</span></template>含手续费￥{{onePeriod.apFee}})</template></p>
+                                                </template>
+                                                <p style="color: #999">
+                                                    <template v-if="periodInfo.apOverdueFeeFlag==1">
+                                                        <template v-if="periodInfo.apOverdueFeeType==1">
+                                                            逾期还款手续费:
+                                                            <template v-if="periodInfo.apOverdueFeeUnit==1">
+                                                                    {{periodInfo.apOverdueFee}}%/期
+                                                            </template>
+                                                             <template v-if="periodInfo.apOverdueFeeUnit==2">
+                                                                    ￥{{periodInfo.apOverdueFee}}/期
+                                                            </template>
+                                                        </template>
+                                                        <template v-if="periodInfo.apOverdueFeeType==2">
+                                                            逾期还款手续费:
+                                                            <template v-if="periodInfo.apOverdueFeeUnit==1">
+                                                                    {{periodInfo.apOverdueFee}}%/天
+                                                            </template>
+                                                             <template v-if="periodInfo.apOverdueFeeUnit==2">
+                                                                    ￥{{periodInfo.apOverdueFee}}/天
+                                                            </template>
+                                                        </template>
+                                                    </template>
+                                                </p>
+                                        </template>
+
+                                    </template>
+                                    <br>
+                                 </div>
+                            </span>
+
+                        </div>
+                    </template>
+                    <!--分期详情展示end-->
+                    <!--延期详情展示start-->
+                    <template  v-if="payType==2 && skuId &&　paymentData.delayMark　&&　paymentData.delayMarkLisr.length>0">
+                        <div class="wrap_wrapper">
+                            <span class="wrap_tit" style="height: 0.2rem"></span>
+                            <span>
+                                <div class="wrap_con">
+                                    <p class="color_666">延期支付说明：</p>
+                                    <p class="color_999"><span >账期：</span>提交订单后{{paymentData.delayMarkLisr[0].apTempItemList[0].payInterval}}天</p>
+                                    <p class="color_999">
+                                        <span>手续费：</span> <!--apFeeUnit 1是% 其他是元-->
+                                        {{paymentData.delayMarkLisr[0].apFee}}
+                                        <template v-if="paymentData.delayMarkLisr[0].apFeeUnit==1">%</template>
+                                        <template v-else>元</template>
+
+                                    </p>
+                                    <p class="color_999"><span>逾期还款手续费：</span><!--apOverdueFeeUnit 1是% 其他是元-->
+                                        {{paymentData.delayMarkLisr[0].apOverdueFee}}
+                                        <template v-if="paymentData.delayMarkLisr[0].apOverdueFeeUnit==1">%</template>
+                                        <template v-else>元</template>/天
+                                    </p>
+                                 </div>
+                            </span>
+
+                        </div>
+                    </template>
+                    <!--延期详情展示end-->
+                    <!--定金支付详情展示start-->
+                    <template  v-if="payType==3 && skuId &&　paymentData.depositMark　&&　paymentData.depositMarkLisr.length>0">
+                        <div class="wrap_wrapper">
+                            <span class="wrap_tit" style="height: 0.2rem"></span>
+                            <span>
+                                <div class="wrap_con">
+                                		<p>定金金额：<span class="redWord">￥{{paymentData.depositMarkLisr[0].apTempItemList[0].payAmt}}</span></p>
+                                        <p><span class="color_999">定金支付时间：</span>提交订单后{{paymentData.depositMarkLisr[0].apTempItemList[0].payInterval}}天之内</p>
+                                        <p><span class="color_999">尾款支付时间：</span>定金支付后{{paymentData.depositMarkLisr[0].apTempItemList[1].payInterval}}天之内</p>
+                                        <p class="color_e60012">如未按时支付尾款，定金恕不退还</p>
+                                 </div>
+                            </span>
+
+                        </div>
+                    </template>
+                    <!--定金支付详情展示end-->
+                </div>
+
+            </div>
+            <!--<div class="prop_con">
+                <img class="prop_img" :src=" imgUrl +  (skuInfo.skuPictureUrl == ''? product.item.picUrls[0]: skuInfo.skuPictureUrl)" alt=""/>
+                <p class="win_priceWrap">
+                    <template v-if="skuId">
+
+                        <template v-if="skuInfo.hasPrice">
+                            <template v-if="skuInfo.barginPrice != ''">
+                                <span class="win_price">￥{{ skuInfo.barginPrice}}</span>
+                            </template>
+                            <template v-else>
+                                <span class="win_price">￥{{ skuInfo.skuPrice}}</span>
+                            </template>
+                            <br/>&nbsp;
+                            <span class="win_count">库存：{{skuInfo.qty == 0 || skuInfo.qty == "" ? '无货' : skuInfo.qty}} {{skuInfo.qty == 0 || skuInfo.qty == "" ? '': skuInfo.unit}}</span>
+                        </template>
+                        <template v-else>
+                            <span class="win_count">欢迎询价</span>
+                        </template>
+                    </template>
+                    <template v-else>
+                        <span class="win_price">￥{{ product.item.hasPrice == 1 ? product.item.guidePriceForShow : ''}}</span>
+                        <br/>&nbsp;
+                        请选择
+                        <template v-for="attr in uncheckAttr">
+                            <span class="win_count">{{attr.name}} &nbsp;</span>
+                        </template>
+                    </template>
+                </p>
+
+                <div class="prop_chahaoWrap">
+                    <img class="prop_chahao" src="../../img/win_chahao.png" alt="" @click="itemDialog = !itemDialog"/>
+                </div>
+                <div class="win_select">
+                    <template v-for="attrSale in product.item.attrSale">
+                        <div class="wrap_wrapper clearfix">
+                            <span class="wrap_tit">{{attrSale.name}}：</span>
+                            <p class="wrap_con">
+                                <template v-for="value in attrSale.values">
+                                    <span :class="'beginSpan ' + value.checkedStatus" @click="value.checkedStatus == 'normal'||value.checkedStatus == 'checked' ?changeCheckStatus(attrSale,value) : ''">{{value.name}}</span>
+                                </template>
+                            </p>
+                        </div>
+                    </template>
+                    <template  v-if="skuId &&　periodInfoList　&&　periodInfoList.length>0">
+                        <div class="wrap_wrapper">
+                            <span class="wrap_tit">分期：</span>
+                            <span>
+                                <div class="wrap_con">
+                                    <span :class="getApChecked('')" @click="changeStatement($event,'')">全款</span>
+                                    <template v-for="(periodInfo,index) in periodInfoList">
+                                       <span :class="getApChecked(periodInfo.id)" @click="changeStatement($event,periodInfo.id)">{{periodInfo.apNum}}期<template v-if="!periodInfo.needFirstPay">(延)</template></span>
+                                    </template>
+                                    <template v-for="(periodInfo,index) in periodInfoList">
+                                        <template v-if="periodId==periodInfo.id">
+                                                <p style="color: #666;margin-top: 0.1rem;">{{periodInfo.apNum}}期分期说明：</p>
+                                                <template v-for="(onePeriod,index) in periodInfo.apTempItemList">
+                                                       <p class="stageDet">{{periodInfo.apTempItemList.length==(index+1)?'尾':periodName[index]}}期:￥{{onePeriod.payFee}}<template v-if="onePeriod.apFee">(含手续费￥{{onePeriod.apFee}})</template></p>
+                                                </template>
+                                                <p style="color: #999">
+                                                    <template v-if="periodInfo.apOverdueFeeFlag==1">
+                                                        逾期还款手续费:
+                                                        <template v-if="periodInfo.apOverdueFeeUnit==1">
+                                                                {{periodInfo.apOverdueFee}}%/天
+                                                        </template>
+                                                         <template v-if="periodInfo.apOverdueFeeUnit==2">
+                                                                ￥{{periodInfo.apOverdueFee}}/天
+                                                        </template>
+                                                    </template>
+                                                </p>
+                                        </template>
+
+                                    </template>
+                                    <br>
+                                 </div>
+                            </span>
+
+                        </div>
+                    </template>
+                </div>
+
+            </div>-->
+             <input class="win_jiaRu" type="button" value="确定" @click="changeProductAttr()"/>
+        </div>
+
+    </div>
+<!--删除商品提示-->
+<div class="zhezhao2" v-show="delDialog" v-cloak>
+    <div>
+        <p>确认将商品删除吗？</p>
+        <span class="quXiao" @click="delDialog = false;">取消</span>
+        <span class="queDing" @click="batchDel();delDialog = false;">确定</span>
+    </div>
+</div>
+
+    <!--购物车输入框为0或者空时提示删除商品-->
+<div class="zhezhao2" v-show="delSingleDialog" v-cloak>
+    <div>
+        <p>确认将商品删除吗？</p>
+        <span class="quXiao" @click="singleDelProduct.quantity = 1;eidtProduct(null,singleDelProduct);delSingleDialog = false;">取消</span>
+        <span class="queDing" @click="singleItemDel();delSingleDialog = false;">确定</span>
+    </div>
+</div>
+<!--去结算弹窗-->
+<section>
+    <div class="zhezhao3" v-show="errorDialog" v-cloak>
+        <div class="con">
+            <template v-for="errorProduct in errorList">
+                <h5>{{errorProduct.title | subEndFilter(10)}}</h5>
+                <p>
+                <template v-for="error in errorProduct.unusualMsg">{{error}}<br></template></p>
+            </template>
+            <div></div>
+            <span class="quXiao" @click="errorDialog = !errorDialog">取消</span><span class="queDing" @click="errorDialog = !errorDialog">确定</span>
+        </div>
+    </div>
+</section>
+<!--满减活动弹窗-->
+<div class="activityDetailsProp" v-show="activityDetailsProp" v-cloak>
+    <div class="zhezhao"@click="closeactivityDetailsProp()"></div>
+    <div class="activityDetails">
+        <img src="../../img/cha.png" alt="关闭" class="closeProp" @click="closeactivityDetailsProp()">
+        <div class="title">活动详情</div>
+        <div class="activityDetailsContainer">
+            <template v-if="judgePromotionsFrom(tempPromotions,1)">
+            <div class="activity">
+                <div class="secondTitle">平台活动</div>
+                <template v-for="(promotion,index) in  tempPromotions">
+                    <div class="activityList clearfix" v-if="promotion.shopId < 10">
+                        <span class="nvb">{{getAddOne(index1) }}</span>
+                        <div class="para">
+                            <p class="oneLine">满<span v-text="promotion.meetPrice"></span>元</p>
+                            <p class="minus oneLine">减<span v-text="promotion.discountPrice"></span>元</p>
+                        </div>
+                        <a href="javascript:;" class="goToOrder" @click="goToOrder(promotion,$event);">去凑单<span></span></a>
+                    </div>
+                </template>
+            </div>
+            </template>
+            <template v-if="judgePromotionsFrom(tempPromotions,2)">
+            <div style="height: 1px;background-color: #e8e8e8;margin-bottom:0.2rem;"></div>
+            <div class="activity">
+                <div class="secondTitle">店铺活动</div>
+                <template v-for="(promotion,index) in  tempPromotions">
+                    <div class="activityList clearfix" v-if="promotion.shopId > 10">
+                        <span class="nvb">{{getAddOne(index2)}}</span>
+                        <div class="para">
+                            <p class="oneLine">满<span v-text="promotion.meetPrice"></span>元</p>
+                            <p class="minus oneLine">减<span v-text="promotion.discountPrice"></span>元</p>
+                        </div>
+                        <a href="javascript:;" class="goToOrder" @click="goToOrder(promotion,$event);">去凑单<span></span></a>
+                    </div>
+                </template>
+            </div>
+            </template>
+        </div>
+    </div>
+</div>
+
+
+
+<!--分期不满足弹框-->
+<section>
+    <div class="zhezhao3" v-show="apErrorMsgDialog" v-cloak >
+        <div class="con" style="height: auto;">
+                <p style="height: auto;padding: 0.1rem">{{apErrorMsg}}</p>
+            <div></div>
+            <p style="height: auto;margin-bottom: 0.2rem;">
+                <span class="quXiao" @click="apErrorMsgDialog = !apErrorMsgDialog">取消</span><span class="queDing" @click="userComfirmFlag = true;goOrderview();">确定</span>
+            </p>
+        </div>
+    </div>
+</section>
+
+<!--回到顶部-->
+<section>
+    <div id="top"></div>
+</section>
+    <!--<main-foot :user-info="userInfo" :current-position="3"></main-foot>-->
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery.cookie.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../bower_components/web-storage-cache-master/dist/web-storage-cache.min.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/cookieUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/moment.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/mathUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/jsonUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/StorageUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/common.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../js/swiper.jquery.min.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/14_gouWuChe/gouWuChe.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../html/commonScript/itemUnit/itemUnit.js"></script>
+<script charset="utf-8" type="text/javascript" src="../commonScript/01_index/index_advertises.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/vueFilter.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/vueDirective.js"></script>
+<script charset="utf-8" type="text/javascript" src="../commonScript/productAttr.js"></script>
+<script charset="utf-8" type="text/javascript" src="../commonScript/shopCoupon.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/vueFoot.js"></script>
+<script charset="UTF-8" type="text/javascript" src="script/cart.js"></script>
+</body>
+</html>

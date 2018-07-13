@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>商家信息</title>
+    <link rel="stylesheet" href="../../../css/common.css"/>
+    <link rel="stylesheet" href="../../css/5_dianPuShouYe/dianPu_index.css"/>
+    <link rel="stylesheet" href="../../css/5_dianPuShouYe/shangJiaXinXi.css"/>
+    <script type="text/javascript" src="../../../lib/adjust.js"></script>
+</head>
+<style>
+    [v-cloak] {
+        display: none;
+    }
+</style>
+<body style="background: #f4f4f4;font-size: 0.3rem;">
+<div id="shopInfo"  v-cloak>
+<div class="top_wrapper" style="border: none;background: none;line-height: 0.6rem;">
+    <!--<a class="back_wrapper" href="javascript:;" onclick="javascript:history.back(-1);"><img class="back" src="../../img/back.png" alt=""/></a>-->
+
+    <a class="back_wrapper" href="javascript:;" onclick="goshopIndex()"><img class="back" src="../../img/back.png" alt=""/></a>
+
+    <p style="text-align: center;text-indent: -0.4rem">商家信息</p>
+</div>
+<div class="shop_begin">
+    <div class="head_imgBg" style="padding-top: 0.5rem;"><br/>
+        <img class="shop_headImg" src="../../img/maiJIaTouXiang.png" alt=""/>
+        <img class="shoucang" :src="shoucangSrc" alt="" @click="addShopFavourite()"/>
+
+        <p class="oneLine">{{ shopInfo.shopName }}</p>
+    </div>
+    <div class="shop_detile">
+        <p><span class="informTitle">店铺名称 : </span><span class="informDetile">{{shopInfo.shopName}}</span></p>
+        <p><span class="informTitle">公司名称 : </span><span class="informDetile">{{shopInfo.companyName}}</span></p>
+        <p><span class="informTitle">所 在 地 : </span><span class="informDetile">{{shopInfo.companyAddr}}</span></p>
+    </div>
+</div>
+
+<div class="img_con">
+    <div style="margin-bottom: 0.2rem;">
+        认证服务：
+            <template v-if=" '' == shopInfo.serIconImageSrc">
+                无
+            </template>
+            <template v-else>
+                <template v-for="icon in shopInfo.serIconImageSrc">
+                    <img class="renzheng" :src="imgUrl + icon.val" alt=""/>
+                </template>
+            </template>
+    </div>
+    <div>
+        营业执照：
+            <img class="zhizhao"  :src="imgUrl + shopInfo.busLicenImgSrc" alt=""/>
+    </div>
+</div>
+<div class="zhizhao_tanChuang">
+    <div style="height: 7rem;width: 5rem;margin: 2rem auto;position: relative">
+        <img style="width: 100%" :src="imgUrl + shopInfo.busLicenImgSrc" alt=""/>
+        <img style="height: 0.4rem;width: 0.4rem;position: absolute;right: -0.2rem;top:  -0.2rem" src="../../img/cha.png" alt=""/>
+    </div>
+</div>
+<div class="renzheng_tanChuang">
+    <div style="height: 5rem;width: 5rem;margin: 2rem auto;position: relative"><!--认证弹窗无实现-->
+        <img style="width: 100%" src="../../img/renzheng_big.jpg" alt=""/>
+        <img style="height: 0.4rem;width: 0.4rem;position: absolute;right: -0.2rem;top:  -0.2rem" src="../../img/cha.png" alt=""/>
+    </div>
+</div>
+
+
+<!--<input class="btn" type="button" value="申请代理"/>-->
+</div>
+
+<div class="footer_fixed">
+    <div class="footer_wrapper" onclick="window.location.href='../../html/1_index/index.html'">
+        <img class="footer_img" src="../../img/pingtai.png" alt=""/>
+        <span>商城首页</span>
+    </div>
+    <div class="footer_wrapper" style="border-left: 1px solid #cccccc;border-right: 1px solid #cccccc;" @click="gotoShopIndex()">
+        <img class="footer_img" src="../../img/shouye.png" alt=""/>
+        <span>店铺首页</span>
+    </div>
+    <div class="footer_wrapper">
+        <img class="footer_img" src="../../img/shop_xiaoxiang.png" alt=""/>
+        <span>联系卖家</span>
+    </div>
+</div>
+
+<script charset="UTF-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/request.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../js/5_dianPuShouYe/shangJiaXinXi.js"></script>
+<script charset="utf-8" type="text/javascript" src="script/shopInfo.js"></script>
+</body>
+</html>

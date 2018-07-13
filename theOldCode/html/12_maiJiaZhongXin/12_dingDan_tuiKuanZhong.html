@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>退款/售后</title>
+    <link type="text/css" rel="stylesheet" href="../../../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/12_maiJiaZhongXin/12_dingDan_woDedingDan.css"/>
+    <script type="text/javascript" src="../../../lib/adjust.js"></script>
+</head>
+<body style="background-color: #fff;">
+<div id="sale_after_progress" v-cloak>
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="javascript:;" class="fanHui" v-on:click="toOrderList()"></a>
+        退款/售后
+    </div>
+    <div style="height: 0.88rem;"></div>
+</header>
+<section>
+        <div class="tuiKuanzhong">
+            <img src="../../img/tuikuan@3x.png" alt=""/>
+
+            <!--<template v-if="progressInfo.tradeReturnDto.state == 1">
+                <h2>等待卖家处理</h2>
+            </template>
+            <template v-else-if="progressInfo.tradeReturnDto.state == 2">
+                <h2>卖家拒绝</h2>
+            </template>
+            <template v-else-if="progressInfo.tradeReturnDto.state == 3">
+                <h2>卖家同意</h2>
+            </template>
+            <template v-else-if="progressInfo.tradeReturnDto.state == 4">
+                <h2>等待卖家收货</h2>
+            </template>
+            <template v-else-if="progressInfo.tradeReturnDto.state == 5">
+                <h2>退款关闭</h2>
+            </template>
+            <template v-else-if="progressInfo.tradeReturnDto.state == 6">
+                <h2>退款成功</h2>
+            </template>
+            <template v-else-if="progressInfo.tradeReturnDto.state == 7">
+                <template v-if="progressInfo.tradeReturnDto.orderPayBank==1 || progressInfo.tradeReturnDto.orderPayBank==101">
+                    <h2>卖家同意，正在退款中，退款金额将在3-15个工作日内到达您的支付账户内</h2>
+                </template>
+                <template v-else>
+                    <h2>卖家同意，正在退款中</h2>
+                </template>
+            </template>
+            <template v-else-if="progressInfo.tradeReturnDto.state == 8">
+                <h2>待平台处理退款</h2>
+            </template>
+            <template v-else-if="progressInfo.tradeReturnDto.state == 9">
+                <h2>平台处理中</h2>
+            </template>
+            <template v-else-if="progressInfo.tradeReturnDto.state == 10">
+                <h2>退款失败，等待平台再次同意退款</h2>
+            </template>
+            <template v-else-if="progressInfo.tradeReturnDto.state == 11">
+                <h2>退款申请成功，支付宝处理中</h2>
+            </template>-->
+
+            <!--<p>卖家已经同意您的退款申请，<br/>请您及时确认是否已经收到货款</p>
+
+            <a href="javascript:;" class="tiaoZhuan">确认收到货款</a>-->
+
+            <a href="javascript:;" class="tiaoZhuan">确认收到货款</a>
+
+            <span class="printHome">printhome.com</span>
+        </div>
+</section>
+<!--回到顶部-->
+<section>
+    <div id="top">
+    </div>
+</section>
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/jsonUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/12_maiJiaZhongXin/12_dingDan_woDedingDan.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/vueFilter.js"></script>
+<script charset="utf-8" type="text/javascript" src="script/sale-after-progress.js"></script>
+</body>
+</html>

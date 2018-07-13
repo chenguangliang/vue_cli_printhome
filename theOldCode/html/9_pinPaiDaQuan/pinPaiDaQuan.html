@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>印刷家</title>
+    <link rel="stylesheet" href="../../../css/common.css"/>
+    <link rel="stylesheet" href="../../css/9_pinPaiDaQuan/pinPaiDaQuan.css"/>
+    <link rel="stylesheet" href="../../../css/animate.css"/>
+    <script type="text/javascript" src="../../../lib/adjust.js"></script>
+</head>
+<body>
+<div id="lieBiaovm">
+    <!--头部导航-->
+    <header>
+        <div class="header">
+            <a href="../1_index/index.html" class="return"></a>品牌大全
+        </div>
+        <div class="zhanwei"></div>
+    </header>
+    <section>
+        <div class="lieBiao">
+            <div class="sanji1">
+                <div class="winBrandNameWrap">
+                    <div class="winBrandName oneLine">{{brandFlag}}</div>
+                    <img src="../../img/close.png" class="close" alt="" @click="closeWin()"/>
+                </div>
+
+                <template v-for="shop in shopList">
+                    <a href="javascript:;" @click="shopInfoIndex(shop.shopId)">
+                        <img :src="shop.logoUrl == null ||shop.logoUrl == '' ? '../../img/default_shop_logo.png':imgUrl + shop.logoUrl" alt=""/>
+                        <p>{{shop.shopName}}</p>
+                    </a>
+                </template>
+            </div>
+            <div class="ziMu">
+                <div class="kezi" @click="querybrandList('A',$event)">
+                    <p class="yiji yijibg">A</p>
+                </div>
+                <div class="erji">
+                    <ol>
+                        <template v-for="brand in brandListshow">
+                            <li class="erjiColor" @click="showLiebiao(brand.brandId,$event,brand.brandName)">
+                                <img :src="imgUrl + brand.brandLogoUrl" alt=""/>
+                                <span class="line"></span>
+                                <p class="brandName">{{brand.brandName}}</p>
+                            </li>
+                        </template>
+                    </ol>
+                </div>
+            </div>
+            <div class="ziMu">
+                <div class="kezi" @click="querybrandList('B',$event)">
+                    <p class="yiji yijibg">B</p>
+                </div>
+                <div class="erji">
+                    <ol>
+                        <template v-for="brand in brandListshow">
+                            <li class="erjiColor" @click="showLiebiao(brand.brandId,$event,brand.brandName)">
+                                <img :src="imgUrl + brand.brandLogoUrl" alt=""/>
+                                <span class="line"></span>
+                                <p class="brandName">{{brand.brandName}}</p>
+                            </li>
+                        </template>
+                    </ol>
+                </div>
+            </div>
+            <div class="ziMu">
+                <div class="kezi" @click="querybrandList('C',$event)">
+                    <p class="yiji yijibg">C</p>
+                </div>
+                <div class="erji">
+                    <ol>
+                        <template v-for="brand in brandListshow">
+                            <li class="erjiColor" @click="showLiebiao(brand.brandId,$event,brand.brandName)">
+                                <img :src="imgUrl + brand.brandLogoUrl" alt=""/>
+                                <span class="line"></span>
+                                <p class="brandName">{{brand.brandName}}</p>
+                            </li>
+                        </template>
+                    </ol>
+                </div>
+            </div>
+            <div class="ziMu">
+                <div class="kezi" @click="querybrandList('D',$event)">
+                    <p class="yiji yijibg" >D</p>
+                </div>
+                <div class="erji">
+                    <ol>
+                        <template v-for="brand in brandListshow">
+                            <li class="erjiColor" @click="showLiebiao(brand.brandId,$event,brand.brandName)">
+                                <img :src="imgUrl + brand.brandLogoUrl" alt=""/>
+                                <span class="line"></span>
+                                <p class="brandName">{{brand.brandName}}</p>
+                            </li>
+                        </template>
+                    </ol>
+                </div>
+            </div>
+            <div class="ziMu">
+                <div class="kezi" @click="querybrandList('E',$event)">
+                    <p class="yiji yijibg" >E</p>
+                </div>
+                <div class="erji">
+                    <ol>
+                        <template v-for="brand in brandListshow">
+                            <li class="erjiColor" @click="showLiebiao(brand.brandId,$event,brand.brandName)">
+                                <img :src="imgUrl + brand.brandLogoUrl" alt=""/>
+                                <span class="line"></span>
+                                <p class="brandName">{{brand.brandName}}</p>
+                            </li>
+                        </template>
+                    </ol>
+                </div>
+            </div>
+            <div class="ziMu">
+                <div class="kezi" @click="querybrandList('F',$event)">
+                    <p class="yiji yijibg" >F</p>
+                </div>
+                <div class="erji">
+                    <ol>
+                        <template v-for="brand in brandListshow">
+                            <li class="erjiColor" @click="showLiebiao(brand.brandId,$event,brand.brandName)">
+                                <img :src="imgUrl + brand.brandLogoUrl" alt=""/>
+                                <span class="line"></span>
+                                <p class="brandName">{{brand.brandName}}</p>
+                            </li>
+                        </template>
+                    </ol>
+                </div>
+            </div>
+            <div class="ziMu">
+                <div class="kezi" @click="querybrandList('G',$event)">
+                    <p class="yiji yijibg" >G</p>
+                </div>
+                <div class="erji">
+                    <ol>
+                        <template v-for="brand in brandListshow">
+                            <li class="erjiColor" @click="showLiebiao(brand.brandId,$event,brand.brandName)">
+                                <img :src="imgUrl + brand.brandLogoUrl" alt=""/>
+                                <span class="line"></span>
+                                <p class="brandName">{{brand.brandName}}</p>
+                            </li>
+                        </template>
+                    </ol>
+                </div>
+            </div>
+            <div class="ziMu">
+                <div class="kezi" @click="querybrandList('H',$event)">
+                    <p class="yiji yijibg" >H</p>
+                </div>
+                <div class="erji">
+                    <ol>
+                        <template v-for="brand in brandListshow">
+                            <li class="erjiColor" @click="showLiebiao(brand.brandId,$event,brand.brandName)">
+                                <img :src="imgUrl + brand.brandLogoUrl" alt=""/>
+                                <span class="line"></span>
+                                <p class="brandName">{{brand.brandName}}</p>
+                            </li>
+                        </template>
+                    </ol>
+                </div>
+            </div>
+            <div class="ziMu">
+                <div class="kezi" @click="querybrandList('I',$event)">
+                    <p class="yiji yijibg" >I</p>
+                </div>
+                <div class="erji">
+                    <ol>
+                        <template v-for="brand in brandListshow">
+                            <li class="erjiColor" @click="showLiebiao(brand.brandId,$event,brand.brandName)">
+                                <img :src="imgUrl + brand.brandLogoUrl" alt=""/>
+                                <span class="line"></span>
+                                <p class="brandName">{{brand.brandName}}</p>
+                            </li>
+                        </template>
+                    </ol>
+                </div>
+            </div>
+            <div class="ziMu">
+                <div class="kezi" @click="querybrandList('J',$event)">
+                    <p class="yiji yijibg" >J</p>
+                </div>
+                <div class="erji">
+                    <ol>
+                        <template v-for="brand in brandListshow">
+                            <li class="erjiColor" @click="showLiebiao(brand.brandId,$event,brand.brandName)">
+                                <img :src="imgUrl + brand.brandLogoUrl" alt=""/>
+                                <span class="line"></span>
+                                <p class="brandName">{{brand.brandName}}</p>
+                            </li>
+                        </template>
+                    </ol>
+                </div>
+            </div>
+            <div class="ziMu">
+                <div class="kezi" @click="querybrandList('K',$event)">
+                    <p class="yiji yijibg" >K</p>
+                </div>
+                <div class="erji">
+                    <ol>
+                        <template v-for="brand in brandListshow">
+                            <li class="erjiColor" @click="showLiebiao(brand.brandId,$event,brand.brandName)">
+                                <img :src="imgUrl + brand.brandLogoUrl" alt=""/>
+                                <span class="line"></span>
+                                <p class="brandName">{{brand.brandName}}</p>
+                            </li>
+                        </template>
+                    </ol>
+                </div>
+            </div>
+            <div class="ziMu">
+                <div class="kezi" @click="querybrandList('L',$event)">
+                    <p class="yiji yijibg" >L</p>
+                </div>
+                <div class="erji">
+                    <ol>
+                        <template v-for="brand in brandListshow">
+                            <li class="erjiColor" @click="showLiebiao(brand.brandId,$event,brand.brandName)">
+                                <img :src="imgUrl + brand.brandLogoUrl" alt=""/>
+                                <span class="line"></span>
+                                <p class="brandName">{{brand.brandName}}</p>
+                            </li>
+                        </template>
+                    </ol>
+                </div>
+            </div>
+            <div class="ziMu">
+                <div class="kezi" @click="querybrandList('M',$event)">
+                    <p class="yiji yijibg" >M</p>
+                </div>
+                <div class="erji">
+                    <ol>
+                        <template v-for="brand in brandListshow">
+                            <li class="erjiColor" @click="showLiebiao(brand.brandId,$event,brand.brandName)">
+                                <img :src="imgUrl + brand.brandLogoUrl" alt=""/>
+                                <span class="line"></span>
+                                <p class="brandName">{{brand.brandName}}</p>
+                            </li>
+                        </template>
+                    </ol>
+                </div>
+            </div>
+            <div class="ziMu">
+                <div class="kezi" @click="querybrandList('N',$event)">
+                    <p class="yiji yijibg" >N</p>
+                </div>
+                <div class="erji">
+                    <ol>
+                        <template v-for="brand in brandListshow">
+                            <li class="erjiColor" @click="showLiebiao(brand.brandId,$event,brand.brandName)">
+                                <img :src="imgUrl + brand.brandLogoUrl" alt=""/>
+                                <span class="line"></span>
+                                <p class="brandName">{{brand.brandName}}</p>
+                            </li>
+                        </template>
+                    </ol>
+                </div>
+            </div>
+            <div class="ziMu">
+                <div class="kezi" @click="querybrandList('O',$event)">
+                    <p class="yiji yijibg" >O</p>
+                </div>
+                <div class="erji">
+                    <ol>
+                        <template v-for="brand in brandListshow">
+                            <li class="erjiColor" @click="showLiebiao(brand.brandId,$event,brand.brandName)">
+                                <img :src="imgUrl + brand.brandLogoUrl" alt=""/>
+                                <span class="line"></span>
+                                <p class="brandName">{{brand.brandName}}</p>
+                            </li>
+                        </template>
+                    </ol>
+                </div>
+            </div>
+            <div class="ziMu">
+                <div class="kezi" @click="querybrandList('P',$event)">
+                    <p class="yiji yijibg" >P</p>
+                </div>
+                <div class="erji">
+                    <ol>
+                        <template v-for="brand in brandListshow">
+                            <li class="erjiColor" @click="showLiebiao(brand.brandId,$event,brand.brandName)">
+                                <img :src="imgUrl + brand.brandLogoUrl" alt=""/>
+                                <span class="line"></span>
+                                <p class="brandName">{{brand.brandName}}</p>
+                            </li>
+                        </template>
+                    </ol>
+                </div>
+            </div>
+            <div class="ziMu">
+                <div class="kezi" @click="querybrandList('Q',$event)">
+                    <p class="yiji yijibg" >Q</p>
+                </div>
+                <div class="erji">
+                    <ol>
+                        <template v-for="brand in brandListshow">
+                            <li class="erjiColor" @click="showLiebiao(brand.brandId,$event,brand.brandName)">
+                                <img :src="imgUrl + brand.brandLogoUrl" alt=""/>
+                                <span class="line"></span>
+                                <p class="brandName">{{brand.brandName}}</p>
+                            </li>
+                        </template>
+                    </ol>
+                </div>
+            </div>
+            <div class="ziMu">
+                <div class="kezi" @click="querybrandList('R',$event)">
+                    <p class="yiji yijibg" >R</p>
+                </div>
+                <div class="erji">
+                    <ol>
+                        <template v-for="brand in brandListshow">
+                            <li class="erjiColor" @click="showLiebiao(brand.brandId,$event,brand.brandName)">
+                                <img :src="imgUrl + brand.brandLogoUrl" alt=""/>
+                                <span class="line"></span>
+                                <p class="brandName">{{brand.brandName}}</p>
+                            </li>
+                        </template>
+                    </ol>
+                </div>
+            </div>
+            <div class="ziMu">
+                <div class="kezi" @click="querybrandList('S',$event)">
+                    <p class="yiji yijibg" >S</p>
+                </div>
+                <div class="erji">
+                    <ol>
+                        <template v-for="brand in brandListshow">
+                            <li class="erjiColor" @click="showLiebiao(brand.brandId,$event,brand.brandName)">
+                                <img :src="imgUrl + brand.brandLogoUrl" alt=""/>
+                                <span class="line"></span>
+                                <p class="brandName">{{brand.brandName}}</p>
+                            </li>
+                        </template>
+                    </ol>
+                </div>
+            </div>
+            <div class="ziMu">
+                <div class="kezi" @click="querybrandList('T',$event)">
+                    <p class="yiji yijibg" >T</p>
+                </div>
+                <div class="erji">
+                    <ol>
+                        <template v-for="brand in brandListshow">
+                            <li class="erjiColor" @click="showLiebiao(brand.brandId,$event,brand.brandName)">
+                                <img :src="imgUrl + brand.brandLogoUrl" alt=""/>
+                                <span class="line"></span>
+                                <p class="brandName">{{brand.brandName}}</p>
+                            </li>
+                        </template>
+                    </ol>
+                </div>
+            </div>
+            <div class="ziMu">
+                <div class="kezi" @click="querybrandList('U',$event)">
+                    <p class="yiji yijibg" >U</p>
+                </div>
+                <div class="erji">
+                    <ol>
+                        <template v-for="brand in brandListshow">
+                            <li class="erjiColor" @click="showLiebiao(brand.brandId,$event,brand.brandName)">
+                                <img :src="imgUrl + brand.brandLogoUrl" alt=""/>
+                                <span class="line"></span>
+                                <p class="brandName">{{brand.brandName}}</p>
+                            </li>
+                        </template>
+                    </ol>
+                </div>
+            </div>
+            <div class="ziMu">
+                <div class="kezi" @click="querybrandList('V',$event)">
+                    <p class="yiji yijibg" >V</p>
+                </div>
+                <div class="erji">
+                    <ol>
+                        <template v-for="brand in brandListshow">
+                            <li class="erjiColor" @click="showLiebiao(brand.brandId,$event,brand.brandName)">
+                                <img :src="imgUrl + brand.brandLogoUrl" alt=""/>
+                                <span class="line"></span>
+                                <p class="brandName">{{brand.brandName}}</p>
+                            </li>
+                        </template>
+                    </ol>
+                </div>
+            </div>
+            <div class="ziMu">
+                <div class="kezi" @click="querybrandList('W',$event)">
+                    <p class="yiji yijibg" >W</p>
+                </div>
+                <div class="erji">
+                    <ol>
+                        <template v-for="brand in brandListshow">
+                            <li class="erjiColor" @click="showLiebiao(brand.brandId,$event,brand.brandName)">
+                                <img :src="imgUrl + brand.brandLogoUrl" alt=""/>
+                                <span class="line"></span>
+                                <p class="brandName">{{brand.brandName}}</p>
+                            </li>
+                        </template>
+                    </ol>
+                </div>
+            </div>
+            <div class="ziMu">
+                <div class="kezi" @click="querybrandList('X',$event)">
+                    <p class="yiji yijibg" >X</p>
+                </div>
+                <div class="erji">
+                    <ol>
+                        <template v-for="brand in brandListshow">
+                            <li class="erjiColor" @click="showLiebiao(brand.brandId,$event,brand.brandName)">
+                                <img :src="imgUrl + brand.brandLogoUrl" alt=""/>
+                                <span class="line"></span>
+                                <p class="brandName">{{brand.brandName}}</p>
+                            </li>
+                        </template>
+                    </ol>
+                </div>
+            </div>
+            <div class="ziMu">
+                <div class="kezi" @click="querybrandList('Y',$event)">
+                    <p class="yiji yijibg" >Y</p>
+                </div>
+                <div class="erji">
+                    <ol>
+                        <template v-for="brand in brandListshow">
+                            <li class="erjiColor" @click="showLiebiao(brand.brandId,$event)">
+                                <img :src="imgUrl + brand.brandLogoUrl" alt=""/>
+                                <span class="line"></span>
+                                <p class="brandName">{{brand.brandName}}</p>
+                            </li>
+                        </template>
+                    </ol>
+                </div>
+            </div>
+            <div class="ziMu">
+                <div class="kezi" @click="querybrandList('Z',$event)">
+                    <p class="yiji yijibg" >Z</p>
+                </div>
+                <div class="erji">
+                    <ol>
+                        <template v-for="brand in brandListshow">
+                            <li class="erjiColor" @click="showLiebiao(brand.brandId,$event)">
+                                <img :src="imgUrl + brand.brandLogoUrl" alt=""/>
+                                <span class="line"></span>
+                                <p class="brandName">{{brand.brandName}}</p>
+                            </li>
+                        </template>
+                    </ol>
+                </div>
+            </div>
+            <div class="ziMu">
+                <div class="kezi" @click="querybrandList('其它',$event)">
+                    <p class="yiji yijibg" >其它</p>
+                </div>
+                <div class="erji">
+                    <ol>
+                        <template v-for="brand in brandListshow">
+                            <li class="erjiColor" @click="showLiebiao(brand.brandId,$event)">
+                                <img :src="imgUrl + brand.brandLogoUrl" alt=""/>
+                                <span class="line"></span>
+                                <p class="brandName">{{brand.brandName}}</p>
+                            </li>
+                        </template>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="home">printhome.com</div>
+    </section>
+    <!--占位-->
+    <div class="zhanwei2"></div>
+    <!--回到顶部-->
+    <div id="top" @click="goToTop"></div>
+
+    <main-foot :user-info="userInfo" :current-position="0"></main-foot>
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/common_http.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/vueFoot.js"></script>
+<script charset="utf-8" type="text/javascript"  src="script/index.js"></script>
+</body>
+</html>

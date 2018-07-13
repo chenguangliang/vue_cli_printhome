@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>小印支付</title>
+    <link type="text/css" rel="stylesheet" href="../../../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../../../css/animate.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/15_xiaoYinZhiFu/weiSheZhiMiMa.css"/>
+    <script type="text/javascript" src="../../../lib/adjust.js"></script>
+</head>
+<body>
+<div id="recharge">
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="javascript:history.back(-1);" class="return"></a>小印支付
+    </div>
+    <div class="zhanwei"></div>
+</header>
+<!--头部结束-->
+<section>
+    <div class="logo borderNone">
+        <a href="javascript:;"><img src="../../img/zhiFu.png" alt="" class="zhiFuLoGo"/></a>
+        <span class="line"></span>
+        <span class="shouYinTai">小印支付</span>
+    </div>
+    <div class="keYongYuE">
+        小印支付账户可用余额：<span>¥</span><span  v-cloak>{{accountInfo.usableMoney}}</span>
+    </div>
+</section>
+<section>
+    <div class="chongZhiTiShi">
+        您可在任意一家银行柜台办理向以下账户的汇款业务，您可登录任意一家银行向以下账户汇款，汇款时请务必选择“普通”方式进行网银汇款；柜台办理请告知银行工作人员务必使用“大额支付”或“小额支付”方式进行转账汇款。
+    </div>
+</section>
+<section>
+    <div class="zhangHu">
+        <p class="font26">账户名称:</p>
+        <p class="color3" v-cloak>{{accountInfo.buyerPaysAccountName}}</p>
+        <p  class="font26" style="margin-top: 0.1rem;">账户账号:</p>
+        <p class="color3" v-cloak>{{accountInfo.buyerPaysAccountNo}}</p>
+        <p  class="font26" style="margin-top: 0.1rem;">开户行:</p>
+        <p class="color3">中信银行北京和平里支行</p>
+        <p  class="font26" style="margin-top: 0.1rem;">开户行行号:</p>
+        <p class="color3">302100011753</p>
+    </div>
+</section>
+<section>
+   <!-- <div class="shengCheng">
+        <a href="javascript:;">生成充值付款凭证</a>
+    </div>-->
+</section>
+    <template v-if="bankAccoutState == 3"><!-- 被驳回 -->
+        <button type="button" class="Withdrawals disabled">要求不符（请拨打4006-770-878）</button>
+    </template>
+    <template v-else-if="bankAccoutState == 2"><!-- 设置了提现账户，审核中 -->
+        <button type="button" class="Withdrawals disabled">账户正在审核中，请耐心等待</button>
+    </template>
+    <template v-else-if="timeRange">
+        <button type="button" class="Withdrawals" @click="withdraw">提&emsp;现</button>
+    </template>
+    <template v-else>
+        <button type="button" class="Withdrawals disabled">提现时间为：9:00-16:00</button>
+    </template>
+
+<div style="height:1.35rem;"></div>
+    <main-foot :user-info="userInfo" :current-position="4"></main-foot>
+</div>
+
+
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/jsonUtil.js"></script>
+<script type="text/javascript" src="../../js/vueFoot.js"></script>
+<script type="text/javascript" src="../../../lib/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../html/15_xiaoYinZhiFu/script/queryBalance.js"></script>
+</body>
+</html>

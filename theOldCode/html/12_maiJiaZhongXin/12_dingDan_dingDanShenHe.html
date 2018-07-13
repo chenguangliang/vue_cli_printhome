@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>订单审核</title>
+    <script type="text/javascript" src="../../../lib/adjust.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../../../css/pullToRefresh.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/12_maiJiaZhongXin/12_dingDan_woDedingDan.css">
+    <link type="text/css" rel="stylesheet" href="../../css/12_maiJiaZhongXin/10_xieYiGuanLi_xieYiGuanLi.css"/>
+</head>
+<body>
+<div id="order_review_list" v-cloak>
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="../../html/12_maiJiaZhongXin/2_maiJiaZhongXin_maiJiaZhongXin.html" class="fanHui" ></a>
+        订单审核
+    </div>
+</header>
+<!--选项卡-->
+<section>
+    <div class="xuanXiangKa xunJia">
+        <ul>
+            <li id="lab1" class="on" v-on:click="changeOrderPanel('1')">由我提交</li>
+            <li id="lab0" v-on:click="changeOrderPanel('0')">待我审核</li>
+        </ul>
+    </div>
+</section>
+<div class="zhanwei"></div>
+<section>
+    <div id="wrapper">
+    <div class="tab_box" id="scroller">
+        <div class="quanBU wrapScrool">
+            <div style="height: 1.4rem"></div>
+            <template v-if="orderList != null && orderList.length > 0">
+            <template v-for="order in orderList">
+            <div class="dingDan">
+                <div class="dianPu">
+                    <span class="pingTai"></span>
+                    <template v-for="json in jsonArray">
+                        <template v-if="order.orderId == json.orderId">
+                            <a href="javascript:;" class="name">{{json.shopName}}</a>
+                        </template>
+                    </template>
+                    <template v-if="order.approveStatus== '0'">
+                        <div class="daishenhe"></div>
+                    </template>
+                    <template v-else-if="order.approveStatus== '1'">
+                        <div class="yishenhe"></div>
+                    </template>
+                    <template v-else-if="order.approveStatus== '2'">
+                        <div class="boHui">
+                            <div class="yibohui"></div>
+                            <div class="chakanyuanyin" v-bind:rejectReason="order.rejectReason" v-on:click="queryRejectReason($event)"></div>
+                        </div>
+                    </template>
+                </div>
+                <div class="xiangQing">
+                    <template v-for="entityItem in order.items">
+                        <template v-for="json in jsonArray">
+                            <template v-if="order.orderId == json.orderId">
+                                <template v-for="jsonItem in json.items">
+                                    <template v-if="entityItem.skuId == jsonItem.skuId">
+                                        <template v-if="jsonItem.itemBuyType == 4 ">
+                                            <template v-for="jsonMealItem in jsonItem.itemMeal.itemMealDetails">
+                                                <div class="top clearfix">
+                                                    <img v-bind:src="img_url + jsonMealItem.skuInfo.itemPicUrl" alt="" class="dianPuLogo"/>
+                                                    <p class="shangPin">{{jsonMealItem.skuInfo.itemName | substringFilter(0,15)}}</p>
+                                                    <p class="leiXing">
+                                                        <template v-for="itemAttrName in jsonMealItem.skuInfo.itemAttrList">
+                                                            <span style="margin-right:5px">
+                                                                {{itemAttrName.name}} :
+                                                                <template v-for="itemAttrValue in itemAttrName.values">
+                                                                    {{itemAttrValue.name}}
+                                                                </template>
+                                                            </span>
+                                                        </template>
+                                                    </p>
+                                                    <p class="money">
+                                                        <template>¥{{jsonMealItem.skuInfo.minPrice}}</template>
+                                                    </p>
+                                                    <p class="num">X {{jsonItem.num}}</p>
+                                                </div>
+                                            </template>
+                                        </template>
+                                        <template v-else>
+                                            <div class="top clearfix">
+                                                <img v-bind:src="img_url + jsonItem.skuPicUrl" alt="" class="dianPuLogo"/>
+                                                <p class="shangPin">{{jsonItem.itemName | substringFilter(0,15)}}</p>
+                                                <p class="leiXing">
+                                                    <template v-for="itemAttrName in jsonItem.itemAttr">
+                                                    <span style="margin-right:5px">
+                                                        {{itemAttrName.name}} :
+                                                        <template v-for="itemAttrValue in itemAttrName.values">
+                                                            {{itemAttrValue.name}}
+                                                        </template>
+                                                    </span>
+                                                    </template>
+                                                </p>
+                                                <p class="money">
+                                                    <template v-if="order.paymentMethod == 3">{{jsonItem.payPrice}}积分</template>
+                                                    <template v-else>¥{{jsonItem.payPrice}}</template>
+                                                </p>
+                                                <p class="num">X {{jsonItem.num}}</p>
+                                            </div>
+                                        </template>
+                                    </template>
+                                </template>
+                            </template>
+                        </template>
+                    </template>
+                    <div class="bottom border-none">
+                        <!--<p>共计<span>12345678901234567890.12</span>件商品</p>-->
+                        <p>合计：<span>￥{{order.paymentPrice}}</span></p>
+                        <!--<p>（含运费￥123456789.12）</p>-->
+                    </div>
+                    <template v-if="approveStatus != null && approveStatus == '0'">
+                        <div class="caoZuo">
+                            <span class="orderGrayBtn" v-on:click="approveSubmit(order.orderId,'1',order.parentOrderId)">审核通过</span>
+                            <span class="orderGrayBtn" v-on:click="approveRejectNotice(order)">审核驳回</span>
+                        </div>
+                    </template>
+                </div>
+            </div>
+            </template>
+            <p  class="printHome">printhome.com</p>
+            </template>
+            <template v-else>
+                <div class="wuDingDan" style="background: #fff;height: 12rem;margin-top: -1rem;padding-top: 1rem;">
+                    <div class="zhiFuChengGong">
+                        <img src="../../img/chenggongbg@3x.png" alt=""/>
+                    </div>
+                    <h2>您还没有订单信息哦！</h2>
+                    <!--<a href="../../html/1_index/index.html" class="tiaoZhuan">立即选购</a>-->
+                    <p  class="printHome">printhome.com</p>
+                </div>
+            </template>
+        </div>
+    </div>
+    </div>
+</section>
+<!--回到顶部-->
+<section>
+    <div id="top">
+    </div>
+</section>
+<!--弹窗-->
+<section>
+    <div class="boHuiBg" id="reject_reason_div">
+        <div class="boHuiYuanYin">
+            <h3>查看驳回原因</h3>
+            <div>
+                <h4>驳回原因：</h4>
+                <p>{{rejectReason}}</p>
+            </div>
+            <button class="sure">确定</button>
+            <i class="close"></i>
+        </div>
+    </div>
+    <div class="shenHeBoHuiBg" id="approve_reject_notice">
+        <div class="shenHeBoHui">
+            <h3>审核驳回</h3>
+            <div>
+                <h4>驳回原因：</h4>
+                <textarea placeholder="请填写驳回理由，最多300字。" v-model="tempRejectReason"></textarea>
+            </div>
+            <p><button class="cancel">取消</button><button class="sure" v-on:click="approveReject()">确定</button></p>
+            <i class="close"></i>
+            <span class="textNone"></span>
+        </div>
+    </div>
+</section>
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/iscroll.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/pullToRefresh_fixHead.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/jsonUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/12_maiJiaZhongXin/12_dingDan_dingDanShenHe.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/vueFilter.js"></script>
+<script charset="utf-8" type="text/javascript" src="script/buyer-order-review.js"></script>
+</body>
+</html>

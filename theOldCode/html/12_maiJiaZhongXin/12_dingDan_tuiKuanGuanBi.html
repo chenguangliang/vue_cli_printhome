@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>退款/售后</title>
+    <link type="text/css" rel="stylesheet" href="../../../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/12_maiJiaZhongXin/12_dingDan_woDedingDan.css"/>
+    <script type="text/javascript" src="../../../lib/adjust.js"></script>
+</head>
+<body>
+<div id="sale_after_detail" v-cloak>
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="javascript:;" onclick="javascript:history.back(-1);" class="fanHui"></a>
+        退款/售后
+    </div>
+    <div style="height: 0.88rem;"></div>
+</header>
+<section>
+    <div class="dingDan tui">
+            <a class="xiangQing" href="javascript:;">
+                <h2>退款商品
+                    <span>
+                        <template v-if="resultData.tradeReturnDto.state == 1">等待卖家处理</template>
+                        <template v-else-if="resultData.tradeReturnDto.state == 2">卖家拒绝</template>
+                        <template v-else-if="resultData.tradeReturnDto.state == 3">卖家同意</template>
+                        <template v-else-if="resultData.tradeReturnDto.state == 4">等待卖家收货</template>
+                        <template v-else-if="resultData.tradeReturnDto.state == 5">退款关闭</template>
+                        <template v-else-if="resultData.tradeReturnDto.state == 6">退款成功</template>
+                        <template v-else-if="resultData.tradeReturnDto.state == 7">卖家同意，正在退款中</template>
+                        <template v-else-if="resultData.tradeReturnDto.state == 8">待平台处理退款</template>
+                        <template v-else-if="resultData.tradeReturnDto.state == 9">平台处理中</template>
+                        <template v-else-if="resultData.tradeReturnDto.state == 10">退款失败，等待平台再次同意退款</template>
+                        <template v-else-if="resultData.tradeReturnDto.state == 11">退款申请成功，支付宝处理中</template>
+                    </span>
+                </h2>
+                <template v-for="entityItem in resultData.tradeReturnGoodsDetailList">
+                <div class="top clearfix">
+                    <img v-bind:src="img_url + entityItem.goodsPicUrl" alt="" class="dianPuLogo"/>
+                    <p class="shangPin">{{entityItem.goodsName}}</p>
+                    <template v-if="resultData.tradeReturnDto.orderPayBank == 7">
+                        <p class="money">{{entityItem.payPrice}}积分</p>
+                    </template>
+                    <template v-else>
+                        <p class="money">¥{{entityItem.payPrice}}</p>
+                    </template>
+                    <p class="num">X {{resultData.num}}</p>
+                </div>
+                </template>
+            </a>
+            <div style="border: 1px dashed #ccc;width: 6rem;margin: 0 auto"></div>
+            <div class="dianJiZhanKai">点击展开详情<span class="arrow xiaLa"></span></div>
+            <div class="zhaiYao">
+                <h3>订单摘要</h3>
+                <div class="heZi">
+                    <span class="left">订单号：</span>
+                    <span class="right">{{resultData.tradeOrdersDTO.orderId}}</span>
+                </div>
+                <div class="heZi">
+                    <span class="left">下单时间：</span>
+                    <span class="right">{{resultData.tradeOrdersDTO.createTime | longToDate(resultData.tradeOrdersDTO.createTime)}}</span>
+                </div>
+                <div class="heZi">
+                    <span class="left">付款时间：</span>
+                    <span class="right">{{resultData.tradeOrdersDTO.paymentTime | longToDate(resultData.tradeOrdersDTO.paymentTime)}}</span>
+                </div>
+                <div class="heZi">
+                    <span class="left">订单状态：</span>
+                    <span class="right">
+                        <template v-if="resultData.tradeOrdersDTO.state == 1">
+                            待付款
+                        </template>
+                        <template v-else-if="resultData.tradeOrdersDTO.state == 2">
+                            待配送
+                        </template>
+                        <template v-else-if="resultData.tradeOrdersDTO.state == 3">
+                            待收货
+                        </template>
+                        <template v-else-if="resultData.tradeOrdersDTO.state == 4">
+                            待评价
+                        </template>
+                        <template v-else-if="resultData.tradeOrdersDTO.state == 5">
+                            已完成
+                        </template>
+                        <template v-else-if="resultData.tradeOrdersDTO.state == 6">
+                            已取消
+                        </template>
+                        <template v-else-if="resultData.tradeOrdersDTO.state == 7">
+                            已关闭
+                        </template>
+                    </span>
+                </div>
+                <div class="heZi">
+                    <span class="left">运费：</span>
+                    <span class="right">{{resultData.tradeOrdersDTO.freight}}元</span>
+                </div>
+                <div class="heZi">
+                    <span class="left">实付款：</span>
+                    <span class="right"><span class="red">{{resultData.tradeOrdersDTO.paymentPrice}}</span>元</span>
+                </div>
+            </div>
+        </div>
+</section>
+<section>
+    <div class="tuiKuanGuanBi">
+        <div class="heZi">
+            <span class="left">申请数量：</span>
+            <span class="right">{{amountNum}}件</span>
+        </div>
+        <div class="heZi">
+            <span class="left">退款理由：</span>
+            <span class="right">{{returnResult}}</span>
+        </div>
+        <div class="heZi">
+            <span class="left">退款金额：</span>
+            <span class="right">{{refundMoney}}元</span>
+        </div>
+        <div class="heZi">
+            <span class="left">问题描述：</span>
+            <span class="right">{{remark}}</span>
+        </div>
+        <div class="heZi">
+            <span class="left">上传凭证：</span>
+            <span class="right w5">
+                <template v-for="picDTO in resultData.tradeReturnDto.picDTOList">
+                    <img v-bind:src="img_url + picDTO.picUrl" alt='' />
+                </template>
+            </span>
+        </div>
+    </div>
+</section>
+
+<!--回到顶部-->
+<section>
+    <div id="top">
+    </div>
+</section>
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/jsonUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/12_maiJiaZhongXin/12_dingDan_woDedingDan.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/vueFilter.js"></script>
+<script charset="utf-8" type="text/javascript" src="script/sale-after-detail.js"></script>
+</body>
+</html>

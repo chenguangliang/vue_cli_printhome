@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>联系人信息修改</title>
+    <link type="text/css" rel="stylesheet" href="../../../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/18_maiJiaZhongXin/14_zhangHuSheZhi_lianXiRenXinXi.css"/>
+    <script type="text/javascript" src="../../../lib/adjust.js"></script>
+</head>
+<body>
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="javascript:;" onclick="javascript:history.back(-1);" class="return"></a>
+        联系人信息修改
+    </div>
+    <div style="height: 0.88rem;"></div>
+</header>
+<!--联系人开始-->
+<form id="lianxiren_form">
+<section>
+    <div class="lianxiren" id="sellerupdate">
+        <h2 class="title">联系人信息</h2>
+        <p class="clearfix">
+            <span class="left">
+                用户编号：
+            </span>
+            <input type="hidden" id="userId" v-model="userInfoDTO.userId">
+            <span class="right" v-text="userInfoDTO.userId" style="margin-top:-2px;">
+            </span>
+        </p>
+        <p class="clearfix">
+            <span class="left">用户名：</span>
+            <input type="hidden" id="uname" v-model="userInfoDTO.userDTO.uname">
+            <span class="right" v-text="userInfoDTO.userDTO.uname" style="margin-top:-2px;">
+            </span>
+        </p>
+        <p class="clearfix">
+           <span class="left" style="height:0.58rem;line-height:0.58rem;">
+               <label>＊</label>固定电话：</span>
+            <span class="right">
+                <input type="text" placeholder="请输入固定电话" maxlength="20" id="linkPhoneNum" name="linkPhoneNum" v-model="userDTO.linkPhoneNum" class="gray_word ccc_border"/>
+            </span>
+        </p>
+        <div class="warm none" id="linkPhoneNumDiv">输入2-20个字符，可以中文和英文组成。</div>
+        <p class="clearfix">
+            <span class="left" style="height:0.58rem;line-height:0.58rem;">
+                <label>＊</label>所在部门：
+            </span>
+
+            <span class="right">
+                <select id="department" name="department" v-model="userDTO.department"  class="gray_word ccc_border">
+                    <option v-for="department in departmentData" :value="department.code" v-text="department.label"></option>
+                </select>
+            </span>
+        </p>
+        <div class="warm none" id="departmentDiv">请选择部门</div>
+        <p class="clearfix">
+            <span class="left" style="height:0.58rem;line-height:0.58rem;">
+                <label>＊</label>联系人姓名：</span>
+            <span class="right">
+                <input type="text" placeholder="请输入联系人的姓名"  maxlength="20" v-model="userDTO.linkMan" name="linkMan" id="linkMan" class="gray_word ccc_border"/>
+            </span>
+        </p>
+        <div class="warm none" id="linkManDiv">输入2-20个字符，可以中文和英文组成。</div>
+        <p class="clearfix">
+            <span class="left">绑定手机：</span>
+            <span class="right"  style="margin-top:-2px;">
+                <span class="fl" v-text="userInfoDTO.userDTO.umobile"></span>
+                <input type="hidden" id="umobile" v-model="userInfoDTO.userDTO.umobile">
+                <template v-if="userInfoDTO.userDTO.umobile">
+                    <span class="fr">已绑定<a href="#">点此修改</a></span>
+                </template>
+                <template v-else>
+                    <span class="fr">未绑定<a href="#">点此绑定</a></span>
+                </template>
+            </span>
+        </p>
+        <p class="clearfix">
+            <span class="left">绑定邮箱：</span>
+            <span class="right"  style="margin-top:-2px;">
+                <span class="fl" v-text="userInfoDTO.userDTO.userEmail"></span>
+                <input type="hidden" id="userEmail" v-model="userInfoDTO.userDTO.userEmail">
+                <template v-if="userInfoDTO.userDTO.userEmail">
+                    <span class="fr">已绑定<a href="#">点此修改</a></span>
+                </template>
+                <template v-else>
+                    <span class="fr">未绑定<a href="#">点此绑定</a></span>
+                </template>
+            </span>
+        </p>
+    </div>
+</section>
+<footer>
+    <div class="footer">
+        <a href="14_zhangHuSheZhi_lianXiRenXinXi.html" class="quxiao">取消</a>
+        <a href="#" onclick="updateLianxiren();" class="baocun">保存</a>
+    </div>
+</footer>
+</form>
+<script type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script src="../../bower_components/jquery-validation/1.11.1/jquery.validate.js" type="text/javascript"></script>
+<script type="text/javascript" src="../../bower_components/jquery-validation/1.11.1/messages_zh.js"></script>
+<script src="../../bower_components/jquery-validation/1.11.1/messages_zh.js" type="text/javascript"></script>
+<link href="../../bower_components/jquery-validation/1.11.1/jquery.validateA.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../../js/18_maiJiaZhongXin/14_zhangHuSheZhi_lianXiRenXinXi.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/stringUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/mathUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="script/14_sellerInfoUpdate.js"></script>
+</body>
+</html>

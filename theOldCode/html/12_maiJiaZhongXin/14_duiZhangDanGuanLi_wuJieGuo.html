@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>对账单管理</title>
+    <link rel="stylesheet" href="../../../css/common.css">
+    <link rel="stylesheet" href="../../css/16_dingDanHeDui/shangPinQingDan.css"/>
+    <script type="text/javascript" src="../../../lib/adjust.js"></script>
+</head>
+<body style="background-color: #fff;">
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="javascript:;" class="return" onclick="javascript:history.back(-1);"></a>对账单管理
+    </div>
+</header>
+<section id="souSuoVM">
+    <div class="souSuo">
+        <div class="dateTime">
+            <span>创建日期：</span>
+            <select v-model="dateTime.year" v-show="showSelect">
+                <option value="2014">2014</option>
+                <option value="2015">2015</option>
+                <option value="2016">2016</option>
+                <option value="2017">2017</option>
+            </select>
+            <input type="date" style="display: block" v-model="dateTime.beginTime" v-show="!showSelect"/>
+            <i>-</i>
+            <select v-model="dateTime.month" v-show="showSelect">
+                <option value="1">1月</option>
+                <option value="2">2月</option>
+                <option value="3">3月</option>
+                <option value="4">4月</option>
+                <option value="5">5月</option>
+                <option value="6">6月</option>
+                <option value="7">7月</option>
+                <option value="8">8月</option>
+                <option value="9">9月</option>
+                <option value="10">10月</option>
+                <option value="11">11月</option>
+                <option value="12">12月</option>
+            </select>
+            <input type="date" style="display: block" v-model="dateTime.endTime" v-show="!showSelect"/>
+            <img src="../../img/shuaxin@3x.png" alt=""/>
+        </div>
+        <input type="button" value="搜  索" @click="searchOrderList()"/>
+    </div>
+</section>
+ <div style="height:2.76rem;background-color: #f4f4f4;"></div>
+<section>
+    <div class="wuDingDan">
+        <img src="../../img/chenggongbg@3x.png" alt="">
+        <h2 style="margin-bottom: 0;">该时段暂无订单信息</h2>
+    </div>
+</section>
+<div style="height: 0.84rem;"></div>
+<div class="footer">
+    <div class="quanXuan">
+        <img class="select quanxuan" src="../../img/no-select.png" alt="">
+        <span>全选</span>
+    </div>
+    <div class="weibianji">
+        <div class="del">生成对账单</div>
+    </div>
+</div>
+<!--回到顶部-->
+<div id="top">
+</div>
+<script type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../../lib/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/iscroll.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/pullToRefresh_fixHead.js"></script>
+<script type="text/javascript" src="../../../lib/common.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../js/popup.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="script/14_duizhang_wujieguo.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/vueFilter.js"></script>
+</body>
+</html>

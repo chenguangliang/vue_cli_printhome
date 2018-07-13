@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>营业执照信息修改</title>
+    <link type="text/css" rel="stylesheet" href="../../../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/18_maiJiaZhongXin/14_zhangHuSheZhi_yingYeZhiZhaoXinXi.css"/>
+    <script type="text/javascript" src="../../../lib/adjust.js"></script>
+</head>
+<body>
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="javascript:;" onclick="javascript:history.back(-1);" class="return"></a>
+        营业执照信息修改
+    </div>
+    <div style="height: 0.88rem;"></div>
+</header>
+<!--联系人开始-->
+<form id="yingyezhizhao_form">
+    <div id="sellerupdate">
+<section>
+    <div class="lianxiren">
+        <h2 class="title">营业执照信息</h2>
+        <p class="clearfix">
+            <input type="hidden" id="userId" v-model="userInfoDTO.userId">
+            <span class="left">
+                公司名称：
+            </span>
+            <span class="right" v-text="userInfoDTO.userBusinessDTO.companyName">
+            </span>
+        </p>
+        <p class="clearfix">
+            <span class="left lh">
+                <label>＊</label>法定代表人姓名：
+            </span>
+            <span class="right">
+               <input type="text" id="artificialPersonName" name="artificialPersonName" v-model="userInfoDTO.userBusinessDTO.artificialPersonName" class="gray_word ccc_border w330 xingMing" maxlength="10"/>
+            </span>
+        </p>
+        <div class="warm none">输入2-20个字符，可以中文和英文组成。</div>
+        <p class="clearfix">
+            <span class="left lh">
+                <label>＊</label>注册资本：
+            </span>
+            <span class="right">
+                 <input type="text" id="registeredCapital" name="registeredCapital" class="gray_word ccc_border ziBen" v-model="userInfoDTO.userBusinessDTO.registeredCapital" maxlength="20"/> 万
+            </span>
+        </p>
+        <div class="warm none">输入1-20个数字。</div>
+        <p class="clearfix">
+            <span class="left lh">
+                <label>＊</label>证件类型：
+            </span>
+            <span class="right">
+                <select id="idCardType" name="idCardType" v-model="userInfoDTO.userBusinessDTO.idCardType" >
+                    <option value="" >请选择</option>
+                    <option v-for="idCardType in idCardTypeData" :value="idCardType" v-text="idCardType"></option>
+                </select>
+            </span>
+        </p>
+        <div class="warm none">请选择证件类型，有如下几种。</div>
+        <p class="clearfix">
+            <span class="left lh">
+                <label>＊</label>证件号码：
+            </span>
+            <span class="right">
+                 <input type="text" name="idCardNum" id="idCardNum"  class="gray_word ccc_border zhengJian" v-model="userInfoDTO.userBusinessDTO.idCardNum" maxlength="50" @change="textRegular($event,'/^[A-Za-z0-9]{1,50}$/','请输入有效证件号码',userInfoDTO.userBusinessDTO,'idCardNum');"/>
+            </span>
+        </p>
+        <div class="warm none">请输入18位数字或字母。</div>
+        <p class="clearfix">
+            <span class="left">
+                <label>＊</label>经营范围：
+            </span>
+            <span class="right jingYingFanWei">
+                <template v-for="businessScope in businessScopeData">
+                    <template v-if="userInfoDTO.userBusinessDTO.businessScope.indexOf(businessScope)>-1">
+                        <span class="jingYingXuanXiang">
+                            <input name="businessScope" @click="changeBusinessScope(0,businessScope)" checked="checked" type="checkbox" :value="businessScope" /> {{businessScope}}
+                        </span>
+                    </template>
+                    <template v-else>
+                        <span class="jingYingXuanXiang"><input name="businessScope" @click="changeBusinessScope(1,businessScope)" type="checkbox" :value="businessScope" /> {{businessScope}} </span>
+                    </template>
+                </template>
+            </span>
+        </p>
+    </div>
+</section>
+<section>
+    <div class="lianxiren">
+        <p style="margin-top: 0;" class="clearfix">
+            <span class="left">
+                <label>＊</label>营业执照所在地：
+            </span>
+        </p>
+        <p class="diZhi clearfix">
+            <select v-model="busLicProvince" id="busLicProvince" name="busLicProvince" @change="changeProvince" title="请选择省份">
+                <option value="" > 请选择 </option>
+                <!--绑定value 到 Vue 实例的一个动态属性-->
+                <option v-for="province in provinceList" :value="province.code" v-text="province.name" ></option>
+            </select>
+            <select v-model="busLicCity" name="busLicCity" id="busLicCity"  @change="changeCity" title="请选择城市">
+                <option value="" > 请选择 </option>
+                <!--绑定value 到 Vue 实例的一个动态属性-->
+                <option v-for="city in cityList" :value="city.code" v-text="city.name" ></option>
+            </select>
+            <select v-model="busLicArea" name="busLicArea" id="busLicArea" title="请选择区县">
+                <option value="" > 请选择 </option>
+                <!--绑定value 到 Vue 实例的一个动态属性-->
+                <option v-for="area in areaList" :value="area.code" v-text="area.name" ></option>
+            </select>
+        </p>
+        <div class="warm none">请选择营业执照所在地。</div>
+        <p class="clearfix">
+            <span class="left">
+                <label>＊</label>营业执照详细地址：
+            </span>
+        </p>
+        <p class="zhiZhao clearfix">
+            <input type="text" id="businessLicencAddressDetail" name="businessLicencAddressDetail" v-model="userInfoDTO.userBusinessDTO.businessLicencAddressDetail" class="gray_word ccc_border zhiZhaoDiZhi" maxlength="30"/>
+        </p>
+        <div class="warm none">请输入不超过100个字</div>
+        <p class="clearfix">
+            <span class="left w178 lh">
+                <label>＊</label>成立日期：
+            </span>
+            <span class="right">
+                <input type="date" id="businessLicenceDate" name="businessLicenceDate" v-model="businessLicenceDate"  class="gray_word ccc_border chengLiRiQi"/>
+            </span>
+        </p>
+        <div class="warm none">请选择成立日期</div>
+        <p class="clearfix">
+            <span class="left w178 lh">
+                <label>＊</label>公司电话：
+            </span>
+            <span class="right">
+                <input type="text" id="companyPhone" name="companyPhone" v-model="userInfoDTO.userBusinessDTO.companyPhone" class="gray_word ccc_border gongYongDianHua" maxlength="23"/>
+            </span>
+        </p>
+        <div class="warm none">请输入正确电话号码</div>
+        <p class="clearfix">
+            <span class="left w178 lh">
+                <label>＊</label>联系人：
+            </span>
+            <span class="right">
+                <input type="text" name="linkman" id="linkman" maxlength="20" v-model="userInfoDTO.userBusinessDTO.linkman" class="gray_word ccc_border lianXiRen"/>
+            </span>
+        </p>
+        <div class="warm none">输入2-20个字符，可以中文和英文组成。</div>
+        <p class="clearfix">
+            <span class="left w178 lh">
+                <label>＊</label>联系人手机：
+            </span>
+            <span class="right">
+                <input type="text" id="linkmanPhone" name="linkmanPhone" v-model="userInfoDTO.userBusinessDTO.linkmanPhone" class="gray_word ccc_border shouJi" maxlength="11"/>
+            </span>
+        </p>
+        <div class="warm none">请输入正确的手机号</div>
+        <p class="clearfix"><span class="left"><label>＊</label>公司所在地：</span></p>
+        <p class="diZhi clearfix">
+            <select name="company_province" id="company_province" v-model="companyProvince" @change="changeComProvince" title="请选择省份">
+            <option value="" > 请选择 </option>
+                <!--绑定value 到 Vue 实例的一个动态属性-->
+            <option v-for="province in provinceList" :value="province.code" v-text="province.name" ></option>
+        </select>
+        <select name="company_city" id="company_city" v-model="companyCity" @change="changeComCity" title="请选择城市">
+            <option value="" > 请选择 </option>
+            <!--绑定value 到 Vue 实例的一个动态属性-->
+            <option v-for="city in comCityList" :value="city.code" v-text="city.name" ></option>
+        </select>
+        <select name="company_area" id="company_area" v-model="companyArea" title="请选择区县">
+            <option value="" > 请选择 </option>
+            <!--绑定value 到 Vue 实例的一个动态属性-->
+            <option v-for="area in comAreaList" :value="area.code" v-text="area.name" ></option>
+        </select>
+        </p>
+        <div class="warm none">请输入不超过100个字</div>
+        <p class="clearfix">
+            <span class="left w178 lh">
+                <label>＊</label>公司详细地址：
+            </span>
+            <span class="right">
+                <input name="companyDeclinedAddress" id="companyDeclinedAddress" type="text" v-model="userInfoDTO.userBusinessDTO.companyDeclinedAddress" class="gray_word ccc_border gongSiXiangXiDiZhi" maxlength="30"/>
+            </span>
+        </p>
+        <div class="warm none">请输入不超过100个字</div>
+        <p class="clearfix">
+            <span class="left">企业是否有融资需求：</span>
+            <span class="right rongZi">
+                <template v-if="userInfoDTO.userBusinessDTO.isFinancing==1">
+                    <img src="../../img/yes-select.png" alt="" class="yes"/>是<img @click="changeIsFinacing(0)" src="../../img/no-select.png" alt="" class="no"/>否
+                </template>
+                <template v-else-if="userInfoDTO.userBusinessDTO.isFinancing==0">
+                    <img @click="changeIsFinacing(1)" src="../../img/no-select.png" alt="" class="yes"/>是<img src="../../img/yes-select.png" alt="" class="no"/>否
+                </template>
+            </span>
+        </p>
+        <template v-if="userInfoDTO.userBusinessDTO.isFinancing==1">
+            <p class="money clearfix">
+                <span class="left lh"><label>＊</label>期望融资额度：</span>
+            <span class="right">
+                <input type="text" id="financingNum" name="financingNum" class="gray_word ccc_border" v-model="userInfoDTO.userBusinessDTO.financingNum" maxlength="9"/>万元
+            </span>
+            </p>
+            <div class="warm none">融资额度为最多不超过9位的正整数。</div>
+        </template>
+        <p class="clearfix">
+            <span class="left">是否多证合一：</span>
+            <span class="right rongZi">
+                <template v-if="userInfoDTO.userBusinessDTO.isSanzheng==1">
+                    <img src="../../img/yes-select.png" alt="" class="yes"/>是<img @click="changeIsSanzheng(0)" src="../../img/no-select.png" alt="" class="no"/>否
+                </template>
+                <template v-else-if="userInfoDTO.userBusinessDTO.isSanzheng==0">
+                    <img @click="changeIsSanzheng(1)" src="../../img/no-select.png" alt="" class="yes"/>是<img src="../../img/yes-select.png" alt="" class="no"/>否
+                </template>
+            </span>
+        </p>
+        <template v-if="userInfoDTO.userBusinessDTO.isSanzheng==1">
+            <p class="money clearfix">
+                <span class="left lh"><label>＊</label>社会信用代码证：</span>
+            <span class="right">
+                <input type="text" name="unifiedCreditCode" id="unifiedCreditCode" v-model="userInfoDTO.userBusinessDTO.unifiedCreditCode" class="gray_word ccc_border daiMaZheng" maxlength="50"/>
+            </span>
+            <div class="warm none">请输入社会信用代码证</div>
+            </p>
+        </template>
+        <template v-else-if="userInfoDTO.userBusinessDTO.isSanzheng==0">
+            <p class="money clearfix">
+                <span class="left lh"><label>＊</label>注册号(营业执照)：</span>
+            <span class="right">
+                <input type="text" name="businessLicenceId" id="businessLicenceId" v-model="userInfoDTO.userBusinessDTO.businessLicenceId" class="gray_word ccc_border daiMaZheng" maxlength="20"/>
+            </span>
+            <div class="warm none">请输入注册号(营业执照)</div>
+            </p>
+        </template>
+        <p class="clearfix">
+            <span class="left">营业执照是否长期有效：</span>
+            <span class="right rongZi">
+                <template v-if="isBusinessLicenceIndate=='2'">
+                    <img src="../../img/yes-select.png" alt="" class="yes"/>是<img @click="changeIsBusinessLicenceIndate(1)" src="../../img/no-select.png" alt="" class="no"/>否
+                </template>
+                <template v-else>
+                    <img @click="changeIsBusinessLicenceIndate(2)" src="../../img/no-select.png" alt="" class="yes"/>是<img src="../../img/yes-select.png" alt="" class="no"/>否
+                </template>
+            </span>
+        </p>
+
+            <p class="money clearfix">
+                <span class="left lh">营业执照有效期至：</span>
+                <template v-if="isBusinessLicenceIndate=='1'">
+                    <span class="right">
+                        <input type="date" id="businessLicenceIndate" name="businessLicenceIndate" class="gray_word ccc_border" v-model="businessLicenceIndate" />
+                    </span>
+                </template>
+                <template v-else>
+                    <span class="right  lh">
+                        <input  placeholder="长期有效" class="gray_word ccc_border" disabled>
+                    </span>
+                </template>
+            </p>
+    </div>
+</section>
+        <section>
+            <div class="lianxiren" >
+                <p class="clearfix">
+                    <span class="left">营业执照副本电子版：</span>
+                    <span class="right">
+                    <img id="businessLicencePicSrcImg" :src="getImgUrl(userInfoDTO.userBusinessDTO.businessLicencePicSrc)" @click="showImg($event)" alt="" class="bigImg"/>
+                    <span style="position: relative;display: inline-block;width: 2rem;height: 0.4rem;margin-top:0.1rem;">
+                        <span style="width:1.3rem;height:0.4rem;line-height: 0.4rem;font-size:12px;text-align:center;position: absolute;left: 0;border: 1px solid #ccc;border-radius: 5px">选择文件</span>
+                        <input type="file" name="file" id="fileInputyy" onchange="fileChange('fileInputyy','businessLicencePicSrcImg','businessLicencePicSrc')" style="width:1.3rem;font-size:12px;position: absolute;opacity:0;"/>
+                        <input name="businessLicencePicSrc" id="businessLicencePicSrc" type="hidden" v-model="userInfoDTO.userBusinessDTO.businessLicencePicSrc" />
+                    </span>
+                    </span>
+                </p>
+                <p class="clearfix">
+                    <span class="left">法人身份证（正面）：</span>
+                    <span class="right">
+                    <img id="artificialPersonPicSrcImg" :src="getImgUrl(userInfoDTO.userBusinessDTO.artificialPersonPicSrc)" @click="showImg($event)" alt="" class="bigImg"/>
+                    <span style="position: relative;display: inline-block;width: 2rem;height: 0.4rem;margin-top:0.1rem;">
+                        <span style="width:1.3rem;height:0.4rem;line-height: 0.4rem;font-size:12px;text-align:center;position: absolute;left: 0;border: 1px solid #ccc;border-radius: 5px">选择文件</span>
+                        <input type="file" name="file" id="fileInputz" onchange="fileChange('fileInputz','artificialPersonPicSrcImg','artificialPersonPicSrc')" style="width:1.3rem;font-size:12px;position: absolute;opacity:0;"/>
+                        <input name="artificialPersonPicSrc" id="artificialPersonPicSrc" type="hidden" v-model="userInfoDTO.userBusinessDTO.artificialPersonPicSrc" />
+                    </span>
+                    </span>
+                </p>
+                <p class="clearfix">
+                    <span class="left">法人身份证（背面）：</span>
+                    <span class="right">
+                    <img id="artificialPersonPicBackSrcImg" :src="getImgUrl(userInfoDTO.userBusinessDTO.artificialPersonPicBackSrc)" @click="showImg($event)" alt="" class="bigImg"/>
+                    <span style="position: relative;display: inline-block;width: 2rem;height: 0.4rem;margin-top:0.1rem;">
+                        <span style="width:1.3rem;height:0.4rem;line-height: 0.4rem;font-size:12px;text-align:center;position: absolute;left: 0;border: 1px solid #ccc;border-radius: 5px">选择文件</span>
+                        <input type="file" name="file" id="fileInputf" onchange="fileChange('fileInputf','artificialPersonPicBackSrcImg','artificialPersonPicBackSrc')" style="width:1.3rem;font-size:12px;position: absolute;opacity:0;"/>
+                        <input name="artificialPersonPicBackSrc" id="artificialPersonPicBackSrc" type="hidden" v-model="userInfoDTO.userBusinessDTO.artificialPersonPicBackSrc" />
+                    </span>
+                    </span>
+                </p>
+            </div>
+        </section>
+        <div class="showBigImg" @click="hideImg()">
+            <div style="height: 7rem;width: 5rem;margin: 2rem auto;position: relative">
+                <img style="width: 100%" id="imgDiv" alt=""/>
+                <img style="height: 0.4rem;width: 0.4rem;position: absolute;right: -0.2rem;top:  -0.2rem" src="../../img/cha.png" alt=""/>
+            </div>
+        </div>
+    </div>
+<div style="height: 0.84rem;"></div>
+<footer>
+    <div class="footer">
+        <a href="14_zhangHuSheZhi_yingYeZhiZhaoXinXi.html" class="quxiao">取消</a>
+        <a href="#" onclick="updateYingyezhizhao();" class="save">保存</a>
+    </div>
+</footer>
+</form>
+<div id="top" @click="goToTop"></div>
+<script type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../bower_components/attachment/jquery.form.js"></script>
+<script type="text/javascript" src="../../../lib/common.js"></script>
+<script type="text/javascript" src="../../js/18_maiJiaZhongXin/14_zhangHuSheZhi_lianXiRenXinXi.js"></script>
+<script src="../../bower_components/jquery-validation/1.11.1/jquery.validate.js" type="text/javascript"></script>
+<script type="text/javascript" src="../../bower_components/jquery-validation/1.11.1/messages_zh.js"></script>
+<script src="../../bower_components/jquery-validation/1.11.1/messages_zh.js" type="text/javascript"></script>
+<link href="../../bower_components/jquery-validation/1.11.1/jquery.validateA.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/stringUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/mathUtil.js"></script>
+<!--<script charset="utf-8" type="text/javascript" src="../../bower_components/attachment/ajaxfileupload.js"></script>-->
+<script type="text/javascript" src="../../bower_components/attachment/ajaxformfileupload.js"></script>
+<script charset="utf-8" type="text/javascript" src="script/14_sellerInfoUpdate.js"></script>
+</body>
+</html>

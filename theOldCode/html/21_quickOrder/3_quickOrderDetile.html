@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>订单详情</title>
+    <script type="text/javascript" src="../../../lib/adjust.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/21_quickOrder/0_quickOrderCommon.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/21_quickOrder/3_quickOrderDetile.css"/>
+</head>
+<body style="background-color: #f4f4f4;">
+<div id="app" class="orderDetile">
+    <!--头部开始-->
+    <header>
+        <div class="headerquickOrder">
+            <a href="javascript:history.back(-1);" class="fanHui"></a>
+            订单详情
+        </div>
+        <div class="fixHead font28">
+            <p class="redWord">基本信息</p>
+            <p style="border-right: 1px solid #dadada;border-left: 1px solid #dadada;">商品信息</p>
+            <p>分期明细</p>
+        </div>
+        <div style="height:1.68rem;"></div>
+    </header>
+    <!--主要的三大块内容-->
+    <div class="mainConWrap">
+        <div class="mainCon essentialInfo" >
+            <template v-if="order.confirmResult==-1">
+                <div class="refuseReason">
+                    <span style="vertical-align: top">
+                        <template v-if="order.orderInitType==0">卖家拒绝原因:</template>
+                        <template v-else>买家拒绝原因:</template>
+                    </span>
+                    <div class="refuseCon">{{order.confirmRemark}}</div>
+                </div>
+            </template>
+
+            <div class="contact">
+                <p class="font30">联系方式</p>
+                <template v-if="urlObj.identity==2">
+                    <p class="mart10">
+                        <span class="infoKey">卖方：</span><input placeholder="公司名称全称" type="text" class="grayInput" v-model="sellerJm.companyName">
+                    </p>
+                    <p class="mart10">
+                        <span class="infoKey">联系人：</span><input type="text" class="grayInput" v-model="sellerJm.linkMan">
+                    </p>
+                    <p class="mart10">
+                        <span class="infoKey">邮箱：</span><input type="text" class="grayInput" v-model="sellerJm.userEmail">
+                    </p>
+                    <p class="mart10">
+                        <span class="infoKey">联系电话：</span><input type="text" class="grayInput" v-model="sellerJm.umobile">
+                    </p>
+                    <p style="background-color: #F4F4F4;width: 100%;height: 2px;margin-top: 0.1rem;"></p>
+                    <p class="mart10">
+                        <span class="infoKey"><span class="redWord">* </span>买方：</span><input type="text" class="grayInput" v-model="buyerJm.companyName">
+                    </p>
+                    <p class="mart10">
+                        <span class="infoKey">联系人：</span><input type="text" class="grayInput" v-model="buyerJm.linkMan">
+                    </p>
+                    <p class="mart10">
+                        <span class="infoKey">邮箱：</span><input type="text" class="grayInput" v-model="buyerJm.userEmail">
+                    </p>
+                    <p class="mart10">
+                        <span class="infoKey"><span class="redWord">* </span>联系电话：</span><input type="text" class="grayInput" v-model="buyerJm.umobile">
+                    </p>
+                </template>
+                <template v-else>
+
+                    <p class="mart10">
+                        <span class="infoKey">买方：</span><input type="text" class="grayInput" v-model="buyerJm.companyName">
+                    </p>
+                    <p class="mart10">
+                        <span class="infoKey">联系人：</span><input type="text" class="grayInput" v-model="buyerJm.linkMan">
+                    </p>
+                    <p class="mart10">
+                        <span class="infoKey">邮箱：</span><input type="text" class="grayInput" v-model="buyerJm.userEmail">
+                    </p>
+                    <p class="mart10">
+                        <span class="infoKey">联系电话：</span><input type="text" class="grayInput" v-model="buyerJm.umobile">
+                    </p>
+                    <p style="background-color: #F4F4F4;width: 100%;height: 2px;margin-top: 0.1rem;"></p>
+                    <p class="mart10">
+                        <span class="infoKey"><span class="redWord">* </span>卖方：</span><input placeholder="公司名称全称" type="text" class="grayInput" v-model="sellerJm.companyName">
+                    </p>
+                    <p class="mart10">
+                        <span class="infoKey">联系人：</span><input type="text" class="grayInput" v-model="sellerJm.linkMan">
+                    </p>
+                    <p class="mart10">
+                        <span class="infoKey">邮箱：</span><input type="text" class="grayInput" v-model="sellerJm.userEmail">
+                    </p>
+                    <p class="mart10">
+                        <span class="infoKey"><span class="redWord">* </span>联系电话：</span><input type="text" class="grayInput" v-model="sellerJm.umobile">
+                    </p>
+
+                </template>
+            </div>
+            <div class="orderInfo">
+                <p class="font28">订单信息</p>
+                <p class="mart10">
+                    <span class="infoKey">订单总价：</span><span class="font28 redWord" v-cloak>￥{{order.totalAmount}}</span>
+                </p>
+               <!--  <p class="mart10">
+                    <span class="infoKey">支付方式：</span>
+                    <template v-if="order.payMethod==1">
+                        <input type="text" class="grayInput" value="个人支付">
+                    </template>
+                    <template v-if="order.payMethod==2">
+                        <input type="text" class="grayInput" value="企业支付">
+                    </template>
+
+                </p> -->
+                <p class="mart10">
+                    <span class="infoKey">支付信息：</span>
+                    <template v-if="order.payDelay==0">
+                        <input type="text" class="grayInput" value="立即支付">
+                    </template>
+                    <template v-if="order.payDelay==1">
+                        <input type="text" class="grayInput" value="延期支付">
+                        <span class="delayPayBtn">
+                            <img src="../../img/quickOrder/kejian.png" alt="" style="width: 0.4rem;height: 0.24rem;margin: 0 auto 0.1rem">
+                            <span style="color: #333">查看支付详情</span>
+                        </span>
+                        <!--<img class="delayPayBtn" src="../../img/seeDetile.png" alt="">-->
+                    </template>
+                </p>
+                <p class="mart10">
+                    <span class="infoKey">发票：</span>
+                    <template v-if="order.invoiceType==0">
+                        <input type="text" class="grayInput" value="不开发票">
+                    </template>
+                    <template v-if="order.invoiceType==1">
+                        <input type="text" class="grayInput" value="增值税普通发票">
+                        <!--<img class="invoiceBtn" src="../../img/seeinvoice.png" alt="">-->
+                        <span class="invoiceBtn">
+                            <img src="../../img/quickOrder/kejianhui.png" alt="" style="width: 0.4rem;height: 0.24rem;margin: 0 auto 0.1rem">
+                            <span style="color: #666">查看发票信息</span>
+                        </span>
+                    </template>
+                    <template v-if="order.invoiceType==2">
+                        <input type="text" class="grayInput" value="增值税专用发票">
+                        <!--<img class="invoiceBtn" src="../../img/seeinvoice.png" alt="">-->
+                        <span class="invoiceBtn">
+                            <img src="../../img/quickOrder/kejianhui.png" alt="" style="width: 0.4rem;height: 0.24rem;margin: 0 auto 0.1rem">
+                            <span>查看发票信息</span>
+                        </span>
+                    </template>
+
+                </p>
+                <p class="mart10">
+                    <span class="infoKey">审核信息：</span>
+                    <template v-if="order.isAudit==0">
+                        <span>无需审核</span>
+                    </template>
+                    <template v-if="order.isAudit==1">
+                        <span>需要审核</span><br>
+                         <span class="infoKey mart10">审核人：</span><span>{{checkerName}}</span>
+                    </template>
+                </p>
+
+            </div>
+        </div>
+        <div class="mainCon goodInfo" style="display: none">
+            <template v-for="item in itemDetails">
+                <div class="oneGoods">
+                    <p class="">
+                        <span class="infoKey w160" v-cloak>{{personalityDTO.itemNameLity}}：</span><span v-cloak>{{item.itemInfo.itemName}}</span>
+                    </p>
+                    <p class="mart10">
+                        <span class="infoKey w160">单价(元)：</span><span>{{item.itemInfo.unitPrice}}</span>
+                    </p>
+                    <p class="mart10">
+                        <span class="infoKey w160">数量：</span><span>{{item.itemQuantity}}</span>
+                    </p>
+                    <p class="mart10">
+                        <span class="infoKey w160">运费(元)：</span><span>{{item.itemFreight}}</span>
+                    </p>
+                    <p class="mart10">
+                        <span class="infoKey w160">总价(元)：</span><span>{{item.itemTotalPrice}}</span>
+                    </p>
+                    <div class="goodsDetBtn font28">商品详情</div>
+                </div>
+                <!--商品详情弹窗-->
+                <div class="goodsDetileWrap">
+                    <div class="addInvoiceHead">
+                        <div class="headerquickOrder">
+                            <a href="javascript:;" class="fanHui goodsDetileArrow"></a>商品详情
+                        </div>
+                        <div style="height: 0.88rem"></div>
+                    </div>
+                    <div class="goodsDetile" style="padding-right: 0;">
+                        <!--商品编码-->
+                        <p class="mart10">
+                            <span class="infoKey w160" v-cloak>{{personalityDTO.itemIdLity}}：</span><span class="infoValue">{{item.itemInfo.itemId}}</span>
+                        </p>
+                        <!--商品内容-->
+                        <p class="mart10">
+                            <span class="infoKey w160" v-cloak>{{personalityDTO.itemNameLity}}：</span>
+                            <span class="infoValue">{{item.itemInfo.itemName}}</span>
+                        </p>
+                        <!--商品规格-->
+                        <p class="mart10">
+                            <span class="infoKey w160" v-cloak>{{personalityDTO.itemStandardLity}}：</span><span class="infoValue">{{item.itemInfo.standard}}</span>
+                        </p>
+                        <!--商品品牌-->
+                        <p class="mart10">
+                            <span class="infoKey w160" v-cloak>{{personalityDTO.itemBrandLity}}：</span><span class="infoValue">{{item.itemInfo.brandName}}</span>
+                        </p>
+                        <!--商品品类-->
+                        <p class="mart10">
+                            <span class="infoKey w160" v-cloak>{{personalityDTO.itemCnameLity}}：</span><span class="infoValue">{{item.itemInfo.cname}}</span>
+                        </p>
+                        <p class="mart10">
+                            <span class="infoKey w160">单价(元)：</span><span
+                                class="infoValue">{{item.itemInfo.unitPrice}}</span>
+                        </p>
+                        <p class="mart10">
+                            <span class="infoKey w160">数量：</span><span class="infoValue">{{item.itemQuantity}}</span>
+                        </p>
+                        <p class="mart10">
+                            <span class="infoKey w160">单位：</span><span class="infoValue">{{item.itemInfo.itemUnitName}}</span>
+                        </p>
+                        <p class="mart10">
+                            <span class="infoKey w160">运费(元)：</span><span
+                                class="infoValue">{{item.itemFreight}}</span>
+                        </p>
+                        <p class="mart10">
+                            <span class="infoKey w160">总价(元)：</span><span
+                                class="infoValue">{{item.itemTotalPrice}}</span>
+                        </p>
+                        <p class="mart10">
+                            <span class="infoKey w160">备注：</span><span class="infoValue">{{item.itemInfo.remark}}</span>
+                        </p>
+                    </div>
+                </div>
+            </template>
+
+
+        </div>
+        <div class="mainCon installmentWrap" style="display: none">
+            <template v-for="period in periodDetails">
+                <div class="installment">
+                    <p class="font30">第{{period.periodCounts}}期 <template v-if="period.periodCounts ==1 && order.isPrepay==1 ">/预付款</template>
+                    </p>
+                    <p class="mart10">
+                        <span class="infoKey">比例：</span><span>{{period.orderScale}}</span>
+                    </p>
+                    <p class="mart10">
+                        <span class="infoKey">金额(元)：</span><span>{{period.orderAmount}}</span>
+                    </p>
+                    <p class="mart10">
+                        <span class="infoKey">是否已支付：</span><span>
+                        <template v-if="period.isPay==0">未支付</template>
+                        <template v-if="period.isPay==1">已支付</template>
+                        </span>
+                    </p>
+                    <p class="mart10">
+                        <span class="infoKey">应支付时间：</span><span v-if="period.payTime">{{period.payTime |longToDate}}</span>
+                    </p>
+                    <p class="mart10">
+                        <span class="infoKey">已支付时间：</span><span v-if="period.payedTime">{{period.payedTime |longToDate}}</span>
+                    </p>
+                </div>
+            </template>
+
+            <div class="totalInfo">
+                <p class="mart10"><span class="infoKey">合计(元)：</span><span class="minWidCon">{{order.totalAmount}}</span></p>
+                <p class="mart10"><span class="infoKey">已付(元)：</span><span class="minWidCon">{{order.payedAmount}}</span></p>
+                <p class="mart10"><span class="infoKey">未付(元)：</span><span class="font28 redWord minWidCon">{{order.unPayedAmount}}</span></p>
+                <template v-if="order.isPrepay==1">
+                    <!--<p class="mart10"><span class="infoKey">预付款(元)：</span>{{periodDetails[0].orderAmount}}</p>-->
+                    <p class="mart10"><span class="infoKey">预付款(元)：</span><span class="minWidCon" v-text="periodDetails!=null?periodDetails[0].orderAmount:''"></span></p>
+                </template>
+            </div>
+        </div>
+    </div>
+    <!--延期支付详情弹窗-->
+    <div class="delayPayWrap">
+        <div class="delayPayHead">
+            <div class="headerquickOrder">
+                <a href="javascript:;" class="fanHui delayPayArrow"></a>
+                订单详情
+            </div>
+            <div style="height: 0.88rem"></div>
+        </div>
+        <div style="padding: 0.2rem">
+            <div class="delayPayTop bb">
+                <p class="mart10">
+                    <span class="infoKey w160">1.预付款：</span>
+                    <template v-if="order.isPrepay==1">
+                        <span v-text="periodDetails!=null?periodDetails[0].orderAmount:''"></span>元
+                        <!--<span>{{periodDetails[0].orderAmount}}</span>元-->
+                    </template>
+                    <template v-else>
+                        <span>无预付款</span>
+                    </template>
+
+                </p>
+                <p class="mart10">
+                    <span class="infoKey w160">2.分期付款：</span>
+                    <template v-if="order.isPeriod==1">
+                        <span>有分期 <input type="text" class="grayInput marLR10" :value="order.period" style="width: 1rem;">期</span>
+                    </template>
+                    <template v-else>
+                        <span>无分期</span>
+                    </template>
+                </p>
+            </div>
+            <template v-if="order.periodMethod==0">
+                <p class="font30 redWord mart10 ">按比例计算</p>
+                <template v-for="detile in periodDetails ">
+                    <div class="delayPayPart" style="padding-bottom: 0.2rem;border-bottom: 1px solid #F4F4F4;margin-bottom: 0.2rem;">
+                        <p class="font30">第{{detile.periodCounts}}期 <template v-if="detile.periodCounts==1&&order.isPrepay==1">/ 预付款</template>:</p>
+                        <!--<p class="mart10">
+                            <span class="infoKey">支付前提：</span>
+                            <input type="text" class="grayInput" value="" style="width: 2rem">
+                            <input type="text" class="grayInput marLR10" value="" style="width: 1rem">天
+                        </p>-->
+                        <p class="mart10">
+                            <span class="infoKey">支付比例：</span>
+                            <input type="text" class="grayInput marR10" :value="detile.orderScale" style="width: 2rem">% = <span>{{detile.orderAmount}}</span>元
+                        </p>
+                    </div>
+                </template>
+            </template>
+            <template v-if="order.periodMethod==1">
+                <p class="font30 redWord mart10">按金额计算</p>
+                <template v-for="detile in periodDetails ">
+                    <div class="delayPayPart">
+                        <p class="font30">第{{detile.periodCounts}}期 <template v-if="detile.periodCounts==1&&order.isPrepay==1">/ 预付款</template>:</p>
+                        <!--<p class="mart10">
+                            <span class="infoKey">支付前提：</span>
+                            <input type="text" class="grayInput" value="" style="width: 2rem">
+                            <input type="text" class="grayInput marLR10" value="" style="width: 1rem">天
+                        </p>-->
+                        <p class="mart10">
+                            <span class="infoKey">支付金额：</span>
+                            <input type="text" class="grayInput marR10" :value="detile.orderAmount" style="width: 2rem">元 = <span>{{detile.orderScale}}</span>%
+                        </p>
+                    </div>
+                </template>
+            </template>
+            <p class="mart10">
+                <span class="infoKey w160 marb10" style="width: auto">3.（第一期 / 预付款）支付前提：</span><br>
+                <select name="" id="payPromise" class="graySelect w250 marL40" :value="order.premise" style="pointer-events: none;">
+                    <option value="6">接受订单后</option>
+                    <option value="7">发货前</option>
+                    <option value="1">发货后</option>
+                    <option value="2">收货后</option>
+                    <option value="3">验货后</option>
+                    <option value="4">收到发票后</option>
+                    <option value="5">统一对账后</option>
+                </select>
+                <input type="number" class="grayInput marLR10 "  style="width: 1rem;" :value="order.premiseDays">天
+            </p>
+        </div>
+    </div>
+    <!--普通发票详情弹窗-->
+    <template v-if="order.invoiceType==1">
+        <div class="zhezhao2 commonInvoice">
+            <div class="winCon">
+                <h3>增值税普通发票</h3>
+                <h4><span class="redWord">*</span>发票抬头：</h4>
+                <template v-if="invoiceDTO">
+                    <input type="text" maxlength="30" class="grayInput" style="width:5rem;margin-left: 0.15rem;" v-model="invoiceDTO.invoiceTitle">
+                </template>
+                <h4><span class="redWord">*</span>纳税人识别码：</h4>
+                <template v-if="invoiceDTO">
+                <input type="text" maxlength="20" class="grayInput" style="width:5rem;margin-left: 0.15rem;" v-model="invoiceDTO.taxpayerCode">
+                </template>
+                <p class="boottomBtn">
+                    <button class="cancel">取消</button>
+                    <button class="sure">确定</button>
+                </p>
+
+                <i class="close commonInvoiceClose"></i>
+            </div>
+        </div>
+    </template>
+
+    <!--增值税专用发票详情弹窗-->
+    <template v-if="order.invoiceType==2">
+         <div class="addInvoiceWrap">
+        <div class="addInvoiceHead">
+            <div class="headerquickOrder">
+                <a href="javascript:;" class="fanHui addInvoiceArrow"></a>增值税专用发票信息
+            </div>
+            <div style="height: 0.88rem"></div>
+        </div>
+        <div class="addInvoiceTop">
+            <p class="mart10">
+                <span class="infoKey"><span class="redWord">＊</span>单位名称：</span><input type="text" class="grayInput" v-model="invoiceDTO.companyName">
+            </p>
+            <p class="mart10">
+                <span class="infoKey"><span class="redWord">＊</span>纳税人识别号：</span><input type="text" class="grayInput" v-model="invoiceDTO.taxpayerCode">
+            </p>
+            <p class="mart10">
+                <span class="infoKey"><span class="redWord">＊</span>注册地址：</span><input type="text" class="grayInput" v-model="invoiceDTO.registeredAddress">
+            </p>
+            <p class="mart10">
+                <span class="infoKey"><span class="redWord">＊</span>注册电话：</span><input type="text" class="grayInput" v-model="invoiceDTO.registeredPhone">
+            </p>
+            <p class="mart10">
+                <span class="infoKey"><span class="redWord">＊</span>开户银行：</span><input type="text" class="grayInput" v-model="invoiceDTO.bankName">
+            </p>
+            <p class="mart10">
+                <span class="infoKey"><span class="redWord">＊</span>银行账户：</span><input type="text" class="grayInput" v-model="invoiceDTO.bankAccount">
+            </p>
+            <p class="mart10">
+                <span class="infoKey">营业执照：</span>
+                <img style="vertical-align: middle" class="licenseImg" :src="imgUrl + invoiceDTO.businessLicensePicUrl" alt="">
+            </p>
+            <p class="mart10">
+                <span class="infoKey">税务登记证：</span>
+                <img style="vertical-align: middle;height: 0.7rem" class="registerBtn" :src="imgUrl + invoiceDTO.taxRegistrationCertificatePicUrl"
+                     alt="">
+            </p>
+            <p class="mart10">
+                <span class="infoKey">一般纳税人证明：</span>
+                <img style="vertical-align: middle;height: 0.7rem" class="proveBtn" :src="imgUrl + invoiceDTO.generalTaxpayerPicUrl" alt="">
+            </p>
+        </div>
+        <div class="addInvoiceTop">
+            <p class="mart10 font30">发票内容明细</p>
+            <p class="mart10">
+                <span class="infoKey"><span class="redWord">＊</span>收票人姓名：</span><input type="text" class="grayInput" v-model="invoiceDTO.consigneeName">
+            </p>
+            <p class="mart10">
+                <span class="infoKey"><span class="redWord">＊</span>收票人手机：</span><input type="text" class="grayInput" v-model="invoiceDTO.consigneeMobile">
+            </p>
+            <p class="mart10">
+                <span class="infoKey"><span class="redWord">＊</span>收票人省份：</span><input type="text" style="width: 2.5rem" class="grayInput" v-model="fullAddress[0]">
+            </p>
+            <p class="mart10">
+                <span class="infoKey"><span class="redWord">＊</span>市：</span><input type="text" style="width: 2.5rem" class="grayInput" v-model="fullAddress[1]">
+            </p>
+            <p class="mart10">
+                <span class="infoKey"><span class="redWord">＊</span>区：</span><input type="text" style="width: 2.5rem" class="grayInput" v-model="fullAddress[2]">
+            </p>
+            <p class="mart10">
+                <span class="infoKey"><span class="redWord">＊</span>详细地址：</span><textarea style="vertical-align: top;resize: none;pointer-events:none;width: 3.6rem;min-height: 2rem" name="" id="" class="grayArea" cols="30" v-model="invoiceDTO.detailAddress"></textarea>
+            </p>
+        </div>
+        <!--查看营业执照图片放大-->
+        <div class="zhezhao licenceWin">
+            <div class="con">
+                <img alt="" :src="imgUrl + invoiceDTO.businessLicensePicUrl" alt="">
+                <i class="close"></i>
+            </div>
+        </div>
+        <!--查看税务登记图片放大-->
+        <div class="zhezhao registerWin">
+            <div class="con" style="margin-top: -2.2rem;">
+                <img alt="" style="height: 3.48rem"
+                     :src="imgUrl + invoiceDTO.taxRegistrationCertificatePicUrl">
+                <i class="close"></i>
+            </div>
+        </div>
+        <!--查看纳税证明图片放大-->
+        <div class="zhezhao proveWin">
+            <div class="con" style="margin-top: -2.2rem;">
+                <img  style="height: 3.48rem"
+                     :src="imgUrl + invoiceDTO.generalTaxpayerPicUrl" alt="">
+                <i class="close"></i>
+            </div>
+        </div>
+    </div>
+    </template>
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/21_quickOrder/3_quickOrderDetile.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/jsonUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/vueFilter.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../html/commonScript/address/address.js"></script>
+<script charset="utf-8" type="text/javascript" src="script/3_quickOrderDetile.js"></script>
+</body>
+</html>

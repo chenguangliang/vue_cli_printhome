@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>地址管理</title>
+    <link rel="stylesheet" href="../../../css/common.css"/>
+    <script type="text/javascript" src="../../../lib/adjust.js"></script>
+    <link rel="stylesheet" href="../../css/12_maiJiaZhongXin/4_shouHuoDiZhi_shouHuoDiZhi.css"/>
+</head>
+<body>
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="javascript:;" onclick="javascript:history.back(-1);" class="return"></a>地址管理
+    </div>
+    <div class="zhanwei"></div>
+</header>
+<!--个人信息开始-->
+<section>
+    <div class="tianXie">
+        <div>
+            <span class="left"><label>＊</label>收货人：</span>
+            <span class="right"><input type="text" placeholder="姓名" id="xingMing" ></span>
+        </div>
+        <div class="warm none">请填写收货人信息！</div>
+        <div>
+            <span class="left"><label>＊</label>手机：</span>
+            <span class="right"><input type="text" placeholder="请输入手机号码" id="shoujIHao"maxlength="11"/></span>
+        </div>
+        <div class="warm none">请填写手机号！</div>
+        <div>
+            <span class="left">固定电话：</span>
+            <span class="right"><input type="number"  placeholder="请输入固定电话" ></span>
+        </div>
+        <div>
+            <span class="left"><label>＊</label>省：</span>
+            <span class="right"><select id="sel_Province" name="sel_Province"  ></select></span>
+        </div>
+        <div class="warm none">请选择收货地址！</div>
+        <div>
+            <span class="left"><label>＊</label>市：</span>
+            <span class="right"><select id="sel_City" name="sel_City" ></select></span>
+        </div>
+        <div class="warm none">请选择收货地址！</div>
+        <div>
+            <span class="left"><label>＊</label>区：</span>
+            <span class="right"><select id="sel_County" name="sel_County" ></select></span>
+        </div>
+        <div class="warm none">请选择收货地址！</div>
+        <div>
+            <span class="left"><label>＊</label>详细地址：</span>
+            <span class="right"><input type="text" placeholder="街道" id="address" /></span>
+        </div>
+        <div class="warm none">请填写详细地址！</div>
+        <div>
+            <span class="left"></span>
+            <span class="right"><input type="checkbox">设为默认地址</span>
+        </div>
+    </div>
+</section>
+<!--保存按钮-->
+<section>
+    <a href="4_shouHuoDiZhi_shouHuoDiZhi2.html" class="saveAddress">保存收货地址</a>
+</section>
+<script charset="UTF-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../bower_components/selectAdd.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/12_maiJiaZhongXin/4_shouHuoDiZhi_shouHuoDiZhi.js"></script>
+</body>
+</html>

@@ -7,13 +7,14 @@
    要唤醒一个 mutation handler，你需要以相应的 type 调用 store.commit 方法：
 
  */
-export default {
-  turnOnLoading (state){
-    console.log("on");
-    state.isLoading= true;
+import mutation_names from './mutation_types'
+
+const mutations={
+  [mutation_names.LOADING_OPEN](state){
+    state.loadingFlag=1;
   },
-  turnOffLoading (state) {
-    console.log("off");
-    state.isLoading=false;
+  [mutation_names.LOADING_CLOSE](state){
+    state.loadingFlag=0;
   }
-}
+};
+export default mutations;

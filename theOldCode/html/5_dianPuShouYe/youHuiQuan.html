@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>优惠券</title>
+    <link rel="stylesheet" href="../../../css/common.css"/>
+    <link rel="stylesheet" href="../../css/5_dianPuShouYe/dianPu_index.css"/>
+    <link rel="stylesheet" href="../../css/5_dianPuShouYe/youHuiQuan.css"/>
+    <link rel="stylesheet" href="../../css/7_lingQuanZhongXin/lingQuanZhongXin.css"/>
+    <script type="text/javascript" src="../../../lib/adjust.js"></script>
+</head>
+<body style="background: #f4f4f4;font-size: 0.3rem;">
+<div id="shopIndexCoupon">
+<div class="top1">
+    <!--<a class="arrow_wrapper" href="javascript:;" onclick="javascript:history.back(-1);"><img class="arrow" src="../../img/back.png" alt=""/></a>优惠券-->
+    <a class="arrow_wrapper" href="javascript:;" @click="gotoShopIndex()"><img class="arrow" src="../../img/back.png" alt=""/></a>优惠券
+</div>
+<div style="height: 0.88rem"></div>
+
+    <template v-if="couponsDTOs != ''">
+        <template v-for="coupon  in couponsDTOs">
+            <div :class="getCouponType(coupon)">
+                <div class="content" @click="coupon.isGet == 'true'?'' : getCoupons(coupon)">
+                    <div :class=" coupon.JJGuoqi == 'true' ? 'zhuangtai':''"></div>
+                    <p class="jine">
+                        <template v-if="coupon.couponType == '1'">
+                            ¥<span>{{coupon.couponAmount}}</span>
+                        </template>
+                        <template v-if="coupon.couponType == '2'">
+                            <span>{{coupon.couponAmount}}</span>折
+                        </template>
+                        <template v-if="coupon.couponType == '3'">
+                            ¥<span>{{coupon.couponAmount}}</span>
+                        </template>
+                    </p>
+
+                    <p class="mingcheng">{{coupon.couponName}}</p>
+
+                    <p class="riqi">至<span>{{coupon.couponEndTime | timestampFormat('YYYY.MM.DD')}}</span>截止</p>
+
+                    <p class="shuliang">限领<span>{{coupon.allowGetNum}}</span>张</p>
+
+
+                    <p class="qian">
+                        <template v-if="coupon.couponType == '1'">
+                            满{{coupon.meetPrice}}元可用
+                        </template>
+                        <template v-if="coupon.couponType == '2'">
+                            最高抵扣{{coupon.couponMax}}元
+                        </template>
+                        <template v-if="coupon.couponType == '3'">
+                            无门槛
+                        </template>
+                    </p>
+                    <!--是否过期、领取、领完-->
+                    <template v-if="coupon.state == '2' || coupon.state == '3'">
+                        <img src="../../img/yiguoqi@3x.png" alt="" id="yiguoqi"/>
+                    </template>
+                    <template v-else-if="coupon.isGet=='true'">
+                        <img src="../../img/yilingqu@3x.png" alt="" style="display: block;" class="yilingqu"/>
+                    </template>
+                    <template v-else-if="coupon.state=='7'">
+                        <img src="../../img/yilingwan@3x.png" alt="" id="yilingwan"/>
+                    </template>
+                </div>
+                <div class="leibie">
+                    <div  @click="getCouponDetail(coupon.couponId)">
+                        <template v-if="coupon.couponUsingRange == '1'">
+                            平台通用类
+                        </template>
+                        <template v-if="coupon.couponUsingRange == '2'">
+                            店铺通用类
+                        </template>
+                        <template v-if="coupon.couponUsingRange == '3'">
+                            品类通用类
+                        </template>
+                        <template v-if="coupon.couponUsingRange == '4'">
+                            指定商品类
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </template>
+    <template  v-else>
+        <div class="noCoupon">
+            {{noCoupon}}
+        </div>
+    </template>
+    <!--优惠卷详情弹框-->
+    <transition name="fade">
+        <section v-show="couponDetailDialog" >
+            <div :class="getCouponDetailClass(couponDetail.couponInfo.couponUsingRange) ">
+                <template v-if="couponDetail.couponInfo.couponUsingRange == 1">
+                    <div class="pingtai">
+                        <h3>平台通用类优惠券</h3>
+                        <p>此优惠券全平台所有商品均可使用</p>
+                        <span id="close"></span>
+                    </div>
+                </template>
+            </div>
+            <template v-if="couponDetail.couponInfo.couponUsingRange != 1" >
+                <div class="dianpu"  v-cloak>
+                    <h3>
+                        <template v-if="couponDetail.couponInfo.couponUsingRange == '2'">
+                            适用店铺
+                        </template>
+                        <template v-if="couponDetail.couponInfo.couponUsingRange == '3'">
+                            适用分类
+                        </template>
+                        <template v-if="couponDetail.couponInfo.couponUsingRange == '4'">
+                            适用商品
+                        </template>
+                    </h3>
+
+                    <div class="liebiao">
+                        <template v-if="couponDetail.couponInfo.couponUsingRange == '2'">
+                            <ul>
+                            <template v-for="(key,value) in couponDetail.pager.records">
+                                <li><a href="javascript:;" @click="gotoShopIndex(key)">{{key.itemName}}</a></li>
+                            </template>
+                            </ul>
+                            <p>printhome.com</p>
+                        </template>
+                        <template v-if="couponDetail.couponInfo.couponUsingRange == '3'">
+                            <div id="dianjiyu">
+                                <template v-for="oneLevel in couponDetail.categoryes">
+                                    <template v-if="oneLevel.canShow">
+                                        <div class="pinLeiLieBiao">
+                                            <div class="kezi">
+                                                <p class="yiji yijibg">{{oneLevel.categoryCName}}</p>
+                                            </div>
+                                            <template v-for="twoLevel in oneLevel.children">
+                                                <template v-if="twoLevel.canShow">
+                                                    <div class="erji">
+                                                        <div class="sanji">
+                                                            <li class="sanji_top sanji_top_color">{{twoLevel.categoryCName}}（{{twoLevel.children.length}}）</li>
+                                                            <div class="sanji_bottom">
+                                                                <template v-for="threeLevel in twoLevel.children">
+                                                                    <a href="javascript:;">{{threeLevel.categoryCName}}</a>
+                                                                </template>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </template>
+                                            </template>
+                                        </div>
+                                    </template>
+                                </template>
+                            </div>
+                            <p>printhome.com</p>
+                        </template>
+                        <template v-if="couponDetail.couponInfo.couponUsingRange == '4'">
+                            <h3 class="title">商品列表</h3>
+                            <ul>
+                                <template v-for="(key,value) in couponDetail.pager.records">
+                                    <li><a href="javascript:;" @click="gotoProductDetail(key.itemId,key.skuId)">{{key.itemName}}</a></li>
+                                </template>
+
+                            </ul>
+                            <p>printhome.com</p>
+                        </template>
+                    </div>
+                    <a href="javascript:void(0);" @click="couponDetailDialog=!couponDetailDialog" class="guanbi">关闭</a>
+                </div>
+            </template>
+        </section>
+    </transition>
+<div style="height: 1rem"></div>
+<div class="footer_fixed">
+    <div class="footer_wrapper" onclick="window.location.href='../../html/1_index/index.html'">
+        <img class="footer_img" src="../../img/pingtai.png" alt=""/>
+        <span>商城首页</span>
+    </div>
+    <div class="footer_wrapper" style="border-left: 1px solid #cccccc;border-right: 1px solid #cccccc;" @click="gotoShopIndex">
+        <img class="footer_img" src="../../img/shouye.png" alt=""/>
+        <span>店铺首页</span>
+    </div>
+    <div class="footer_wrapper">
+        <img class="footer_img" src="../../img/shop_xiaoxiang.png" alt=""/>
+        <span>联系卖家</span>
+    </div>
+</div>
+</div>
+<script charset="UTF-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/cookieUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/moment.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/mathUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/jsonUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/vueFilter.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../js/5_dianPuShouYe/youHuiQuan.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../js/7_lingQuanZhongXin/lingQuanZhongXin.js"></script>
+<script charset="utf-8" type="text/javascript" src="../commonScript/shopCoupon.js"></script>
+<script charset="UTF-8" type="text/javascript" src="script/shopIndexCoupon.js"></script>
+</body>
+</html>

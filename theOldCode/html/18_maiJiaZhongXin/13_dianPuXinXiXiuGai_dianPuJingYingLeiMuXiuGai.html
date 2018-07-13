@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>店铺经营类目修改</title>
+    <script type="text/javascript" src="../../../lib/adjust.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/18_maiJiaZhongXin/13_dianPuXinXiXiuGai_dianPuJingYingLeiMuXiuGai.css"/>
+</head>
+<body>
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="../../html/18_maiJiaZhongXin/13_dianPuXinXiXiuGai_dianPuXinXiXiuGai.html?label=leiMu" class="fanHui"></a>
+        店铺经营类目修改
+    </div>
+    <div class="zhanwei"></div>
+</header>
+<div id="shopInfoLMEdit" v-cloak>
+<section>
+    <h3 class="dianPuLeiMu">店铺经营类目</h3>
+    <div class="leiMu">
+        <template v-for="(entity,key) in passedCategoryList">
+            <div><p style="max-width: 4.8rem;">{{entity}}<span class="shanChu" @click="deleteCategory(key)"></span></p></div>
+        </template>
+
+        <template v-for="(entity,key) in newCategoryList">
+            <div><p style="max-width: 4.8rem;">{{entity}}<img src="../../img/new@3x.png" alt="" /><span class="shanChu" @click="delNewCategory(key)"></span></p></div>
+        </template>
+    </div>
+</section>
+<section>
+    <input type="button" value="+新增类目" class="xinZengLeiMu"/>
+</section>
+<!--占位-->
+<section>
+    <div  class="footer_zhanWei"></div>
+</section>
+<footer>
+    <div class="tiJiao">
+        <input type="button" @click="submit()" value="提交"/>
+    </div>
+</footer>
+<!--回到顶部-->
+<section>
+    <div id="top">
+    </div>
+</section>
+    <!--经营类目查看驳回原因-->
+    <section>
+        <div class="category_reject_prop">
+            <div class="bg" @click="hide_category_reject_prop()"></div>
+            <div class="category_reject">
+                <h3>驳回原因</h3>
+                <div><span class="left">被驳回类目：</span><span class="right">{{rejectedCategoryText}}</span></div>
+                <div><span class="left">驳回原因：</span><span class="right">{{rejectedCategoryComment}}</span></div>
+                <p class="btn"><button class="cancel" @click="hide_category_reject_prop()">取消</button><button class="sure" @click="hide_category_reject_prop()">确定</button></p>
+                <img src="../../img/cha.png" class="close" @click="hide_category_reject_prop()"/>
+            </div>
+        </div>
+    </section>
+<!--删除类目弹窗-->
+<section>
+    <div class="shanChuTanChuang">
+        <div class="bg"></div>
+        <div class="faBuTanChuang">
+            <h5>删除</h5>
+            <p>确定要删除该类目吗？</p>
+            <div></div>
+            <p><a href="javascript:;">取消</a><a href="javascript:;">确定</a></p>
+        </div>
+    </div>
+</section>
+<!--新增类目弹窗-->
+<section>
+    <div class="xinZengLeiMuTanChuang">
+        <div class="bg"></div>
+        <div class="boHuiYuanYin">
+            <h3>新增类目</h3>
+            <p>店铺类目</p>
+            <select id="categoryLev1" name="categoryLev1" @change="getCategoryLV2"
+                    title="请选择一级类目">
+                <option value="" > 请选择 </option>
+                <option v-for="category in categoryLV1List" :value="category.categoryCid" v-text="category.categoryCName"></option>
+            </select>
+            <select id="categoryLev2" name="categoryLev2" @change="getCategoryLV3"
+                    title="请选择二级类目">
+                <option value="" > 请选择 </option>
+                <option v-for="category in categoryLV2List" :value="category.categoryCid" v-text="category.categoryCName"></option>
+            </select>
+            <select id="categoryLev3" name="categoryLev3" title="请选择三级类目">
+                <option value="" > 请选择 </option>
+                <option v-for="category in categoryLV3List" :value="category.categoryCid" v-text="category.categoryCName"></option>
+            </select>
+            <div class="btn"><button class="cancel">取消</button><button class="sure" @click="addNewCategory()">确定</button></div>
+            <img src="../../img/cha.png" class="close"/>
+        </div>
+    </div>
+</section>
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/request.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/18_maiJiaZhongXin/13_dianPuXinXiXiuGai_dianPuXinXiXiuGai.js"></script>
+<script charset="utf-8" type="text/javascript" src="script/13_shopInfoLMEdit.js"></script>
+</body>
+</html>

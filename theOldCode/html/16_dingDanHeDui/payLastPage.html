@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>去支付</title>
+    <link rel="stylesheet" href="../../../css/common.css">
+    <link rel="stylesheet" href="../../css/common1.css">
+    <link rel="stylesheet" href="../../css/16_dingDanHeDui/quZhiFu.css">
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+    <script type="text/javascript" src="../../../lib/adjust.js"></script>
+</head>
+<body>
+<div id="payLastPage" v-cloak>
+<header>
+    <div class="header">
+        <a href="javascript:;" class="return" @click="gotoOrderCenter()"></a>去支付
+    </div>
+</header>
+<div class="zhanwei"></div>
+    <!--支付标题头-->
+<section>
+    <div class="shouyin">
+        <a href="../../html/1_index/index.html"><img src="../../img/zhiFu.png" alt="" class="zhiFuLoGo"/></a>
+        <p style="border-right:1px solid #c9c9c9;height: 0.7rem;float: left;margin-top: 0.24rem;margin-right: 0.2rem;"></p>
+         <a href="javascript:;"><img src="../../img/payDeskLogo1.png" alt=""  class="shouYinTai"/>
+             <p style="font-size: 0.26rem;margin-top: 0.45rem;float: left;margin-left: 0.1rem;">收银台</p>
+         </a>
+    </div>
+</section>
+<section>
+    <div class="bordert_ccc bg_fff">
+        <div class="pad_l20">
+            <p class="font_26 color_333 lh-50 pad_r20">感谢使用<span class="font_28 color_e60012">小印支付（转账支付）</span>，请根据<span class="no_phone">短信</span>提示尽快完成付款！</p>
+            <p class="font_24 color_666 lh-50" style="word-break: break-all;">交易编码已发送至您绑定的<span class="no_phone">手机({{payInfo.userPhone}})和</span>邮箱({{payInfo.userEmail}}),付款到账后订单状态将在24小时内更新；如有疑问请拨打4006-770-878客服电话。
+            </p>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="bg_fff pad_20 mar_t20">
+        <div class="bg_fff">
+            <p class="font_26 color_333 lh-50">
+                您可登录任意一家银行向以下账户<span class="font_26 color_e60012">转账付款</span>对应订单金额，并务必在<span class="font_26 color_e60012">汇款摘要</span>中填入正确的交易编码！
+            </p>
+            <p class="font_26 color_333 lh-50">
+                您的交易编码为：<span class="font_26 color_e60012">{{payInfo.indexNumer}}</span><span id="isSubOrder">（交易编码同时对应以下所有子订单）</span>
+            </p>
+            <p class="font_30 color_e60012 lh-50">交易编码如未填写或填写错误订单将异常！</p>
+            <p class="font_24 color_666">（延期订单请在当日23:59分前完成转账付款，逾期可能导致支付失败）</p>
+        </div>
+        <template v-for="orderInfo in payInfo.allOrdernfo">
+            <div class="bg_f8f8f8 pad_l20 mar_t20 pad_tb10">
+                <p style="font-size:0;" class="mar_b20">
+                    <span class="font_24 color_666">订&nbsp;&nbsp;&nbsp;单&nbsp;&nbsp;&nbsp;号：</span><span class="font_26 color_333">{{orderInfo.orderNo}}
+					<template v-if="orderInfo.phaseNum != null">
+			            ({{orderInfo.phaseNum}})
+			        </template>
+					</span>
+                </p>
+                <p style="font-size:0;" class="mar_b20 ">
+                    <span class="font_24 color_666">账&nbsp;户&nbsp;名&nbsp;称：</span><span class="font_26 color_333">{{orderInfo.accName}}</span>
+                </p>
+                <p style="font-size:0;" class="mar_b20">
+                    <span class="font_24 color_666">账 户 账 号：</span><span class="font_26 color_333">{{orderInfo.accNumber}}</span>
+                </p>
+                <p style="font-size:0;" class="mar_b20">
+                    <span class="font_24 color_666">开户行名称：</span><span class="font_26 color_333">{{orderInfo.bankName}}</span>
+                </p>
+                <p style="font-size:0;" class="mar_b20">
+                    <span class="font_24 color_666">开户行行号：</span><span class="font_26 color_333">{{orderInfo.bankNumber}}</span>
+                </p>
+                <p class="font_26 color_666 text_right">
+                    总价：<span class="font_30 color_e60012">¥ {{orderInfo.payPrice}}&ensp;</span>
+                </p>
+            </div>
+        </template>
+    </div>
+</section>
+<div style="height: 0.84rem;"></div>
+<footer>
+    <div class="footer bg_fff text_cen">
+        <span class="yellowBtn openPaymentExample" style="margin-right:0.8rem;margin-top:0.1rem;">查看付款示例</span>
+        <span class="redBtn" @click="printDetail()">生成付款申请单</span>
+    </div>
+</footer>
+<!--付款示例-->
+<div class="paymentExample popUp">
+    <div class="popup popup_close"></div>
+    <div class="paymentExampleContent">
+        <a href="javascript:;" class="closed popup_close"></a>
+        <p class="color_666 font_22 text_cen lh-50">查看付款示例</p>
+        <div style="height:7.5rem;overflow-y: auto;">
+            <div class="explain2 color_fff font_26 text_cen">1.中信银行付款示例</div>
+            <div class="indexNumWrap" style="padding-bottom: 0.4rem;">
+                <img src="../../img/zhongxin1.png" alt="" class="jianHang">
+                <span class="indexNum">
+                    <span>点击更多</span><br><br>
+                    请务必把交易编码 <span style="color: #e60012;">({{payInfo.indexNumer |deleteSpace}})</span>完整写在此处。如需备注其他内容，请在交易编码之后补充。
+                </span>
+            </div>
+            <div class="explain color_fff font_26 text_cen">2.中国工商银行付款示例</div>
+            <div class="indexNumWrap">
+                <img src="../../img/gongshang1.png" alt="" class="jianHang">
+                <span class="indexNum" style="bottom: 0.8rem;">
+                    请务必把交易编码 <span style="color: #e60012">({{payInfo.indexNumer |deleteSpace}})</span>完整写在此处。如需备注其他内容，请在交易编码之后补充。
+                </span>
+            </div>
+            <div class="explain2 color_fff font_26 text_cen">3.中国银行付款示例</div>
+            <div class="indexNumWrap">
+                <img src="../../img/zhongguoyinhang1@3x.png" alt="" class="jianHang">
+                <span class="indexNum" style="bottom: 0.1rem;">
+                    请务必把交易编码 <span style="color: #e60012">({{payInfo.indexNumer |deleteSpace}})</span>完整写在此处。如需备注其他内容，请在交易编码之后补充。
+                </span>
+            </div>
+            <div class="explain color_fff font_26 text_cen">4.中国建设银行付款示例</div>
+            <div class="indexNumWrap">
+                <img src="../../img/jianhang1@3x.png" alt="" class="jianHang">
+                <span class="indexNum" style="bottom: 0.4rem;">
+                    请务必把交易编码 <span style="color: #e60012">({{payInfo.indexNumer |deleteSpace}})</span>完整写在此处。如需备注其他内容，请在交易编码之后补充。
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--操作引导-->
+<div class="lead popUp">
+    <div class="popup">
+        <div class="third_step lead_step">
+            <img src="../../img/3.png" alt=""   style="width: 4rem;height:1.36rem;">
+            <div class="dialog_box color_333">您的交易编码为：<span class="color_e60012">{{payInfo.indexNumer |deleteSpace}}</span></div>
+            <img src="../../img/xiayibu.png" alt="" class="mar_cen" style="width: 1.5rem;height: 0.66rem;" onclick="show_hide('.third_step','.fourth_step')">
+        </div>
+        <div class="fourth_step lead_step">
+            <img src="../../img/4.png" alt=""  style="width:4rem;height: 1.96rem;">
+            <div class="clearfix message_box"  v-for="orderInfo in payInfo.allOrdernfo">
+                <p class="mar_b20">
+                    <span class="font_24 color_666">订&nbsp;&nbsp;&nbsp;单&nbsp;&nbsp;&nbsp;号：</span><span class="font_26 color_333">{{orderInfo.orderNo}}
+                    <template v-if="orderInfo.phaseNum != null">
+			            ({{orderInfo.phaseNum}})
+			        </template>
+                    </span>
+                </p>
+                <p style="border: 1px dashed #e60012;border-radius: 0.06rem;" class="mar_b20 ">
+                    <span class="font_24 color_666">账&nbsp;户&nbsp;名&nbsp;称：</span><span class="font_26 color_333">{{orderInfo.accName}}</span>
+                </p>
+                <p style="border: 1px dashed #e60012;border-radius: 0.06rem;" class="mar_b20">
+                    <span class="font_24 color_666">账 户 账 号：</span><span class="font_26 color_333">{{orderInfo.accNumber}}</span>
+                </p>
+                <p class="mar_b20">
+                    <span class="font_24 color_666">开户行名称：</span><span class="font_26 color_333">{{orderInfo.bankName}}</span>
+                </p>
+                <p class="mar_b20">
+                    <span class="font_24 color_666">开户行行号：</span><span class="font_26 color_333">{{orderInfo.bankNumber}}</span>
+                </p>
+                <p class="font_26 color_666 fr text_cen" style="border: 1px dashed #e60012;border-radius: 0.06rem;">
+                    总价：<span class="font_30 color_e60012">¥ {{orderInfo.payPrice}}&ensp;</span>
+                </p>
+            </div>
+            <img src="../../img/xiayibu.png" alt="" class="mar_cen" style="width: 1.5rem;height: 0.66rem;"onclick="show_hide('.fourth_step','.fifth_step')">
+        </div>
+        <div class="fifth_step lead_step">
+            <img src="../../img/5.png" alt="" style="width:5rem;height: 2.56rem;">
+            <div class="dialog_box color_333">您的交易编码为：<span class="color_e60012">{{payInfo.indexNumer |deleteSpace}}</span></div>
+            <img src="../../img/xiayibu.png" alt="" class="mar_cen" style="width: 1.5rem;height: 0.66rem;" onclick="show_hide('.fifth_step','.sixth_step')">
+        </div>
+        <div class="sixth_step lead_step">
+            <img src="../../img/7.png" alt="" style="width:2.91rem;height: 1.97rem;">
+            <button type="button" onclick="show_hide('.sixth_step','.seventh_step')" style="background:0 none;display: block;width: 2.2rem;height: 0.64rem;position: absolute;left: 0;bottom: 0;"></button>
+        </div>
+        <div class="seventh_step lead_step">
+            <img src="../../img/shili.png" alt=""  style="width:5.8rem;height: 6.6rem;">
+            <span class="color_e60012 font_26" style="position: absolute;right: 0.4rem;bottom: 2.75rem;">{{payInfo.indexNumer |deleteSpace}}</span>
+            <img src="../../img/I-no.png" alt="" class="mar_cen"  style="width: 1.5rem;height: 0.65rem;" onclick="show_hide('.lead','','second');unClockedBody();">
+        </div>
+    </div>
+</div>
+
+</div>
+<script src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/cookieUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/vueUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/moment.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/jsonUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/mathUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/StorageUtil.js"></script>
+<script type="text/javascript" src="../../../lib/common.js"></script>
+<script type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/vueFilter.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/vueDirective.js"></script>
+<script src="../../js/16_dingDanHeDui/quZhiFu.js"></script>
+<script charset="UTF-8" type="text/javascript" src="script/payLastPage.js"></script>
+</body>
+</html>

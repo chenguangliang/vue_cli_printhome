@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport"
+    content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>找回密码1：确认账号</title>
+    <link rel="stylesheet" href="../../../css/common.css"/>
+    <link rel="stylesheet" href="../../css/2_login_sign/zhaoHuiMiMa.css"/>
+    <script charset="UTF-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+    <script type="text/javascript" src="../../../lib/adjust.js"></script>
+    <script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+    <script type="text/javascript" src="../../../lib/request.js"></script>
+</head>
+<style>
+    [v-cloak] {
+        display: none;
+    }
+</style>
+<body style="background: white;font-size: 0.3rem;padding: 0.2rem">
+<div>
+    <div class="title">
+        <img src="../../img/yz-bg.png" alt=""/>
+
+        <div>1.确认帐号</div>
+    </div>
+    <div style="padding: 0.2rem;margin-top: 0.1rem;">
+        <div>
+            <span style="font-size: 0.3rem;color: #333333;margin-right: 0.2rem;">登陆账号</span>
+            <span style="font-size: 0.26rem;color: #666666">请填写需要找回密码的印刷家账号</span>
+        </div>
+        <div  id="phoneNum" class="user_name  gray_word">
+            <div class="phoneHead" @click="showGuoJiPage()" >+{{areacode}}</div>
+            <input type="text" class="ccc_border" placeholder="手机号" id="phone" maxlength="11" />
+            <!--@keydown="limitPhone($event)"-->
+        </div>
+        <div class="user_error none">账户账号信息错误，请重新输入</div>
+        <div style="margin-top: 0.3rem;">
+            <span style="font-size: 0.3rem;color: #333333;margin-right: 0.2rem;">验证码</span>
+            <span style="font-size: 0.26rem;color: #666666">验证码请输入下图中显示的数字</span>
+        </div>
+        <div class="code">
+            <img src="../../img/yanzhengma.png" alt="" id="imgCaptcha" onclick="getImgcaptcha()"/>
+            <input  id="picCaptcha" class="code_input ccc_border gray_word"  type="text" maxlength="4" onchange="if(/\D/.test(this.value)){printAlert('只能输入数字');this.value='';}" onkeypress="keyPress()" placeholder="验证码"  />
+        </div>
+        <div class="code_error none">验证码错误，请重新输入</div>
+        <div class="code_expire none">验证码已过期，请重新获取</div>
+
+    </div>
+</div>
+<div class="btn">
+    <a  href="javascript:;"><input class="red_bg" type="button" onclick="javascript:history.back(-1);" value="取  消"/></a>
+    <a  href="javascript:;"><input class="red_bg" type="button" onclick="oneStepSubmit()" value="确  定"/></a>
+</div>
+
+<script charset="utf-8" type="text/javascript" src="../../../lib/request.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../../lib/common.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../js/2_login_sign/zhaoHuiMiMa.js"></script>
+<script charset="UTF-8" type="text/javascript" src="script/findpwd.js"></script>
+</body>
+</html>

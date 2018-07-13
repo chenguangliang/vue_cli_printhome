@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>买家认证</title>
+    <link rel="stylesheet" href="../../../css/common.css"/>
+    <link rel="stylesheet" href="../../css/2_login_sign/fastRenZheng.css"/>
+    <link rel="stylesheet" href="../../css/12_maiJiaZhongXin/9_woDeYouHuiQuan_woDeYouHuiQuan.css"/>
+    <script type="text/javascript" src="../../../lib/adjust.js"></script>
+    <script  charset="UTF-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="../../../lib/common.js"></script>
+    <script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+</head>
+<body>
+<div id="auth">
+    <header>
+        <div class="header">
+            <a href="javascript:;" onclick="javascript:history.back(-1);" class="return"></a>买家认证
+        </div>
+        <div class="zhanwei"></div>
+    </header>
+    <section>
+        <div class="register_box">
+            <ul>
+                <li>
+                    <span><i>＊</i>公司名称：</span>
+                    <input type="text" v-model="userInfoDTO.userBusinessDTO.companyName" placeholder="请输入公司名称" class="companyName ccc_border gray_word"/>
+                </li>
+                <div class="warm none">请输入工商局注册的正确公司名称。</div>
+                <li>
+                    <span><i>＊</i>联系人姓名：</span>
+                    <input type="text" v-model="userInfoDTO.userDTO.linkMan" placeholder="请输入联系人姓名" maxlength="20" class="linkMan ccc_border gray_word"/>
+                </li>
+                <div class="warm none">请输入2-20个字符，可由中文和英文组成。</div>
+                <!-- <li class="regist_item">
+                    <span><i>＊</i>经营范围：</span>
+                    <div class="regist_item_ifo clearfix" id="business_scope">
+                        <input type="checkbox" id="checkbox01" />
+                        <label for="checkbox01" data-name="书刊印刷" class="chushi"></label>
+                        <input type="checkbox" id="checkbox02" />
+                        <label for="checkbox02" data-name="包装印刷" class="chushi"></label>
+                        <input type="checkbox" id="checkbox03" />
+                        <label for="checkbox03" data-name="数字印刷" class="chushi"></label>
+                        <input type="checkbox" id="checkbox04" />
+                        <label for="checkbox04" data-name="商业印刷" class="chushi"></label>
+                        <input type="checkbox" id="checkbox05" />
+                        <label for="checkbox05" data-name="报业印刷" class="chushi"></label>
+                        <input type="checkbox" id="checkbox06" />
+                        <label for="checkbox06" data-name="标签印刷" class="chushi"></label>
+                        <input type="checkbox" id="checkbox07" />
+                        <label for="checkbox07" data-name="票据印刷" class="chushi"></label>
+                        <input type="checkbox" id="checkbox08" />
+                        <label for="checkbox08" data-name="特种印刷" class="chushi"></label>
+                        <input type="checkbox" id="checkbox09" />
+                        <label for="checkbox09" data-name="广告设计" class="chushi"></label>
+                        <input type="checkbox" id="checkbox10" />
+                        <label for="checkbox10" data-name="专项印刷" class="chushi"></label>
+                        <input type="checkbox" id="checkbox11" />
+                        <label for="checkbox11" data-name="其他" class="chushi"></label>
+                    </div>
+                    <input type="hidden" v-model="userInfoDTO.userBusinessDTO.businessScope" id="businessScope"/>
+                </li>
+                <div class="warm none">请至少选择一项。</div> -->
+
+                <li>
+                	<span><i>＊</i>公司所在地：</span>
+                	<p class="diZhi clearfix" style="margin-left: 1.73rem;">
+			            <select style="margin-left: 0;" name="company_province" id="company_province" v-model="companyProvince" @change="changeComProvince" title="请选择省份">
+				            <option value="" > 请选择 </option>
+				                <!--绑定value 到 Vue 实例的一个动态属性-->
+				            <option v-for="province in provinceList" :value="province.code" v-text="province.name" ></option>
+			        	</select>
+				        <select style="margin-left: 0.1rem;" name="company_city" id="company_city" v-model="companyCity" @change="changeComCity" title="请选择城市">
+				            <option value="" > 请选择 </option>
+				            <!--绑定value 到 Vue 实例的一个动态属性-->
+				            <option v-for="city in comCityList" :value="city.code" v-text="city.name" ></option>
+				        </select>
+				        <select style="margin-left: 0.1rem;" name="company_area" id="company_area" v-model="companyArea" title="请选择区县">
+				            <option value="" > 请选择 </option>
+				            <!--绑定value 到 Vue 实例的一个动态属性-->
+				            <option v-for="area in comAreaList" :value="area.code" v-text="area.name" ></option>
+				        </select>
+			        </p>
+                </li>
+                <li>
+                    <span><i>＊</i>公司地址：</span>
+                    <input type="text" v-model="userInfoDTO.userBusinessDTO.companyDeclinedAddress" placeholder="请输入公司地址" class=" ccc_border gray_word"/>
+                </li>
+                <li>
+                    <span><i>＊</i>法人名称：</span>
+                    <input type="text" v-model="userInfoDTO.userBusinessDTO.artificialPersonName" placeholder="请输入法人名称" class=" ccc_border gray_word"/>
+                </li>
+                <li>
+                    <span><i>＊</i>营业执照：</span>
+                    <input type="text" v-model="userInfoDTO.userBusinessDTO.businessLicenceId" placeholder="请输入营业执照号码" class=" ccc_border gray_word"/>
+                </li>
+                <li>
+                    <span><i>＊</i>贸易身份：</span>
+                    <span class="right rongZi" style="margin-left: 1.7rem;width: 3.8rem;">
+	                    <img @click="tradeTypeChange(0)" src="../../img/yes-select.png" alt="" class="yes"/>销售
+	                    <img @click="tradeTypeChange(1)" src="../../img/no-select.png" alt="" class="no"/>采购
+	                    <img @click="tradeTypeChange(2)" src="../../img/no-select.png" alt="" class="no"/>两者都是
+		            </span>
+                </li>
+                <li>
+                    <span><i>＊</i>邮箱：</span>
+                    <input type="text" v-model="userInfoDTO.userDTO.userEmail" placeholder="请输入邮箱" maxlength="25" class="MailInput  ccc_border gray_word"/>
+                </li>
+                <div class="warm none">请输入有效的电子邮件</div>
+                <li class="yanZhengMa">
+		            <span>
+		                <i>＊</i>邮箱验证码：
+		            </span>
+		                <input style="width:2rem;" type="tel" maxlength="6" id="captcha_id" class="yanZhengMa ccc_border" >
+		                <input style="left:4rem;width:1.7rem;background-color: #e60012;color: #fff;" type="button" class="captchaBtn" onclick="sendCaptcha('email');" value="获取验证码"/>
+		                <input type="hidden" id="code_key" name="codeKey">
+		        </li>
+		        <p class="warm none">验证码输入错误，请重新输入</p>
+            </ul>
+        </div>
+    </section>
+    <section>
+        <a class="tijiao"  href="javascript:void(0);" v-on:click="submit">提交买家认证</a>
+    </section>
+    <section>
+        <a href="../../html/1_index/index.html" class="back">回首页>></a>
+    </section>
+    <section style="position: relative;overflow: hidden;height: 0.5rem">
+        <div class="home">printhome.com</div>
+    </section>
+</div>
+<div class="zhezhao" style="display:none;">
+    <div class="con" style="height: 3rem;width: 4.4rem;left: 1rem;">
+        <h5>公司已存在</h5>
+        <p style="height: auto;">您所认证的公司已存在，请核实后再认证，如有问题请时通过客服渠道4006-770-878和我们联系 。</p>
+        <div></div>
+        <span class="queDing" onclick="javascript:$('.zhezhao').hide();">确定</span>
+    </div>
+</div>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/StorageUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../html/2_login_sign/script/fastRenZheng.js"></script>
+</body>
+</html>

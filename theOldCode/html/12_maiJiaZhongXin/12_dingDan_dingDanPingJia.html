@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+	<meta name="format-detection" content="telephone=no"/>
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<title>订单评价</title>
+	<script type="text/javascript" src="../../../lib/adjust.js"></script>
+	<link type="text/css" rel="stylesheet" href="../../../css/common.css"/>
+	<link type="text/css" rel="stylesheet" href="../../css/12_maiJiaZhongXin/12_dingDan_woDedingDan.css"/>
+	<link rel="stylesheet" href="../../css/12_maiJiaZhongXin/12_dingDan_dingDanPingJia.css">
+</head>
+<body>
+<div id="order_evaluate">
+<!--头部开始-->
+<header>
+	<div class="header">
+		<a href="javascript:;" class="fanHui" v-on:click="goBackOrderList()"></a>
+		订单评价
+	</div>
+	<div style="height: 0.88rem;"></div>
+</header>
+<section>
+	<div class="dianPu">
+		<span class="pingTai"></span>
+		<a href="javascript:;" class="name">{{resultData.tradeOrdersDTO.shopName}}</a>
+	</div>
+	<template v-for="(tradeOrderItemsDTO,index) in resultData.tradeOrdersDTO.items">
+		<template v-if="tradeOrderItemsDTO.itemBuyType!=null && tradeOrderItemsDTO.itemBuyType == 4">
+		</template>
+		<template v-else>
+			<div class="dingDan tui" v-bind:id="'item_div_index_'+index" v-bind:skuId="tradeOrderItemsDTO.skuId" v-bind:itemId="tradeOrderItemsDTO.itemId">
+				<a class="xiangQing" href="javascript:;">
+					<div class="top clearfix">
+						<template v-for="itemShopCartDTO in resultData.itemShopCartDTOList">
+							<template v-if="itemShopCartDTO.skuId == tradeOrderItemsDTO.skuId">
+								<img v-bind:src="img_url + itemShopCartDTO.skuPicUrl" alt="" class="dianPuLogo" />
+							</template>
+						</template>
+						<template v-for="itemDTO in resultData.itemDTOList">
+							<template v-if="itemDTO.itemId == tradeOrderItemsDTO.itemId">
+								<p class="shangPin">{{itemDTO.itemName}}</p>
+							</template>
+						</template>
+						<p class="leiXing">{{tradeOrderItemsDTO.skuName}}</p>
+						<p class="pingfen" v-bind:id="'sku_scope_index_'+index">
+							商品评分:
+							<img src="../../img/shoucang.png" alt="">
+							<img src="../../img/shoucang.png" alt="">
+							<img src="../../img/shoucang.png" alt="">
+							<img src="../../img/shoucang.png" alt="">
+							<img src="../../img/shoucang.png" alt="">
+						</p>
+					</div>
+				</a>
+				<div style="border: 1px dashed #E8E8E8;width: 6rem;margin: 0 auto"></div>
+				<div class="m">
+					<h3>添加评论</h3>
+					<textarea v-bind:id="'content_index_'+index" placeholder="快来分享您的购买体会和使用感受,让更多小伙伴一起体验吧!评价即可获取100成长值哦~评价+晒单可获取200成长值!(点击下方按钮上传照片即可完成晒单)" maxlength="300"></textarea>
+				</div>
+				<div class="b clearfix" v-bind:id="'fileupload-div-'+index">
+					<a href="javascript:;" class="ccc_border">
+						<img src="../../img/xiangJi.png" alt="" />
+						<input type="file" class="fuJian" v-bind:id="'fileupload-index-'+index" name="file" onchange="startUpload(this)"/>
+					</a>
+				</div>
+			</div>
+		</template>
+	</template>
+</section>
+<section>
+	<div class="dppf">
+		<h3>店铺评分</h3>
+		<div class="pingfen_group" id="shopDescriptionScope">
+			描述相符：
+			<img src="../../img/shoucang.png" alt="">
+			<img src="../../img/shoucang.png" alt="">
+			<img src="../../img/shoucang.png" alt="">
+			<img src="../../img/shoucang.png" alt="">
+			<img src="../../img/shoucang.png" alt="">
+		</div>
+		<div class="pingfen_group" id="shopServiceScope">
+			服务态度：
+			<img src="../../img/shoucang.png" alt="">
+			<img src="../../img/shoucang.png" alt="">
+			<img src="../../img/shoucang.png" alt="">
+			<img src="../../img/shoucang.png" alt="">
+			<img src="../../img/shoucang.png" alt="">
+		</div>
+		<div class="pingfen_group" id="shopArrivalScope">
+			到货速度：
+				<img src="../../img/shoucang.png" alt="" />
+				<img src="../../img/shoucang.png" alt="" />
+				<img src="../../img/shoucang.png" alt="" />
+				<img src="../../img/shoucang.png" alt="" />
+				<img src="../../img/shoucang.png" alt="" />
+		</div>
+	</div>
+</section>
+<div style="height: 1.04rem;"></div>
+<footer>
+	<div class="footer">
+		<a href="javascript:;"><img src="../../img/no-select.png" alt="" id="isAnonymity"/>匿名评价</a>
+	  	<input type="button" value="发表评价" class="faBiao" v-on:click="publishEvaluate()"/>
+		<input type="button" value="取消" class="quXiao" v-on:click="goBackOrderList()"/>
+	</div>
+</footer>
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../bower_components/attachment/jquery.form.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/attachment/ajaxfileupload.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/12_maiJiaZhongXin/12_dingDan_woDedingDan.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/jsonUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="script/buyer-order-evaluate.js"></script>
+</body>
+</html>

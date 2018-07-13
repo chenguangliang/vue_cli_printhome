@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>修改物资</title>
+    <script type="text/javascript" src="../../../lib/adjust.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/21_quickOrder/0_quickOrderCommon.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/21_quickOrder/3_quickOrderDetile.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/21_quickOrder/4_addQuickOrder.css"/>
+</head>
+<body style="background-color: #f4f4f4;">
+<div id="app">
+    <!--头部开始-->
+    <header>
+        <div class="headerquickOrder">
+            <a href="javascript:history.back(-1);" class="fanHui"></a>修改物资
+        </div>
+        <div style="height:0.88rem;"></div>
+    </header>
+    <!--主体-->
+    <div>
+        <div class="addGoodsCon">
+            <div>
+                <span class="infoKey w160"><span class="redWord">*</span><span v-cloak>{{personalityDTO.itemNameLity}}：</span></span>
+                <input type="text" maxlength="30" class="grayInput" :placeholder="please+ personalityDTO.itemNameLity" v-model="material.itemName">
+            </div>
+            <div class="mart10">
+                <span class="infoKey w160"><span class="redWord">*</span><span v-cloak>{{personalityDTO.itemCnameLity}}：</span></span>
+                <select class="graySelect w140 oneLineNoPoint" name="pinlei" id="pinlei" @change="changeLevOne()">
+                    <option value="0">一级类目</option>
+                    <template v-for="levItem in categoryLevOne">
+                        <option :value="levItem.categoryCid">{{levItem.categoryCName}}</option>
+                    </template>
+                    <option value="other">其他</option>
+                </select>
+                <select class="graySelect w140 oneLineNoPoint" name="pinlei1" id="pinlei1" @change="changeLevTwo()">
+                    <option value="0">二级类目</option>
+                    <template v-for="levItem in categoryLevTwo">
+                        <option :value="levItem.categoryCid">{{levItem.categoryCName}}</option>
+                    </template>
+                </select>
+                <select class="graySelect w140 oneLineNoPoint" name="pinlei2" id="pinlei2" @change="queryBrand()" >
+                    <option value="0" selected>三级类目</option>
+                    <template v-for="levItem in categoryLevThree">
+                        <option :value="levItem.categoryCid">{{levItem.categoryCName}}</option>
+                    </template>
+                </select>
+                <p class="otherClass">
+                    <span class="infoKey w160"></span>
+                    <input type="text" maxlength="20" class="grayInput mart10 otherCategory" placeholder="请输入其他品类">
+                </p>
+            </div>
+            <div class="mart10">
+                <span class="infoKey w160"><span class="redWord">*</span><span v-cloak>{{personalityDTO.itemBrandLity}}：</span></span>
+                <select class="graySelect" name="pinpai" id="pinpai">
+                    <option value="0">请选择</option>
+                    <template v-for="brand in brandList">
+                        <option :value="brand.brandId">{{brand.brandName}}</option>
+                    </template>
+                    <option value="other">其他</option>
+                </select>
+                <p class="otherBrand">
+                    <span class="infoKey w160"></span> <input type="text" maxlength="20" class="grayInput mart10 otherBrandInput" placeholder="请输入其他品牌">
+                </p>
+            </div>
+            <div class="mart10">
+                <span class="infoKey w160"><span class="redWord">*</span>单价：</span>
+                <input type="text" class="grayInput mart10" maxlength="10" @keyup="limitUnitPrice()" placeholder="请输入单价" v-model="material.unitPrice">元
+            </div>
+            <div class="mart10">
+                <span class="infoKey w160"><span class="redWord">*</span>单位：</span>
+                <select class="graySelect" name="danwei" id="danwei">
+                    <option value="0">请选择</option>
+                    <option value="吨">吨</option>
+                    <option value="令">令</option>
+                    <option value="公斤">公斤</option>
+                    <option value="卷">卷</option>
+                    <option value="平方米">平方米</option>
+                    <option value="米">米</option>
+                    <option value="平方厘米">平方厘米</option>
+                    <option value="包">包</option>
+                    <option value="罐">罐</option>
+                    <option value="桶">桶</option>
+                    <option value="台">台</option>
+                    <option value="套">套</option>
+                    <option value="个">个</option>
+                    <option value="条">条</option>
+                    <option value="张">张</option>
+                    <option value="本">本</option>
+                    <option value="other">其他</option>
+                </select>
+
+                <p class="otherUnit">
+                    <span class="infoKey w160"></span> <input type="text" maxlength="5" class="grayInput mart10 otherUnitInput" placeholder="请输入其他单位">
+                </p>
+            </div>
+
+            <div class="mart10">
+                <span class="infoKey w160"><span v-cloak>{{personalityDTO.itemStandardLity}}：</span></span>
+                <select class="graySelect" name="guige" id="guige">
+                    <option value="0">请选择</option>
+                    <optgroup label="1.平张纸">1.平张纸</optgroup>
+                    <option value="787mm X 1,092mm">787mm X 1,092mm</option>
+                    <option value="889mm X 1,194mm">889mm X 1,194mm</option>
+                    <option value="635mm X 940mm">635mm X 940mm</option>
+                    <option value="635mm X 965mm">635mm X 965mm</option>
+                    <option value="31’’x43’’(787mmx1,092mm)">31”x43”(787mmx1,092mm)</option>
+                    <option value="35’’x47’’(889mmx1,194mm)">35”x47”(889mmx1,194mm)</option>
+                    <option value="25’’x37’’(635mmx940mm)">25”x37”(635mmx940mm)</option>
+                    <option value="25’’x38’’(635mmx965mm)">25”x38”(635mmx965mm)</option>
+                    <optgroup label="2.卷筒纸">2.卷筒纸</optgroup>
+                    <option value="31’’(787mm)">31”(787mm)</option>
+                    <option value="35’’(889mm)">35”(889mm)</option>
+                    <option value="56.58” (1,437mm)">56.58”(1,437mm)</option>
+                    <option value="62’’(1,574mm)">62”(1,574mm)</option>
+                    <option value="70’’(1,778mm)">70”(1,778mm)</option>
+                    <optgroup label="3.自定义规格">3.自定义规格</optgroup>
+                    <template v-for="spec in Specifications">
+                        <option :value="spec.standardName">{{spec.standardName}}</option>
+                    </template>
+                    <option value="other">其他</option>
+                </select>
+                <p class="otherSpeci">
+                    <span class="infoKey w160"></span>
+                    <input type="text" maxlength="15" class="grayInput mart10 otherSpeciInput" placeholder="请输入其他规格">
+                </p>
+            </div>
+            <div class="mart20">
+                <span class="infoKey w160">审核信息：</span>
+                <img class="redRoundBtn noNeedCheck" src="../../img/yes-select.png" alt="">无需审核
+                <img class="redRoundBtn needCheck marL20" src="../../img/no-select.png" alt="" @click="showAuditors()">需要审核
+                <p class="otherchecker mart10">
+                    <span class="infoKey w160">审核人：</span>
+                    <select name="" id="checker1" class="graySelect" v-model="material.auditer">
+                        <option value="0">请选择</option>
+                        <template v-for="auditor in auditors">
+                            <option :value="auditor.userId">{{auditor.username}}</option>
+                        </template>
+                    </select>
+                </p>
+            </div>
+            <div class="mart20">
+                <span class="infoKey w160">备注：</span>
+                <textarea placeholder="请输入备注" maxlength="100" name="" id="" cols="30" rows="5" class="grayArea remark"
+                          style="vertical-align: top"></textarea>
+            </div>
+        </div>
+        <div style="height: 2rem ;background-color: #fff;"></div>
+        <div class="fixFootOne addGoodsFixBtn">
+            <p class="cancel" onclick="javascript:window.location='./8_materialList.html'"
+               style="border-right: 1px solid #F4F4F4;">取消</p>
+            <p class="sure redWord" @click="editMaterial()">确定</p>
+        </div>
+    </div>
+</div>
+    <script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+    <script charset="utf-8" type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+    <script charset="utf-8" type="text/javascript" src="../../../lib/common.js"></script>
+    <script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+    <script charset="utf-8" type="text/javascript" src="../../../lib/request.js"></script>
+    <script charset="utf-8" type="text/javascript" src="../../js/21_quickOrder/9_addMaterial.js"></script>
+    <script charset="utf-8" type="text/javascript" src="script/12_editMaterial.js"></script>
+</body>
+</html>

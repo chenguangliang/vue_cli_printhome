@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>高级搜索</title>
+    <link type="text/css" rel="stylesheet" href="../../../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/12_maiJiaZhongXin/10_xieYiGuanLi_xieYiChuangJian.css"/>
+    <link type="text/css" rel="stylesheet"  href="../../css/lCalendar.css"/>
+    <script type="text/javascript" src="../../../lib/adjust.js"></script>
+</head>
+<body style="background-color: #fff;">
+<div id="order_high_grade_search">
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="javascript:;" onclick="javascript:history.back(-1);" class="fanHui" v-on:click="goBackOrderList()"></a>
+        高级搜索
+    </div>
+    <div style="height:0.88rem;"></div>
+</header>
+<!--协议编号-->
+<section>
+    <div class="suoSou">
+        <p>
+            <span>商品名称：</span>
+            <input type="text" maxlength="20" v-model="itemName"/>
+        </p>
+        <p>
+            <span>店铺名称：</span>
+            <input type="text" maxlength="20" v-model="shopName"/>
+        </p>
+        <p>
+            <span>订单编号：</span>
+            <input type="text" maxlength="20" v-model="orderId"/>
+        </p>
+        <p>
+            <span>订单状态：</span>
+            <select style="width: 4.5rem;" v-model="orderState">
+                <option value="">请选择</option>
+                <option value="1">待付款</option>
+                <option value="2">待配送</option>
+                <option value="3">待收货</option>
+                <option value="4">待评价</option>
+                <option value="5">已完成</option>
+                <option value="6">已取消</option>
+                <option value="7">已关闭</option>
+            </select>
+        </p>
+        <p>
+            <span>订单类型：</span>
+            <select style="width: 4.5rem;" v-model="orderType">
+                <option value="">请选择</option>
+                <option value="2">普通订单</option>
+                <option value="0">询价订单</option>
+                <option value="1">协议订单</option>
+                <option value="5">定金订单</option>
+                <option value="4">延期订单</option>
+                <option value="3">分期订单</option>
+            </select>
+        </p>
+        <!--<p>
+            <span>订单金额：</span>
+            <input type="number" maxlength="20" style="width: 2.15rem;"/>
+            -
+            <input type="number" maxlength="20" style="width: 2.15rem;"/>
+        </p>-->
+        <p>
+            <span>下单时间：</span>
+            <input id="selTime1" type="datetime-local"  name="input_date1" placeholder="时间选择" style="width: 2.2rem" v-model="createStart"/>
+            -
+            <input id="selTime2" type="datetime-local"   name="input_date2" placeholder="时间选择" style="width: 2.2rem" v-model="createEnd"/>
+        </p>
+        <p>
+            <span>付款时间：</span>
+            <input id="selTime3"type="datetime-local"   name="input_date3" placeholder="时间选择" style="width: 2.2rem" v-model="paymentTimeStart"/>
+            -
+            <input id="selTime4" type="datetime-local" name="input_date4" placeholder="时间选择" style="width: 2.2rem" v-model="paymentTimeEnd"/>
+        </p>
+        <a href="javascript:;" class="gaoJiSouSuo" v-on:click="queryBuyerOrderByHighGrade()">高级搜索</a>
+    </div>
+</section>
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/jsonUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="script/buyer-order-high-grade-search.js"></script>
+</body>
+</html>

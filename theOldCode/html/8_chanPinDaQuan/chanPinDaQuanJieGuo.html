@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>产品大全结果页</title>
+    <link rel="stylesheet" href="../../../css/common.css"/>
+    <link rel="stylesheet" href="../../css/8_chanPinDaQuan/chanPinDaQuan.css"/>
+    <script type="text/javascript" src="../../../lib/adjust.js"></script>
+</head>
+<style>
+    [v-cloak] {
+        display: none;
+    }
+</style>
+<body style="background: #f4f4f4;font-size: 0.3rem;">
+<div id="chanpinjieguo" v-cloak>
+<input type="hidden" value="2" id="typejs"/>
+
+<div class="top_wrapper">
+    <!--<a href="#" class="back_wrapper"><img class="back" src="../../img/back.png" alt="" onclick="window.history.go(-1);"/></a>-->
+    <a href="javascript:;" class="return" onclick="window.location='../8_chanPinDaQuan/chanPinDaQuan.html'"></a>
+    <!--<a href="javascript:;" class="return" onclick="javascript:history.back(-1);"></a>-->
+    <span class="top_title back_wrapper over_point" v-substring1="[0,10]">{{itemInfo.itemName}}</span>
+</div>
+<div class="height_112"></div>
+<div class="list_goods">
+    <a href="#">
+        <img class="listgoods_img" :src="imgUrl + picUrl" alt=""/></a>
+
+    <div class="title_wrapper">
+        <!--<a href="http://www.baidu.com" class="result_product_name">{{itemInfo.itemName}}(商品属性)</a>-->
+        <a href="#" class="result_product_name threeLine">{{itemAttrName}}</a>
+
+    </div>
+</div>
+
+<template v-for="item in itemShopsList">
+    <div class="list_shops" style="display: inline-block" @click="toShopItemIndex(item.shopId,item.itemId)">
+        <a href="javascript:return 0;" style="display: inline-block">
+            <img class="listshops_img" :src="item.logoUrl==null || item.logoUrl==''?'../../img/default_shop_logo.png':imgUrl + item.logoUrl" alt=""/></a>
+
+        <div class="shop_title_wrapper">
+            <a href="javascript:return 0;" class="listshops_name over_point">{{item.shopName}}</a>
+            <template v-if="parseFloat(item.scope) > 4.4">
+                <span class="heart-on" style="width: 16px;float: none;"></span>
+                <span class="heart-on" style="width: 16px;float: none;"></span>
+                <span class="heart-on" style="width: 16px;float: none;"></span>
+                <span class="heart-on" style="width: 16px;float: none;"></span>
+                <span class="heart-on" style="width: 16px;float: none;"></span>
+            </template>
+            <template v-else-if="parseFloat(item.scope) > 4.2">
+                <span class="heart-on" style="width: 16px;float: none;"></span>
+                <span class="heart-on" style="width: 16px;float: none;"></span>
+                <span class="heart-on" style="width: 16px;float: none;"></span>
+                <span class="heart-on" style="width: 16px;float: none;"></span>
+                <span class="heart-half" style="width: 16px;float: none;"></span>
+            </template>
+            <template v-else-if="parseFloat(item.scope) > 3.4">
+                <span class="heart-on" style="width: 16px;float: none;"></span>
+                <span class="heart-on" style="width: 16px;float: none;"></span>
+                <span class="heart-on" style="width: 16px;float: none;"></span>
+                <span class="heart-on" style="width: 16px;float: none;"></span>
+                <span class="heart-off" style="width: 16px;float: none;"></span>
+            </template>
+            <template v-else-if="parseFloat(item.scope) >3.2">
+                <span class="heart-on" style="width: 16px;float: none;"></span>
+                <span class="heart-on" style="width: 16px;float: none;"></span>
+                <span class="heart-on" style="width: 16px;float: none;"></span>
+                <span class="heart-half" style="width: 16px;float: none;"></span>
+                <span class="heart-off" style="width: 16px;float: none;"></span>
+            </template>
+            <template v-else-if="parseFloat(item.scope) >2.4">
+                <span class="heart-on" style="width: 16px;float: none;"></span>
+                <span class="heart-on" style="width: 16px;float: none;"></span>
+                <span class="heart-on" style="width: 16px;float: none;"></span>
+                <span class="heart-off" style="width: 16px;float: none;"></span>
+                <span class="heart-off" style="width: 16px;float: none;"></span>
+            </template>
+            <template v-else-if="parseFloat(item.scope) >2.2">
+                <span class="heart-on" style="width: 16px;float: none;"></span>
+                <span class="heart-on" style="width: 16px;float: none;"></span>
+                <span class="heart-half" style="width: 16px;float: none;"></span>
+                <span class="heart-off" style="width: 16px;float: none;"></span>
+                <span class="heart-off" style="width: 16px;float: none;"></span>
+            </template>
+            <template v-else-if="parseFloat(item.scope) >1.4">
+                <span class="heart-on" style="width: 16px;float: none;"></span>
+                <span class="heart-on" style="width: 16px;float: none;"></span>
+                <span class="heart-off" style="width: 16px;float: none;"></span>
+                <span class="heart-off" style="width: 16px;float: none;"></span>
+                <span class="heart-off" style="width: 16px;float: none;"></span>
+            </template>
+            <template v-else-if="parseFloat(item.scope) >1.2">
+                <span class="heart-on" style="width: 16px;float: none;"></span>
+                <span class="heart-half" style="width: 16px;float: none;"></span>
+                <span class="heart-off" style="width: 16px;float: none;"></span>
+                <span class="heart-off" style="width: 16px;float: none;"></span>
+                <span class="heart-off" style="width: 16px;float: none;"></span>
+            </template>
+            <template v-else-if="parseFloat(item.scope) >0.4">
+                <span class="heart-on" style="width: 16px;float: none;"></span>
+                <span class="heart-off" style="width: 16px;float: none;"></span>
+                <span class="heart-off" style="width: 16px;float: none;"></span>
+                <span class="heart-off" style="width: 16px;float: none;"></span>
+                <span class="heart-off" style="width: 16px;float: none;"></span>
+            </template>
+            <template v-else-if="parseFloat(item.scope) >0.2">
+                <span class="heart-half" style="width: 16px;float: none;"></span>
+                <span class="heart-off" style="width: 16px;float: none;"></span>
+                <span class="heart-off" style="width: 16px;float: none;"></span>
+                <span class="heart-off" style="width: 16px;float: none;"></span>
+                <span class="heart-off" style="width: 16px;float: none;"></span>
+            </template>
+            <template v-else>
+                <span class="heart-off" style="width: 16px;float: none;"></span>
+                <span class="heart-off" style="width: 16px;float: none;"></span>
+                <span class="heart-off" style="width: 16px;float: none;"></span>
+                <span class="heart-off" style="width: 16px;float: none;"></span>
+                <span class="heart-off" style="width: 16px;float: none;"></span>
+            </template>
+            <template v-if="item.hasPrice == 1">
+                <p class="listshops_price red_word over_point">
+                    <template v-if="item.guidePriceForShow != null && item.guidePriceForShow != ''">
+                        ￥{{item.guidePriceForShow}}
+                    </template>
+                </p>
+            </template>
+            <template v-else-if="loggingStatus == 'true'">
+                <p class="listshops_price red_word over_point">欢迎询价</p>
+            </template>
+            <template v-else>
+                <p class="listshops_price red_word over_point">登录后可询价</p>
+            </template>
+        </div>
+
+    </div>
+</template>
+
+</div>
+
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/common_http.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jq_scroll.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/TouchSlide.1.1.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../js/8_chanPinDaQuan/chanPinDaQuan.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../js/vueDirective.js"></script>
+<script type="text/javascript" src="script/categoryItemsResult.js"></script>
+</body>
+</html>

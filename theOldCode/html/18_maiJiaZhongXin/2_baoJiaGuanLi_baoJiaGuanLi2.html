@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>报价管理</title>
+    <link type="text/css" rel="stylesheet" href="../../../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/12_maiJiaZhongXin/10_xieYiGuanLi_xieYiGuanLi.css"/>
+    <script type="text/javascript" src="../../../lib/adjust.js"></script>
+</head>
+<body>
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="#" onclick="goback()" class="fanHui"></a>
+        报价管理
+    </div>
+    <div class="zhanwei"></div>
+</header>
+<!--选项卡-->
+<div id="priceInfo">
+<section>
+    <div class="xuanXiangKa xunJia">
+        <ul>
+            <li  onclick="location='2_baoJiaGuanLi_baoJiaGuanLi.html'">单一报价</li>
+            <li class="on">批量报价</li>
+        </ul>
+    </div>
+</section>
+<section>
+    <div class="tab_box">
+        <div class="queRen" style="display: block">
+            <template v-for="detail in details">
+            <div class="wuPin">
+                <p>
+                    <span>物品名称：</span>
+                    <i v-text="detail.itemName"></i>
+                </p>
+                <p>
+                    <span>交货时间：</span>
+                    <i v-text="time(detail.deliveryDate2)"></i>
+                </p>
+                <p>
+                    <span>商品属性：</span>
+                    <i class="shangPinShuXing" v-text="detail.salerAttr+'  '"></i>
+                </p>
+                <p>
+                    <span>数量：</span>
+                    <input type="text"  name="quantity" v-model="detail.quantity" @blur="numInputForLengthForVue($event,7, 2,detail,'quantity');" @keyup="numInputForLengthForVue($event,7, 2,detail,'quantity');">
+                    <span>单价：</span>
+                    <input type="text" name="matPrice" v-model="detail.matPrice" @blur="numInputForLengthForVue($event,7, 2,detail,'matPrice');" @keyup="numInputForLengthForVue($event,7, 2,detail,'matPrice');" >
+                </p>
+                <p>
+                    <span>有效时间：</span>
+                    <input type="date" :id="'beginDate_'+detail.id" :min="nowDate()"  name="beginDate" style="width: 2.27rem;" v-model="detail.beginDate">
+                    一
+                    <input type="date" :id="'endDate_'+detail.id" :min="nowDate()" name="endDate" style="width: 2.27rem;" v-model="detail.endDate">
+                </p>
+            </div>
+            </template>
+        </div>
+    </div>
+</section>
+<section>
+    <p class="printHome">printhome.com</p>
+</section>
+<!--占位-->
+<section>
+    <div style="height: 0.95rem;width: 100%;"></div>
+</section>
+<!--回到顶部-->
+<section>
+    <div id="top">
+    </div>
+</section>
+<footer>
+        <div class=" foot">
+            <a href="#" onclick="goback()" class="cancle">取消</a><a href="javascript:;" @click="submit">确定</a>
+        </div>
+</footer>
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/12_maiJiaZhongXin/10_xieYiGuanLi_xieYiGuanLi.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/vueFilter.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/moment.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/mathUtil.js"></script>
+<script type="text/javascript" src="script/2_xunjiabaojia.js"></script>
+</body>
+</html>

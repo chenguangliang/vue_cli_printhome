@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>销售情况统计图</title>
+    <script type="text/javascript" src="../../../lib/adjust.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../../css/common.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/daterangepicker.css"/>
+    <link type="text/css" rel="stylesheet" href="../../css/18_maiJiaZhongXin/10_xiaoShouFenXi_xiaoShouZhuangKuang.css"/>
+</head>
+<body>
+<!--头部开始-->
+<header>
+    <div class="header">
+        <a href="../../html/18_maiJiaZhongXin/10_xiaoShouFenXi_xiaoShouFenXi.html" class="fanHui" ></a>
+        销售情况统计图
+        <a href="javascript:;" class="riLi" id="date-range"></a>
+    </div>
+</header>
+<div style="height: 0.88rem;"></div>
+<div id="saleState">
+<section>
+    <div class="shangPinLieBiao" v-cloak>
+        <div class="theTop">
+            <img :src="imgUrl + itemInfo.pictureUrl" alt="" class="shangPinTuPian">
+            <p class="mingZi">{{itemInfo.itemName}}</p>
+            <p class="shuXing">销售属性：{{itemInfoAttr}}</p>
+        </div>
+    </div>
+</section>
+<section>
+    <ul class="xuanXiangKa">
+        <!--<li>销售额</li>-->
+        <!--<li>销售量</li>-->
+        <li class="on qieHuan">切换数据图展示</li>
+    </ul>
+    <div class="lieBiao">
+        <template v-for="(dataShow,index) in showList">
+            <div class="leiMu">
+                <span class="xuLie">{{ index+1 }}</span>
+                <span class="left"></span>
+                <span class="right"></span>
+                <span class="lineY"></span>
+                <p class="time">日期<span>{{dataShow.dateTime}}</span></p>
+                <div class="clearfix">
+                    <div class="xiaoShouE">
+                        <p>销售额</p>
+                        <span>{{dataShow.price}}</span>
+                    </div>
+                    <div class="xiaoShouLiang">
+                        <p>销售量</p>
+                        <span>{{dataShow.num}}</span>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+</section>
+<section>
+    <div class="tongJiTu">
+        <ul>
+            <li class="on" @click="showPageChat('price')">销售额</li>
+            <li @click="showPageChat('num')">销售量</li>
+            <span class="qieHuan" @click="showPageChat('price')">切换列表展示</span>
+        </ul>
+        <div class="tu" id="myChart"></div>
+    </div>
+</section>
+<!--回到顶部-->
+<section>
+    <div id="top">
+    </div>
+</section>
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/echarts/dist/echarts-all.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/common.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/jsonUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="script/moment.min.js"></script>
+<script charset="utf-8" type="text/javascript" src="script/jquery.daterangepicker.js"></script>
+<script charset="utf-8" type="text/javascript" src="script/10_xiaoShouZhuangKuang.js"></script>
+</body>
+</html>

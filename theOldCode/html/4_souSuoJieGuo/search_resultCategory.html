@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>搜索结果</title>
+    <link rel="stylesheet" href="../../../css/common.css"/>
+    <link rel="stylesheet" href="../../../css/search.css"/>
+    <link rel="stylesheet" href="../../../css/pullToRefresh.css"/>
+    <style type="text/css">
+        #pullDown {
+            height: 0.6rem;
+        }
+        #pullUp {
+            margin-bottom: 0.4rem;
+        }
+    </style>
+    <script type="text/javascript" src="../../../lib/adjust.js"></script>
+</head>
+<body style="background: #f4f4f4;font-size: 0.3rem;">
+<div id="searchResult">
+<div >
+    <div class="top_wrapper">
+        <a href="../../html/11_pinDaoLeiMu/pinDaoLeiMu.html" class="back_wrapper"><img class="back" src="../../img/back.png" alt="" /></a>
+
+        <div class="search_wrapper" style="width: 5rem">
+            <select name="search" id="search">
+                <option value="goods" selected = "selected" >商品</option>
+                <option value="shop">店铺</option>
+            </select>
+            <input type="text" id="key" class="search_box" style="width: 2.6rem;border-radius: 0"  @click="goToSearch"/>
+
+            <div style="display: inline-block; float: right; margin: 3px 10px 0 0;">
+                <!--<img class="chahao" src="../../img/chahao.png" alt=""/>-->
+                <img class="fangda" src="../../img/fangdajing.png" alt="" onclick="searchList()"/>
+            </div>
+        </div>
+        <img class="toggle_img" src="../../img/suoluetu-@3x.png" alt="" @click="toggleShow" id="switchPic"/>
+    </div>
+    <div class="search_btn">
+        <p searchSort="1" searchSortFlag="1" v-on:click="searchList($event,'update')">最近更新</p>
+
+        <p searchSort="3" searchSortFlag="1" v-on:click="searchList($event,'sale')">销量<img :src="clickImgUrl.saleSrc" alt=""/></p>
+
+        <p searchSort="4" searchSortFlag="1" v-on:click="searchList($event,'price')">价格<img :src="clickImgUrl.priceSrc" alt=""/></p>
+
+        <p searchSort="2" searchSortFlag="1" class="last" v-on:click="searchList($event,'comment')">评论最多</p>
+    </div>
+</div>
+<div class="suolue_wrap">
+    <div id="wrapper">
+        <div id="scroller">
+                <ul  class="suolue_result wrapScrool">
+                    <div style="height: 1.9rem"></div>
+                    <template v-for="item in goodsData">
+
+                        <li class="suolue_goods inline_block" v-show="showMode">
+                            <a href="#" style="display: inline-block" @click="gotoGood(item)">
+                                <img class="suoluegoods_img" v-bind:src="imgUrl + item.picUrl" alt=""/>
+                                <p class="suoluegoods_name">{{item.itemName}}</p></a>
+                            <p class="suoluegoods_price" @click="getShopEvaluationInfo(item.shopId)">
+                                <template v-if="item.hasPrice == 1">
+                                    ￥{{item.skuPrice}}
+                                </template>
+                                <template v-else>
+                                    欢迎询价
+                                </template>
+                                <img style="width: 0.3rem;float: right;margin-top: 0.15rem;" src="../../img/point.png" alt=""/>
+                            </p>
+                            <div class="suoluefloot_ship"><p style="background-color: #f39700;">
+                                <span class="suoluecontact" @click="itemSkuFavorite(item)">收藏商品</span>
+                                <span class="suoluegoods_car" @click="shopFavorite(item)">收藏店铺</span></p>
+
+                                <div class="suolueship_wrapper">
+                                    <p class="suolueshop_name" v-on:click="toShop(item.shopId)">{{item.shopName}}</p>
+
+                                    <p class="suolue_detile">描述：
+                                        <span class="red_word mr20">{{shopEvaluationInfo.shopDescription}}</span>服务：
+                                        <span class="red_word">{{shopEvaluationInfo.shopReputation}}</span></p>
+
+                                    <p class="suolue_detile">物流：
+                                        <span class="red_word mr20">{{shopEvaluationInfo.shopArrival}}</span>态度：
+                                        <span class="red_word">{{shopEvaluationInfo.shopService}}</span>
+                                    </p></div>
+                            </div>
+                        </li>
+                    </template>
+                </ul>
+                <ul v-show="!showMode" class="list_result wrapScrool">
+                    <template v-for="item in goodsData">
+
+                        <li class="list_goods" v-show="!showMode">
+                            <a href="#" style="display: inline-block" @click="gotoGood(item)">
+                                <img class="listgoods_img" v-bind:src="imgUrl + item.picUrl" alt=""/></a>
+
+                            <div class="title_wrapper">
+                                <a href="#" class="listgoods_name" @click="gotoGood(item)">{{item.itemName}}</a>
+
+                                <p class="listgoods_price red_word" @click="getShopEvaluationInfo(item.shopId)">
+                                    <template v-if="item.hasPrice == 1">
+                                        ￥{{item.skuPrice}}
+                                    </template>
+                                    <template v-else>
+                                        欢迎询价
+                                    </template>
+                                    <img style="width: 0.3rem;float: right;margin-top: 0.15rem;" src="../../img/point.png" alt=""/>
+                                </p>
+                            </div>
+                            <div class="listfloot_ship">
+                                <div class="listship_wrapper">
+                                    <p class="listshop_name" v-on:click="toShop(item.shopId)">{{item.shopName}}</p>
+
+                                    <p class="list_detile">描述：
+                                        <span class="red_word mr20">{{shopEvaluationInfo.shopDescription}}</span>服务：
+                                        <span class="red_word">{{shopEvaluationInfo.shopReputation}}</span>
+                                    </p>
+
+                                    <p class="list_detile">物流：
+                                        <span class="red_word mr20">{{shopEvaluationInfo.shopArrival}}</span>态度：
+                                        <span class="red_word">{{shopEvaluationInfo.shopService}}</span>
+                                    </p>
+
+                                    <p style="margin-top: 0.1rem;">
+                                        <!--<span class="list_shoucang mr20" @click="itemSkuFavorite(item)">收藏商品</span>
+                                        <span class="list_shoucang" @click="shopFavorite(item)">收藏店铺</span>-->
+                                    </p>
+                                </div>
+                            <!--<span class="add_wrapper" style="background-color: #f39700;">
+                                <p class="listcontact" @click="itemSkuFavorite(item)"><span>收藏</span><br/><span>商品</span></p>
+                                <p class="listgoods_car" @click="shopFavorite(item)">收藏<br/>店铺</p>
+                            </span>-->
+                                <div class="add_wrapper" style="background-color: #f39700;height: 1.7rem;">
+                                   <p class="listcontact" @click="itemSkuFavorite(item)">收藏<br/>商品</p>
+                                    <p class="listgoods_car" @click="shopFavorite(item)">收藏<br/>店铺</p>
+                                </div>
+                            </div>
+                        </li>
+                    </template>
+                </ul>
+        </div>
+    </div>
+</div>
+</div>
+<script charset="utf-8" type="text/javascript" src="../../bower_components/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../bower_components/vue/dist/vue.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/jsonUtil.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/common.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/request.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../js/popup.js"></script>
+<script charset="utf-8" type="text/javascript" src="../../../lib/iscroll.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../../lib/pullToRefresh_fixHead.js"></script>
+<script charset="UTF-8" type="text/javascript" src="../../js/4_souSuoJieGuo/search_http.js"></script>
+<script charset="UTF-8" type="text/javascript" src="script/search_resultCategory.js"></script>
+</body>
+</html>
