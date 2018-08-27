@@ -289,7 +289,7 @@
 </template>
 <style>
   @import "../../../node_modules/swiper/dist/css/swiper.css";
-  @import "../../css/index.css";
+  @import "index/index.css";
   @import "../../css/animate.css";
 </style>
 
@@ -297,7 +297,6 @@
   import request from "../../lib/request";
   import common from "../../lib/common";
   import {swiper,swiperSlide} from "vue-awesome-swiper";
-  import index from "../../lib/1_index";
   import mainFooter from "./index/mainFooter.vue";
   import $ from "jquery";
   export default {
@@ -498,6 +497,30 @@
       if(this.userInfo.userstatus==9 && invitationFlag==1){ //快速卖家未认证
         $(".quickInvitation").show();
       }
+
+      window.addEventListener('scroll', function () {
+        var wHeight = $('.nav').height(); //获取浏览器可视窗口高度
+        var wTop = $(window).scrollTop(); //获取滚动条距离顶部高度
+        if (wTop >= wHeight)  //当滚动条距离顶部高度超过一屏时执行
+        {
+          $(".header ").css('background', 'rgba(230,0,18,1)');  //返回顶部按钮显示
+          $(".souSuo ").css('background', 'rgba(255,255,255,1)');
+          $('.pinDao').css('color','#fff');
+          $('.pinDao span').css({'background':'url("../../img/pindao.png") no-repeat','background-size': '100% 100%'});
+        }
+        else {
+          $(".header ").css('background', 'rgba(230,0,18,0.1)');  //返回顶部按钮隐藏
+          $(".souSuo ").css('background', 'rgba(255,255,255,0.8)');
+          $('.pinDao').css('color','#666');
+          $('.pinDao span').css({'background':'url("../../img/pindaohui.png") no-repeat','background-size': '100% 100%'});
+        }
+        if(
+          $("#navigation").css("display")=="block"
+        ){
+          $("#navigation").hide();
+        }
+      })
     }
   }
+
 </script>

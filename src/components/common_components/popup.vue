@@ -20,12 +20,14 @@
   </transition>
 </template>
 <script type="text/ecmascript-6">
-  /*  1.父组件引入组件 components:{popup}
-      2.父组件引用 <popup ref="popup">
+  /*  使用方法一：组件不全局注册，内部使用
+   *  1.父组件import引入组件 配置components:{popup}
+   *  2.父组件引用 <popup ref="popup">
    *  3.this.$refs.popup.popUp_auto(1500,111,666);
-   *
    *  -------已经挂在到全局了 看install.js----------
-   *
+   *  使用方法二：组件全局注册
+   *  直接在父组件中写<popup ref="popup"> 然后就可以用 this.$refs.popup.popUp_auto(1500,111,666);
+   *  注意：不能在export default中配置components:{popup}！ 因为已经全局注册过了！
    */
   import store from '../../store/store'
   import {mapState,mapMutations} from "vuex"

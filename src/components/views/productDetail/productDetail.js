@@ -262,51 +262,57 @@ export default {
         },
         //服务认证信息
         initServiceAuth:function() {
-            var temp = this;
+            let temp=this;
             var shopId = temp.product.item.shopId;
             var paramData = {
                 shopId:shopId
             };
-            $.jsonAjax(getUrl("sellcenter/service/serviceAuth"), jsonUtil.filterJSONNULL(paramData), function (data, status, xhr) {
-                if (data.isSuccess) {
-                    temp.$data.serviceAuthInfo = data.resultData;
-                }
-            }, false);
+            temp.axios.get("sellcenter/service/serviceAuth").then( (res) => {
+              if(res.data.isSuccess){
+                temp.$data.serviceAuthInfo = res.data.resultData;
+              }
+            }).catch( (err) => {
+              console.log(err);
+            })
         },
         //获取配送至内容
         getAddresses:function(regionCode){
-            var temp = "";
-            $.jsonAjax(getUrl("address/query"),
-                {id:regionCode},
-                function(data,status, xhr){
-                   // console.log(data);
-                    temp = data;
-                },false);
-            return temp;
+            let temp=this;
+            temp.axios.get("/address/query",{params:{id:regionCode}}).then( (res) => {
+                if(res.data){
+                    temp.citys =  res.data;
+                    temp.twoRegionCode = temp.citys[0].code;
+                  }else {
+                }
+
+            }).catch( (err) => {
+              console.log(err);
+            })
         },
         //获取所有省份
         getProvinces:function(regionCode){
-            var temp = this;
-            $.jsonAjax(getUrl("address/query"),
-                {id:regionCode},
-                function(data,status, xhr){
-                   // console.log(data);
-                    temp.provinces = data;
-                },false);
+          let temp=this;
+          temp.axios.get("/address/query",{params:{id:regionCode}}).then( (res) => {
+            if(res.data){
+              temp.provinces = res.data;
+            }
+          }).catch( (err) => {
+            console.log(err);
+          })
         },
         //获取修改地址后获取运费
         getDeliveryType:function(itemId,skuId,addressId){
-            var temp = this;
-            $.jsonAjax(getUrl("productController/getDeliveryType"),
-                {itemId:itemId,
-                 skuId:skuId,regionId:addressId},
-                 function(data,status, xhr){
-                     //console.log(data);
-                     temp.product.deliveryTypes = data;
-                     $.each(data,function(index,ele){
-                         temp.product.preferentialWay =  ele.deliveryTypePreferentialWayDTO;
-                     });
-                },false);
+            let temp=this;
+            temp.axios.get("productController/getDeliveryType",{params:{itemId:itemId, skuId:skuId,regionId:addressId}}).then( (res) => {
+                if(res.data){
+                  temp.product.deliveryTypes = res.data;
+                  $.each(res.data,function(index,ele){
+                    temp.product.preferentialWay =  ele.deliveryTypePreferentialWayDTO;
+                  });
+                  }
+            }).catch( (err) => {
+              console.log(err);
+            })
         },
         //获取效果class
        // normal(可以点击),checked(选中),disabled(无法选择
@@ -320,17 +326,17 @@ export default {
         },
         //商品收藏
         itemSkuFavorite:function(){
-            if(this.product.item.attrTempalte !=2 && this.product.item.attrTempalte !=3){
+          this.$refs.popup.popUp_auto_false(2500,"请先选择商品属性");
+            /*if(this.product.item.attrTempalte !=2 && this.product.item.attrTempalte !=3){
                 if(this.skuId == ''){
                     popUp_auto_false(2500,"请先选择商品属性");
                     return false;
                 }
             }
             if(this.skuInfo.favouriteSku != ''){//已经关注 取消关注
+              debugger
                 var temp = this;
-                $.jsonAjax(getUrl('favourite/delItem'),{
-                    ids:[this.skuInfo.favouriteSku.id]
-                },function(data,status, xhr){
+                $.jsonAjax(getUrl('favourite/delItem'),{ ids:[this.skuInfo.favouriteSku.id]},function(data,status, xhr){
                     if(data.success){
                         temp.skuInfo.favouriteSku = "";
                         popUp_auto(1500,"取消关注");
@@ -363,7 +369,7 @@ export default {
                 },false);
                 return false;
 
-            }
+            }*/
         },
         //获取sku收藏信息
         getFavouriteSku:function(skuId,itemId){
@@ -861,6 +867,19 @@ export default {
             var temp=this;
             temp.isBuyAluminumClip=false;
             temp.aluminumClipPrice=0;
+        },
+        limitAllImg:function (){
+          var limitImg = $(".jieshao-wrap,.pingce-wrap");
+          limitImg.find("img,input,table,form,strong,i,iframe").css({"display": "block", "max-width": "100%"});
+          limitImg.find("img").each(function (index, item) {
+            if (parseInt($(item).attr("height"))) {
+              $(item).css({"height": "100%", "margin": "0 auto"});
+            }
+          });
+          limitImg.find("td").removeAttr("width").css({"font-size": "0.12rem"});
+          /*设置outer的高度，为了弹出框以后，禁止下边的滑动*/
+          $(".outer").css("height", $(window).height() / 80 + "rem");
+          $("embed").css('width',"100%")
         }
     },
     computed:{
@@ -879,11 +898,10 @@ export default {
         }
     },
     beforeMount:function(){
-        this.loading_open();
         //在挂载之前获取商品信息
         this.getDetails(this.$route.query.itemId,this.$route.query.skuId);
         //获取配送至地址 为了请求skuPrice做准备
-        /*this.regionCode = cookieUtil.getRegionCookieCode();
+        this.regionCode = cookieUtil.getRegionCookieCode();
         //spu价格显示处理
         this.proSpuPriceShow();
         //如果skuId不为空时
@@ -908,15 +926,15 @@ export default {
         //获取省份信息
         this.getProvinces('0');
         //获取二级代码
-        this.citys =  this.getAddresses(this.regionCode);
+        // this.citys =  this.getAddresses(this.regionCode);
         //获取二级
-        this.twoRegionCode = this.citys[0].code;
+        // this.twoRegionCode = this.citys[0].code;
         //服务认证信息
         this.initServiceAuth();
         //初始化商品评价
         this.initLoadEvaluation();
         //初始化购物车
-        this.getMyCart();*/
+        this.getMyCart();
 
     },
     mounted:function(){
@@ -934,8 +952,6 @@ export default {
         //ShufflingFigure();
         //点击事件
         //productClick();
-       //将所有的图片自适应
-        limitAllImg();
        //套餐商品
         this.goodsPackageScrool();
       //获取用户优惠卷信息
@@ -950,8 +966,7 @@ export default {
             this.loadEvaluation();
         },
         regionCode:function(newValue,oldValue){
-            this.citys =  this.getAddresses(newValue);
-            this.twoRegionCode = this.citys[0].code;
+            this.getAddresses(newValue);
         },
         twoRegionCode:function(newValue,oldValue){
             this.getDeliveryType(itemId,skuId,this.regionCode);
@@ -977,8 +992,7 @@ export default {
     },
     components:{
     swiper,
-    swiperSlide
-  },
+    swiperSlide},
     beforeRouteEnter(to, from, next) {//切换进入当前路由之前的钩子函数
     next();
   }
@@ -1010,16 +1024,5 @@ function gotoLogin() {
         window.location="../../html/2_login_sign/login_common.html";
     }
 }
-function limitAllImg() {
-  var limitImg = $(".jieshao-wrap,.pingce-wrap");
-  limitImg.find("img,input,table,form,strong,i,iframe").css({"display": "block", "max-width": "100%"});
-  limitImg.find("img").each(function (index, item) {
-    if (parseInt($(item).attr("height"))) {
-      $(item).css({"height": "100%", "margin": "0 auto"});
-    }
-  });
-  limitImg.find("td").removeAttr("width").css({"font-size": "0.12rem"});
-  /*设置outer的高度，为了弹出框以后，禁止下边的滑动*/
-  $(".outer").css("height", $(window).height() / 80 + "rem");
-  $("embed").css('width',"100%")
-}
+
+

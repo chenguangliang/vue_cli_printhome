@@ -60,7 +60,7 @@
 
 
 <style scoped>
-  @import "../../../css/search.css";
+  @import "search.css";
 </style>
 <style>
   body{

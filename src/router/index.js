@@ -4,7 +4,10 @@ import index from '@/components/views/index';
 import search from '@/components/views/search/search';
 import searchGoodsResults from '@/components/views/search/searchGoods_results';
 import productDetail from '@/components/views/productDetail/productDetail.vue';
-import store from '../store/store';
+import loginPhone from '@/components/views/login/login_phone.vue';
+import areaCode from '@/components/views/login/areaCode.vue';
+import loginCommon from '@/components/views/login/loginCommon.vue';
+
 
 Vue.use(Router);
 
@@ -24,23 +27,38 @@ let router= new Router({
     {
       path: '/searchGoodsResults',
       name: 'searchGoodsResults',
-      component: searchGoodsResults
+      component: searchGoodsResults,
+      meta: {keepAlive: true}
     },
     {
       path:'/productDetail',
       name:'productDetail',
       component:productDetail
+    },
+    {
+      path:'/loginPhone',
+      name:'loginPhone',
+      component:loginPhone
+    },
+    {
+      path:'/loginCommon',
+      name:'loginCommon',
+      component:loginCommon
+    },
+    {
+      path:'/areaCode',
+      name:'areaCode',
+      component:areaCode
     }
   ]
 })
+
 router.beforeEach((to,from,next)=>{
   // alert(111)
-  console.log(10010);
   next();
 });
 router.afterEach((to,from)=>{
   // alert(222)
-  console.log(10011);
 
 });
 

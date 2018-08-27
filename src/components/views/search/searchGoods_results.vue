@@ -530,7 +530,7 @@
     }
 </script>
 
-<style>
+<style scoped>
   #wrapper{
     background: #f4f4f4;
   }
@@ -546,7 +546,7 @@
   }
 </style>
 <style scoped>
-  @import "../../../css/search.css";
+  @import "search.css";
 </style>
 <style>
   @import "../../../css/pullToRefresh.css";

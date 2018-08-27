@@ -3,6 +3,7 @@
   <!--<div style="height: 100px;width: 100px;position: fixed;background-color: red;z-index: 99999999"></div>-->
 
   <div id="productDetail">
+    <popup ref="popup"></popup>
     <header>
       <div class="top">
         <a href="#" class="arrow_wrapper"><img class="arrow" src="../../../assets/img/back.png" alt=""/></a>
@@ -261,7 +262,7 @@
             <img class="goods_select" src="../../../assets/img/shangPin_arrow.png" alt=""/>
           </p>
         </div>
-        <div class="tip">
+        <div class="tip" style="display: none">
           <template v-if="serviceAuthInfo.platformServiceRuleDTOList != null && serviceAuthInfo.userPlatformServiceRuleDTOList != null">
             <template v-for="rule in serviceAuthInfo.platformServiceRuleDTOList">
               <template v-for="userRule in serviceAuthInfo.userPlatformServiceRuleDTOList">
@@ -446,7 +447,7 @@
             <span class="goodsDetileInfo" v-cloak><span class="goodsDetileTit">商品体积：</span><span v-if="product.item.volume">{{product.item.volume +'m³'}}</span> </span>
           </div>
 
-          <div v-html="replaceSrcUrl(product.item.describeUrl,imgUrl)"></div>
+          <div v-if="product.item.describeUrl" v-html="replaceSrcUrl(product.item.describeUrl,imgUrl)"></div>
         </div>
 
         <!-- 包装清单部分开始-->
@@ -528,7 +529,7 @@
 
         <!-- 商家评测部分开始-->
         <div class="pingce-wrap">
-          <template v-if="product.item.appraisalUrl != null">
+          <template v-if="product.item.appraisalUrl">
             <div class="pingce_con" v-html="replaceSrcUrl(product.item.appraisalUrl,imgUrl)"></div>
           </template>
         </div>
@@ -1120,7 +1121,7 @@
 
 <script type="text/ecmascript-6">
   import productDetail from "./productDetail"
-
+  import $ from "jquery"
   export default {
     name: 'productDetail',
     mixins:[productDetail],
@@ -1133,14 +1134,14 @@
 
     },
     mounted: function () {
-
     },
   }
 </script>
 
 
 <style scoped>
-  @import "../../../css/shangPinYe.css";
+  @import "../../../css/common1.css";
+  @import "./shangPinYe.css";
 </style>
 
 <style>

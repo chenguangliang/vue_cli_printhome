@@ -125,42 +125,45 @@ export default {
                 }
             },false)*/
           temp.axios.get("/productController/details",{params:submitData}).then( (res) => {
-            if(res.data.success){
-              temp.product = res.data.result;
-              temp.goodsType=temp.product.item.attrTempalte;
-              $('title').html(res.data.result.item.itemName);
+              if(res.data.success){
+                temp.product = res.data.result;
+                temp.goodsType=temp.product.item.attrTempalte;
+                $('title').html(res.data.result.item.itemName);
 
-              //请求该sku对应的促销广告展示出来   /getItemSaleAd?shopId=&itemId=&skuId=
-              // temp.getAdData(res.data.result.item.shopId,temp.itemId,temp.skuId);
-              if(res.data.result.item.attrTempalte==2 || res.data.result.item.attrTempalte==3){//板材、橡皮布商品
-                temp.skuInfo.qty=9999999;//板材无库存限制
-                if(res.data.result.item.attrTempalte==2){//板材
-                  temp.boardSaleAttr=res.data.result.item.boardSaleAttr;//存储板材商品详情
+                //请求该sku对应的促销广告展示出来   /getItemSaleAd?shopId=&itemId=&skuId=
+                // temp.getAdData(res.data.result.item.shopId,temp.itemId,temp.skuId);
+                if(res.data.result.item.attrTempalte==2 || res.data.result.item.attrTempalte==3){//板材、橡皮布商品
+                  temp.skuInfo.qty=9999999;//板材无库存限制
+                  if(res.data.result.item.attrTempalte==2){//板材
+                    temp.boardSaleAttr=res.data.result.item.boardSaleAttr;//存储板材商品详情
+                  }
+                  if(res.data.result.item.attrTempalte==3){//橡皮布
+                    temp.boardSaleAttr=res.data.result.item.rubberClothSaleAttr;//存储橡皮布商品详情
+                  }
+                  temp.selectedThickMsg=temp.boardSaleAttr.boardThicknessList[0]; //初始化选中的厚度
+                  temp.priceForBoard=temp.selectedThickMsg.boardThicknessPrices[0].sellPrice+"/m²";//板材无sku，价格显示阶梯价第一个
+                  /*如果是询价商品，请求报价列表过来，并且把temp.priceForBoard重置为空*/
+                  if(temp.product.item.itemStatus == 4 &&　temp.product.item.hasPrice != 1 &&　temp.product.logging_status == 'true'){
+                    temp.priceForBoard='';
+                    var inquiryPara={sellerId:temp.product.item.sellerId, buyerId:temp.product.userId, itemId:itemId};
+                    $.jsonAjax(getUrl("productController/queryInquiryList"),inquiryPara,function(data, status, xhr){
+                      if(data){
+                        temp.boardInquiryList=data;
+                      }
+                    },false)
+                  }
                 }
-                if(res.data.result.item.attrTempalte==3){//橡皮布
-                  temp.boardSaleAttr=res.data.result.item.rubberClothSaleAttr;//存储橡皮布商品详情
-                }
-                temp.selectedThickMsg=temp.boardSaleAttr.boardThicknessList[0]; //初始化选中的厚度
-                temp.priceForBoard=temp.selectedThickMsg.boardThicknessPrices[0].sellPrice+"/m²";//板材无sku，价格显示阶梯价第一个
-                /*如果是询价商品，请求报价列表过来，并且把temp.priceForBoard重置为空*/
-                if(temp.product.item.itemStatus == 4 &&　temp.product.item.hasPrice != 1 &&　temp.product.logging_status == 'true'){
-                  temp.priceForBoard='';
-                  var inquiryPara={sellerId:temp.product.item.sellerId, buyerId:temp.product.userId, itemId:itemId};
-                  $.jsonAjax(getUrl("productController/queryInquiryList"),inquiryPara,function(data, status, xhr){
-                    if(data){
-                      temp.boardInquiryList=data;
-                    }
-                  },false)
-                }
+                // this.loading_close();
+                temp.$nextTick(function () {
+                  temp.limitAllImg();
+                });
+              }else{
+                window.location = "../../html/4_souSuoJieGuo/search_nothing.html"
               }
-              // this.loading_close();
-            }else{
-              window.location = "../../html/4_souSuoJieGuo/search_nothing.html"
-            }
 
-            res.data?temp.data=res.data:"";
+              res.data?temp.data=res.data:"";
           }).catch( (err) => {
-            console.log(err);
+              console.log(err);
           })
         },
         //获取sku对应的广告图片

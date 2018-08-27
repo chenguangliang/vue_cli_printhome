@@ -21,7 +21,7 @@
     height: 0.58rem;
     margin: 0 auto;
     display:block;
-    background: url("../assets/img/pindaohui.png") no-repeat;
+    background: url("../../../assets/img/pindaohui.png") no-repeat;
     background-size: 100% 100%;
 }
 .souSuo{
@@ -215,7 +215,7 @@
 .adv .logo{
     width: 0.52rem;
     height: 0.56rem;
-    background: url("../assets/img/adv.png") no-repeat;
+    background: url("../../../assets/img/adv.png") no-repeat;
     background-size: 100% 100%;
     float: left;
     margin-left: 0.18rem;
@@ -272,7 +272,7 @@
     height: 0.54rem;
     line-height: 0.54rem;
     text-align: center;
-    background: url("../assets/img/bg@3x.png") no-repeat;
+    background: url("../../../assets/img/bg@3x.png") no-repeat;
     background-size: 100% 100%;
     color: #e60012;
     font-size: 0.26rem;
@@ -406,7 +406,7 @@
     height: 0.54rem;
     line-height: 0.54rem;
     text-align: center;
-    background: url("../assets/img/bg@3x.png") no-repeat;
+    background: url("../../../assets/img/bg@3x.png") no-repeat;
     background-size: 100% 100%;
     color: #e60012;
     font-size: 0.26rem;
@@ -660,7 +660,7 @@
     width: 1.8rem;
     height: 0.65rem;
     margin: 0 auto;
-    background:url("../assets/img/loginLogo.png") no-repeat;
+    background:url("../../../assets/img/loginLogo.png") no-repeat;
     -webkit-background-size: 100% 100%;
     background-size: 100% 100%;
 }

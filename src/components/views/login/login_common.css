@@ -1,0 +1,237 @@
+body{
+    background: url("../../../assets/img/loginBg.png") no-repeat;
+    background-size: 100% 200%;
+}
+.dingBu{
+    width: 100%;
+    height: 1.1rem;
+
+}
+.backToIndex{
+    width: 0.3rem;
+    height: 0.3rem;
+    float: right;
+    margin-right: 0.2rem;
+    margin-top: 0.2rem;
+}
+.backToIndex img{
+    width:0.3rem;
+    height: 0.3rem;
+    margin: 0 auto;
+}
+/*logo*/
+.logo{
+    width: 100%;
+    height: 1.08rem;
+    margin-bottom: 1.16rem;
+}
+.logo a img{
+    width: 3.2rem;
+    height: 1.08rem;
+    margin: 0 auto;
+}
+/*user*/
+.user{
+    width: 5.12rem;
+    height: 0.75rem;
+    margin: 0 auto 0.5rem;
+    border: 1px solid #a0a0a0;
+    -webkit-border-radius: 0.05rem;
+    -moz-border-radius: 0.05rem;
+    border-radius: 0.05rem;
+    position: relative;
+}
+.user .pic{
+    width: 0.4rem;
+    height: 0.4rem;
+    position: absolute;
+    top: 0.15rem;
+    left: 0.1rem;
+    background: url("../../../assets/img/user.png") no-repeat;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+}
+.user input{
+    background: none;
+    width: 75%;
+    height: 0.75rem;
+    position: absolute;
+    left: 0.65rem;
+    top: 0;
+    font-size: 0.28rem;
+    color: #333;
+}
+.user input::-webkit-input-placeholder{
+    font-size: 0.24rem;
+    color: #999;
+}
+.user .warm{
+    width: 0.34rem;
+    height: 0.34rem;;
+    background: url("../../../assets/img/warm.png") no-repeat;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    position: absolute;
+    right: 0.1rem;
+    top: 0.15rem;
+    display: none;
+}
+.user #usertips{
+    font-size: 0.22rem;
+    color: #e60012;
+    position: absolute;
+    left: 0;
+    top: 0.85rem;
+}
+.userTip{
+    width: 100%;
+    height: 0.6rem;
+    background: #e60012;
+    font-size: 0.24rem;
+    color: #fff;
+    text-align: center;
+    line-height: 0.6rem;
+    display: none;
+}
+/*key*/
+.key{
+    width: 5.12rem;
+    height: 0.75rem;
+    margin: 0 auto 0.15rem;
+    border: 1px solid #a0a0a0;
+    -webkit-border-radius: 0.05rem;
+    -moz-border-radius: 0.05rem;
+    border-radius: 0.05rem;
+    position: relative;
+}
+.key span{
+    width: 0.4rem;
+    height: 0.4rem;
+    position: absolute;
+    top: 0.15rem;
+    left: 0.1rem;
+    background:url("../../../assets/img/key.png") no-repeat;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+}
+.key input{
+    background: none;
+    width: 75%;
+    height: 0.75rem;
+    position: absolute;
+    left: 0.65rem;
+    top: 0;
+    font-size: 0.28rem;
+    color: #333;
+}
+.key input::-webkit-input-placeholder{
+    font-size: 0.24rem;
+    color: #999;
+}
+.key i{
+    width: 0.4rem;
+    height: 0.26rem;
+    position: absolute;
+    top: 0.25rem;
+    right: 0.1rem;
+}
+.key .img01{
+    background:url("../../../assets/img/eyes1.png") no-repeat;
+    -webkit-background-size: 100% 50%;
+    background-size: 100% 50%;
+    top: 0.3rem;
+}
+.key .img02{
+    background:url("../../../assets/img/eyes.png") no-repeat;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+}
+/*twoBtn*/
+.twoBtn{
+    margin:0 auto;
+    width: 5.12rem;
+    overflow: hidden;
+}
+.twoBtn .forget{
+    float: left;
+}
+.twoBtn .newUser{
+    float: right;
+}
+.twoBtn a{
+    font-size: 0.22rem;
+    color: #666;
+}
+/*btn*/
+.btn{
+    width: 5.12rem;
+    height: 0.78rem;
+    line-height: 0.78rem;
+    text-align: center;
+    display: block;
+    margin: 0.35rem auto 1.5rem;
+    background: #ccc;
+    -webkit-border-radius: 0.05rem;
+    -moz-border-radius: 0.05rem;
+    border-radius: 0.05rem;
+    font-size: 0.3rem;
+    color: #fff;
+}
+.btnSuccess{
+    background: #e60012;
+}
+/*other*/
+.other{
+    width: 5.12rem;
+    height: 0.4rem;
+    margin: 0 auto;
+    position: relative;
+}
+.other div{
+    position: absolute;
+}
+.other .left{
+    width: 1.7rem;
+    height:1px;
+    background: #999;
+    left: 0;
+    top: 0;
+}
+.other .middle{
+    width: 1.72rem;
+    font-size: 0.22rem;
+    color: #333;
+    left: 1.7rem;
+    top: -0.15rem;
+    text-align: center;
+}
+.other .right{
+    width: 1.7rem;
+    height: 1px;
+    background: #999;
+    top: 0;
+    right: 0;
+}
+/*twoLogin*/
+.twoLogin{
+    width: 5.12rem;
+    height: 1.52rem;
+    margin: 0 auto;
+}
+.twoLogin a{
+    font-size: 0.22rem;
+    color: #666;
+    text-align: center;
+    display: inline-block;
+}
+.twoLogin .weChat{
+    padding-left: 0.5rem;
+}
+.twoLogin .phone{
+    padding-left: 1.1rem;
+}
+.twoLogin a img{
+    width: 0.8rem;
+    height: 0.8rem;
+    margin: 0 auto 0.2rem;
+}

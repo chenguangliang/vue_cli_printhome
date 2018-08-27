@@ -1019,7 +1019,7 @@ img.adBigImg{
     top:-2.86rem;
     position: absolute;
     left:0;
-    background: url("../assets/img/suojia_bg.png") no-repeat center 100% ;
+    background: url("../../../assets/img/suojia_bg.png") no-repeat center 100% ;
     background-size: cover;
     z-index: 100;
     text-align: center;
